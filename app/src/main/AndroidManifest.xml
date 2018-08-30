@@ -19,6 +19,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activities.DM_Activity"
+            android:label="@string/title_activity_dm_"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aurora.d20_35_app.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.PC_Activity"
+            android:label="@string/title_activity_pc_"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aurora.d20_35_app.activities.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

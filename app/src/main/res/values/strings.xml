@@ -3,4 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="DM_button">Dungeon Master Tools</string>
     <string name="PC_button">Player Character Tools</string>
+    <string name="title_activity_dm_">DM_Activity</string>
+    <string name="title_activity_pc_">PC_Activity</string>
 </resources>

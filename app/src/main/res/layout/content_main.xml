@@ -11,13 +11,11 @@
     <Button
         android:id="@+id/DMbutton"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="32dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="120dp"
         android:text="@string/DM_button"
-        app:layout_constraintBottom_toTopOf="@+id/PCbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,13 +23,11 @@
     <Button
         android:id="@+id/PCbutton"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="100dp"
         android:text="@string/PC_button"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/DMbutton" />
