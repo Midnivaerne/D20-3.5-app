@@ -2,8 +2,6 @@ package com.aurora.d20_35_app.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -23,34 +21,26 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button DM_button = (Button) findViewById(R.id.DMbutton);
+        Button DM_button = (Button) findViewById(R.id.DM_button);
         DM_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent_DM = new Intent(MainActivity.this, DM_Activity.class);
                 MainActivity.this.startActivity(intent_DM);
-                Log.i("Content ", " Main layout ");
+                Log.i("Content ", " Main layout to DM ");
             }
         });
 
-        Button PC_button = (Button) findViewById(R.id.PCbutton);
+        Button PC_button = (Button) findViewById(R.id.PC_button);
         PC_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent_PC = new Intent(MainActivity.this, PC_Activity.class);
                 MainActivity.this.startActivity(intent_PC);
-                Log.i("Content ", " Main layout ");
+                Log.i("Content ", " Main layout to PC ");
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
     }
 
     @Override
@@ -66,12 +56,18 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.action_settings:
+                Intent intent_settings = new Intent(MainActivity.this, Settings_Activity.class);
+                MainActivity.this.startActivity(intent_settings);
+                Log.i("Content ", " Main layout to Settings ");
+                break;
+            case R.id.action_help:
+                Intent intent_help = new Intent(MainActivity.this, Help_Activity.class);
+                MainActivity.this.startActivity(intent_help);
+                Log.i("Content ", " Main layout to Help ");
+                break;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

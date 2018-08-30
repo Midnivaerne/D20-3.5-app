@@ -9,7 +9,7 @@
     tools:showIn="@layout/activity_main">
 
     <Button
-        android:id="@+id/DMbutton"
+        android:id="@+id/DM_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="60dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/PCbutton"
+        android:id="@+id/PC_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="60dp"
@@ -30,6 +30,6 @@
         android:text="@string/PC_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DMbutton" />
+        app:layout_constraintTop_toBottomOf="@+id/DM_button" />
 
 </android.support.constraint.ConstraintLayout>
