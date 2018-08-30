@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         DM_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                System.out.println("test");
                 Fragment_DM fragment_DM = new Fragment_DM();
                 loadFragment(fragment_DM, "content_DM");
             }
