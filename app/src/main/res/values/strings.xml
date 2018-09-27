@@ -80,4 +80,15 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_help_">Help</string>
+    <string name="action_database">Database</string>
+    <string name="title_rulesset_list">Rules Sets</string>
+    <string name="title_rulesset_detail">Rules set Detail</string>
+    <string name="title_activity_player_character_">PlayerCharacter_Activity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_player_character_actions_">PlayerCharacterActions_Activity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
 </resources>

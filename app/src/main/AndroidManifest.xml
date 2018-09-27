@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aurora.d20_35_app">
 
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -53,6 +58,42 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.aurora.d20_35_app.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.RulessetListActivity"
+            android:label="@string/title_rulesset_list"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aurora.d20_35_app.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.RulessetDetailActivity"
+            android:label="@string/title_rulesset_detail"
+            android:parentActivityName=".activities.RulessetListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aurora.d20_35_app.activities.RulessetListActivity" />
+        </activity>
+        <activity
+            android:name=".activities.PlayerCharacter_Activity"
+            android:label="@string/title_activity_player_character_"
+            android:parentActivityName=".activities.PC_Activity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aurora.d20_35_app.activities.PC_Activity" />
+        </activity>
+        <activity
+            android:name=".activities.PlayerCharacterActions_Activity"
+            android:label="@string/title_activity_player_character_actions_"
+            android:parentActivityName=".activities.PlayerCharacter_Activity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aurora.d20_35_app.activities.PlayerCharacter_Activity" />
         </activity>
     </application>
 
