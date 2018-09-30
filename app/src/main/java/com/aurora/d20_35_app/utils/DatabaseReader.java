@@ -22,6 +22,7 @@ public class DatabaseReader {
 
     private SQLiteDatabase database;
     private DbInitializer openHelper;
+    private String databaseName;
     private static DatabaseReader instance;
     Boolean fromExternalSource = true;
 
@@ -31,11 +32,11 @@ public class DatabaseReader {
      * @param context
      * @param sourceDirectory
      */
-    private DatabaseReader(Context context, String sourceDirectory) {
+    private DatabaseReader(Context context, String sourceDirectory, String databaseName) {
         if (sourceDirectory == null) {
-            this.openHelper = new DbInitializer(context);
+            this.openHelper = new DbInitializer(context, databaseName);
         } else {
-            this.openHelper = new DbInitializer(context, sourceDirectory);
+            this.openHelper = new DbInitializer(context, sourceDirectory, databaseName);
         }
     }
 
@@ -46,9 +47,9 @@ public class DatabaseReader {
      * @param sourceDirectory optional external directory
      * @return the instance of DabaseAccess
      */
-    public static DatabaseReader getInstance(Context context, String sourceDirectory) {
+    public static DatabaseReader getInstance(Context context, String sourceDirectory, String databaseName) {
         if (instance == null) {
-            instance = new DatabaseReader(context, sourceDirectory);
+            instance = new DatabaseReader(context, sourceDirectory, databaseName);
         }
         return instance;
     }
@@ -91,15 +92,15 @@ public class DatabaseReader {
         if (fromExternalSource) {
             // Check the external database file. External database must be available for the first time deployment.
             String externalDirectory = Environment.getExternalStorageDirectory().getAbsolutePath() + "/database";
-            File dbFile = new File(externalDirectory, DbInitializer.getDatabase_name());
+            File dbFile = new File(externalDirectory, databaseName);
             if (!dbFile.exists()) {
                 return;
             }
             // If external database is avaliable, deploy it
-            databaseReader = DatabaseReader.getInstance(MainActivity.getContext(), externalDirectory);
+            databaseReader = DatabaseReader.getInstance(MainActivity.getContext(), externalDirectory,databaseName);
         } else {
             // From assets
-            databaseReader = DatabaseReader.getInstance(MainActivity.getContext(), null);
+            databaseReader = DatabaseReader.getInstance(MainActivity.getContext(), null,databaseName);
         }
 
         databaseReader.open();

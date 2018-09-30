@@ -44,10 +44,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        GetPermissions();
-
-        DatabaseManager.howMany();
-        DatabaseManager.howManyExternal();
+        getPermissions();
+        DatabaseManager.initialDatabaseSetup();
 
         Button DM_button = (Button) findViewById(R.id.DM_button);
         DM_button.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void GetPermissions() {
+    public void getPermissions() {
         // Check whether this app has read external storage permission or not.
         int readExternalStoragePermission = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
 
