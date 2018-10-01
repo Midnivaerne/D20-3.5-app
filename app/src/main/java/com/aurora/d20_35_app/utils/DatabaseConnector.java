@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.Connection;
 
+import static com.aurora.d20_35_app.utils.DatabaseManager.externalPathSeparator;
 import static com.aurora.d20_35_app.utils.PermissionHandler.getPublicExternalStorageBaseDir;
 
 public class DatabaseConnector {
@@ -32,16 +33,14 @@ public class DatabaseConnector {
     public static void chooseConnection(String selectedDB) {
         try {
             try {
-                Class.forName("org.sqlite.JDBC");
                 if (external) {
                     String externalPath = getPublicExternalStorageBaseDir();
-                    String externalPathSeparator = "\\d20appStorage\\";
                     conn = DriverManager.getConnection(externalPath + externalPathSeparator + selectedDB + ".db");
                 } else {
-                    conn = DriverManager.getConnection("jdbc:sqlite:src\\genesys\\project\\database\\" + selectedDB + ".db");
+                    conn = DriverManager.getConnection(selectedDB + ".db");//TODO probably wrong internal db path
                 }
 
-            } catch (ClassNotFoundException | SQLException e) {
+            } catch (SQLException e) {
                 ErrorController.ErrorControllerMethod(e);
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }

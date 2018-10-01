@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.aurora.d20_35_app.R;
-import com.aurora.d20_35_app.utils.DatabaseManager;
+import com.aurora.d20_35_app.utils.BackgroundUserDBInitializer;
 
 import lombok.NonNull;
 
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getPermissions();
-        DatabaseManager.initialDatabaseSetup();
+        new BackgroundUserDBInitializer("userDB_handler").start();
 
         Button DM_button = (Button) findViewById(R.id.DM_button);
         DM_button.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent_help = new Intent(MainActivity.this, Help_Activity.class);
                 MainActivity.this.startActivity(intent_help);
                 Log.i("Content ", " Main layout to Help ");
+                break;
+            case R.id.action_exit:
+                Log.i("Content ", " Main layout to Exit ");
+                finish();
+                moveTaskToBack(true);
                 break;
         }
         return super.onOptionsItemSelected(item);
