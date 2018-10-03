@@ -2,14 +2,13 @@ package com.aurora.d20_35_app.utils;
 
 import com.aurora.d20_35_app.activities.MainActivity;
 
-import java.nio.file.Path;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.Connection;
 
-import static com.aurora.d20_35_app.utils.DatabaseManager.externalPathSeparator;
+import static com.aurora.d20_35_app.activities.MainActivity.*;
 import static com.aurora.d20_35_app.utils.PermissionHandler.getPublicExternalStorageBaseDir;
 
 public class DatabaseConnector {

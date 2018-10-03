@@ -13,7 +13,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name=".Startup">
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
@@ -60,7 +61,7 @@
                 android:value="com.aurora.d20_35_app.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.RulessetListActivity"
+            android:name=".activities.RulesSetListActivity"
             android:label="@string/title_rulesset_list"
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -69,13 +70,13 @@
                 android:value="com.aurora.d20_35_app.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.RulessetDetailActivity"
+            android:name=".activities.RulesSetDetailActivity"
             android:label="@string/title_rulesset_detail"
-            android:parentActivityName=".activities.RulessetListActivity"
+            android:parentActivityName=".activities.RulesSetListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.activities.RulessetListActivity" />
+                android:value="com.aurora.d20_35_app.activities.RulesSetListActivity" />
         </activity>
         <activity
             android:name=".activities.PlayerCharacter_Activity"

@@ -16,9 +16,9 @@ import com.aurora.d20_35_app.R;
  * An activity representing a single Rules set detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link RulessetListActivity}.
+ * in a {@link RulesSetListActivity}.
  */
-public class RulessetDetailActivity extends AppCompatActivity {
+public class RulesSetDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +55,9 @@ public class RulessetDetailActivity extends AppCompatActivity {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(RulessetDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(RulessetDetailFragment.ARG_ITEM_ID));
-            RulessetDetailFragment fragment = new RulessetDetailFragment();
+            arguments.putString(RulesSetDetailFragment.ARG_ITEM_ID,
+                    getIntent().getStringExtra(RulesSetDetailFragment.ARG_ITEM_ID));
+            RulesSetDetailFragment fragment = new RulesSetDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.rulesset_detail_container, fragment)
@@ -75,7 +75,7 @@ public class RulessetDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            navigateUpTo(new Intent(this, RulessetListActivity.class));
+            navigateUpTo(new Intent(this, RulesSetListActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

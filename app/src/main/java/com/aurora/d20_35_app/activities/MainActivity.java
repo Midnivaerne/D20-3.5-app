@@ -3,6 +3,7 @@ package com.aurora.d20_35_app.activities;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -17,17 +18,22 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.aurora.d20_35_app.R;
+import com.aurora.d20_35_app.Startup;
 import com.aurora.d20_35_app.utils.BackgroundUserDBInitializer;
 
 import lombok.NonNull;
+
+import static com.aurora.d20_35_app.utils.PermissionHandler.getPublicExternalStorageBaseDir;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG_EXTERNAL_STORAGE = "EXTERNAL_STORAGE";
     public static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE_PERMISSION = 1;
     public static final int REQUEST_CODE_READ_EXTERNAL_STORAGE_PERMISSION = 1;
+    public static String externalPathSeparator = "/Android/data/com.aurora.d20_3.5_app/";
 
     private static MainActivity instance;
+    public static String path = getPublicExternalStorageBaseDir() + externalPathSeparator + "Data/";
 
     public MainActivity() {
         instance = this;
@@ -41,13 +47,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getPermissions();
-        new BackgroundUserDBInitializer("userDB_handler").start();
+        if (Startup.sharedpreferences.getBoolean("firstTimeOpened", true)) {
+            Log.i("Permissions ", " Getting initial permissions");
+            getPermissions();
+            Startup.editor.putBoolean("firstTimeOpened", false).apply();
+        } else {
+            Log.i("Permissions ", " Initial permissions already loaded");
+        }
 
-        Button DM_button = (Button) findViewById(R.id.DM_button);
+        Button DM_button = findViewById(R.id.DM_button);
         DM_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button PC_button = (Button) findViewById(R.id.PC_button);
+        Button PC_button = findViewById(R.id.PC_button);
         PC_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,10 +94,20 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         switch (id) {
+            case R.id.action_rules:
+                Intent intent_rules = new Intent(MainActivity.this, RulesExplanationActivity.class);
+                MainActivity.this.startActivity(intent_rules);
+                Log.i("Content ", " Main layout to RulesExplanation ");
+                break;
+            case R.id.action_content:
+                Intent intent_content = new Intent(MainActivity.this, ContentActivity.class);
+                MainActivity.this.startActivity(intent_content);
+                Log.i("Content ", " Main layout to Content ");
+                break;
             case R.id.action_database:
-                Intent intent_database = new Intent(MainActivity.this, RulessetListActivity.class);
+                Intent intent_database = new Intent(MainActivity.this, RulesSetListActivity.class);
                 MainActivity.this.startActivity(intent_database);
-                Log.i("Content ", " Main layout to Database ");
+                Log.i("Content ", " Main layout to Database/RulesSetList ");
                 break;
             case R.id.action_settings:
                 Intent intent_settings = new Intent(MainActivity.this, Settings_Activity.class);
