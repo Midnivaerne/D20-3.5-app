@@ -9,20 +9,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import lombok.Data;
 import lombok.NonNull;
 
 import static com.aurora.d20_35_app.activities.MainActivity.path;
 
 public class DatabaseManager {
 
-    /**
-     * An array of sample (dummy) items.
-     */
     public static List<ADatabase> databasesList = new ArrayList<ADatabase>();
-
-    /**
-     * A map of sample (dummy) items, by ID.
-     */
     public static Map<String, ADatabase> databasesMap = new HashMap<String, ADatabase>();
 
     public static void initialDatabaseSetup() {
@@ -120,10 +114,11 @@ public class DatabaseManager {
         return builder.toString();
     }
 
+    @Data
     public static class ADatabase {
-        public final String id;
-        public final String content;
-        public final String details;
+        private final String id;
+        private final String content;
+        private final String details;
 
         public ADatabase(String id, String content, String details) {
             this.id = id;

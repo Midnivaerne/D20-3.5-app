@@ -2,19 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aurora.d20_35_app">
 
-    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".Startup"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name=".Startup">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".activities.MainActivity"
             android:label="@string/app_name"
@@ -44,6 +44,22 @@
                 android:value="com.aurora.d20_35_app.activities.MainActivity" />
         </activity>
         <activity
+            android:name=".activities.RulesExplanationActivity"
+            android:label="@string/title_activity_rulesexplanation_"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aurora.d20_35_app.activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.ContentActivity"
+            android:label="@string/title_activity_content_"
+            android:parentActivityName=".activities.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aurora.d20_35_app.activities.MainActivity" />
+        </activity>
+        <activity
             android:name=".activities.Settings_Activity"
             android:label="@string/title_activity_settings_"
             android:parentActivityName=".activities.MainActivity">
@@ -61,7 +77,7 @@
                 android:value="com.aurora.d20_35_app.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.RulesSetListActivity"
+            android:name=".activities.DatabasesListActivity"
             android:label="@string/title_rulesset_list"
             android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -70,13 +86,13 @@
                 android:value="com.aurora.d20_35_app.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.RulesSetDetailActivity"
+            android:name=".activities.DatabasesListDetailActivity"
             android:label="@string/title_rulesset_detail"
-            android:parentActivityName=".activities.RulesSetListActivity"
+            android:parentActivityName=".activities.DatabasesListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.activities.RulesSetListActivity" />
+                android:value="com.aurora.d20_35_app.activities.DatabasesListActivity" />
         </activity>
         <activity
             android:name=".activities.PlayerCharacter_Activity"

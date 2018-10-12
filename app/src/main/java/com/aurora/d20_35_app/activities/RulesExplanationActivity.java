@@ -20,7 +20,7 @@ import com.aurora.d20_35_app.utils.RulesManager;
 
 import java.util.List;
 
-class RulesExplanationActivity extends AppCompatActivity {
+public class RulesExplanationActivity extends AppCompatActivity {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -33,7 +33,9 @@ class RulesExplanationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rules);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        RulesManager.loadRulesCategory();//todo test
+
+        /**Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
@@ -41,16 +43,16 @@ class RulesExplanationActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO jump to top
+                view.scrollTo(0, 0);//TODO test it
             }
-        });
+        });**/
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        if (findViewById(R.id.rules_explanation_container) != null) {
+        if (findViewById(R.id.activity_rules_explanation_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
@@ -58,7 +60,7 @@ class RulesExplanationActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        View recyclerView = findViewById(R.id.rules_explanation);
+        View recyclerView = findViewById(R.id.activity_rules_explanation);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
     }
@@ -79,16 +81,16 @@ class RulesExplanationActivity extends AppCompatActivity {
                 DatabaseManager.ADatabase item = (DatabaseManager.ADatabase) view.getTag();
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
-                    arguments.putString(RulesSetDetailFragment.ARG_ITEM_ID, item.id);
-                    RulesSetDetailFragment fragment = new RulesSetDetailFragment();
+                    arguments.putString(DatabasesListDetailFragment.ARG_ITEM_ID, item.getId());
+                    DatabasesListDetailFragment fragment = new DatabasesListDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.rules_explanation_container, fragment)
+                            .replace(R.id.activity_rules_explanation_container, fragment)
                             .commit();
                 } else {
                     Context context = view.getContext();
-                    Intent intent = new Intent(context, RulesSetDetailActivity.class);
-                    intent.putExtra(RulesSetDetailFragment.ARG_ITEM_ID, item.id);
+                    Intent intent = new Intent(context, DatabasesListDetailActivity.class);
+                    intent.putExtra(DatabasesListDetailFragment.ARG_ITEM_ID, item.getId());
 
                     context.startActivity(intent);
                 }
@@ -112,8 +114,8 @@ class RulesExplanationActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
+            holder.mIdView.setText(mValues.get(position).getId());
+            holder.mContentView.setText(mValues.get(position).getContent());
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);

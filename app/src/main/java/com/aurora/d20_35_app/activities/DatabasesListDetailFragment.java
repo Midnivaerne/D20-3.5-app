@@ -14,11 +14,11 @@ import com.aurora.d20_35_app.utils.DatabaseManager;
 
 /**
  * A fragment representing a single Rules set detail screen.
- * This fragment is either contained in a {@link RulesSetListActivity}
- * in two-pane mode (on tablets) or a {@link RulesSetDetailActivity}
+ * This fragment is either contained in a {@link DatabasesListActivity}
+ * in two-pane mode (on tablets) or a {@link DatabasesListDetailActivity}
  * on handsets.
  */
-public class RulesSetDetailFragment extends Fragment {
+public class DatabasesListDetailFragment extends Fragment {
     /**
      * The fragment argument representing the item ID that this fragment
      * represents.
@@ -34,7 +34,7 @@ public class RulesSetDetailFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public RulesSetDetailFragment() {
+    public DatabasesListDetailFragment() {
     }
 
     @Override
@@ -47,7 +47,7 @@ public class RulesSetDetailFragment extends Fragment {
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(aDatabase.content);
+                appBarLayout.setTitle(aDatabase.getContent());
             }
         }
     }
@@ -55,10 +55,10 @@ public class RulesSetDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.rulesset_detail, container, false);
+        View rootView = inflater.inflate(R.layout.activity_databases_list_inner_detail_fragment, container, false);
 
         if (aDatabase != null) {
-            ((TextView) rootView.findViewById(R.id.rulesset_detail)).setText(aDatabase.details);
+            ((TextView) rootView.findViewById(R.id.rulesset_detail)).setText(aDatabase.getDetails());
         }
 
         return rootView;

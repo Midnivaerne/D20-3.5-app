@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.utils.DatabaseManager;
+import com.aurora.d20_35_app.utils.RulesManager;
 
 import java.util.List;
 
@@ -26,11 +27,11 @@ import java.util.List;
  * An activity representing a list of Rules Sets. This activity
  * has different presentations for handset and tablet-size devices. On
  * handsets, the activity presents a list of items, which when touched,
- * lead to a {@link RulesSetDetailActivity} representing
+ * lead to a {@link DatabasesListDetailActivity} representing
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class RulesSetListActivity extends AppCompatActivity {
+public class DatabasesListActivity extends AppCompatActivity {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -41,9 +42,9 @@ public class RulesSetListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rulesset_list);
+        setContentView(R.layout.activity_databases_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
@@ -63,7 +64,7 @@ public class RulesSetListActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        if (findViewById(R.id.rulesset_detail_container) != null) {
+        if (findViewById(R.id.activity_databases_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
@@ -71,7 +72,7 @@ public class RulesSetListActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        View recyclerView = findViewById(R.id.rulesset_list);
+        View recyclerView = findViewById(R.id.activity_databases_list_inner);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
     }
@@ -100,7 +101,7 @@ public class RulesSetListActivity extends AppCompatActivity {
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final RulesSetListActivity mParentActivity;
+        private final DatabasesListActivity mParentActivity;
         private final List<DatabaseManager.ADatabase> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
@@ -109,23 +110,23 @@ public class RulesSetListActivity extends AppCompatActivity {
                 DatabaseManager.ADatabase item = (DatabaseManager.ADatabase) view.getTag();
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
-                    arguments.putString(RulesSetDetailFragment.ARG_ITEM_ID, item.id);
-                    RulesSetDetailFragment fragment = new RulesSetDetailFragment();
+                    arguments.putString(DatabasesListDetailFragment.ARG_ITEM_ID, item.getId());
+                    DatabasesListDetailFragment fragment = new DatabasesListDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.rulesset_detail_container, fragment)
+                            .replace(R.id.activity_databases_detail_container, fragment)
                             .commit();
                 } else {
                     Context context = view.getContext();
-                    Intent intent = new Intent(context, RulesSetDetailActivity.class);
-                    intent.putExtra(RulesSetDetailFragment.ARG_ITEM_ID, item.id);
+                    Intent intent = new Intent(context, DatabasesListDetailActivity.class);
+                    intent.putExtra(DatabasesListDetailFragment.ARG_ITEM_ID, item.getId());
 
                     context.startActivity(intent);
                 }
             }
         };
 
-        SimpleItemRecyclerViewAdapter(RulesSetListActivity parent,
+        SimpleItemRecyclerViewAdapter(DatabasesListActivity parent,
                                       List<DatabaseManager.ADatabase> items,
                                       boolean twoPane) {
             mValues = items;
@@ -136,14 +137,14 @@ public class RulesSetListActivity extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.rulesset_list_content, parent, false);
+                    .inflate(R.layout.activity_databases_list_content, parent, false);
             return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
+            holder.mIdView.setText(mValues.get(position).getId());
+            holder.mContentView.setText(mValues.get(position).getContent());
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
@@ -160,8 +161,8 @@ public class RulesSetListActivity extends AppCompatActivity {
 
             ViewHolder(View view) {
                 super(view);
-                mIdView = (TextView) view.findViewById(R.id.id_text);
-                mContentView = (TextView) view.findViewById(R.id.content);
+                mIdView = (TextView) view.findViewById(R.id.id_database_text);
+                mContentView = (TextView) view.findViewById(R.id.database_content);
             }
         }
     }

@@ -22,8 +22,6 @@ public class Startup extends Application {
         editor.putBoolean("firstTimeOpened", true);
         editor.apply();
 
-        new BackgroundUserDBInitializer("userDB_handler").start();
-
         Log.i("Startup ", " End of startup");
     }
 }

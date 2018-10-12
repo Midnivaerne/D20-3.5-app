@@ -16,7 +16,7 @@ import java.util.List;
 
 import lombok.NonNull;
 
-import static com.aurora.d20_35_app.activities.MainActivity.REQUEST_CODE_WRITE_EXTERNAL_STORAGE_PERMISSION;
+import static com.aurora.d20_35_app.activities.MainActivity.REQUEST_CODE_PERMISSION_ALL;
 
 public class DatabaseReader {
 
@@ -112,7 +112,7 @@ public class DatabaseReader {
     }
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_CODE_WRITE_EXTERNAL_STORAGE_PERMISSION) {
+        if (requestCode == REQUEST_CODE_PERMISSION_ALL) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission is granted
                 showQuotes();
