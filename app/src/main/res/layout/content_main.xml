@@ -5,35 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.aurora.d2035app.MainActivity"
+    tools:context="com.aurora.d20_35_app.activities.MainActivity"
     tools:showIn="@layout/activity_main">
 
     <Button
-        android:id="@+id/DMbutton"
+        android:id="@+id/DM_button"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="32dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="120dp"
         android:text="@string/DM_button"
-        app:layout_constraintBottom_toTopOf="@+id/PCbutton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/PCbutton"
+        android:id="@+id/PC_button"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="50dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="120dp"
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:text="@string/PC_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DMbutton" />
+        app:layout_constraintTop_toBottomOf="@+id/DM_button" />
 
 </android.support.constraint.ConstraintLayout>
