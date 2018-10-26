@@ -12,7 +12,7 @@ public class Enums {
         /**
          * @param dataLocationValue
          */
-        private DataLocation(String dataLocationValue) {
+        DataLocation(String dataLocationValue) {
             this.DataLocationValue = dataLocationValue;
         }
 
@@ -33,6 +33,37 @@ public class Enums {
             }
             return null;
         }
+    }
 
+    public enum DatabaseHandlers {
+        userDB("userDB_handler"),
+        rulesDB("rulesDB_handler");
+
+        private String DataHandlerName;
+
+        /**
+         * @param DataHandlerName
+         */
+        DatabaseHandlers(String DataHandlerName) {
+            this.DataHandlerName = DataHandlerName;
+        }
+
+        @Override
+        public String toString() {
+            return this.DataHandlerName;
+        }
+
+        /**
+         * @param DataHandlerName
+         * @return
+         */
+        public static DataLocation getEnum(String DataHandlerName) {
+            for (DataLocation b : DataLocation.values()) {
+                if (b.DataLocationValue.equalsIgnoreCase(DataHandlerName)) {
+                    return b;
+                }
+            }
+            return null;
+        }
     }
 }

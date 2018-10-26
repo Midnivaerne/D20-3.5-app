@@ -1,16 +1,17 @@
-package com.aurora.d20_35_app.activities;
+package com.aurora.d20_35_app.views;
 
 import android.app.Activity;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aurora.d20_35_app.R;
-import com.aurora.d20_35_app.utils.DatabaseManager;
+import com.aurora.d20_35_app.models.DatabaseManager;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * A fragment representing a single Rules set detail screen.

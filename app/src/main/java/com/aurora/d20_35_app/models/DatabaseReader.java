@@ -1,4 +1,4 @@
-package com.aurora.d20_35_app.utils;
+package com.aurora.d20_35_app.models;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -8,7 +8,7 @@ import android.os.Environment;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
-import com.aurora.d20_35_app.activities.MainActivity;
+import com.aurora.d20_35_app.viewModels.D2035appVM;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 
 import lombok.NonNull;
 
-import static com.aurora.d20_35_app.activities.MainActivity.REQUEST_CODE_PERMISSION_ALL;
+import static com.aurora.d20_35_app.models.DatabaseManager.REQUEST_CODE_PERMISSION_ALL;
 
 public class DatabaseReader {
 
@@ -45,7 +45,7 @@ public class DatabaseReader {
      *
      * @param context         the Context
      * @param sourceDirectory optional external directory
-     * @return the instance of DabaseAccess
+     * @return the instance of DatabaseAccess
      */
     public static DatabaseReader getInstance(Context context, String sourceDirectory, String databaseName) {
         if (instance == null) {
@@ -86,7 +86,7 @@ public class DatabaseReader {
         cursor.close();
         return list;
     }
-
+    /** TODO this
     private void showQuotes() {
         DatabaseReader databaseReader;
         if (fromExternalSource) {
@@ -96,18 +96,18 @@ public class DatabaseReader {
             if (!dbFile.exists()) {
                 return;
             }
-            // If external database is avaliable, deploy it
-            databaseReader = DatabaseReader.getInstance(MainActivity.getContext(), externalDirectory,databaseName);
+            // If external database is available, deploy it
+            databaseReader = DatabaseReader.getInstance(D2035appVM.getActivity(), externalDirectory,databaseName);
         } else {
             // From assets
-            databaseReader = DatabaseReader.getInstance(MainActivity.getContext(), null,databaseName);
+            databaseReader = DatabaseReader.getInstance(D2035appVM.getActivity(), null,databaseName);
         }
 
         databaseReader.open();
         List<String> quotes = databaseReader.getQuotes();
         databaseReader.close();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.getContext(), android.R.layout.simple_list_item_1, quotes); //probably example to delete?
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(D2035appVM.getActivity(), android.R.layout.simple_list_item_1, quotes); //probably example to delete?
         //this.listView.setAdapter(adapter); //TODO no idea
     }
 
@@ -117,10 +117,11 @@ public class DatabaseReader {
                 // Permission is granted
                 showQuotes();
             } else {
-                Toast.makeText(MainActivity.getContext(), "Until you grant the permission, we cannot display the quotes", Toast.LENGTH_SHORT).show();
+                Toast.makeText(D2035appVM.getActivity(), "Until you grant the permission, we cannot display the quotes", Toast.LENGTH_SHORT).show();
             }
         }
 
     }
+    **/
 
 }

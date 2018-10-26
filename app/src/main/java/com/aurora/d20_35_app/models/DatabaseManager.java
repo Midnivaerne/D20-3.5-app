@@ -1,6 +1,10 @@
-package com.aurora.d20_35_app.utils;
+package com.aurora.d20_35_app.models;
 
+import android.Manifest;
+import android.content.Context;
 import android.util.Log;
+
+import com.aurora.d20_35_app.utils.Enums;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -10,16 +14,34 @@ import java.util.List;
 import java.util.Map;
 
 import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 
-import static com.aurora.d20_35_app.activities.MainActivity.path;
+import static com.aurora.d20_35_app.utils.PermissionHandler.getPublicExternalStorageBaseDir;
 
 public class DatabaseManager {
+
+    public static final String LOG_TAG_EXTERNAL_STORAGE = "EXTERNAL_STORAGE";
+    public static final int REQUEST_CODE_PERMISSION_ALL = 1;
+    @Getter
+    @Setter
+    private static int readExternalStoragePermission = -1;// Read external storage permission cache.
+    @Getter
+    @Setter
+    private static int writeExternalStoragePermission = -1;// Write external storage permission cache.
+    @Getter
+    private static String[] permissionTypeString = {"Read", "Write"};
+    @Getter
+    private static String[] permissionTypeStringManifest = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+    public static String externalPathSeparator = "/Android/data/com.aurora.d20_3.5_app/";
+    public static String path = getPublicExternalStorageBaseDir() + externalPathSeparator + "Data/";
 
     public static List<ADatabase> databasesList = new ArrayList<ADatabase>();
     public static Map<String, ADatabase> databasesMap = new HashMap<String, ADatabase>();
 
-    public static void initialDatabaseSetup() {
+    public static void initialDatabaseSetup(Context context, String databaseName) {
         Log.i("Database directory:", "checking if directory exist...");
         if (!new File(path).exists()) {
             Log.i("Database directory:", "directory doesn't exist, creating...");
@@ -30,10 +52,10 @@ public class DatabaseManager {
         }
 
         Log.i("Database file:", "checking if file exist...");
-        if (!new File(path + "userDB.db").exists()) {
+        if (!new File(path + databaseName).exists()) {
             Log.i("Database file:", "file doesn't exist, creating...");
-            DatabaseCreator.createUserDatabase(path);
-            Log.i("Database file:", "created file: userDB.db");
+            DatabaseCreator.createSpecificDatabase(context, path, databaseName);
+            Log.i("Database file:", "created file: " + databaseName);
         } else {
             Log.i("Database file:", "file already exist.");
         }
@@ -94,7 +116,7 @@ public class DatabaseManager {
             File file = new File(path);
             String name = file.listFiles(fileExtensionFilter("db"))[i].getName();
             String nameShortened = name.split("\\.")[0];
-            addItem(loadDatabaseDetails(i+1, nameShortened));
+            addItem(loadDatabaseDetails(i + 1, nameShortened));
         }
     }
 

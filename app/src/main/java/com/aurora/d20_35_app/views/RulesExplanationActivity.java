@@ -1,24 +1,23 @@
-package com.aurora.d20_35_app.activities;
+package com.aurora.d20_35_app.views;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aurora.d20_35_app.R;
-import com.aurora.d20_35_app.utils.DatabaseManager;
-import com.aurora.d20_35_app.utils.RulesManager;
+import com.aurora.d20_35_app.models.DatabaseManager;
+import com.aurora.d20_35_app.models.RulesManager;
 
 import java.util.List;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+import lombok.NonNull;
 
 public class RulesExplanationActivity extends AppCompatActivity {
 

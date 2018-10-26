@@ -1,4 +1,4 @@
-package com.aurora.d20_35_app.utils;
+package com.aurora.d20_35_app.models;
 
 
 import java.util.ArrayList;

@@ -14,103 +14,105 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="@xml/backup_descriptor">
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".views.D2035appActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.DM_Activity"
+            android:name=".views.DM_Activity"
             android:label="@string/title_activity_dm_"
-            android:parentActivityName=".activities.MainActivity"
+            android:parentActivityName=".views.D2035appActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.activities.MainActivity" />
+                android:value="com.aurora.d20_35_app.views.D2035appActivity" />
         </activity>
         <activity
-            android:name=".activities.PC_Activity"
+            android:name=".views.PC_Activity"
             android:label="@string/title_activity_pc_"
-            android:parentActivityName=".activities.MainActivity"
+            android:parentActivityName=".views.D2035appActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.activities.MainActivity" />
+                android:value="com.aurora.d20_35_app.views.D2035appActivity" />
         </activity>
         <activity
-            android:name=".activities.RulesExplanationActivity"
+            android:name=".views.RulesExplanationActivity"
             android:label="@string/title_activity_rulesexplanation_"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName=".views.D2035appActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.activities.MainActivity" />
+                android:value="com.aurora.d20_35_app.views.D2035appActivity" />
         </activity>
         <activity
-            android:name=".activities.ContentActivity"
+            android:name=".views.ContentActivity"
             android:label="@string/title_activity_content_"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName=".views.D2035appActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.activities.MainActivity" />
+                android:value="com.aurora.d20_35_app.views.D2035appActivity" />
         </activity>
         <activity
-            android:name=".activities.Settings_Activity"
+            android:name=".views.Settings_Activity"
             android:label="@string/title_activity_settings_"
-            android:parentActivityName=".activities.MainActivity">
+            android:parentActivityName=".views.D2035appActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.activities.MainActivity" />
+                android:value="com.aurora.d20_35_app.views.D2035appActivity" />
         </activity>
         <activity
-            android:name=".activities.Help_Activity"
+            android:name=".views.Help_Activity"
             android:label="@string/title_activity_help_"
-            android:parentActivityName=".activities.MainActivity"
+            android:parentActivityName=".views.D2035appActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.activities.MainActivity" />
+                android:value="com.aurora.d20_35_app.views.D2035appActivity" />
         </activity>
         <activity
-            android:name=".activities.DatabasesListActivity"
+            android:name=".views.DatabasesListActivity"
             android:label="@string/title_rulesset_list"
-            android:parentActivityName=".activities.MainActivity"
+            android:parentActivityName=".views.D2035appActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.activities.MainActivity" />
+                android:value="com.aurora.d20_35_app.views.D2035appActivity" />
         </activity>
         <activity
-            android:name=".activities.DatabasesListDetailActivity"
+            android:name=".views.DatabasesListDetailActivity"
             android:label="@string/title_rulesset_detail"
-            android:parentActivityName=".activities.DatabasesListActivity"
+            android:parentActivityName=".views.DatabasesListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.activities.DatabasesListActivity" />
+                android:value="com.aurora.d20_35_app.views.DatabasesListActivity" />
         </activity>
         <activity
-            android:name=".activities.PlayerCharacter_Activity"
+            android:name=".views.PlayerCharacter_Activity"
             android:label="@string/title_activity_player_character_"
-            android:parentActivityName=".activities.PC_Activity"
+            android:parentActivityName=".views.PC_Activity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.activities.PC_Activity" />
+                android:value="com.aurora.d20_35_app.views.PC_Activity" />
         </activity>
         <activity
-            android:name=".activities.PlayerCharacterActions_Activity"
+            android:name=".views.PlayerCharacterActions_Activity"
             android:label="@string/title_activity_player_character_actions_"
-            android:parentActivityName=".activities.PlayerCharacter_Activity"
+            android:parentActivityName=".views.PlayerCharacter_Activity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.activities.PlayerCharacter_Activity" />
+                android:value="com.aurora.d20_35_app.views.PlayerCharacter_Activity" />
         </activity>
     </application>
 

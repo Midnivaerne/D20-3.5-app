@@ -10,7 +10,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context=".activities.DatabasesListActivity">
+    tools:context=".views.DatabasesListActivity">
 
     <!--
     This layout is a two-pane layout for the Rules Sets
@@ -27,7 +27,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:context="com.aurora.d20_35_app.activities.DatabasesListActivity"
+        tools:context="com.aurora.d20_35_app.views.DatabasesListActivity"
         tools:listitem="@layout/activity_databases_list_content" />
 
     <FrameLayout

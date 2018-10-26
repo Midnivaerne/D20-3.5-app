@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
-import com.aurora.d20_35_app.utils.BackgroundUserDBInitializer;
-
 public class Startup extends Application {
 
     public static SharedPreferences sharedpreferences;
