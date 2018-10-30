@@ -9,40 +9,24 @@ import android.widget.Toast;
 
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
+import com.aurora.d20_35_app.databinding.ActivityD2035appBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
+import com.aurora.d20_35_app.models.DatabaseCreator;
 import com.aurora.d20_35_app.models.DatabaseManager;
 import com.aurora.d20_35_app.viewModels.D2035appVM;
-import com.aurora.d20_35_app.databinding.ActivityD2035appBinding;
 
 public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D2035appVM> {
 
     private static final String KEY_STATUS = "STATUS";
-    //private D2035appVM viewModel;
-    //private static D2035appActivity instance;
-
-    //public D2035appActivity() {
-    //    instance = this;
-    //}
-
-    //public static Context getContext() {
-    //    return instance;
-    //}
 
     @Override
     public D2035appVM onCreate() {
-        setSupportActionBar(getBinding().toolbar);
-
-        //Button DM_button = findViewById(R.id.DM_button);
-        //DM_button.setOnClickListener(super.getViewModel().dmButtonOnClick());
-
-        //Button PC_button = findViewById(R.id.PC_button);
-        //PC_button.setOnClickListener(super.getViewModel().pcButtonOnClick());
-
+        setSupportActionBar(getMViewDataBinding().toolbar);
         return new D2035appVM(this, getIntent().getStringExtra(KEY_STATUS));
     }
 
     @Override
-    public int getVariable() {
+    public int getBindingVariable() {
         return BR.viewModel;
     }
 
@@ -61,7 +45,7 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (DatabaseManager.getWriteExternalStoragePermission() == PackageManager.PERMISSION_GRANTED) {
-            super.getViewModel().initialDatabasesResolver();
+            DatabaseCreator.initialDatabasesResolver(this);
             // Handle action bar item clicks here. The action bar will
             // automatically handle clicks on the Home/Up button, so long
             // as you specify a parent activity in AndroidManifest.xml.
@@ -73,7 +57,7 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
                     Log.i("Content ", " Main layout to RulesExplanation ");
                     break;
                 case R.id.action_content:
-                    Intent intent_content = new Intent(D2035appActivity.this, ContentActivity.class);
+                    Intent intent_content = new Intent(D2035appActivity.this, D2035appActivity.class);
                     D2035appActivity.this.startActivity(intent_content);
                     Log.i("Content ", " Main layout to Content ");
                     break;
@@ -106,6 +90,13 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
     }
 
 
+    @Override
+    public void onFragmentAttached() {
 
+    }
 
+    @Override
+    public void onFragmentDetached(String tag) {
+
+    }
 }

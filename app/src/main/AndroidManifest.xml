@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".views.DM_Activity"
+            android:name=".views.DMActivity"
             android:label="@string/title_activity_dm_"
             android:parentActivityName=".views.D2035appActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -37,7 +37,7 @@
                 android:value="com.aurora.d20_35_app.views.D2035appActivity" />
         </activity>
         <activity
-            android:name=".views.PC_Activity"
+            android:name=".views.PCActivity"
             android:label="@string/title_activity_pc_"
             android:parentActivityName=".views.D2035appActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -54,7 +54,7 @@
                 android:value="com.aurora.d20_35_app.views.D2035appActivity" />
         </activity>
         <activity
-            android:name=".views.ContentActivity"
+            android:name=".fragments.D2035appContentFragment"
             android:label="@string/title_activity_content_"
             android:parentActivityName=".views.D2035appActivity">
             <meta-data
@@ -99,11 +99,11 @@
         <activity
             android:name=".views.PlayerCharacter_Activity"
             android:label="@string/title_activity_player_character_"
-            android:parentActivityName=".views.PC_Activity"
+            android:parentActivityName=".views.PCActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.views.PC_Activity" />
+                android:value="com.aurora.d20_35_app.views.PCActivity" />
         </activity>
         <activity
             android:name=".views.PlayerCharacterActions_Activity"

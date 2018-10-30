@@ -1,5 +1,6 @@
 package com.aurora.d20_35_app.models;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.aurora.d20_35_app.utils.Enums;
@@ -12,8 +13,10 @@ import lombok.Data;
 public class RulesManager {
     public static List<rulesCategory> rulesCategoryList = new ArrayList<rulesCategory>();
 
-    public static void generateStandardRules() {
-        new BackgroundDBInitializer(Enums.DatabaseHandlers.rulesDB.toString()).start();
+    public static void generateStandardRules(Activity activity) {
+        BackgroundDBInitializer backgroundDBInitializer = new BackgroundDBInitializer(Enums.DatabaseHandlers.rulesDB.toString());
+        backgroundDBInitializer.setContext(activity);
+        backgroundDBInitializer.start();
         insertStandardRulesFromSQL();
     }
 

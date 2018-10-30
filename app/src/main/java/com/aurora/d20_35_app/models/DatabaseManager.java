@@ -42,22 +42,22 @@ public class DatabaseManager {
     public static Map<String, ADatabase> databasesMap = new HashMap<String, ADatabase>();
 
     public static void initialDatabaseSetup(Context context, String databaseName) {
-        Log.i("Database directory:", "checking if directory exist...");
+        Log.i("Database directory:", "checking if directory: " + path + " exist...");
         if (!new File(path).exists()) {
-            Log.i("Database directory:", "directory doesn't exist, creating...");
+            Log.i("Database directory:", "directory " + path + " doesn't exist, creating...");
             new File(String.valueOf(path)).mkdirs();
             Log.i("Database directory:", "created directory:" + path);
         } else {
-            Log.i("Database directory:", "directory already exist.");
+            Log.i("Database directory:", "directory " + path + " already exist.");
         }
 
-        Log.i("Database file:", "checking if file exist...");
+        Log.i("Database file:", "checking if file: " + databaseName + " exist...");
         if (!new File(path + databaseName).exists()) {
-            Log.i("Database file:", "file doesn't exist, creating...");
+            Log.i("Database file:", "file: " + databaseName + " doesn't exist, creating...");
             DatabaseCreator.createSpecificDatabase(context, path, databaseName);
             Log.i("Database file:", "created file: " + databaseName);
         } else {
-            Log.i("Database file:", "file already exist.");
+            Log.i("Database file:", "file: " + databaseName + " already exist.");
         }
     }
 

@@ -22,4 +22,5 @@ public class Startup extends Application {
 
         Log.i("Startup ", " End of startup");
     }
+
 }

@@ -1,13 +1,29 @@
 package com.aurora.d20_35_app.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Environment;
 import android.os.StatFs;
+import android.util.Log;
+
+import com.aurora.d20_35_app.models.DatabaseManager;
 
 import java.io.File;
 
+import androidx.core.content.ContextCompat;
+
 public class PermissionHandler {
 
+
+    public static void reloadPermissions(Activity activity) {
+        Log.i("Permissions ", " Reloading permissions...");
+
+        DatabaseManager.setReadExternalStoragePermission(ContextCompat.checkSelfPermission(activity, DatabaseManager.getPermissionTypeStringManifest()[0]));
+        Log.i("Permissions ", " Loaded " + DatabaseManager.getPermissionTypeString()[0] + " = " + DatabaseManager.getReadExternalStoragePermission());
+
+        DatabaseManager.setWriteExternalStoragePermission(ContextCompat.checkSelfPermission(activity, DatabaseManager.getPermissionTypeStringManifest()[1]));
+        Log.i("Permissions ", " Loaded " + DatabaseManager.getPermissionTypeString()[1] + " = " + DatabaseManager.getWriteExternalStoragePermission());
+    }
 
     // Check whether the external storage is mounted or not.
     public static boolean isExternalStorageMounted() {
