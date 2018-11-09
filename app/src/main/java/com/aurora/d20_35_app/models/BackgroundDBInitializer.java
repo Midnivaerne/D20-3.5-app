@@ -24,7 +24,7 @@ public class BackgroundDBInitializer implements Runnable {
     public void run() {
         if (DatabaseManager.getWriteExternalStoragePermission() == PackageManager.PERMISSION_GRANTED) {
             if (threadName.endsWith("_handler")) {
-                initialDatabaseSetup(context, threadName.replace("_handler", ".db"));
+                initialDatabaseSetup(context, threadName.replace("_handler", ""));
             }
         } else {
             Log.i("Thread", "Can't initialize database with:" + threadName + ", permissions not granted");

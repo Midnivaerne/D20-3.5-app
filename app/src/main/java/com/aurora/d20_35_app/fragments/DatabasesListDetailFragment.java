@@ -1,4 +1,4 @@
-package com.aurora.d20_35_app.views;
+package com.aurora.d20_35_app.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.models.DatabaseManager;
+import com.aurora.d20_35_app.views.DatabasesListActivity;
+import com.aurora.d20_35_app.views.DatabasesListDetailActivity;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import androidx.fragment.app.Fragment;

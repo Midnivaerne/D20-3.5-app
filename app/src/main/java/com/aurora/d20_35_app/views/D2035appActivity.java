@@ -52,7 +52,7 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
             int id = item.getItemId();
             switch (id) {
                 case R.id.action_rules:
-                    Intent intent_rules = new Intent(D2035appActivity.this, RulesExplanationActivity.class);
+                    Intent intent_rules = new Intent(D2035appActivity.this, RulesActivity.class);
                     D2035appActivity.this.startActivity(intent_rules);
                     Log.i("Content ", " Main layout to RulesExplanation ");
                     break;
@@ -67,12 +67,12 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
                     Log.i("Content ", " Main layout to Database/RulesSetList ");
                     break;
                 case R.id.action_settings:
-                    Intent intent_settings = new Intent(D2035appActivity.this, Settings_Activity.class);
+                    Intent intent_settings = new Intent(D2035appActivity.this, SettingsActivity.class);
                     D2035appActivity.this.startActivity(intent_settings);
                     Log.i("Content ", " Main layout to Settings ");
                     break;
                 case R.id.action_help:
-                    Intent intent_help = new Intent(D2035appActivity.this, Help_Activity.class);
+                    Intent intent_help = new Intent(D2035appActivity.this, HelpActivity.class);
                     D2035appActivity.this.startActivity(intent_help);
                     Log.i("Content ", " Main layout to Help ");
                     break;

@@ -1,48 +1,46 @@
 package com.aurora.d20_35_app.views;
 
-import android.os.Bundle;
-import android.view.View;
-
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.aurora.d20_35_app.databinding.ActivityPlayerCharacterActionsBinding;
+import com.aurora.d20_35_app.helper.BindingActivity;
+import com.aurora.d20_35_app.viewModels.PlayerCharacterActionsVM;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
-public class PlayerCharacterActions_Activity extends AppCompatActivity
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+public class PlayerCharacterActionsActivity extends BindingActivity<ActivityPlayerCharacterActionsBinding, PlayerCharacterActionsVM>
         implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_player_character_actions);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    public PlayerCharacterActionsVM onCreate() {
+        setSupportActionBar(getMViewDataBinding().toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);  //TODO investigate if working here and if needs to be moved
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, getMViewDataBinding().toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        return new PlayerCharacterActionsVM(this);
+    }
+
+    @Override
+    public int getBindingVariable() {
+        return BR.viewModel;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_player_character_actions;
     }
 
     @Override
@@ -100,5 +98,15 @@ public class PlayerCharacterActions_Activity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentAttached() {
+
+    }
+
+    @Override
+    public void onFragmentDetached(String tag) {
+
     }
 }

@@ -12,6 +12,7 @@ public class PCVM extends ActivityViewModel<PCActivity> {
     public PCVM(PCActivity activity) {
         super(activity);
 
+        showBackButton();
     }
 
     public void addCharacterButtonOnClick(View view, Activity activity) {

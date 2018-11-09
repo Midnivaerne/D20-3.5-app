@@ -1,7 +1,8 @@
-package com.aurora.d20_35_app.views;
+package com.aurora.d20_35_app.viewModels;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,17 +10,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aurora.d20_35_app.R;
+import com.aurora.d20_35_app.fragments.DatabasesListDetailFragment;
+import com.aurora.d20_35_app.helper.ActivityViewModel;
 import com.aurora.d20_35_app.models.DatabaseManager;
-import com.aurora.d20_35_app.models.RulesManager;
+import com.aurora.d20_35_app.views.DatabasesListActivity;
+import com.aurora.d20_35_app.views.DatabasesListDetailActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
 
-public class RulesExplanationActivity extends AppCompatActivity {
+public class DatabasesListVM extends ActivityViewModel<DatabasesListActivity> {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -27,31 +32,25 @@ public class RulesExplanationActivity extends AppCompatActivity {
      */
     private boolean mTwoPane;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rules);
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public DatabasesListVM(DatabasesListActivity activity) {
+        super(activity);
 
-        RulesManager.loadRulesCategory();//todo test
+        showBackButton();
 
-        /**Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
+        DatabaseManager.loadDatabasesList();
+        DatabaseManager.hideRulesDatabase();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                view.scrollTo(0, 0);//TODO test it
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
-        });**/
-        // Show the Up button in the action bar.
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        });
 
-        if (findViewById(R.id.activity_rules_explanation_container) != null) {
+        if (getActivity().findViewById(R.id.activity_databases_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
@@ -59,20 +58,20 @@ public class RulesExplanationActivity extends AppCompatActivity {
             mTwoPane = true;
         }
 
-        View recyclerView = findViewById(R.id.activity_rules_explanation);
+        View recyclerView = getActivity().findViewById(R.id.activity_databases_list_inner);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this, RulesManager.rulesCategoryList, mTwoPane));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this.getActivity(), DatabaseManager.databasesList, mTwoPane));
     }
 
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final RulesExplanationActivity mParentActivity;
-        private final List<RulesManager.rulesCategory> mValues;
+        private final DatabasesListActivity mParentActivity;
+        private final List<DatabaseManager.ADatabase> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
@@ -84,7 +83,7 @@ public class RulesExplanationActivity extends AppCompatActivity {
                     DatabasesListDetailFragment fragment = new DatabasesListDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.activity_rules_explanation_container, fragment)
+                            .replace(R.id.activity_databases_detail_container, fragment)
                             .commit();
                 } else {
                     Context context = view.getContext();
@@ -96,8 +95,8 @@ public class RulesExplanationActivity extends AppCompatActivity {
             }
         };
 
-        SimpleItemRecyclerViewAdapter(RulesExplanationActivity parent,
-                                      List<RulesManager.rulesCategory> items,
+        SimpleItemRecyclerViewAdapter(DatabasesListActivity parent,
+                                      List<DatabaseManager.ADatabase> items,
                                       boolean twoPane) {
             mValues = items;
             mParentActivity = parent;
@@ -107,7 +106,7 @@ public class RulesExplanationActivity extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.rules_explanation_content, parent, false);
+                    .inflate(R.layout.activity_databases_list_content, parent, false);
             return new ViewHolder(view);
         }
 
@@ -131,8 +130,8 @@ public class RulesExplanationActivity extends AppCompatActivity {
 
             ViewHolder(View view) {
                 super(view);
-                mIdView = (TextView) view.findViewById(R.id.id_explanation_text);
-                mContentView = (TextView) view.findViewById(R.id.explanation_content);
+                mIdView = (TextView) view.findViewById(R.id.id_database_text);
+                mContentView = (TextView) view.findViewById(R.id.database_content);
             }
         }
     }

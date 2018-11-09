@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.MenuItem;
 
 import com.aurora.d20_35_app.R;
+import com.aurora.d20_35_app.fragments.DatabasesListDetailFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 

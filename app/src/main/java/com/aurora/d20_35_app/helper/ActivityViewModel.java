@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.aurora.d20_35_app.utils.CommonUtils;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.BaseObservable;
 import lombok.Getter;
@@ -108,5 +109,13 @@ public class ActivityViewModel<A extends AppCompatActivity> extends BaseObservab
     public void showLoading() {
         hideLoading();
         mProgressDialog = CommonUtils.showLoadingDialog(this.getActivity());
+    }
+
+    public void showBackButton(){
+        // Show the Up button in the action bar.
+        ActionBar actionBar = getActivity().getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 }

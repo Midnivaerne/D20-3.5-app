@@ -2,6 +2,7 @@ package com.aurora.d20_35_app.models;
 
 import android.Manifest;
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 
 import com.aurora.d20_35_app.utils.Enums;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import androidx.annotation.RequiresApi;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
@@ -38,6 +40,9 @@ public class DatabaseManager {
     public static String externalPathSeparator = "/Android/data/com.aurora.d20_3.5_app/";
     public static String path = getPublicExternalStorageBaseDir() + externalPathSeparator + "Data/";
 
+    public static final String USERDB = "userDB";
+    public static final String RULESDB = "rulesDB";
+
     public static List<ADatabase> databasesList = new ArrayList<ADatabase>();
     public static Map<String, ADatabase> databasesMap = new HashMap<String, ADatabase>();
 
@@ -51,13 +56,13 @@ public class DatabaseManager {
             Log.i("Database directory:", "directory " + path + " already exist.");
         }
 
-        Log.i("Database file:", "checking if file: " + databaseName + " exist...");
-        if (!new File(path + databaseName).exists()) {
-            Log.i("Database file:", "file: " + databaseName + " doesn't exist, creating...");
+        Log.i("Database file:", "checking if file: " + databaseName + ".db exist...");
+        if (!new File(path + databaseName + ".db").exists()) {
+            Log.i("Database file:", "file: " + databaseName + ".db doesn't exist, creating...");
             DatabaseCreator.createSpecificDatabase(context, path, databaseName);
-            Log.i("Database file:", "created file: " + databaseName);
+            Log.i("Database file:", "created file: " + databaseName + ".db");
         } else {
-            Log.i("Database file:", "file: " + databaseName + " already exist.");
+            Log.i("Database file:", "file: " + databaseName + ".db already exist.");
         }
     }
 
@@ -110,6 +115,7 @@ public class DatabaseManager {
     }
 
     public static void loadDatabasesList() {
+        Log.i("Database file:", "Loading databases list");
         databasesList.clear();
         databasesMap.clear();
         for (int i = 0; i < countFilesInDir(path); i++) {
@@ -120,9 +126,27 @@ public class DatabaseManager {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static void hideRulesDatabase() {
+        for (Object obj : databasesList) {
+            if (obj.toString().equals(RULESDB)) {
+                int index = databasesList.indexOf(obj);
+                ADatabase item = databasesList.get(index);
+                removeItem(item);
+                break;
+            }
+        }
+    }
+
     private static void addItem(ADatabase item) {
         databasesList.add(item);
         databasesMap.put(item.id, item);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private static void removeItem(ADatabase item) {
+        databasesList.remove(item);
+        databasesMap.remove(item.id, item);
     }
 
     private static ADatabase loadDatabaseDetails(int position, String name) {

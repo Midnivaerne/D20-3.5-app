@@ -3,6 +3,7 @@ package com.aurora.d20_35_app.models;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,24 +22,26 @@ public class DbInitializer extends SQLiteOpenHelper {
     @Setter
     private String database_name;
     private Context context;
+    @Setter
+    private InputStream is;
 
     public DbInitializer(Context context, @NonNull String database_name) {
         super(context, database_name, null, DATABASE_VERSION);
         this.database_name = database_name;
-        this.context=context;
+        this.context = context;
     }
 
     public DbInitializer(Context context, @NonNull String sourceDirectory, @NonNull String database_name) {
         super(context, sourceDirectory + database_name, null, DATABASE_VERSION);
         this.database_name = database_name;
-        this.context=context;
+        this.context = context;
     }
 
     public void onCreate(SQLiteDatabase db) {
         if (!database_name.equals("")) {
+            Log.i("Database file:", "creating tables for: " + database_name);
             try {
                 StringBuilder buf = new StringBuilder();
-                InputStream is = context.getAssets().open("Database/Sample.db.sql");
                 BufferedReader in = new BufferedReader(new InputStreamReader(is));
                 String str;
 

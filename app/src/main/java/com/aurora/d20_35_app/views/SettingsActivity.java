@@ -18,12 +18,12 @@ import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.core.app.NavUtils;
-
 import com.aurora.d20_35_app.R;
 
 import java.util.List;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.core.app.NavUtils;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
@@ -36,7 +36,7 @@ import java.util.List;
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings
  * API Guide</a> for more information on developing a Settings UI.
  */
-public class Settings_Activity extends AppCompatPreferenceActivity {
+public class SettingsActivity extends AppCompatPreferenceActivity {
 
     /**
      * A preference value change listener that updates the preference's summary
@@ -201,7 +201,7 @@ public class Settings_Activity extends AppCompatPreferenceActivity {
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
             if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), Settings_Activity.class));
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
             }
             return super.onOptionsItemSelected(item);
@@ -231,7 +231,7 @@ public class Settings_Activity extends AppCompatPreferenceActivity {
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
             if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), Settings_Activity.class));
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
             }
             return super.onOptionsItemSelected(item);
@@ -261,7 +261,7 @@ public class Settings_Activity extends AppCompatPreferenceActivity {
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
             if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), Settings_Activity.class));
+                startActivity(new Intent(getActivity(), SettingsActivity.class));
                 return true;
             }
             return super.onOptionsItemSelected(item);
