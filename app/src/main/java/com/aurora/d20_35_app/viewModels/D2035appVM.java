@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.aurora.d20_35_app.Startup;
 import com.aurora.d20_35_app.helper.ActivityViewModel;
-import com.aurora.d20_35_app.models.DatabaseCreator;
 import com.aurora.d20_35_app.models.DatabaseManager;
 import com.aurora.d20_35_app.utils.PermissionHandler;
 import com.aurora.d20_35_app.views.D2035appActivity;
@@ -19,6 +19,7 @@ import com.aurora.d20_35_app.views.PCActivity;
 
 import java.util.Arrays;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.ObservableField;
 import lombok.NonNull;
@@ -46,10 +47,11 @@ public class D2035appVM extends ActivityViewModel<D2035appActivity> {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O_MR1)
     public void dmButtonOnClick(View view, Activity activity) {
         Log.i("Button ", " Clicked toDM");
         if (DatabaseManager.getWriteExternalStoragePermission() == PackageManager.PERMISSION_GRANTED) {
-            DatabaseCreator.initialDatabasesResolver(activity);
+            DatabaseManager.initialDatabasesResolver(activity);
             Intent intent_DM = new Intent(activity, DMActivity.class);
             activity.startActivity(intent_DM);
             Log.i("Content ", " Main layout to DM ");
@@ -58,10 +60,11 @@ public class D2035appVM extends ActivityViewModel<D2035appActivity> {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O_MR1)
     public void pcButtonOnClick(View view, Activity activity) {
         Log.i("Button ", " Clicked toPC");
         if (DatabaseManager.getWriteExternalStoragePermission() == PackageManager.PERMISSION_GRANTED) {
-            DatabaseCreator.initialDatabasesResolver(activity);
+            DatabaseManager.initialDatabasesResolver(activity);
             Intent intent_PC = new Intent(activity, PCActivity.class);
             activity.startActivity(intent_PC);
             Log.i("Content ", " Main layout to PC ");

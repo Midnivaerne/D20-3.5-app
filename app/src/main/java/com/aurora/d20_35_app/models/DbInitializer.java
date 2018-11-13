@@ -5,14 +5,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+
+import static com.aurora.d20_35_app.models.DatabaseManager.sqlFileToString;
 
 public class DbInitializer extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
@@ -40,17 +40,10 @@ public class DbInitializer extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         if (!database_name.equals("")) {
             Log.i("Database file:", "creating tables for: " + database_name);
+            db.execSQL(sqlFileToString(is));
+            db.endTransaction();
             try {
-                StringBuilder buf = new StringBuilder();
-                BufferedReader in = new BufferedReader(new InputStreamReader(is));
-                String str;
-
-                while ((str = in.readLine()) != null) {
-                    buf.append(str);
-                }
-
-                in.close();
-                db.execSQL(buf.toString());
+                is.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }

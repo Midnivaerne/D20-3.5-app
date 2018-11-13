@@ -1,14 +1,20 @@
 package com.aurora.d20_35_app.models;
 
 import android.Manifest;
-import android.content.Context;
+import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.util.Log;
 
 import com.aurora.d20_35_app.utils.Enums;
+import com.aurora.d20_35_app.utils.PermissionHandler;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,25 +52,127 @@ public class DatabaseManager {
     public static List<ADatabase> databasesList = new ArrayList<ADatabase>();
     public static Map<String, ADatabase> databasesMap = new HashMap<String, ADatabase>();
 
-    public static void initialDatabaseSetup(Context context, String databaseName) {
+    public static void initialDatabasesResolver(Activity activity) {
+        PermissionHandler.reloadPermissions(activity);
+        initialPathSetup();
+        dbThreadSetup(activity, Enums.DatabaseHandlers.userDB.toString());
+        dbThreadSetup(activity, Enums.DatabaseHandlers.rulesDB.toString());
+        insertStandardRulesFromSQL(activity);//todo check if rules already present
+    }
+
+    public static void initialPathSetup() {
         Log.i("Database directory:", "checking if directory: " + path + " exist...");
         if (!new File(path).exists()) {
             Log.i("Database directory:", "directory " + path + " doesn't exist, creating...");
-            new File(String.valueOf(path)).mkdirs();
-            Log.i("Database directory:", "created directory:" + path);
+            Boolean fileCreated = new File(String.valueOf(path)).mkdirs();
+            if (fileCreated) {
+                Log.i("Database directory:", "created directory:" + path);
+            } else {
+                Log.e("Database directory:", "failed to create directory:" + path);
+            }
         } else {
             Log.i("Database directory:", "directory " + path + " already exist.");
         }
+    }
 
-        Log.i("Database file:", "checking if file: " + databaseName + ".db exist...");
-        if (!new File(path + databaseName + ".db").exists()) {
-            Log.i("Database file:", "file: " + databaseName + ".db doesn't exist, creating...");
-            DatabaseCreator.createSpecificDatabase(context, path, databaseName);
-            Log.i("Database file:", "created file: " + databaseName + ".db");
-        } else {
-            Log.i("Database file:", "file: " + databaseName + ".db already exist.");
+    private static void dbThreadSetup(Activity activity, String name) {
+        BackgroundDBInitializer backgroundInitializer = new BackgroundDBInitializer(name);
+        backgroundInitializer.setContext(activity);
+        backgroundInitializer.setPath(path);
+        backgroundInitializer.start();
+
+        try {
+            backgroundInitializer.getT().join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
+
+
+    public static void insertStandardRulesFromSQL(Activity activity) {
+        try {
+            Log.i("Database file:", "inserting standard rules");
+
+            Log.i("Database file:", "opening file: " + path + RULESDB + ".db");
+            SQLiteDatabase database = SQLiteDatabase.openDatabase(path + RULESDB + ".db", null, SQLiteDatabase.OPEN_READWRITE);
+
+            Log.i("Database file:", "opening inputStream and executing SQL: StandardRules.sql");
+            InputStream inputStream = activity.getAssets().open("Database/StandardRules.sql");
+            database.execSQL(sqlFileToString(inputStream));
+
+            Log.i("Database file:", "closing inputStream, transaction and database ...");
+            inputStream.close();
+            database.endTransaction();
+            database.close();
+            Log.i("Database file:", "inputStream, transaction and database closed");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void loadDatabasesList() {
+        Log.i("Database file:", "Loading databases list");
+        databasesList.clear();
+        databasesMap.clear();
+        for (int i = 0; i < countFilesInDir(path); i++) {
+            File file = new File(path);
+            String name = file.listFiles(fileExtensionFilter("db"))[i].getName();
+            String nameShortened = name.split("\\.")[0];
+            addItem(loadDatabaseDetails(i + 1, nameShortened));
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static void hideRulesDatabase() {
+        for (Object obj : databasesList) {
+            if (obj.toString().equals(RULESDB)) {
+                int index = databasesList.indexOf(obj);
+                ADatabase item = databasesList.get(index);
+                removeItem(item);
+                break;
+            }
+        }
+    }
+
+    private static void addItem(ADatabase item) {
+        databasesList.add(item);
+        databasesMap.put(item.id, item);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private static void removeItem(ADatabase item) {
+        databasesList.remove(item);
+        databasesMap.remove(item.id, item);
+    }
+
+    private static ADatabase loadDatabaseDetails(int position, String name) {
+        return new ADatabase(String.valueOf(position), name, makeDetails(name));
+    }
+
+    private static String makeDetails(String name) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Details about: ").append(name);
+        builder.append("\n" + name + " contains ...");
+        return builder.toString();
+    }
+
+    public static String sqlFileToString(InputStream is) {
+        StringBuilder buf = new StringBuilder();
+        try {
+            BufferedReader in = new BufferedReader(new InputStreamReader(is));
+            String str;
+
+            while ((str = in.readLine()) != null) {
+                buf.append(str);
+            }
+
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return buf.toString();
+    }
+
 
     public static int howMany(@NonNull Enums.DataLocation where, @NonNull String path) {
         showFiles(path);
@@ -112,52 +220,6 @@ public class DatabaseManager {
             count = file.listFiles(fileExtensionFilter("db")).length;
         }
         return count;
-    }
-
-    public static void loadDatabasesList() {
-        Log.i("Database file:", "Loading databases list");
-        databasesList.clear();
-        databasesMap.clear();
-        for (int i = 0; i < countFilesInDir(path); i++) {
-            File file = new File(path);
-            String name = file.listFiles(fileExtensionFilter("db"))[i].getName();
-            String nameShortened = name.split("\\.")[0];
-            addItem(loadDatabaseDetails(i + 1, nameShortened));
-        }
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public static void hideRulesDatabase() {
-        for (Object obj : databasesList) {
-            if (obj.toString().equals(RULESDB)) {
-                int index = databasesList.indexOf(obj);
-                ADatabase item = databasesList.get(index);
-                removeItem(item);
-                break;
-            }
-        }
-    }
-
-    private static void addItem(ADatabase item) {
-        databasesList.add(item);
-        databasesMap.put(item.id, item);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private static void removeItem(ADatabase item) {
-        databasesList.remove(item);
-        databasesMap.remove(item.id, item);
-    }
-
-    private static ADatabase loadDatabaseDetails(int position, String name) {
-        return new ADatabase(String.valueOf(position), name, makeDetails(name));
-    }
-
-    private static String makeDetails(String name) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Details about: ").append(name);
-        builder.append("\n" + name + " contains ...");
-        return builder.toString();
     }
 
     @Data

@@ -4,32 +4,48 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
-import lombok.Setter;
+import java.io.File;
 
-import static com.aurora.d20_35_app.models.DatabaseManager.initialDatabaseSetup;
+import lombok.Getter;
+import lombok.Setter;
 
 public class BackgroundDBInitializer implements Runnable {
 
+    @Getter
     private Thread t;
     private final String threadName;
+    private final String databaseName;
     @Setter
     private Context context;
+    @Setter
+    private String path;
 
     public BackgroundDBInitializer(String threadName) {
         this.threadName = threadName;
+        this.databaseName = threadName.replace("_handler", "");
         Log.i("Thread", "creating:" + threadName);
     }
 
     @Override
     public void run() {
-        if (DatabaseManager.getWriteExternalStoragePermission() == PackageManager.PERMISSION_GRANTED) {
-            if (threadName.endsWith("_handler")) {
-                initialDatabaseSetup(context, threadName.replace("_handler", ""));
+        try {
+            if (DatabaseManager.getWriteExternalStoragePermission() == PackageManager.PERMISSION_GRANTED) {
+                if (threadName.endsWith("_handler")) {
+                    Log.i("Database file:", "checking if file: " + databaseName + ".db exist...");
+                    if (!new File(path + databaseName + ".db").exists()) {
+                        Log.i("Database file:", "file: " + databaseName + ".db doesn't exist, creating...");
+                        DatabaseCreator.createSpecificDatabase(context, path, databaseName);
+                        Log.i("Database file:", "created file: " + databaseName + ".db");
+                    } else {
+                        Log.i("Database file:", "file: " + databaseName + ".db already exist.");
+                    }
+                }
+            } else {
+                Log.i("Thread", "Can't initialize database with:" + threadName + ", permissions not granted");
             }
-        } else {
-            Log.i("Thread", "Can't initialize database with:" + threadName + ", permissions not granted");
+        } finally {
+            Log.i("Thread", "exiting:" + threadName);
         }
-
     }
 
     public void start() {
@@ -38,7 +54,7 @@ public class BackgroundDBInitializer implements Runnable {
             t = new Thread(this, threadName);
             t.start();
         }
-        Log.i("Thread", "exiting:" + threadName);
+        Log.i("Thread", "started:" + threadName);
     }
 
 }

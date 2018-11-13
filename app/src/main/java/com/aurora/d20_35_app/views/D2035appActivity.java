@@ -2,6 +2,7 @@ package com.aurora.d20_35_app.views;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,9 +12,10 @@ import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.databinding.ActivityD2035appBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
-import com.aurora.d20_35_app.models.DatabaseCreator;
 import com.aurora.d20_35_app.models.DatabaseManager;
 import com.aurora.d20_35_app.viewModels.D2035appVM;
+
+import androidx.annotation.RequiresApi;
 
 public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D2035appVM> {
 
@@ -42,10 +44,11 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O_MR1)
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (DatabaseManager.getWriteExternalStoragePermission() == PackageManager.PERMISSION_GRANTED) {
-            DatabaseCreator.initialDatabasesResolver(this);
+            DatabaseManager.initialDatabasesResolver(this);
             // Handle action bar item clicks here. The action bar will
             // automatically handle clicks on the Home/Up button, so long
             // as you specify a parent activity in AndroidManifest.xml.

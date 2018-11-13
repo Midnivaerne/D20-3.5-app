@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
     With Data Binding, the root element is <layout>.  It contains 2 things.
     1. <data> - We define variables to which we wish to use in our binding expressions and

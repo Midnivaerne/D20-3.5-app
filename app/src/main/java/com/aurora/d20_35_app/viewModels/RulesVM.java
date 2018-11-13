@@ -47,7 +47,7 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
         }
         });**/
 
-        if (this.getActivity().findViewById(R.id.activity_rules_explanation_container) != null) {
+        if (getActivity().findViewById(R.id.activity_rules_explanation_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
@@ -55,10 +55,9 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
             mTwoPane = true;
         }
 
-        View recyclerView = this.getActivity().findViewById(R.id.activity_rules_explanation);
+        View recyclerView = getActivity().findViewById(R.id.activity_rules_list_inner);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
-
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
