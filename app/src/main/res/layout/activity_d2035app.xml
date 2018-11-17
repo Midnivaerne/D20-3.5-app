@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    With Data Binding, the root element is <layout>.  It contains 2 things.
-    1. <data> - We define variables to which we wish to use in our binding expressions and
-                import any other classes we may need for reference, like android.view.View.
-    2. <root layout> - This is the visual root layout of our view.  This is the root xml tag in the MVC and MVP view examples.
--->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -52,7 +46,7 @@
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="120dp"
                 android:layout_marginEnd="60dp"
-                android:onClick="@{(v) -> viewModel.dmButtonOnClick(v, viewModel.getActivity())}"
+                android:onClick="@{(v) -> viewModel.buttonOnClick(v)}"
                 android:text="@string/DM_button"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +60,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="60dp"
                 android:layout_marginBottom="120dp"
-                android:onClick="@{(v) -> viewModel.pcButtonOnClick(v, viewModel.getActivity())}"
+                android:onClick="@{(v) -> viewModel.buttonOnClick(v)}"
                 android:text="@string/PC_button"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

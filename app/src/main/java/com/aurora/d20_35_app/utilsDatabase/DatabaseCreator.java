@@ -1,4 +1,4 @@
-package com.aurora.d20_35_app.models;
+package com.aurora.d20_35_app.utilsDatabase;
 
 import android.content.Context;
 import android.util.Log;
@@ -6,10 +6,12 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
 
+import androidx.room.Room;
 import lombok.NonNull;
 
-import static com.aurora.d20_35_app.models.DatabaseManager.RULESDB;
-import static com.aurora.d20_35_app.models.DatabaseManager.USERDB;
+import static com.aurora.d20_35_app.utilsDatabase.DatabaseHolder.MIGRATION_1_2;
+import static com.aurora.d20_35_app.utilsDatabase.DatabaseManager.RULESDB;
+import static com.aurora.d20_35_app.utilsDatabase.DatabaseManager.USERDB;
 
 
 public class DatabaseCreator {
@@ -47,6 +49,10 @@ public class DatabaseCreator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        DatabaseHolder databaseHolder = Room.databaseBuilder(context, DatabaseHolder.class, databaseName + ".db").addMigrations(MIGRATION_1_2).build();
+        System.out.println(databaseHolder.racesDAO().getRaces());
+        databaseHolder.close();
     }
 
     private static String chooseSQL(String databaseName) {

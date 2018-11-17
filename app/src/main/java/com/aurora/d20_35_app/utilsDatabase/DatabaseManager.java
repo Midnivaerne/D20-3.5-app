@@ -1,4 +1,4 @@
-package com.aurora.d20_35_app.models;
+package com.aurora.d20_35_app.utilsDatabase;
 
 import android.Manifest;
 import android.app.Activity;
@@ -6,7 +6,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.util.Log;
 
-import com.aurora.d20_35_app.utils.Enums;
+import com.aurora.d20_35_app.enums.DataLocation;
+import com.aurora.d20_35_app.enums.DatabaseHandlers;
 import com.aurora.d20_35_app.utils.PermissionHandler;
 
 import java.io.BufferedReader;
@@ -55,8 +56,8 @@ public class DatabaseManager {
     public static void initialDatabasesResolver(Activity activity) {
         PermissionHandler.reloadPermissions(activity);
         initialPathSetup();
-        dbThreadSetup(activity, Enums.DatabaseHandlers.userDB.toString());
-        dbThreadSetup(activity, Enums.DatabaseHandlers.rulesDB.toString());
+        dbThreadSetup(activity, DatabaseHandlers.userDB.toString());
+        dbThreadSetup(activity, DatabaseHandlers.rulesDB.toString());
         insertStandardRulesFromSQL(activity);//todo check if rules already present
     }
 
@@ -174,7 +175,7 @@ public class DatabaseManager {
     }
 
 
-    public static int howMany(@NonNull Enums.DataLocation where, @NonNull String path) {
+    public static int howMany(@NonNull DataLocation where, @NonNull String path) {
         showFiles(path);
         int databasesCount = countFilesInDir(path);
         Log.i("Database file:", where.toString() + "databases count:" + databasesCount);

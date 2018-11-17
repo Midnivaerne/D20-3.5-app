@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.fragments.DatabasesListDetailFragment;
 import com.aurora.d20_35_app.helper.ActivityViewModel;
-import com.aurora.d20_35_app.models.DatabaseManager;
+import com.aurora.d20_35_app.utilsDatabase.DatabaseManager;
 import com.aurora.d20_35_app.views.DatabasesListActivity;
 import com.aurora.d20_35_app.views.DatabasesListDetailActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

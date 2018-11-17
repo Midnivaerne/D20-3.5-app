@@ -12,8 +12,8 @@ import android.widget.TextView;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.fragments.DatabasesListDetailFragment;
 import com.aurora.d20_35_app.helper.ActivityViewModel;
-import com.aurora.d20_35_app.models.DatabaseManager;
-import com.aurora.d20_35_app.models.RulesManager;
+import com.aurora.d20_35_app.utilsDatabase.DatabaseManager;
+import com.aurora.d20_35_app.utilsDatabase.RulesManager;
 import com.aurora.d20_35_app.views.DatabasesListDetailActivity;
 import com.aurora.d20_35_app.views.RulesActivity;
 
@@ -31,7 +31,6 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
 
     public RulesVM(RulesActivity activity) {
         super(activity);
-
         showBackButton();
 
         RulesManager.loadRulesCategory();//todo test
@@ -43,7 +42,7 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
          FloatingActionButton fab = findViewById(R.id.fab);
          fab.setOnClickListener(new View.OnClickListener() {
         @Override public void onClick(View view) {
-        view.scrollTo(0, 0);//TODO test it
+        view.scrollTo(0, 0);//TODO implement mvvm version
         }
         });**/
 

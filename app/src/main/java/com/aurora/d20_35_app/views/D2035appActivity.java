@@ -1,23 +1,19 @@
 package com.aurora.d20_35_app.views;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.databinding.ActivityD2035appBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
-import com.aurora.d20_35_app.models.DatabaseManager;
 import com.aurora.d20_35_app.viewModels.D2035appVM;
 
-import androidx.annotation.RequiresApi;
+import dagger.android.AndroidInjector;
 
-public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D2035appVM> {
+public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D2035appVM> implements AndroidInjector<Activity> {
 
     private static final String KEY_STATUS = "STATUS";
 
@@ -44,54 +40,35 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
         return true;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O_MR1)
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (DatabaseManager.getWriteExternalStoragePermission() == PackageManager.PERMISSION_GRANTED) {
-            DatabaseManager.initialDatabasesResolver(this);
-            // Handle action bar item clicks here. The action bar will
-            // automatically handle clicks on the Home/Up button, so long
-            // as you specify a parent activity in AndroidManifest.xml.
-            int id = item.getItemId();
-            switch (id) {
-                case R.id.action_rules:
-                    Intent intent_rules = new Intent(D2035appActivity.this, RulesActivity.class);
-                    D2035appActivity.this.startActivity(intent_rules);
-                    Log.i("Content ", " Main layout to RulesExplanation ");
-                    break;
-                case R.id.action_content:
-                    Intent intent_content = new Intent(D2035appActivity.this, D2035appActivity.class);
-                    D2035appActivity.this.startActivity(intent_content);
-                    Log.i("Content ", " Main layout to Content ");
-                    break;
-                case R.id.action_database:
-                    Intent intent_database = new Intent(D2035appActivity.this, DatabasesListActivity.class);
-                    D2035appActivity.this.startActivity(intent_database);
-                    Log.i("Content ", " Main layout to Database/RulesSetList ");
-                    break;
-                case R.id.action_settings:
-                    Intent intent_settings = new Intent(D2035appActivity.this, SettingsActivity.class);
-                    D2035appActivity.this.startActivity(intent_settings);
-                    Log.i("Content ", " Main layout to Settings ");
-                    break;
-                case R.id.action_help:
-                    Intent intent_help = new Intent(D2035appActivity.this, HelpActivity.class);
-                    D2035appActivity.this.startActivity(intent_help);
-                    Log.i("Content ", " Main layout to Help ");
-                    break;
-                case R.id.action_exit:
-                    Log.i("Content ", " Main layout to Exit ");
-                    finish();
-                    moveTaskToBack(true);
-                    break;
-            }
-            return super.onOptionsItemSelected(item);
-        } else {
-            Toast.makeText(getApplicationContext(), "Write external storage permission needed.", Toast.LENGTH_LONG).show();
-            return false;
-        }
+    public void startNewActivityFromMain(int destinationID) {
+        Intent intent_rules = new Intent(this, chooseNewActivity(destinationID));
+        this.startActivity(intent_rules);
+        Log.i("Content ", " Main layout to " + getString(destinationID)); //todo test
     }
 
+    private Class<?> chooseNewActivity(int destinationID) {
+        switch (destinationID) {
+            case R.id.PC_button:
+                return PCActivity.class;
+            case R.id.DM_button:
+                return DMActivity.class;
+            case R.id.action_rules:
+                return RulesActivity.class;
+            case R.id.action_content:
+                return null; //todo ContentActivity.class
+            case R.id.action_database:
+                return DatabasesListActivity.class;
+            case R.id.action_settings:
+                return SettingsActivity.class;
+            case R.id.action_help:
+                return HelpActivity.class;
+            case R.id.action_exit:
+                finish();
+                moveTaskToBack(true);
+                break;
+        }
+        return null;
+    }
 
     @Override
     public void onFragmentAttached() {
@@ -100,6 +77,11 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
 
     @Override
     public void onFragmentDetached(String tag) {
+
+    }
+
+    @Override
+    public void inject(Activity instance) {
 
     }
 }

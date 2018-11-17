@@ -11,13 +11,11 @@ import com.google.android.material.snackbar.Snackbar;
 public class PCVM extends ActivityViewModel<PCActivity> {
     public PCVM(PCActivity activity) {
         super(activity);
-
         showBackButton();
     }
 
     public void addCharacterButtonOnClick(View view, Activity activity) {
         Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
-        //activity.getActionBar().setDisplayHomeAsUpEnabled(true); TODO check and implement setDisplayHomeAsUpEnabled
     }
 }

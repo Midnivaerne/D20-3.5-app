@@ -1,4 +1,4 @@
-package com.aurora.d20_35_app.models;
+package com.aurora.d20_35_app.utilsDatabase;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
-import static com.aurora.d20_35_app.models.DatabaseManager.sqlFileToString;
+import static com.aurora.d20_35_app.utilsDatabase.DatabaseManager.sqlFileToString;
 
 public class DbInitializer extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.

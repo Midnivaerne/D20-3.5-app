@@ -96,10 +96,6 @@ public class ActivityViewModel<A extends AppCompatActivity> extends BaseObservab
 
     }
 
-    /**
-     * -----------------------
-     */
-
     public void hideLoading() {
         if (mProgressDialog != null && mProgressDialog.isShowing()) {
             mProgressDialog.cancel();

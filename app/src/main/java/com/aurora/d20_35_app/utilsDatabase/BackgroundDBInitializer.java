@@ -1,4 +1,4 @@
-package com.aurora.d20_35_app.models;
+package com.aurora.d20_35_app.utilsDatabase;
 
 import android.content.Context;
 import android.content.pm.PackageManager;

@@ -6,7 +6,7 @@ import android.os.Environment;
 import android.os.StatFs;
 import android.util.Log;
 
-import com.aurora.d20_35_app.models.DatabaseManager;
+import com.aurora.d20_35_app.utilsDatabase.DatabaseManager;
 
 import java.io.File;
 
