@@ -1,6 +1,8 @@
 package com.aurora.d20_35_app.utilsDatabase;
 
 
+import android.content.Context;
+
 import com.aurora.d20_35_app.dao.ArmourDAO;
 import com.aurora.d20_35_app.dao.ClassesDAO;
 import com.aurora.d20_35_app.dao.EquipmentDAO;
@@ -9,6 +11,8 @@ import com.aurora.d20_35_app.dao.HeroDAO;
 import com.aurora.d20_35_app.dao.MonstersDAO;
 import com.aurora.d20_35_app.dao.RaceTemplatesDAO;
 import com.aurora.d20_35_app.dao.RacesDAO;
+import com.aurora.d20_35_app.dao.RulesCombatDAO;
+import com.aurora.d20_35_app.dao.RulesSkillsDAO;
 import com.aurora.d20_35_app.dao.SkillsDAO;
 import com.aurora.d20_35_app.dao.SpellsDAO;
 import com.aurora.d20_35_app.dao.WeaponsDAO;
@@ -20,26 +24,37 @@ import com.aurora.d20_35_app.models.Hero;
 import com.aurora.d20_35_app.models.Monsters;
 import com.aurora.d20_35_app.models.RaceTemplates;
 import com.aurora.d20_35_app.models.Races;
+import com.aurora.d20_35_app.models.RulesCombat;
+import com.aurora.d20_35_app.models.RulesSkills;
 import com.aurora.d20_35_app.models.Skills;
 import com.aurora.d20_35_app.models.Spells;
 import com.aurora.d20_35_app.models.Weapons;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Singleton;
+
 import androidx.room.Database;
+import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
+import lombok.Getter;
+import lombok.Setter;
 
+@Singleton
 @Database(entities = {
-        Armour.class, Classes.class, Equipment.class, Feats.class, Hero.class, Monsters.class, Races.class, RaceTemplates.class, Skills.class, Spells.class, Weapons.class
-        }, version = 1, exportSchema = false)
+        Armour.class, Classes.class, Equipment.class, Feats.class, Hero.class, Monsters.class, Races.class, RaceTemplates.class, Skills.class, Spells.class, Weapons.class,
+        RulesCombat.class, RulesSkills.class
+}, version = 1, exportSchema = false)
 public abstract class DatabaseHolder extends RoomDatabase {
 
     private static DatabaseHolder INSTANCE;
+    private static final String DATABASE_NAME = "database.db";
 
     public abstract ArmourDAO armourDAO();
 
@@ -63,11 +78,31 @@ public abstract class DatabaseHolder extends RoomDatabase {
 
     public abstract WeaponsDAO weaponsDAO();
 
+    public abstract RulesSkillsDAO rulesSkillsDAO();
+
+    public abstract RulesCombatDAO rulesCombatDAO();
+
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
         }
     };
+
+    public static DatabaseHolder getDatabaseHolder(Context context) {
+        if (INSTANCE == null) {
+            INSTANCE = Room.databaseBuilder(context.getApplicationContext(), DatabaseHolder.class, DATABASE_NAME).build();
+        }
+
+        return INSTANCE;
+    }
+
+    public static void destroyInstance() {
+        INSTANCE = null;
+    }
+
+    @Getter
+    @Setter
+    private List<String> databasesList = new ArrayList<String>();
 
     /**
      * An array of races available for player.
@@ -99,6 +134,17 @@ public abstract class DatabaseHolder extends RoomDatabase {
     public static final Map<String, Monsters> MONSTERS_MAP = new HashMap<String, Monsters>();
     public static final Map<String, RaceTemplates> RACE_TEMPLATES_MAP = new HashMap<String, RaceTemplates>();
     public static final Map<String, Hero> HEROES_MAP = new HashMap<String, Hero>();
+
+
+    @Getter
+    @Setter
+    private List<String> rulesList = Arrays.asList("Combat", "Skills");
+
+    public static final List<RulesCombat> RULES_COMBAT_LIST = new ArrayList<RulesCombat>();
+    public static final List<RulesSkills> RULES_SKILLS_LIST = new ArrayList<RulesSkills>();
+
+    public static final Map<String, RulesCombat> RULES_COMBAT_MAP = new HashMap<String, RulesCombat>();
+    public static final Map<String, RulesSkills> RULES_SKILLS_MAP = new HashMap<String, RulesSkills>();
 }
 
 

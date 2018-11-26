@@ -12,4 +12,7 @@ public interface SkillsDAO {
 
     @Query("SELECT * FROM Skills")
     List<Skills> getSkills();
+
+    @Query("SELECT DISTINCT Source FROM Skills")
+    List<String> getSources();
 }

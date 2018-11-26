@@ -12,4 +12,7 @@ public interface MonstersDAO {
 
     @Query("SELECT * FROM Monsters")
     List<Monsters> getMonsters();
+
+    @Query("SELECT DISTINCT Source FROM Monsters")
+    List<String> getSources();
 }

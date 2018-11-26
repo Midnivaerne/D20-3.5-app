@@ -12,4 +12,7 @@ public interface SpellsDAO {
 
     @Query("SELECT * FROM Spells")
     List<Spells> getSpells();
+
+    @Query("SELECT DISTINCT Source FROM Spells")
+    List<String> getSources();
 }

@@ -8,12 +8,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aurora.d20_35_app.R;
-import com.aurora.d20_35_app.utilsDatabase.DatabaseManager;
 import com.aurora.d20_35_app.views.DatabasesListActivity;
 import com.aurora.d20_35_app.views.DatabasesListDetailActivity;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import androidx.fragment.app.Fragment;
+
+import static com.aurora.d20_35_app.utilsDatabase.DatabaseHolder.getDatabaseHolder;
 
 /**
  * A fragment representing a single Rules set detail screen.
@@ -31,7 +32,7 @@ public class DatabasesListDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private DatabaseManager.ADatabase aDatabase;
+    private String item;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -45,12 +46,12 @@ public class DatabasesListDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            aDatabase = DatabaseManager.databasesMap.get(getArguments().getString(ARG_ITEM_ID));
+            item = getDatabaseHolder(super.getContext()).getDatabasesList().get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID)));
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(aDatabase.getContent());
+                appBarLayout.setTitle(item);
             }
         }
     }
@@ -60,8 +61,8 @@ public class DatabasesListDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_databases_list_inner_detail_fragment, container, false);
 
-        if (aDatabase != null) {
-            ((TextView) rootView.findViewById(R.id.rulesset_detail)).setText(aDatabase.getDetails());
+        if (item != null) {
+            ((TextView) rootView.findViewById(R.id.rulesset_detail)).setText(item);
         }
 
         return rootView;

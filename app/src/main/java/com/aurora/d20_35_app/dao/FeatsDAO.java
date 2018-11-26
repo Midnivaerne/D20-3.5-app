@@ -12,4 +12,7 @@ public interface FeatsDAO {
 
     @Query("SELECT * FROM Feats")
     List<Feats> getFeats();
+
+    @Query("SELECT DISTINCT Source FROM Feats")
+    List<String> getSources();
 }

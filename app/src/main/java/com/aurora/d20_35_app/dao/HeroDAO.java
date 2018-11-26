@@ -12,4 +12,7 @@ public interface HeroDAO {
 
     @Query("SELECT * FROM Hero")
     List<Hero> getHero();
+
+    @Query("SELECT DISTINCT Source FROM Hero")
+    List<String> getSources();
 }

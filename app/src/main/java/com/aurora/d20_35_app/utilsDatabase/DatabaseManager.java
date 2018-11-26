@@ -2,27 +2,14 @@ package com.aurora.d20_35_app.utilsDatabase;
 
 import android.Manifest;
 import android.app.Activity;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
+import android.os.AsyncTask;
 import android.util.Log;
 
-import com.aurora.d20_35_app.enums.DataLocation;
-import com.aurora.d20_35_app.enums.DatabaseHandlers;
 import com.aurora.d20_35_app.utils.PermissionHandler;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import androidx.annotation.RequiresApi;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -47,18 +34,10 @@ public class DatabaseManager {
     public static String externalPathSeparator = "/Android/data/com.aurora.d20_3.5_app/";
     public static String path = getPublicExternalStorageBaseDir() + externalPathSeparator + "Data/";
 
-    public static final String USERDB = "userDB";
-    public static final String RULESDB = "rulesDB";
-
-    public static List<ADatabase> databasesList = new ArrayList<ADatabase>();
-    public static Map<String, ADatabase> databasesMap = new HashMap<String, ADatabase>();
-
     public static void initialDatabasesResolver(Activity activity) {
         PermissionHandler.reloadPermissions(activity);
         initialPathSetup();
-        dbThreadSetup(activity, DatabaseHandlers.userDB.toString());
-        dbThreadSetup(activity, DatabaseHandlers.rulesDB.toString());
-        insertStandardRulesFromSQL(activity);//todo check if rules already present
+        populateAsync(DatabaseHolder.getDatabaseHolder(activity.getApplicationContext()));
     }
 
     public static void initialPathSetup() {
@@ -76,168 +55,48 @@ public class DatabaseManager {
         }
     }
 
-    private static void dbThreadSetup(Activity activity, String name) {
-        BackgroundDBInitializer backgroundInitializer = new BackgroundDBInitializer(name);
-        backgroundInitializer.setContext(activity);
-        backgroundInitializer.setPath(path);
-        backgroundInitializer.start();
-
-        try {
-            backgroundInitializer.getT().join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public static void populateAsync(@NonNull final DatabaseHolder databaseHolder) {
+        PopulateDbAsync task = new PopulateDbAsync(databaseHolder);
+        task.execute();
     }
 
-
-    public static void insertStandardRulesFromSQL(Activity activity) {
-        try {
-            Log.i("Database file:", "inserting standard rules");
-
-            Log.i("Database file:", "opening file: " + path + RULESDB + ".db");
-            SQLiteDatabase database = SQLiteDatabase.openDatabase(path + RULESDB + ".db", null, SQLiteDatabase.OPEN_READWRITE);
-
-            Log.i("Database file:", "opening inputStream and executing SQL: StandardRules.sql");
-            InputStream inputStream = activity.getAssets().open("Database/StandardRules.sql");
-            database.execSQL(sqlFileToString(inputStream));
-
-            Log.i("Database file:", "closing inputStream, transaction and database ...");
-            inputStream.close();
-            database.endTransaction();
-            database.close();
-            Log.i("Database file:", "inputStream, transaction and database closed");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void closeDatabase(DatabaseHolder databaseHolder) {
+        databaseHolder.close();
+        DatabaseHolder.destroyInstance();
     }
 
-    public static void loadDatabasesList() {
-        Log.i("Database file:", "Loading databases list");
-        databasesList.clear();
-        databasesMap.clear();
-        for (int i = 0; i < countFilesInDir(path); i++) {
-            File file = new File(path);
-            String name = file.listFiles(fileExtensionFilter("db"))[i].getName();
-            String nameShortened = name.split("\\.")[0];
-            addItem(loadDatabaseDetails(i + 1, nameShortened));
-        }
+    public static void loadStandardRules(DatabaseHolder databaseHolder) {
+        //todo check first if rules present?
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    public static void hideRulesDatabase() {
-        for (Object obj : databasesList) {
-            if (obj.toString().equals(RULESDB)) {
-                int index = databasesList.indexOf(obj);
-                ADatabase item = databasesList.get(index);
-                removeItem(item);
-                break;
-            }
-        }
+    private static void generateDataLists(DatabaseHolder databaseHolder) {
+        List<String> databasesList = databaseHolder.getDatabasesList();
+        databasesList.addAll(databaseHolder.armourDAO().getSources());
+        databasesList.addAll(databaseHolder.classesDAO().getSources());
+        databasesList.addAll(databaseHolder.equipmentDAO().getSources());
+        databasesList.addAll(databaseHolder.featsDAO().getSources());
+        databasesList.addAll(databaseHolder.heroDAO().getSources());
+        databasesList.addAll(databaseHolder.monstersDAO().getSources());
+        databasesList.addAll(databaseHolder.racesDAO().getSources());
+        databasesList.addAll(databaseHolder.raceTemplatesDAO().getSources());
+        databasesList.addAll(databaseHolder.skillsDAO().getSources());
+        databasesList.addAll(databaseHolder.spellsDAO().getSources());
+        databasesList.addAll(databaseHolder.weaponsDAO().getSources());
     }
 
-    private static void addItem(ADatabase item) {
-        databasesList.add(item);
-        databasesMap.put(item.id, item);
-    }
+    private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private static void removeItem(ADatabase item) {
-        databasesList.remove(item);
-        databasesMap.remove(item.id, item);
-    }
+        private final DatabaseHolder databaseHolder;
 
-    private static ADatabase loadDatabaseDetails(int position, String name) {
-        return new ADatabase(String.valueOf(position), name, makeDetails(name));
-    }
-
-    private static String makeDetails(String name) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Details about: ").append(name);
-        builder.append("\n" + name + " contains ...");
-        return builder.toString();
-    }
-
-    public static String sqlFileToString(InputStream is) {
-        StringBuilder buf = new StringBuilder();
-        try {
-            BufferedReader in = new BufferedReader(new InputStreamReader(is));
-            String str;
-
-            while ((str = in.readLine()) != null) {
-                buf.append(str);
-            }
-
-            in.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return buf.toString();
-    }
-
-
-    public static int howMany(@NonNull DataLocation where, @NonNull String path) {
-        showFiles(path);
-        int databasesCount = countFilesInDir(path);
-        Log.i("Database file:", where.toString() + "databases count:" + databasesCount);
-        return databasesCount;
-    }
-
-
-    public static void showFiles(@NonNull String dir) {
-        if (new File(dir).listFiles() != null) {
-            File[] files = new File(dir).listFiles(fileExtensionFilter("db"));
-            Log.i("Directory", "path:" + dir);
-            Log.i("Files", "Size: " + files.length);
-            for (int i = 0; i < files.length; i++) {
-                Log.i("Files", "FileName:" + files[i].getName());
-            }
-        } else {
-            Log.i("Files", "No files:");
-        }
-
-    }
-
-    public static FilenameFilter fileExtensionFilter(final String extension) {
-        FilenameFilter fileNameFilter = new FilenameFilter() {
-            @Override
-            public boolean accept(File dir, String name) {
-                if (name.lastIndexOf('.') > 0) {
-                    int lastIndex = name.lastIndexOf('.');
-                    String str = name.substring(lastIndex);
-                    if (str.equals("." + extension)) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-        };
-        return fileNameFilter;
-    }
-
-    public static int countFilesInDir(@NonNull String path) {
-        int count = 0;
-        File file = new File(path);
-        if (file.listFiles() != null) {
-            count = file.listFiles(fileExtensionFilter("db")).length;
-        }
-        return count;
-    }
-
-    @Data
-    public static class ADatabase {
-        private final String id;
-        private final String content;
-        private final String details;
-
-        public ADatabase(String id, String content, String details) {
-            this.id = id;
-            this.content = content;
-            this.details = details;
+        PopulateDbAsync(DatabaseHolder databaseHolder) {
+            this.databaseHolder = databaseHolder;
         }
 
         @Override
-        public String toString() {
-            return content;
+        protected Void doInBackground(final Void... params) {
+            loadStandardRules(databaseHolder);
+            generateDataLists(databaseHolder);
+            return null;
         }
     }
 

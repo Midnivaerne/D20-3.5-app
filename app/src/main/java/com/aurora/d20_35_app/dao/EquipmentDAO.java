@@ -12,4 +12,7 @@ public interface EquipmentDAO {
 
     @Query("SELECT * FROM Equipment")
     List<Equipment> getEquipment();
+
+    @Query("SELECT DISTINCT Source FROM Equipment")
+    List<String> getSources();
 }

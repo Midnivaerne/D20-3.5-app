@@ -12,4 +12,7 @@ public interface WeaponsDAO {
 
     @Query("SELECT * FROM Weapons")
     List<Weapons> getWeapons();
+
+    @Query("SELECT DISTINCT Source FROM Weapons")
+    List<String> getSources();
 }

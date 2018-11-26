@@ -12,4 +12,7 @@ public interface ClassesDAO {
 
     @Query("SELECT * FROM Classes")
     List<Classes> getClasses();
+
+    @Query("SELECT DISTINCT Source FROM Classes")
+    List<String> getSources();
 }

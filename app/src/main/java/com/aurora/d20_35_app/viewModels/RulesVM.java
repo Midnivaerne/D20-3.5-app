@@ -12,8 +12,7 @@ import android.widget.TextView;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.fragments.DatabasesListDetailFragment;
 import com.aurora.d20_35_app.helper.ActivityViewModel;
-import com.aurora.d20_35_app.utilsDatabase.DatabaseManager;
-import com.aurora.d20_35_app.utilsDatabase.RulesManager;
+import com.aurora.d20_35_app.helper.Rules;
 import com.aurora.d20_35_app.views.DatabasesListDetailActivity;
 import com.aurora.d20_35_app.views.RulesActivity;
 
@@ -21,6 +20,8 @@ import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
+
+import static com.aurora.d20_35_app.utilsDatabase.DatabaseHolder.getDatabaseHolder;
 
 public class RulesVM extends ActivityViewModel<RulesActivity> {
     /**
@@ -32,8 +33,7 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
     public RulesVM(RulesActivity activity) {
         super(activity);
         showBackButton();
-
-        RulesManager.loadRulesCategory();//todo test
+        //todo load rules category
 
         /**Toolbar toolbar = findViewById(R.id.toolbar);
          setSupportActionBar(toolbar);
@@ -60,22 +60,22 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this.getActivity(), RulesManager.rulesCategoryList, mTwoPane));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this.getActivity(), getDatabaseHolder(super.getActivity()).getRulesList(), mTwoPane));
     }
 
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         private final RulesActivity mParentActivity;
-        private final List<RulesManager.rulesCategory> mValues;
+        private final List<String> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseManager.ADatabase item = (DatabaseManager.ADatabase) view.getTag();
+                Rules item = (Rules) view.getTag();
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
-                    arguments.putString(DatabasesListDetailFragment.ARG_ITEM_ID, item.getId());
+                    arguments.putString(DatabasesListDetailFragment.ARG_ITEM_ID, String.valueOf(item.getItemID()));
                     DatabasesListDetailFragment fragment = new DatabasesListDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
@@ -84,7 +84,7 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
                 } else {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, DatabasesListDetailActivity.class);
-                    intent.putExtra(DatabasesListDetailFragment.ARG_ITEM_ID, item.getId());
+                    intent.putExtra(DatabasesListDetailFragment.ARG_ITEM_ID, String.valueOf(item.getItemID()));
 
                     context.startActivity(intent);
                 }
@@ -92,7 +92,7 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
         };
 
         SimpleItemRecyclerViewAdapter(RulesActivity parent,
-                                      List<RulesManager.rulesCategory> items,
+                                      List<String> items,
                                       boolean twoPane) {
             mValues = items;
             mParentActivity = parent;
@@ -108,8 +108,8 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).getId());
-            holder.mContentView.setText(mValues.get(position).getContent());
+            holder.mIdView.setText(mValues.get(position));
+            holder.mContentView.setText(mValues.get(position));
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);

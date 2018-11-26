@@ -12,4 +12,7 @@ public interface ArmourDAO {
 
     @Query("SELECT * FROM Armour")
     List<Armour> getArmour();
+
+    @Query("SELECT DISTINCT Source FROM Armour")
+    List<String> getSources();
 }

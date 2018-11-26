@@ -16,20 +16,33 @@ import com.aurora.d20_35_app.enums.ItemType;
 import androidx.room.ColumnInfo;
 import androidx.room.PrimaryKey;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @NoArgsConstructor
 public class Item {
 
-    @PrimaryKey
+    @Getter
+    @Setter
+    @PrimaryKey (autoGenerate = true)
     @ColumnInfo(name = "Item_ID")
     private int itemID;
 
+    @Getter
+    @Setter
     @ColumnInfo(name = "Name")
     private String name;
 
-    public String content;
+    @Getter
+    @Setter
+    @ColumnInfo(name = "Source")
+    private String source;
+
+    @Getter
+    @Setter
+    private String content;
     public String details;
 
 

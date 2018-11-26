@@ -12,4 +12,7 @@ public interface RaceTemplatesDAO {
 
     @Query("SELECT * FROM RaceTemplates")
     List<RaceTemplates> getRaceTemplates();
+
+    @Query("SELECT DISTINCT Source FROM RaceTemplates")
+    List<String> getSources();
 }
