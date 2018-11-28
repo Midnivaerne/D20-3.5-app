@@ -102,7 +102,7 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.rules_explanation_content, parent, false);
+                    .inflate(R.layout.rules_explanation_content, parent, false); //todo check rules_explanation_content vs activity_rules_list_content and other related xml files
             return new ViewHolder(view);
         }
 
@@ -127,7 +127,7 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
             ViewHolder(View view) {
                 super(view);
                 mIdView = (TextView) view.findViewById(R.id.id_explanation_text);
-                mContentView = (TextView) view.findViewById(R.id.explanation_content);
+                mContentView = (TextView) view.findViewById(R.id.id_explanation_content);
             }
         }
     }

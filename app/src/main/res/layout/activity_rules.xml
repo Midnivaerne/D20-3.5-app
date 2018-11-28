@@ -43,7 +43,7 @@
                 android:layout_marginRight="16dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:context=".views.RulesActivity"
-                tools:listitem="@layout/recycler_view_item" />
+                tools:listitem="@layout/activity_rules_list_content" />
         </android.widget.FrameLayout>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
