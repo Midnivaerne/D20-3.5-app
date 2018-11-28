@@ -1,5 +1,7 @@
 package com.aurora.d20_35_app.views;
 
+import android.view.MenuItem;
+
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.databinding.ActivityRulesBinding;
@@ -10,6 +12,7 @@ public class RulesActivity extends BindingActivity<ActivityRulesBinding, RulesVM
 
     @Override
     public RulesVM onCreate() {
+        setSupportActionBar(getMViewDataBinding().toolbar);
         return new RulesVM(this);
     }
 
@@ -25,12 +28,16 @@ public class RulesActivity extends BindingActivity<ActivityRulesBinding, RulesVM
 
 
     @Override
-    public void onFragmentAttached() {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        return super.onOptionsItemSelected(item);
+    }
 
+    @Override
+    public void onFragmentAttached() {
     }
 
     @Override
     public void onFragmentDetached(String tag) {
-
     }
 }

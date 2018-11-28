@@ -30,6 +30,11 @@ public class Rules {
     @Setter
     private String content;
 
+    public Rules(int itemID, String name) {
+        this.itemID = itemID;
+        this.name = name;
+    }
+
     public Rules createRulesGroup(RulesType rulesType) {
         switch (rulesType) {
             case RulesCombat:

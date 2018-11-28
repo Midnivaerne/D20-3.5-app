@@ -36,7 +36,6 @@ public class DatabasesListVM extends ActivityViewModel<DatabasesListActivity> {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public DatabasesListVM(DatabasesListActivity activity) {
         super(activity);
-
         showBackButton();
 
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);

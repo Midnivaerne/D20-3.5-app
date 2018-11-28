@@ -10,11 +10,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aurora.d20_35_app.R;
-import com.aurora.d20_35_app.fragments.DatabasesListDetailFragment;
+import com.aurora.d20_35_app.fragments.RulesDetailFragment;
 import com.aurora.d20_35_app.helper.ActivityViewModel;
 import com.aurora.d20_35_app.helper.Rules;
-import com.aurora.d20_35_app.views.DatabasesListDetailActivity;
 import com.aurora.d20_35_app.views.RulesActivity;
+import com.aurora.d20_35_app.views.RulesDetailActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -35,16 +36,15 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
         showBackButton();
         //todo load rules category
 
-        /**Toolbar toolbar = findViewById(R.id.toolbar);
-         setSupportActionBar(toolbar);
-         toolbar.setTitle(getTitle());
 
-         FloatingActionButton fab = findViewById(R.id.fab);
-         fab.setOnClickListener(new View.OnClickListener() {
-        @Override public void onClick(View view) {
-        view.scrollTo(0, 0);//TODO implement mvvm version
-        }
-        });**/
+        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                view.scrollTo(0, 0);//TODO implement mvvm version
+            }
+        });
+
 
         if (getActivity().findViewById(R.id.activity_rules_explanation_container) != null) {
             // The detail container view will be present only in the
@@ -67,7 +67,7 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         private final RulesActivity mParentActivity;
-        private final List<String> mValues;
+        private final List<Rules> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
@@ -75,16 +75,16 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
                 Rules item = (Rules) view.getTag();
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
-                    arguments.putString(DatabasesListDetailFragment.ARG_ITEM_ID, String.valueOf(item.getItemID()));
-                    DatabasesListDetailFragment fragment = new DatabasesListDetailFragment();
+                    arguments.putString(RulesDetailFragment.ARG_ITEM_ID, String.valueOf(item.getItemID()));
+                    RulesDetailFragment fragment = new RulesDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
                             .replace(R.id.activity_rules_explanation_container, fragment)
                             .commit();
                 } else {
                     Context context = view.getContext();
-                    Intent intent = new Intent(context, DatabasesListDetailActivity.class);
-                    intent.putExtra(DatabasesListDetailFragment.ARG_ITEM_ID, String.valueOf(item.getItemID()));
+                    Intent intent = new Intent(context, RulesDetailActivity.class);
+                    intent.putExtra(RulesDetailFragment.ARG_ITEM_ID, String.valueOf(item.getItemID()));
 
                     context.startActivity(intent);
                 }
@@ -92,7 +92,7 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
         };
 
         SimpleItemRecyclerViewAdapter(RulesActivity parent,
-                                      List<String> items,
+                                      List<Rules> items,
                                       boolean twoPane) {
             mValues = items;
             mParentActivity = parent;
@@ -108,8 +108,8 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position));
-            holder.mContentView.setText(mValues.get(position));
+            holder.mIdView.setText(mValues.get(position).getName());
+            holder.mContentView.setText(mValues.get(position).getContent());
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);

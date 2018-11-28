@@ -16,6 +16,7 @@ import com.aurora.d20_35_app.dao.RulesSkillsDAO;
 import com.aurora.d20_35_app.dao.SkillsDAO;
 import com.aurora.d20_35_app.dao.SpellsDAO;
 import com.aurora.d20_35_app.dao.WeaponsDAO;
+import com.aurora.d20_35_app.helper.Rules;
 import com.aurora.d20_35_app.models.Armour;
 import com.aurora.d20_35_app.models.Classes;
 import com.aurora.d20_35_app.models.Equipment;
@@ -31,7 +32,6 @@ import com.aurora.d20_35_app.models.Spells;
 import com.aurora.d20_35_app.models.Weapons;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,9 +92,18 @@ public abstract class DatabaseHolder extends RoomDatabase {
         if (INSTANCE == null) {
             INSTANCE = Room.databaseBuilder(context.getApplicationContext(), DatabaseHolder.class, DATABASE_NAME).build();
         }
-
+        INSTANCE.onCreateRulesList();
         return INSTANCE;
     }
+
+    private void onCreateRulesList() {
+        String[] rulesTable = {"Combat", "Skills"};
+        rulesList.clear();
+        for (int i = 0; i < rulesTable.length; i++) {
+            rulesList.add(new Rules(i, rulesTable[i]));
+        }
+    }
+
 
     public static void destroyInstance() {
         INSTANCE = null;
@@ -138,7 +147,7 @@ public abstract class DatabaseHolder extends RoomDatabase {
 
     @Getter
     @Setter
-    private List<String> rulesList = Arrays.asList("Combat", "Skills");
+    private List<Rules> rulesList = new ArrayList<Rules>();
 
     public static final List<RulesCombat> RULES_COMBAT_LIST = new ArrayList<RulesCombat>();
     public static final List<RulesSkills> RULES_SKILLS_LIST = new ArrayList<RulesSkills>();
