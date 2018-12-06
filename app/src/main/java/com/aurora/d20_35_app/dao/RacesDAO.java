@@ -7,6 +7,7 @@ import java.util.List;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 @Dao
@@ -21,8 +22,8 @@ public interface RacesDAO {
     @Query("SELECT DISTINCT Source FROM Races")
     List<String> getSources();
 
-    @Insert
-    void insertAll(Races... races);
+    @Insert (onConflict = OnConflictStrategy.IGNORE) //or replace?
+    void insertAll(List<Races> races);
 
     @Delete
     void delete(Races races);

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import com.aurora.d20_35_app.utils.NetworkUtils;
-import com.aurora.d20_35_app.utils.PermissionHandler;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
@@ -18,7 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-import dagger.android.AndroidInjection;
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -31,10 +29,8 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        performDependencyInjection();
         super.onCreate(savedInstanceState);
         bind();
-        PermissionHandler.reloadPermissions(this);
     }
 
     public void bind() {
@@ -42,10 +38,6 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
         this.mActivityViewModel = mActivityViewModel == null ? onCreate() : mActivityViewModel;
         mViewDataBinding.setVariable(getBindingVariable(), mActivityViewModel);
         mViewDataBinding.executePendingBindings();
-    }
-
-    public void performDependencyInjection() {
-        AndroidInjection.inject(this);
     }
 
     public void resetViewModel() {

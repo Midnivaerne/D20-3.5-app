@@ -1,43 +1,56 @@
 package com.aurora.d20_35_app.utilsDatabase;
 
-import android.Manifest;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.util.Xml;
 
-import com.aurora.d20_35_app.utils.PermissionHandler;
+import org.xml.sax.SAXException;
+import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.List;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 
-import static com.aurora.d20_35_app.utils.PermissionHandler.getPublicExternalStorageBaseDir;
+import lombok.NonNull;
+
+import static com.aurora.d20_35_app.utils.ExternalStorageHandler.getPublicExternalStorageBaseDir;
 
 public class DatabaseManager {
-
-    public static final String LOG_TAG_EXTERNAL_STORAGE = "EXTERNAL_STORAGE";
-    public static final int REQUEST_CODE_PERMISSION_ALL = 1;
-    @Getter
-    @Setter
-    private static int readExternalStoragePermission = -1;// Read external storage permission cache.
-    @Getter
-    @Setter
-    private static int writeExternalStoragePermission = -1;// Write external storage permission cache.
-    @Getter
-    private static String[] permissionTypeString = {"Read", "Write"};
-    @Getter
-    private static String[] permissionTypeStringManifest = {Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
     public static String externalPathSeparator = "/Android/data/com.aurora.d20_3.5_app/";
     public static String path = getPublicExternalStorageBaseDir() + externalPathSeparator + "Data/";
 
     public static void initialDatabasesResolver(Activity activity) {
-        PermissionHandler.reloadPermissions(activity);
         initialPathSetup();
+        copyFile("test.xml", activity); //todo test - refactor or delete
         populateAsync(DatabaseHolder.getDatabaseHolder(activity.getApplicationContext()));
+    }
+
+    public static void copyFile(String fileName, Activity activity) {
+        try {
+            InputStream in = activity.getAssets().open(fileName);
+            OutputStream out = new FileOutputStream(new File(path, fileName));
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+            in.close();
+            in = null;
+            out.flush();
+            out.close();
+            out = null;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void initialPathSetup() {
@@ -66,6 +79,8 @@ public class DatabaseManager {
     }
 
     public static void loadStandardRules(DatabaseHolder databaseHolder) {
+        loadDataFromFile(databaseHolder); //todo test to delete
+        databaseHolder.racesDAO().insertAll(databaseHolder.RACES_LIST); //todo test to delete
         //todo check first if rules present?
     }
 
@@ -82,6 +97,31 @@ public class DatabaseManager {
         databasesList.addAll(databaseHolder.skillsDAO().getSources());
         databasesList.addAll(databaseHolder.spellsDAO().getSources());
         databasesList.addAll(databaseHolder.weaponsDAO().getSources());
+        databasesList.addAll(databaseHolder.translationsDAO().getSources());
+    }
+
+    private static void loadDataFromFile(DatabaseHolder databaseHolder) {
+        try {
+            //String filename = "standardRulesData.xml";
+            String filename = "test.xml";
+            File inputFile = new File(path + /*File.separator +*/ filename);
+            SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
+            SAXParser saxParser = saxParserFactory.newSAXParser();
+            XmlHandler xmlHandler = new XmlHandler(databaseHolder);
+            saxParser.parse(inputFile, xmlHandler);
+        } catch (IOException | SAXException | ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void writeDataToFile(DatabaseHolder databaseHolder) {
+        String filename = "testFile.xml";
+        File outputFile = new File(path + File.separator + filename);
+        XmlSerializer xmlSerializer = Xml.newSerializer(); //todo continue
+        //out = new ObjectOutputStream(new FileOutputStream(new File(getFilesDir(),"")+File.separator+filename));
+        //out.writeObject(myPersonObject);
+
     }
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {

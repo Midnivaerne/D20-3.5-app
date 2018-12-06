@@ -1,0 +1,12 @@
+<Races>
+    <Races_Item>
+        <Name>Test_race_name1</Name>
+        <Source>Test_race_source</Source>
+        <RaceDescription>bla bla bla descr test11oneonone</RaceDescription>
+    </Races_Item>
+    <Races_Item>
+        <Name>Test_race_name2</Name>
+        <Source>Test_race_source</Source>
+        <RaceDescription>trutututu asdasdffgdf</RaceDescription>
+    </Races_Item>
+</Races>

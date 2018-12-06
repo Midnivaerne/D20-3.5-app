@@ -1,6 +1,5 @@
 package com.aurora.d20_35_app.views;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
@@ -11,9 +10,7 @@ import com.aurora.d20_35_app.databinding.ActivityD2035appBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.viewModels.D2035appVM;
 
-import dagger.android.AndroidInjector;
-
-public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D2035appVM> implements AndroidInjector<Activity> {
+public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D2035appVM> {
 
     private static final String KEY_STATUS = "STATUS";
 
@@ -80,8 +77,4 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
 
     }
 
-    @Override
-    public void inject(Activity instance) {
-
-    }
 }
