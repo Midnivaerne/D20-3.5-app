@@ -11,10 +11,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@Entity(tableName = "Races")
+@Entity(tableName = "Races", inheritSuperIndices = true)
 public class Races extends Item {
 
     @Ignore

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@Entity
+@Entity(tableName = "Monsters", inheritSuperIndices = true)
 public class Monsters extends Item {
 
 }

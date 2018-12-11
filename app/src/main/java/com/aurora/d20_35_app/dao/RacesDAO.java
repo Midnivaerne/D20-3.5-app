@@ -1,30 +1,34 @@
 package com.aurora.d20_35_app.dao;
 
+import com.aurora.d20_35_app.helper.BaseDAO;
 import com.aurora.d20_35_app.models.Races;
 
 import java.util.List;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 @Dao
-public interface RacesDAO {
+public abstract class RacesDAO implements BaseDAO<Races> {
 
     @Query("SELECT * FROM Races")
-    List<Races> getRaces();
+    public abstract List<Races> getRaces();
+
+    //@Query("SELECT * FROM Races")
+    //public abstract List<Item> getItemRaces(); // above doesn't show Item fields (but they are created/loaded)
 
     @Query("SELECT COUNT(*) from Races")
-    int countRaces();
+    public abstract int countRaces();
 
     @Query("SELECT DISTINCT Source FROM Races")
-    List<String> getSources();
+    public abstract List<String> getSources();
 
-    @Insert (onConflict = OnConflictStrategy.IGNORE) //or replace?
-    void insertAll(List<Races> races);
+    @Query("DELETE FROM Races")
+    public abstract void deleteAll();
 
-    @Delete
-    void delete(Races races);
+    @Query("SELECT Name FROM Races")
+    public abstract List<String> getNames();
+
+    @Query("SELECT * FROM Races WHERE Name > :qName")
+    public abstract Races getRaceWithName(String qName);
 }

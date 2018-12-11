@@ -1,5 +1,6 @@
 package com.aurora.d20_35_app.dao;
 
+import com.aurora.d20_35_app.helper.BaseDAO;
 import com.aurora.d20_35_app.models.Spells;
 
 import java.util.List;
@@ -8,11 +9,14 @@ import androidx.room.Dao;
 import androidx.room.Query;
 
 @Dao
-public interface SpellsDAO {
+public abstract class SpellsDAO  implements BaseDAO<Spells> {
 
     @Query("SELECT * FROM Spells")
-    List<Spells> getSpells();
+    public abstract List<Spells> getSpells();
 
     @Query("SELECT DISTINCT Source FROM Spells")
-    List<String> getSources();
+    public abstract List<String> getSources();
+
+    @Query("DELETE FROM Spells")
+    public abstract void deleteAll();
 }

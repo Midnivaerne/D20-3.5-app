@@ -43,6 +43,7 @@ import javax.inject.Singleton;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 import lombok.Getter;
@@ -55,6 +56,7 @@ import lombok.Setter;
         Translations.class,
         RulesCombat.class, RulesSkills.class
 }, version = 1, exportSchema = false)
+@TypeConverters(DataTypeConverters.class)
 public abstract class DatabaseHolder extends RoomDatabase {
 
     private static DatabaseHolder INSTANCE;
@@ -166,6 +168,7 @@ public abstract class DatabaseHolder extends RoomDatabase {
 
     public final Map<String, RulesCombat> RULES_COMBAT_MAP = new HashMap<String, RulesCombat>();
     public final Map<String, RulesSkills> RULES_SKILLS_MAP = new HashMap<String, RulesSkills>();
+
 }
 
 

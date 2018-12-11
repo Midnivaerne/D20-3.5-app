@@ -1,5 +1,6 @@
 package com.aurora.d20_35_app.dao;
 
+import com.aurora.d20_35_app.helper.BaseDAO;
 import com.aurora.d20_35_app.models.Armour;
 
 import java.util.List;
@@ -8,11 +9,14 @@ import androidx.room.Dao;
 import androidx.room.Query;
 
 @Dao
-public interface ArmourDAO {
+public abstract class ArmourDAO implements BaseDAO<Armour> {
 
     @Query("SELECT * FROM Armour")
-    List<Armour> getArmour();
+    public abstract List<Armour> getArmour();
 
     @Query("SELECT DISTINCT Source FROM Armour")
-    List<String> getSources();
+    public abstract List<String> getSources();
+
+    @Query("DELETE FROM Armour")
+    public abstract void deleteAll();
 }

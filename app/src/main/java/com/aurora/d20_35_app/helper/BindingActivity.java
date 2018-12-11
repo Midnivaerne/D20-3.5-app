@@ -104,6 +104,7 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        System.out.println("entering 4");
         mActivityViewModel.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 

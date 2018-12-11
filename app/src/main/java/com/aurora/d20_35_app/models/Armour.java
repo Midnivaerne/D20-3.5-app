@@ -14,7 +14,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@Entity
+@Entity(tableName = "Armour", inheritSuperIndices = true)
 public class Armour extends Item {
 
     @Ignore

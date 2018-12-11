@@ -14,21 +14,28 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@Entity(tableName = "Translations")
+@Entity(tableName = "Translations", inheritSuperIndices = true)
 public class Translations extends Item {
 
     @Ignore
-    public static final String engTransColumnName = "EnglishTranslation";
+    public static final String categoryColumnName = "Category";
     @Ignore
-    public static final String polTransColumnName = "PolishTranslation";
+    public static final String languageColumnName = "Language";
+    @Ignore
+    public static final String transColumnName = "Translation";
 
     @Getter
     @Setter
-    @ColumnInfo(name = engTransColumnName)
-    private String engTrans;
+    @ColumnInfo(name = categoryColumnName)
+    private String category;
 
     @Getter
     @Setter
-    @ColumnInfo(name = polTransColumnName)
-    private String polTrans;
+    @ColumnInfo(name = languageColumnName)
+    private String language;
+
+    @Getter
+    @Setter
+    @ColumnInfo(name = transColumnName)
+    private String trans;
 }

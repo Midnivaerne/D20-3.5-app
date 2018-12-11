@@ -45,10 +45,10 @@ public class Item {
     public String details;
 
 
-    public Item(int itemID, String content, String details) {
+    public Item(int itemID, String name, String source) {
         this.itemID = itemID;
-        this.content = content;
-        this.details = details;
+        this.name = name;
+        this.source = source;
     }
 
     protected boolean canEqual(Object other) {

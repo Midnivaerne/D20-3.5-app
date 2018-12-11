@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@Entity(tableName = "RulesCombat")
+@Entity(tableName = "RulesCombat", inheritSuperIndices = true)
 public class RulesCombat extends Rules {
 
 }
