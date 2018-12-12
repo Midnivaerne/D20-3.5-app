@@ -1,11 +1,15 @@
 package com.aurora.d20_35_app.helper;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.aurora.d20_35_app.utils.CommonUtils;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.BaseObservable;
 import lombok.Getter;
@@ -14,6 +18,7 @@ public class ActivityViewModel<A extends AppCompatActivity> extends BaseObservab
 
     @Getter
     protected A activity;
+    private ProgressDialog mProgressDialog;
 
     public ActivityViewModel(A activity) {
         this.activity = activity;
@@ -55,10 +60,6 @@ public class ActivityViewModel<A extends AppCompatActivity> extends BaseObservab
 
     }
 
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-
-    }
-
     public void onPostCreate(Bundle savedInstanceState) {
 
     }
@@ -91,7 +92,25 @@ public class ActivityViewModel<A extends AppCompatActivity> extends BaseObservab
 
     }
 
-    /**
-     * -----------------------
-     */
+    public void hideLoading() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.cancel();
+        }
+    }
+
+    public void showLoading() {
+        hideLoading();
+        mProgressDialog = CommonUtils.showLoadingDialog(this.getActivity());
+    }
+
+    public void showBackButton() {
+        // Show the Up button in the action bar.
+        ActionBar actionBar = getActivity().getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    }
 }
