@@ -6,10 +6,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Xml;
 
-import com.aurora.d20_35_app.dao.RacesDAO;
 import com.aurora.d20_35_app.enums.DatabaseUsage;
 import com.aurora.d20_35_app.enums.ItemType;
-import com.aurora.d20_35_app.helper.Item;
 import com.aurora.d20_35_app.models.Races;
 
 import org.xml.sax.SAXException;
@@ -121,11 +119,13 @@ public class DatabaseManager {
         itemType.fromHolderToDatabase(databaseHolder);
     }
 
+    @SuppressWarnings("unchecked")
     private static void generateDataLists(DatabaseHolder databaseHolder) {
         List<String> tmp = new ArrayList<>();
-        for (ItemType type: ItemType.values()){
-            tmp.addAll(type.getDAO(databaseHolder).getSources());
+        for (ItemType type : ItemType.values()) {
+            tmp.addAll(type.getDAO(databaseHolder).getSources());//this is unsafe/unchecked
         }
+        /*
         tmp.addAll(databaseHolder.armourDAO().getSources());
         tmp.addAll(databaseHolder.classesDAO().getSources());
         tmp.addAll(databaseHolder.equipmentDAO().getSources());
@@ -138,6 +138,7 @@ public class DatabaseManager {
         tmp.addAll(databaseHolder.spellsDAO().getSources());
         tmp.addAll(databaseHolder.weaponsDAO().getSources());
         tmp.addAll(databaseHolder.translationsDAO().getSources());
+        */
         databaseHolder.getDatabasesList().clear();
         databaseHolder.getDatabasesList().addAll(new ArrayList<>(new HashSet<>(tmp)));
     }
@@ -199,7 +200,6 @@ public class DatabaseManager {
                 case Another:
                     generateDataLists(databaseHolder);
             }
-            //closeDatabase(databaseHolder); //todo need to close(?)
             return null;
         }
     }
@@ -216,22 +216,25 @@ public class DatabaseManager {
         protected Void doInBackground(final Void... params) {
             ItemType itemType = ItemType.Races; //todo delete
             System.out.println("AllFromDb " + itemType.getAllFromDatabase(databaseHolder)); //todo delete
-            System.out.println("DaoNames " + ((RacesDAO) itemType.getDAO(databaseHolder)).getNames()); //todo delete
-            System.out.println("DaoRaceFromName " + ((RacesDAO) itemType.getDAO(databaseHolder)).getRaceWithName("Test_race_name1")); //todo delete
-            System.out.println("FirstNameFromList " + ((Item) itemType.getDatabaseList(databaseHolder).get(0)).getName()); //todo delete
+            System.out.println("DaoRaceFromName " + (itemType.getDAO(databaseHolder)).getItemWithName("Test_race_name1")); //todo delete
+
             System.out.println("FirstFromList " + (itemType.getDatabaseList(databaseHolder).get(0))); //todo delete
             System.out.println("Id\"1\" FromMap " + (itemType.getDatabaseMap(databaseHolder).get("1"))); //todo delete
-            System.out.println("Id\"1\" NameFromMap(ToRace) " + ((Races)itemType.getDatabaseMap(databaseHolder).get("1")).getName()); //todo delete
-            System.out.println("Id\"1\" NameFromMap(ToItem) " + ((Item)itemType.getDatabaseMap(databaseHolder).get("1")).getName()); //todo delete
 
+            System.out.println("DaoNames " + itemType.getDAO(databaseHolder).getNames()); //todo delete
+            System.out.println("FirstNameFromList " + itemType.getDatabaseList(databaseHolder).get(0).getName()); //todo delete
+            System.out.println("Id\"1\" NameFromMap " + itemType.getDatabaseMap(databaseHolder).get("1").getName()); //todo delete
 
-            /* todo delete
+            System.out.println("FirstDescrFromList(ToRaces) " + ((Races) itemType.getDatabaseList(databaseHolder).get(0)).getRaceDescription()); //todo delete
+            System.out.println("Id\"1\" DescrFromMap(ToRaces) " + ((Races) itemType.getDatabaseMap(databaseHolder).get("1")).getRaceDescription()); //todo delete
+
+            // todo delete
             System.out.println("why?");
-            System.out.println("Races "+((RacesDAO) itemType.getDAO(databaseHolder)).getRaces());
-            System.out.println("ItemRaces "+((RacesDAO) itemType.getDAO(databaseHolder)).getItemRaces());
-            */
+            System.out.println("Races " + (itemType.getDAO(databaseHolder)).getItems());
+            System.out.println("ItemRaces " + (itemType.getDAO(databaseHolder)).getItemsAsItem());
+            //*/
 
-            //closeDatabase(databaseHolder); //todo need to close(?)
+            closeDatabase(databaseHolder); //todo need to close(?)
             return null;
         }
     }

@@ -54,9 +54,15 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
     }
 
     public void startNewActivityFromMain(int destinationID) {
-        Intent intent_rules = new Intent(this, chooseNewActivity(destinationID));
-        this.startActivity(intent_rules);
-        Log.i("Content ", " Main layout to " + getString(destinationID)); //todo test
+        if (destinationID == R.id.action_exit) {
+            Log.i("Content ", " Exiting");
+            finish();
+            moveTaskToBack(true);
+        } else {
+            Intent intent_rules = new Intent(this, chooseNewActivity(destinationID));
+            this.startActivity(intent_rules);
+        }
+
     }
 
     private Class<?> chooseNewActivity(int destinationID) {
@@ -75,10 +81,6 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
                 return SettingsActivity.class;
             case R.id.action_help:
                 return HelpActivity.class;
-            case R.id.action_exit:
-                finish();
-                moveTaskToBack(true);
-                break;
         }
         return null;
     }

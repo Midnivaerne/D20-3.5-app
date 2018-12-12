@@ -22,6 +22,24 @@ public interface BaseDAO<T> {
     @Delete
     void delete(T object);
 
-    List <String> getSources();
+    int countItems();
+
+    List<Integer> getIds();
+
+    List<String> getNames();
+
+    List<String> getSources();
+
+    List<T> getItems();
+
+    List<Item> getItemsAsItem();
+
+    List<T> getItemsWithSource(String source);
+
+    T getItemWithId(String id);
+
+    T getItemWithName(String name);
+
+    void deleteAll();
 }
 

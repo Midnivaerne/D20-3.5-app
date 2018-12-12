@@ -103,6 +103,7 @@ public abstract class DatabaseHolder extends RoomDatabase {
                 public void onCreate(@NonNull SupportSQLiteDatabase db) {
                     super.onCreate(db);
                     INSTANCE.onCreateRulesList();
+
                 }
             }).build();
         }

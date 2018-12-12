@@ -7,11 +7,9 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
-@NoArgsConstructor
 public class Item {
 
     @Ignore
@@ -44,6 +42,8 @@ public class Item {
     @Ignore
     public String details;
 
+    @Ignore
+    public Item(){}
 
     public Item(int itemID, String name, String source) {
         this.itemID = itemID;

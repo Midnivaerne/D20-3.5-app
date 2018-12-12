@@ -8,13 +8,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.aurora.d20_35_app.helper.ActivityViewModel;
-import com.aurora.d20_35_app.utilsDatabase.DatabaseManager;
 import com.aurora.d20_35_app.views.D2035appActivity;
 
 import androidx.core.content.ContextCompat;
 import androidx.databinding.ObservableField;
-
-import static com.aurora.d20_35_app.utilsDatabase.DatabaseHolder.getDatabaseHolder;
 
 
 public class D2035appVM extends ActivityViewModel<D2035appActivity> {
@@ -50,8 +47,6 @@ public class D2035appVM extends ActivityViewModel<D2035appActivity> {
     public void buttonOnClick(View view) {
         Log.i("Button ", " Clicked " + view.toString());
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            DatabaseManager.ConnectDbAsync task = new DatabaseManager.ConnectDbAsync(getDatabaseHolder(activity)); //todo delete after tests
-            task.execute();
             this.getActivity().startNewActivityFromMain(view.getId());
         } else {
             Toast.makeText(getActivity(), "Write external storage permission needed.", Toast.LENGTH_LONG).show();
