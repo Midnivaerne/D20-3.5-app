@@ -32,14 +32,14 @@ public abstract class SkillsDAO  implements BaseDAO<Skills> {
     @Query("SELECT * FROM Skills")
     public abstract List<Item> getItemsAsItem(); // above doesn't show Item fields (but they are created/loaded)
 
-    @Query("SELECT * FROM Skills WHERE Source > :qSource")
-    public abstract List<Skills> getItemsWithSource(String qSource);
+    @Query("SELECT * FROM Skills WHERE Source == :source")
+    public abstract List<Skills> getItemsWithSource(String source);
 
-    @Query("SELECT * FROM Skills WHERE Item_ID > :qId")
-    public abstract Skills getItemWithId(String qId);
+    @Query("SELECT * FROM Skills WHERE Item_ID == :itemID")
+    public abstract Skills getItemWithId(int itemID);
 
-    @Query("SELECT * FROM Skills WHERE Name > :qName")
-    public abstract Skills getItemWithName(String qName);
+    @Query("SELECT * FROM Skills WHERE Name > :name")
+    public abstract Skills getItemWithName(String name);
 
     @Query("DELETE FROM Skills")
     public abstract void deleteAll();

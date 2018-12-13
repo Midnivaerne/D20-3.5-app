@@ -8,14 +8,24 @@ import androidx.room.Ignore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@NoArgsConstructor
 @Entity(tableName = "Translations", inheritSuperIndices = true)
 public class Translations extends Item {
+
+    @Ignore
+    public Translations() {
+        super();
+    }
+
+    public Translations(String name, String source, String category, String language, String trans) {
+        super(name, source);
+        this.category = category;
+        this.language = language;
+        this.trans = trans;
+    }
 
     @Ignore
     public static final String categoryColumnName = "Category";
@@ -38,4 +48,9 @@ public class Translations extends Item {
     @Setter
     @ColumnInfo(name = transColumnName)
     private String trans;
+
+    public Translations clone() {
+        return new Translations(getName(), getSource(), this.category, this.language, this.trans);
+    }
+
 }

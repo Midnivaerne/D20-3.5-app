@@ -11,10 +11,10 @@ import androidx.room.Update;
 public interface BaseDAO<T> {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)//or replace?
-    void insert(T object);
+    long insert(T object);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)//or replace?
-    void insertAll(List<T> objects);
+    List<Long> insertAll(List<T> objects);
 
     @Update
     void update(T object);
@@ -36,7 +36,7 @@ public interface BaseDAO<T> {
 
     List<T> getItemsWithSource(String source);
 
-    T getItemWithId(String id);
+    T getItemWithId(int id);
 
     T getItemWithName(String name);
 

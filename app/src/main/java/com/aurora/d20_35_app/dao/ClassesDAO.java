@@ -32,14 +32,14 @@ public abstract class ClassesDAO implements BaseDAO<Classes> {
     @Query("SELECT * FROM Classes")
     public abstract List<Item> getItemsAsItem(); // above doesn't show Item fields (but they are created/loaded)
 
-    @Query("SELECT * FROM Classes WHERE Source > :qSource")
-    public abstract List<Classes> getItemsWithSource(String qSource);
+    @Query("SELECT * FROM Classes WHERE Source == :source")
+    public abstract List<Classes> getItemsWithSource(String source);
 
-    @Query("SELECT * FROM Classes WHERE Item_ID > :qId")
-    public abstract Classes getItemWithId(String qId);
+    @Query("SELECT * FROM Classes WHERE Item_ID == :itemID")
+    public abstract Classes getItemWithId(int itemID);
 
-    @Query("SELECT * FROM Classes WHERE Name > :qName")
-    public abstract Classes getItemWithName(String qName);
+    @Query("SELECT * FROM Classes WHERE Name == :name")
+    public abstract Classes getItemWithName(String name);
 
     @Query("DELETE FROM Classes")
     public abstract void deleteAll();

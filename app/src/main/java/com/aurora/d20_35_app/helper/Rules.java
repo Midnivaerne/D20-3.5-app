@@ -30,8 +30,7 @@ public class Rules {
     @Setter
     private String content;
 
-    public Rules(int itemID, String name) {
-        this.itemID = itemID;
+    public Rules(String name) {
         this.name = name;
     }
 

@@ -32,14 +32,14 @@ public abstract class SpellsDAO  implements BaseDAO<Spells> {
     @Query("SELECT * FROM Spells")
     public abstract List<Item> getItemsAsItem(); // above doesn't show Item fields (but they are created/loaded)
 
-    @Query("SELECT * FROM Spells WHERE Source > :qSource")
-    public abstract List<Spells> getItemsWithSource(String qSource);
+    @Query("SELECT * FROM Spells WHERE Source == :source")
+    public abstract List<Spells> getItemsWithSource(String source);
 
-    @Query("SELECT * FROM Spells WHERE Item_ID > :qId")
-    public abstract Spells getItemWithId(String qId);
+    @Query("SELECT * FROM Spells WHERE Item_ID == :itemID")
+    public abstract Spells getItemWithId(int itemID);
 
-    @Query("SELECT * FROM Spells WHERE Name > :qName")
-    public abstract Spells getItemWithName(String qName);
+    @Query("SELECT * FROM Spells WHERE Name == :name")
+    public abstract Spells getItemWithName(String name);
 
     @Query("DELETE FROM Spells")
     public abstract void deleteAll();

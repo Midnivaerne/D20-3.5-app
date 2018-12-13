@@ -8,15 +8,30 @@ import androidx.room.Ignore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@NoArgsConstructor
 @Entity(tableName = "Races", inheritSuperIndices = true)
 public class Races extends Item {
+
+    @Ignore
+    public Races() {
+        super();
+    }
+
+    public Races(String name, String source, String raceDescription, String raceAttributeModifiers, String raceSize, String raceSpeed, String raceFeats, String raceSkills, String raceLanguages, String favouriteClass) {
+        super(name, source);
+        this.raceDescription = raceDescription;
+        this.raceAttributeModifiers = raceAttributeModifiers;
+        this.raceSize = raceSize;
+        this.raceSpeed = raceSpeed;
+        this.raceFeats = raceFeats;
+        this.raceSkills = raceSkills;
+        this.raceLanguages = raceLanguages;
+        this.favouriteClass = favouriteClass;
+    }
 
     @Ignore
     public static final String raceDescriptionColumnName = "RaceDescription";
@@ -75,5 +90,8 @@ public class Races extends Item {
     @ColumnInfo(name = favouriteClassColumnName)
     private String favouriteClass;
 
+    public Races clone() {
+        return new Races(getName(), getSource(),this.raceDescription, this.raceAttributeModifiers, this.raceSize, this.raceSpeed, this.raceFeats, this.raceSkills, this.raceLanguages, this.favouriteClass);
+    }
 
 }

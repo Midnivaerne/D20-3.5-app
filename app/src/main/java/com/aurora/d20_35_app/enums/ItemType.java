@@ -25,7 +25,7 @@ public enum ItemType {
      */
     Races("Races") {
         @Override
-        public BaseDAO<Races> getDAO(DatabaseHolder databaseHolder) {
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.racesDAO();
         }
 
@@ -35,7 +35,7 @@ public enum ItemType {
         }
 
         @Override
-        public Map<String, Races> getDatabaseMap(DatabaseHolder databaseHolder) {
+        public Map<Integer, Races> getDatabaseMap(DatabaseHolder databaseHolder) {
             return databaseHolder.RACES_MAP;
         }
 
@@ -53,7 +53,7 @@ public enum ItemType {
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
             databaseHolder.RACES_LIST.addAll(databaseHolder.racesDAO().getItems());
             for (Races races : databaseHolder.RACES_LIST) {
-                databaseHolder.RACES_MAP.put(String.valueOf(races.getItemID()), races);
+                databaseHolder.RACES_MAP.put(races.getItemID(), races);
             }
         }
 
@@ -68,7 +68,7 @@ public enum ItemType {
      */
     Classes("Classes") {
         @Override
-        public BaseDAO<Classes> getDAO(DatabaseHolder databaseHolder) {
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.classesDAO();
         }
 
@@ -78,7 +78,7 @@ public enum ItemType {
         }
 
         @Override
-        public Map<String, Classes> getDatabaseMap(DatabaseHolder databaseHolder) {
+        public Map<Integer, Classes> getDatabaseMap(DatabaseHolder databaseHolder) {
             return databaseHolder.CLASSES_MAP;
         }
 
@@ -96,7 +96,7 @@ public enum ItemType {
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
             databaseHolder.CLASSES_LIST.addAll(databaseHolder.classesDAO().getItems());
             for (Classes classes : databaseHolder.CLASSES_LIST) {
-                databaseHolder.CLASSES_MAP.put(String.valueOf(classes.getItemID()), classes);
+                databaseHolder.CLASSES_MAP.put(classes.getItemID(), classes);
             }
         }
 
@@ -111,7 +111,7 @@ public enum ItemType {
      */
     Skills("Skills") {
         @Override
-        public BaseDAO<Skills> getDAO(DatabaseHolder databaseHolder) {
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.skillsDAO();
         }
 
@@ -121,7 +121,7 @@ public enum ItemType {
         }
 
         @Override
-        public Map<String, Skills> getDatabaseMap(DatabaseHolder databaseHolder) {
+        public Map<Integer, Skills> getDatabaseMap(DatabaseHolder databaseHolder) {
             return databaseHolder.SKILLS_MAP;
         }
 
@@ -139,7 +139,7 @@ public enum ItemType {
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
             databaseHolder.SKILLS_LIST.addAll(databaseHolder.skillsDAO().getItems());
             for (Skills skills : databaseHolder.SKILLS_LIST) {
-                databaseHolder.SKILLS_MAP.put(String.valueOf(skills.getItemID()), skills);
+                databaseHolder.SKILLS_MAP.put(skills.getItemID(), skills);
             }
         }
 
@@ -155,7 +155,7 @@ public enum ItemType {
      */
     Feats("Feats") {
         @Override
-        public BaseDAO<Feats> getDAO(DatabaseHolder databaseHolder) {
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.featsDAO();
         }
 
@@ -165,7 +165,7 @@ public enum ItemType {
         }
 
         @Override
-        public Map<String, Feats> getDatabaseMap(DatabaseHolder databaseHolder) {
+        public Map<Integer, Feats> getDatabaseMap(DatabaseHolder databaseHolder) {
             return databaseHolder.FEATS_MAP;
         }
 
@@ -183,7 +183,7 @@ public enum ItemType {
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
             databaseHolder.FEATS_LIST.addAll(databaseHolder.featsDAO().getItems());
             for (Feats feats : databaseHolder.FEATS_LIST) {
-                databaseHolder.FEATS_MAP.put(String.valueOf(feats.getItemID()), feats);
+                databaseHolder.FEATS_MAP.put(feats.getItemID(), feats);
             }
         }
 
@@ -198,7 +198,7 @@ public enum ItemType {
      */
     Weapons("Weapons") {
         @Override
-        public BaseDAO<Weapons> getDAO(DatabaseHolder databaseHolder) {
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.weaponsDAO();
         }
 
@@ -208,7 +208,7 @@ public enum ItemType {
         }
 
         @Override
-        public Map<String, Weapons> getDatabaseMap(DatabaseHolder databaseHolder) {
+        public Map<Integer, Weapons> getDatabaseMap(DatabaseHolder databaseHolder) {
             return databaseHolder.WEAPONS_MAP;
         }
 
@@ -226,7 +226,7 @@ public enum ItemType {
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
             databaseHolder.WEAPONS_LIST.addAll(databaseHolder.weaponsDAO().getItems());
             for (Weapons weapons : databaseHolder.WEAPONS_LIST) {
-                databaseHolder.WEAPONS_MAP.put(String.valueOf(weapons.getItemID()), weapons);
+                databaseHolder.WEAPONS_MAP.put(weapons.getItemID(), weapons);
             }
         }
 
@@ -241,7 +241,7 @@ public enum ItemType {
      */
     Armour("Armour") {
         @Override
-        public BaseDAO<Armour> getDAO(DatabaseHolder databaseHolder) {
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.armourDAO();
         }
 
@@ -251,7 +251,7 @@ public enum ItemType {
         }
 
         @Override
-        public Map<String, Armour> getDatabaseMap(DatabaseHolder databaseHolder) {
+        public Map<Integer, Armour> getDatabaseMap(DatabaseHolder databaseHolder) {
             return databaseHolder.ARMOUR_MAP;
         }
 
@@ -269,7 +269,7 @@ public enum ItemType {
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
             databaseHolder.ARMOUR_LIST.addAll(databaseHolder.armourDAO().getItems());
             for (Armour armour : databaseHolder.ARMOUR_LIST) {
-                databaseHolder.ARMOUR_MAP.put(String.valueOf(armour.getItemID()), armour);
+                databaseHolder.ARMOUR_MAP.put(armour.getItemID(), armour);
             }
         }
 
@@ -284,7 +284,7 @@ public enum ItemType {
      */
     Equipment("Equipment") {
         @Override
-        public BaseDAO<Equipment> getDAO(DatabaseHolder databaseHolder) {
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.equipmentDAO();
         }
 
@@ -294,7 +294,7 @@ public enum ItemType {
         }
 
         @Override
-        public Map<String, Equipment> getDatabaseMap(DatabaseHolder databaseHolder) {
+        public Map<Integer, Equipment> getDatabaseMap(DatabaseHolder databaseHolder) {
             return databaseHolder.EQUIPMENT_MAP;
         }
 
@@ -312,7 +312,7 @@ public enum ItemType {
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
             databaseHolder.EQUIPMENT_LIST.addAll(databaseHolder.equipmentDAO().getItems());
             for (Equipment equipment : databaseHolder.EQUIPMENT_LIST) {
-                databaseHolder.EQUIPMENT_MAP.put(String.valueOf(equipment.getItemID()), equipment);
+                databaseHolder.EQUIPMENT_MAP.put(equipment.getItemID(), equipment);
             }
         }
 
@@ -327,7 +327,7 @@ public enum ItemType {
      */
     Spells("Spells") {
         @Override
-        public BaseDAO<Spells> getDAO(DatabaseHolder databaseHolder) {
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.spellsDAO();
         }
 
@@ -337,7 +337,7 @@ public enum ItemType {
         }
 
         @Override
-        public Map<String, Spells> getDatabaseMap(DatabaseHolder databaseHolder) {
+        public Map<Integer, Spells> getDatabaseMap(DatabaseHolder databaseHolder) {
             return databaseHolder.SPELLS_MAP;
         }
 
@@ -350,7 +350,7 @@ public enum ItemType {
         public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
             databaseHolder.spellsDAO().insertAll(databaseHolder.SPELLS_LIST);
             for (Spells spells : databaseHolder.SPELLS_LIST) {
-                databaseHolder.SPELLS_MAP.put(String.valueOf(spells.getItemID()), spells);
+                databaseHolder.SPELLS_MAP.put(spells.getItemID(), spells);
             }
         }
 
@@ -370,7 +370,7 @@ public enum ItemType {
      */
     Monsters("Monsters") {
         @Override
-        public BaseDAO<Monsters> getDAO(DatabaseHolder databaseHolder) {
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.monstersDAO();
         }
 
@@ -380,7 +380,7 @@ public enum ItemType {
         }
 
         @Override
-        public Map<String, Monsters> getDatabaseMap(DatabaseHolder databaseHolder) {
+        public Map<Integer, Monsters> getDatabaseMap(DatabaseHolder databaseHolder) {
             return databaseHolder.MONSTERS_MAP;
         }
 
@@ -398,7 +398,7 @@ public enum ItemType {
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
             databaseHolder.MONSTERS_LIST.addAll(databaseHolder.monstersDAO().getItems());
             for (Monsters monsters : databaseHolder.MONSTERS_LIST) {
-                databaseHolder.MONSTERS_MAP.put(String.valueOf(monsters.getItemID()), monsters);
+                databaseHolder.MONSTERS_MAP.put(monsters.getItemID(), monsters);
             }
         }
 
@@ -413,7 +413,7 @@ public enum ItemType {
      */
     RaceTemplates("RaceTemplates") {
         @Override
-        public BaseDAO<RaceTemplates> getDAO(DatabaseHolder databaseHolder) {
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.raceTemplatesDAO();
         }
 
@@ -423,7 +423,7 @@ public enum ItemType {
         }
 
         @Override
-        public Map<String, RaceTemplates> getDatabaseMap(DatabaseHolder databaseHolder) {
+        public Map<Integer, RaceTemplates> getDatabaseMap(DatabaseHolder databaseHolder) {
             return databaseHolder.RACE_TEMPLATES_MAP;
         }
 
@@ -441,7 +441,7 @@ public enum ItemType {
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
             databaseHolder.RACE_TEMPLATES_LIST.addAll(databaseHolder.raceTemplatesDAO().getItems());
             for (RaceTemplates raceTemplates : databaseHolder.RACE_TEMPLATES_LIST) {
-                databaseHolder.RACE_TEMPLATES_MAP.put(String.valueOf(raceTemplates.getItemID()), raceTemplates);
+                databaseHolder.RACE_TEMPLATES_MAP.put(raceTemplates.getItemID(), raceTemplates);
             }
         }
 
@@ -456,7 +456,7 @@ public enum ItemType {
      */
     Hero("Hero") {
         @Override
-        public BaseDAO<Hero> getDAO(DatabaseHolder databaseHolder) {
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.heroDAO();
         }
 
@@ -466,7 +466,7 @@ public enum ItemType {
         }
 
         @Override
-        public Map<String, Hero> getDatabaseMap(DatabaseHolder databaseHolder) {
+        public Map<Integer, Hero> getDatabaseMap(DatabaseHolder databaseHolder) {
             return databaseHolder.HEROES_MAP;
         }
 
@@ -479,7 +479,7 @@ public enum ItemType {
         public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
             databaseHolder.heroDAO().insertAll(databaseHolder.HEROES_LIST);
             for (Hero hero : databaseHolder.HEROES_LIST) {
-                databaseHolder.HEROES_MAP.put(String.valueOf(hero.getItemID()), hero);
+                databaseHolder.HEROES_MAP.put(hero.getItemID(), hero);
             }
         }
 
@@ -499,7 +499,7 @@ public enum ItemType {
      */
     Translations("Translations") {
         @Override
-        public BaseDAO<Translations> getDAO(DatabaseHolder databaseHolder) {
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.translationsDAO();
         }
 
@@ -509,7 +509,7 @@ public enum ItemType {
         }
 
         @Override
-        public Map<String, Translations> getDatabaseMap(DatabaseHolder databaseHolder) {
+        public Map<Integer, Translations> getDatabaseMap(DatabaseHolder databaseHolder) {
             return databaseHolder.TRANSLATIONS_MAP;
         }
 
@@ -522,7 +522,7 @@ public enum ItemType {
         public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
             databaseHolder.translationsDAO().insertAll(databaseHolder.TRANSLATIONS_LIST);
             for (Translations translations : databaseHolder.TRANSLATIONS_LIST) {
-                databaseHolder.TRANSLATIONS_MAP.put(String.valueOf(translations.getItemID()), translations);
+                databaseHolder.TRANSLATIONS_MAP.put(translations.getItemID(), translations);
             }
         }
 
@@ -559,13 +559,13 @@ public enum ItemType {
         return false;
     }
 
-    public abstract BaseDAO<? extends Item> getDAO(DatabaseHolder databaseHolder);
+    public abstract BaseDAO<Item> getDAO(DatabaseHolder databaseHolder);
 
     public abstract List<? extends Item> getDatabaseList(DatabaseHolder databaseHolder);
 
-    public abstract Map<String, ? extends Item> getDatabaseMap(DatabaseHolder databaseHolder);
+    public abstract Map<Integer, ? extends Item> getDatabaseMap(DatabaseHolder databaseHolder);
 
-    public List<? extends Item> getAllFromDatabase(DatabaseHolder databaseHolder) {
+    public List<Item> getAllFromDatabase(DatabaseHolder databaseHolder) {
         return getDAO(databaseHolder).getItems();
     }
 

@@ -32,14 +32,14 @@ public abstract class TranslationsDAO implements BaseDAO<Translations> {
     @Query("SELECT * FROM Translations")
     public abstract List<Item> getItemsAsItem(); // above doesn't show Item fields (but they are created/loaded)
 
-    @Query("SELECT * FROM Translations WHERE Source > :qSource")
-    public abstract List<Translations> getItemsWithSource(String qSource);
+    @Query("SELECT * FROM Translations WHERE Source == :source")
+    public abstract List<Translations> getItemsWithSource(String source);
 
-    @Query("SELECT * FROM Translations WHERE Item_ID > :qId")
-    public abstract Translations getItemWithId(String qId);
+    @Query("SELECT * FROM Translations WHERE Item_ID == :itemID")
+    public abstract Translations getItemWithId(int itemID);
 
-    @Query("SELECT * FROM Translations WHERE Name > :qName")
-    public abstract Translations getItemWithName(String qName);
+    @Query("SELECT * FROM Translations WHERE Name == :name")
+    public abstract Translations getItemWithName(String name);
 
     @Query("DELETE FROM Translations")
     public abstract void deleteAll();

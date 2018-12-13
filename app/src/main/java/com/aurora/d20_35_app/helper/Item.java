@@ -6,9 +6,11 @@ import androidx.room.ColumnInfo;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+@EqualsAndHashCode(callSuper = false)
 @Data
 public class Item {
 
@@ -43,12 +45,16 @@ public class Item {
     public String details;
 
     @Ignore
-    public Item(){}
+    public Item() {
+    }
 
-    public Item(int itemID, String name, String source) {
-        this.itemID = itemID;
+    public Item(String name, String source) {
         this.name = name;
         this.source = source;
+    }
+
+    public Item clone() {
+        return new Item(name, source);
     }
 
     protected boolean canEqual(Object other) {
