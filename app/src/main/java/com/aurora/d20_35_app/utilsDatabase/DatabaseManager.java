@@ -90,7 +90,28 @@ public class DatabaseManager {
         task.execute();
     }
 
-    private static void closeDatabase(DatabaseHolder databaseHolder) {
+    public static void clearWholeDatabaseAndAllHolders(DatabaseHolder databaseHolder) {
+        for (ItemType type : ItemType.values()) {
+            type.deleteAll(databaseHolder);
+        }
+
+    }
+
+    public static void clearWholeDatabase(DatabaseHolder databaseHolder) {
+        for (ItemType type : ItemType.values()) {
+            type.deleteAllFromDatabase(databaseHolder);
+        }
+
+    }
+
+    public static void clearAllHolders(DatabaseHolder databaseHolder) {
+        for (ItemType type : ItemType.values()) {
+            type.deleteAllFromHolder(databaseHolder);
+        }
+
+    }
+
+    public static void closeDatabase(DatabaseHolder databaseHolder) {
         databaseHolder.close();
         DatabaseHolder.destroyInstance();
     }
@@ -103,7 +124,7 @@ public class DatabaseManager {
         loadDataFromHolderToDatabase(databaseHolder, reload, itemType);
     }
 
-    private static void loadDataFromDatabaseToHolder(DatabaseHolder databaseHolder, boolean reload, ItemType itemType) {
+    public static void loadDataFromDatabaseToHolder(DatabaseHolder databaseHolder, boolean reload, ItemType itemType) {
         if (reload) {
             itemType.deleteAllFromHolder(databaseHolder);
         }

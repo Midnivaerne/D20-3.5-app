@@ -2,6 +2,7 @@ package com.aurora.d20_35_app.dao;
 
 import com.aurora.d20_35_app.models.Armour;
 import com.aurora.d20_35_app.utilsDatabase.DatabaseHolder;
+import com.aurora.d20_35_app.utilsDatabase.DatabaseManager;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -35,13 +36,13 @@ public class ArmourDAOTest {
                 // allowing main thread queries, just for testing
                 .allowMainThreadQueries()
                 .build();
-        mDatabaseHolder.armourDAO().deleteAll();
+        DatabaseManager.clearWholeDatabaseAndAllHolders(mDatabaseHolder);
     }
 
     @After
     public void tearDown() throws Exception {
-        mDatabaseHolder.armourDAO().deleteAll();
-        mDatabaseHolder.close();
+        DatabaseManager.clearWholeDatabaseAndAllHolders(mDatabaseHolder);
+        DatabaseManager.closeDatabase(mDatabaseHolder);
     }
 
     @Test

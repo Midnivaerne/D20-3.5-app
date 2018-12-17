@@ -2,6 +2,7 @@ package com.aurora.d20_35_app.dao;
 
 import com.aurora.d20_35_app.models.Classes;
 import com.aurora.d20_35_app.utilsDatabase.DatabaseHolder;
+import com.aurora.d20_35_app.utilsDatabase.DatabaseManager;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -33,13 +34,13 @@ public class ClassesDAOTest {
                 // allowing main thread queries, just for testing
                 .allowMainThreadQueries()
                 .build();
-        mDatabaseHolder.classesDAO().deleteAll();
+        DatabaseManager.clearWholeDatabaseAndAllHolders(mDatabaseHolder);
     }
 
     @After
     public void tearDown() throws Exception {
-        mDatabaseHolder.classesDAO().deleteAll();
-        mDatabaseHolder.close();
+        DatabaseManager.clearWholeDatabaseAndAllHolders(mDatabaseHolder);
+        DatabaseManager.closeDatabase(mDatabaseHolder);
     }
 
     @Test

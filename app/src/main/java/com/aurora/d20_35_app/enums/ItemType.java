@@ -56,12 +56,6 @@ public enum ItemType {
                 databaseHolder.RACES_MAP.put(races.getItemID(), races);
             }
         }
-
-        @Override
-        public void deleteAllFromHolder(DatabaseHolder databaseHolder) {
-            databaseHolder.RACES_LIST.clear();
-            databaseHolder.RACES_MAP.clear();
-        }
     },
     /**
      * Classes
@@ -98,12 +92,6 @@ public enum ItemType {
             for (Classes classes : databaseHolder.CLASSES_LIST) {
                 databaseHolder.CLASSES_MAP.put(classes.getItemID(), classes);
             }
-        }
-
-        @Override
-        public void deleteAllFromHolder(DatabaseHolder databaseHolder) {
-            databaseHolder.CLASSES_LIST.clear();
-            databaseHolder.CLASSES_MAP.clear();
         }
     },
     /**
@@ -142,13 +130,6 @@ public enum ItemType {
                 databaseHolder.SKILLS_MAP.put(skills.getItemID(), skills);
             }
         }
-
-        @Override
-        public void deleteAllFromHolder(DatabaseHolder databaseHolder) {
-            databaseHolder.SKILLS_LIST.clear();
-            databaseHolder.SKILLS_MAP.clear();
-        }
-
     },
     /**
      * Feats
@@ -185,12 +166,6 @@ public enum ItemType {
             for (Feats feats : databaseHolder.FEATS_LIST) {
                 databaseHolder.FEATS_MAP.put(feats.getItemID(), feats);
             }
-        }
-
-        @Override
-        public void deleteAllFromHolder(DatabaseHolder databaseHolder) {
-            databaseHolder.FEATS_LIST.clear();
-            databaseHolder.FEATS_MAP.clear();
         }
     },
     /**
@@ -230,11 +205,6 @@ public enum ItemType {
             }
         }
 
-        @Override
-        public void deleteAllFromHolder(DatabaseHolder databaseHolder) {
-            databaseHolder.WEAPONS_LIST.clear();
-            databaseHolder.WEAPONS_MAP.clear();
-        }
     },
     /**
      * Armour
@@ -272,12 +242,6 @@ public enum ItemType {
                 databaseHolder.ARMOUR_MAP.put(armour.getItemID(), armour);
             }
         }
-
-        @Override
-        public void deleteAllFromHolder(DatabaseHolder databaseHolder) {
-            databaseHolder.ARMOUR_LIST.clear();
-            databaseHolder.ARMOUR_MAP.clear();
-        }
     },
     /**
      * Equipment
@@ -314,12 +278,6 @@ public enum ItemType {
             for (Equipment equipment : databaseHolder.EQUIPMENT_LIST) {
                 databaseHolder.EQUIPMENT_MAP.put(equipment.getItemID(), equipment);
             }
-        }
-
-        @Override
-        public void deleteAllFromHolder(DatabaseHolder databaseHolder) {
-            databaseHolder.EQUIPMENT_LIST.clear();
-            databaseHolder.EQUIPMENT_MAP.clear();
         }
     },
     /**
@@ -359,11 +317,6 @@ public enum ItemType {
             databaseHolder.SPELLS_LIST.addAll(databaseHolder.spellsDAO().getItems());
         }
 
-        @Override
-        public void deleteAllFromHolder(DatabaseHolder databaseHolder) {
-            databaseHolder.SPELLS_LIST.clear();
-            databaseHolder.SPELLS_MAP.clear();
-        }
     },
     /**
      * Monsters
@@ -400,12 +353,6 @@ public enum ItemType {
             for (Monsters monsters : databaseHolder.MONSTERS_LIST) {
                 databaseHolder.MONSTERS_MAP.put(monsters.getItemID(), monsters);
             }
-        }
-
-        @Override
-        public void deleteAllFromHolder(DatabaseHolder databaseHolder) {
-            databaseHolder.MONSTERS_LIST.clear();
-            databaseHolder.MONSTERS_MAP.clear();
         }
     },
     /**
@@ -444,12 +391,6 @@ public enum ItemType {
                 databaseHolder.RACE_TEMPLATES_MAP.put(raceTemplates.getItemID(), raceTemplates);
             }
         }
-
-        @Override
-        public void deleteAllFromHolder(DatabaseHolder databaseHolder) {
-            databaseHolder.RACE_TEMPLATES_LIST.clear();
-            databaseHolder.RACE_TEMPLATES_MAP.clear();
-        }
     },
     /**
      * Hero
@@ -487,12 +428,6 @@ public enum ItemType {
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
             databaseHolder.HEROES_LIST.addAll(databaseHolder.heroDAO().getItems());
         }
-
-        @Override
-        public void deleteAllFromHolder(DatabaseHolder databaseHolder) {
-            databaseHolder.HEROES_LIST.clear();
-            databaseHolder.HEROES_MAP.clear();
-        }
     },
     /**
      * Hero
@@ -529,12 +464,6 @@ public enum ItemType {
         @Override
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
             databaseHolder.TRANSLATIONS_LIST.addAll(databaseHolder.translationsDAO().getItems());
-        }
-
-        @Override
-        public void deleteAllFromHolder(DatabaseHolder databaseHolder) {
-            databaseHolder.TRANSLATIONS_LIST.clear();
-            databaseHolder.TRANSLATIONS_MAP.clear();
         }
 
     };
@@ -580,7 +509,10 @@ public enum ItemType {
         deleteAllFromHolder(databaseHolder);
     }
 
-    public abstract void deleteAllFromHolder(DatabaseHolder databaseHolder);
+    public void deleteAllFromHolder(DatabaseHolder databaseHolder) {
+        getDatabaseList(databaseHolder).clear();
+        getDatabaseMap(databaseHolder).clear();
+    }
 
     public void deleteAllFromDatabase(DatabaseHolder databaseHolder) {
         getDAO(databaseHolder).deleteAll();
