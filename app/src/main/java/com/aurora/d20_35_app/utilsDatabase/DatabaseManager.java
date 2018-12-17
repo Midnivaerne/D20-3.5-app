@@ -125,20 +125,6 @@ public class DatabaseManager {
         for (ItemType type : ItemType.values()) {
             tmp.addAll(type.getDAO(databaseHolder).getSources());//this is unsafe/unchecked
         }
-        /*
-        tmp.addAll(databaseHolder.armourDAO().getSources());
-        tmp.addAll(databaseHolder.classesDAO().getSources());
-        tmp.addAll(databaseHolder.equipmentDAO().getSources());
-        tmp.addAll(databaseHolder.featsDAO().getSources());
-        tmp.addAll(databaseHolder.heroDAO().getSources());
-        tmp.addAll(databaseHolder.monstersDAO().getSources());
-        tmp.addAll(databaseHolder.racesDAO().getSources());
-        tmp.addAll(databaseHolder.raceTemplatesDAO().getSources());
-        tmp.addAll(databaseHolder.skillsDAO().getSources());
-        tmp.addAll(databaseHolder.spellsDAO().getSources());
-        tmp.addAll(databaseHolder.weaponsDAO().getSources());
-        tmp.addAll(databaseHolder.translationsDAO().getSources());
-        */
         databaseHolder.getDatabasesList().clear();
         databaseHolder.getDatabasesList().addAll(new ArrayList<>(new HashSet<>(tmp)));
     }

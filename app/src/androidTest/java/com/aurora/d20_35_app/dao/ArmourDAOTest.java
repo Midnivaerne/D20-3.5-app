@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import androidx.room.Room;
+import androidx.room.Transaction;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
@@ -34,14 +35,17 @@ public class ArmourDAOTest {
                 // allowing main thread queries, just for testing
                 .allowMainThreadQueries()
                 .build();
+        mDatabaseHolder.armourDAO().deleteAll();
     }
 
     @After
     public void tearDown() throws Exception {
+        mDatabaseHolder.armourDAO().deleteAll();
         mDatabaseHolder.close();
     }
 
     @Test
+    @Transaction
     public void getItemWhenNoItemInserted() {
         Assert.assertTrue(mDatabaseHolder.armourDAO().getItems().isEmpty());
     }
