@@ -54,7 +54,7 @@ public class XmlHandler extends DefaultHandler {
         }
         if (qName.contains("_Item") && ItemType.contains(qName.split("_")[0])) {
             itemList.add(item); //warning suppressed
-            itemMap.put(String.valueOf(itemMap.size() + 1), item); //warning suppressed
+            itemMap.put(itemMap.size() + 1, item); //warning suppressed
         }
     }
 

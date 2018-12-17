@@ -32,14 +32,14 @@ public abstract class EquipmentDAO  implements BaseDAO<Equipment> {
     @Query("SELECT * FROM Equipment")
     public abstract List<Item> getItemsAsItem(); // above doesn't show Item fields (but they are created/loaded)
 
-    @Query("SELECT * FROM Equipment WHERE Source > :qSource")
-    public abstract List<Equipment> getItemsWithSource(String qSource);
+    @Query("SELECT * FROM Equipment WHERE Source == :source")
+    public abstract List<Equipment> getItemsWithSource(String source);
 
-    @Query("SELECT * FROM Equipment WHERE Item_ID > :qId")
-    public abstract Equipment getItemWithId(String qId);
+    @Query("SELECT * FROM Equipment WHERE Item_ID == :itemID")
+    public abstract Equipment getItemWithId(int itemID);
 
-    @Query("SELECT * FROM Equipment WHERE Name > :qName")
-    public abstract Equipment getItemWithName(String qName);
+    @Query("SELECT * FROM Equipment WHERE Name == :name")
+    public abstract Equipment getItemWithName(String name);
 
     @Query("DELETE FROM Equipment")
     public abstract void deleteAll();

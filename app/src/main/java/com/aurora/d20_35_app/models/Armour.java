@@ -8,14 +8,31 @@ import androidx.room.Ignore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@NoArgsConstructor
 @Entity(tableName = "Armour", inheritSuperIndices = true)
 public class Armour extends Item {
+
+    @Ignore
+    public Armour() {
+        super();
+    }
+
+    public Armour(String name, String source, String armourPrice, String armourDeflection, String armourMaxDexterityBonus, String armourPenalty, String armourArcaneFailure, String armourMaxSpeed, String armourWeight, String armourSpecialProperties, String armourMaterial, String armourMagicImprovements) {
+        super(name, source);
+        this.armourPrice = armourPrice;
+        this.armourDeflection = armourDeflection;
+        this.armourMaxDexterityBonus = armourMaxDexterityBonus;
+        this.armourPenalty = armourPenalty;
+        this.armourArcaneFailure = armourArcaneFailure;
+        this.armourMaxSpeed = armourMaxSpeed;
+        this.armourWeight = armourWeight;
+        this.armourSpecialProperties = armourSpecialProperties;
+        this.armourMaterial = armourMaterial;
+        this.armourMagicImprovements = armourMagicImprovements;
+    }
 
     @Ignore
     public static final String armourPriceColumnName = "ArmourPrice";
@@ -87,4 +104,8 @@ public class Armour extends Item {
     @Setter
     @ColumnInfo(name = armourMagicImprovementsColumnName)
     private String armourMagicImprovements;
+
+    public Armour clone(){
+        return new Armour(getName(), getSource(), this.armourPrice, this.armourDeflection, this.armourMaxDexterityBonus, this.armourPenalty, this.armourArcaneFailure, this.armourMaxSpeed, this.armourWeight, this.armourSpecialProperties, this.armourMaterial, this.armourMagicImprovements);
+    }
 }

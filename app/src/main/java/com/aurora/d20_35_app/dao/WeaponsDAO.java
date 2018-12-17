@@ -32,14 +32,14 @@ public abstract class WeaponsDAO implements BaseDAO<Weapons> {
     @Query("SELECT * FROM Weapons")
     public abstract List<Item> getItemsAsItem(); // above doesn't show Item fields (but they are created/loaded)
 
-    @Query("SELECT * FROM Weapons WHERE Source > :qSource")
-    public abstract List<Weapons> getItemsWithSource(String qSource);
+    @Query("SELECT * FROM Weapons WHERE Source == :source")
+    public abstract List<Weapons> getItemsWithSource(String source);
 
-    @Query("SELECT * FROM Weapons WHERE Item_ID > :qId")
-    public abstract Weapons getItemWithId(String qId);
+    @Query("SELECT * FROM Weapons WHERE Item_ID == :itemID")
+    public abstract Weapons getItemWithId(int itemID);
 
-    @Query("SELECT * FROM Weapons WHERE Name > :qName")
-    public abstract Weapons getItemWithName(String qName);
+    @Query("SELECT * FROM Weapons WHERE Name == :name")
+    public abstract Weapons getItemWithName(String name);
 
     @Query("DELETE FROM Weapons")
     public abstract void deleteAll();

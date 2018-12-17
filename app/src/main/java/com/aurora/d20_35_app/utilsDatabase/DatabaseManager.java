@@ -90,7 +90,28 @@ public class DatabaseManager {
         task.execute();
     }
 
-    private static void closeDatabase(DatabaseHolder databaseHolder) {
+    public static void clearWholeDatabaseAndAllHolders(DatabaseHolder databaseHolder) {
+        for (ItemType type : ItemType.values()) {
+            type.deleteAll(databaseHolder);
+        }
+
+    }
+
+    public static void clearWholeDatabase(DatabaseHolder databaseHolder) {
+        for (ItemType type : ItemType.values()) {
+            type.deleteAllFromDatabase(databaseHolder);
+        }
+
+    }
+
+    public static void clearAllHolders(DatabaseHolder databaseHolder) {
+        for (ItemType type : ItemType.values()) {
+            type.deleteAllFromHolder(databaseHolder);
+        }
+
+    }
+
+    public static void closeDatabase(DatabaseHolder databaseHolder) {
         databaseHolder.close();
         DatabaseHolder.destroyInstance();
     }
@@ -103,7 +124,7 @@ public class DatabaseManager {
         loadDataFromHolderToDatabase(databaseHolder, reload, itemType);
     }
 
-    private static void loadDataFromDatabaseToHolder(DatabaseHolder databaseHolder, boolean reload, ItemType itemType) {
+    public static void loadDataFromDatabaseToHolder(DatabaseHolder databaseHolder, boolean reload, ItemType itemType) {
         if (reload) {
             itemType.deleteAllFromHolder(databaseHolder);
         }
@@ -125,20 +146,6 @@ public class DatabaseManager {
         for (ItemType type : ItemType.values()) {
             tmp.addAll(type.getDAO(databaseHolder).getSources());//this is unsafe/unchecked
         }
-        /*
-        tmp.addAll(databaseHolder.armourDAO().getSources());
-        tmp.addAll(databaseHolder.classesDAO().getSources());
-        tmp.addAll(databaseHolder.equipmentDAO().getSources());
-        tmp.addAll(databaseHolder.featsDAO().getSources());
-        tmp.addAll(databaseHolder.heroDAO().getSources());
-        tmp.addAll(databaseHolder.monstersDAO().getSources());
-        tmp.addAll(databaseHolder.racesDAO().getSources());
-        tmp.addAll(databaseHolder.raceTemplatesDAO().getSources());
-        tmp.addAll(databaseHolder.skillsDAO().getSources());
-        tmp.addAll(databaseHolder.spellsDAO().getSources());
-        tmp.addAll(databaseHolder.weaponsDAO().getSources());
-        tmp.addAll(databaseHolder.translationsDAO().getSources());
-        */
         databaseHolder.getDatabasesList().clear();
         databaseHolder.getDatabasesList().addAll(new ArrayList<>(new HashSet<>(tmp)));
     }

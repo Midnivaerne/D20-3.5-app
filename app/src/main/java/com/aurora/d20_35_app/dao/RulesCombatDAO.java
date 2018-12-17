@@ -35,15 +35,15 @@ public abstract class RulesCombatDAO implements BaseDAO<RulesCombat> {
     public abstract List<Item> getItemsAsItem(); // above doesn't show Item fields (but they are created/loaded)
 
     @Override
-    public List<RulesCombat> getItemsWithSource(String qSource) {
+    public List<RulesCombat> getItemsWithSource(String source) {
         return null;
     }
 
-    @Query("SELECT * FROM RulesCombat WHERE Item_ID > :qId")
-    public abstract RulesCombat getItemWithId(String qId);
+    @Query("SELECT * FROM RulesCombat WHERE Item_ID == :itemID")
+    public abstract RulesCombat getItemWithId(int itemID);
 
-    @Query("SELECT * FROM RulesCombat WHERE Name > :qName")
-    public abstract RulesCombat getItemWithName(String qName);
+    @Query("SELECT * FROM RulesCombat WHERE Name == :name")
+    public abstract RulesCombat getItemWithName(String name);
 
     @Query("DELETE FROM RulesCombat")
     public abstract void deleteAll();

@@ -32,14 +32,14 @@ public abstract class FeatsDAO  implements BaseDAO<Feats> {
     @Query("SELECT * FROM Feats")
     public abstract List<Item> getItemsAsItem(); // above doesn't show Item fields (but they are created/loaded)
 
-    @Query("SELECT * FROM Feats WHERE Source > :qSource")
-    public abstract List<Feats> getItemsWithSource(String qSource);
+    @Query("SELECT * FROM Feats WHERE Source == :source")
+    public abstract List<Feats> getItemsWithSource(String source);
 
-    @Query("SELECT * FROM Feats WHERE Item_ID > :qId")
-    public abstract Feats getItemWithId(String qId);
+    @Query("SELECT * FROM Feats WHERE Item_ID == :itemID")
+    public abstract Feats getItemWithId(int itemID);
 
-    @Query("SELECT * FROM Feats WHERE Name > :qName")
-    public abstract Feats getItemWithName(String qName);
+    @Query("SELECT * FROM Feats WHERE Name == :name")
+    public abstract Feats getItemWithName(String name);
 
     @Query("DELETE FROM Feats")
     public abstract void deleteAll();

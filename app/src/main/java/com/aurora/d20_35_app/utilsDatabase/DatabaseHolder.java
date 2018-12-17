@@ -1,6 +1,7 @@
 package com.aurora.d20_35_app.utilsDatabase;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import com.aurora.d20_35_app.dao.ArmourDAO;
@@ -57,6 +58,7 @@ import lombok.Setter;
         RulesCombat.class, RulesSkills.class
 }, version = 1, exportSchema = false)
 @TypeConverters(DataTypeConverters.class)
+@SuppressLint("UseSparseArrays")
 public abstract class DatabaseHolder extends RoomDatabase {
 
     private static DatabaseHolder INSTANCE;
@@ -114,7 +116,7 @@ public abstract class DatabaseHolder extends RoomDatabase {
         String[] rulesTable = {"Combat", "Skills"};
         rulesList.clear();
         for (int i = 0; i < rulesTable.length; i++) {
-            rulesList.add(new Rules(i, rulesTable[i]));
+            rulesList.add(new Rules(rulesTable[i]));
         }
     }
 
@@ -146,18 +148,18 @@ public abstract class DatabaseHolder extends RoomDatabase {
     /**
      * A map of races, by ID.
      */
-    public final Map<String, Races> RACES_MAP = new HashMap<String, Races>();
-    public final Map<String, Classes> CLASSES_MAP = new HashMap<String, Classes>();
-    public final Map<String, Skills> SKILLS_MAP = new HashMap<String, Skills>();
-    public final Map<String, Feats> FEATS_MAP = new HashMap<String, Feats>();
-    public final Map<String, Weapons> WEAPONS_MAP = new HashMap<String, Weapons>();
-    public final Map<String, Armour> ARMOUR_MAP = new HashMap<String, Armour>();
-    public final Map<String, Equipment> EQUIPMENT_MAP = new HashMap<String, Equipment>();
-    public final Map<String, Spells> SPELLS_MAP = new HashMap<String, Spells>();
-    public final Map<String, Monsters> MONSTERS_MAP = new HashMap<String, Monsters>();
-    public final Map<String, RaceTemplates> RACE_TEMPLATES_MAP = new HashMap<String, RaceTemplates>();
-    public final Map<String, Hero> HEROES_MAP = new HashMap<String, Hero>();
-    public final Map<String, Translations> TRANSLATIONS_MAP = new HashMap<String, Translations>();
+    public final Map<Integer, Races> RACES_MAP = new HashMap<Integer, Races>();
+    public final Map<Integer, Classes> CLASSES_MAP = new HashMap<Integer, Classes>();
+    public final Map<Integer, Skills> SKILLS_MAP = new HashMap<Integer, Skills>();
+    public final Map<Integer, Feats> FEATS_MAP = new HashMap<Integer, Feats>();
+    public final Map<Integer, Weapons> WEAPONS_MAP = new HashMap<Integer, Weapons>();
+    public final Map<Integer, Armour> ARMOUR_MAP = new HashMap<Integer, Armour>();
+    public final Map<Integer, Equipment> EQUIPMENT_MAP = new HashMap<Integer, Equipment>();
+    public final Map<Integer, Spells> SPELLS_MAP = new HashMap<Integer, Spells>();
+    public final Map<Integer, Monsters> MONSTERS_MAP = new HashMap<Integer, Monsters>();
+    public final Map<Integer, RaceTemplates> RACE_TEMPLATES_MAP = new HashMap<Integer, RaceTemplates>();
+    public final Map<Integer, Hero> HEROES_MAP = new HashMap<Integer, Hero>();
+    public final Map<Integer, Translations> TRANSLATIONS_MAP = new HashMap<Integer, Translations>();
 
 
     @Getter
@@ -167,8 +169,8 @@ public abstract class DatabaseHolder extends RoomDatabase {
     public final List<RulesCombat> RULES_COMBAT_LIST = new ArrayList<RulesCombat>();
     public final List<RulesSkills> RULES_SKILLS_LIST = new ArrayList<RulesSkills>();
 
-    public final Map<String, RulesCombat> RULES_COMBAT_MAP = new HashMap<String, RulesCombat>();
-    public final Map<String, RulesSkills> RULES_SKILLS_MAP = new HashMap<String, RulesSkills>();
+    public final Map<Integer, RulesCombat> RULES_COMBAT_MAP = new HashMap<Integer, RulesCombat>();
+    public final Map<Integer, RulesSkills> RULES_SKILLS_MAP = new HashMap<Integer, RulesSkills>();
 
 }
 

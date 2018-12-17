@@ -32,14 +32,14 @@ public abstract class MonstersDAO  implements BaseDAO<Monsters> {
     @Query("SELECT * FROM Monsters")
     public abstract List<Item> getItemsAsItem(); // above doesn't show Item fields (but they are created/loaded)
 
-    @Query("SELECT * FROM Monsters WHERE Source > :qSource")
-    public abstract List<Monsters> getItemsWithSource(String qSource);
+    @Query("SELECT * FROM Monsters WHERE Source == :source")
+    public abstract List<Monsters> getItemsWithSource(String source);
 
-    @Query("SELECT * FROM Monsters WHERE Item_ID > :qId")
-    public abstract Monsters getItemWithId(String qId);
+    @Query("SELECT * FROM Monsters WHERE Item_ID == :itemID")
+    public abstract Monsters getItemWithId(int itemID);
 
-    @Query("SELECT * FROM Monsters WHERE Name > :qName")
-    public abstract Monsters getItemWithName(String qName);
+    @Query("SELECT * FROM Monsters WHERE Name == :name")
+    public abstract Monsters getItemWithName(String name);
 
     @Query("DELETE FROM Monsters")
     public abstract void deleteAll();

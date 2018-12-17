@@ -32,14 +32,14 @@ public abstract class RaceTemplatesDAO  implements BaseDAO<RaceTemplates> {
     @Query("SELECT * FROM RaceTemplates")
     public abstract List<Item> getItemsAsItem(); // above doesn't show Item fields (but they are created/loaded)
 
-    @Query("SELECT * FROM RaceTemplates WHERE Source > :qSource")
-    public abstract List<RaceTemplates> getItemsWithSource(String qSource);
+    @Query("SELECT * FROM RaceTemplates WHERE Source == :source")
+    public abstract List<RaceTemplates> getItemsWithSource(String source);
 
-    @Query("SELECT * FROM RaceTemplates WHERE Item_ID > :qId")
-    public abstract RaceTemplates getItemWithId(String qId);
+    @Query("SELECT * FROM RaceTemplates WHERE Item_ID == :itemID")
+    public abstract RaceTemplates getItemWithId(int itemID);
 
-    @Query("SELECT * FROM RaceTemplates WHERE Name > :qName")
-    public abstract RaceTemplates getItemWithName(String qName);
+    @Query("SELECT * FROM RaceTemplates WHERE Name == :name")
+    public abstract RaceTemplates getItemWithName(String name);
 
     @Query("DELETE FROM RaceTemplates")
     public abstract void deleteAll();

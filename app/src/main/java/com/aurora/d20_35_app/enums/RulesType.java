@@ -1,5 +1,6 @@
 package com.aurora.d20_35_app.enums;
 
+import com.aurora.d20_35_app.helper.BaseDAO;
 import com.aurora.d20_35_app.helper.Rules;
 import com.aurora.d20_35_app.models.RulesCombat;
 import com.aurora.d20_35_app.models.RulesSkills;
@@ -27,6 +28,11 @@ public enum RulesType {
         public Rules getNewObject() {
             return new RulesCombat();
         }
+
+        @Override
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
+            return databaseHolder.rulesCombatDAO();
+        }
     },
     /**
      * RulesSkills
@@ -45,6 +51,11 @@ public enum RulesType {
         @Override
         public Rules getNewObject() {
             return new RulesSkills();
+        }
+
+        @Override
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
+            return databaseHolder.rulesSkillsDAO();
         }
     };
 
@@ -74,4 +85,9 @@ public enum RulesType {
 
     public abstract Rules getNewObject();
 
+    public abstract BaseDAO<Rules> getDAO(DatabaseHolder databaseHolder);
+
+    public List<Rules> getAllFromDatabase(DatabaseHolder databaseHolder) {
+        return getDAO(databaseHolder).getItems();
+    }
 }

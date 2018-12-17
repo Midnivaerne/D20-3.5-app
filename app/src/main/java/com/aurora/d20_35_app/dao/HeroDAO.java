@@ -32,14 +32,14 @@ public abstract class HeroDAO  implements BaseDAO<Hero> {
     @Query("SELECT * FROM Hero")
     public abstract List<Item> getItemsAsItem(); // above doesn't show Item fields (but they are created/loaded)
 
-    @Query("SELECT * FROM Hero WHERE Source > :qSource")
-    public abstract List<Hero> getItemsWithSource(String qSource);
+    @Query("SELECT * FROM Hero WHERE Source == :source")
+    public abstract List<Hero> getItemsWithSource(String source);
 
-    @Query("SELECT * FROM Hero WHERE Item_ID > :qId")
-    public abstract Hero getItemWithId(String qId);
+    @Query("SELECT * FROM Hero WHERE Item_ID == :itemID")
+    public abstract Hero getItemWithId(int itemID);
 
-    @Query("SELECT * FROM Hero WHERE Name > :qName")
-    public abstract Hero getItemWithName(String qName);
+    @Query("SELECT * FROM Hero WHERE Name == :name")
+    public abstract Hero getItemWithName(String name);
 
     @Query("DELETE FROM Hero")
     public abstract void deleteAll();
