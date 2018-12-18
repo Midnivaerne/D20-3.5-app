@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aurora.d20_35_app">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -81,7 +82,7 @@
                 android:value="com.aurora.d20_35_app.views.D2035appActivity" />
         </activity>
         <activity
-            android:name=".views.DatabasesListActivity"
+            android:name=".views.DatabasesActivity"
             android:label="@string/title_rulesset_list"
             android:parentActivityName=".views.D2035appActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -90,13 +91,13 @@
                 android:value="com.aurora.d20_35_app.views.D2035appActivity" />
         </activity>
         <activity
-            android:name=".views.DatabasesListDetailActivity"
+            android:name=".views.DatabasesListItemDetailActivity"
             android:label="@string/title_rulesset_detail"
-            android:parentActivityName=".views.DatabasesListActivity"
+            android:parentActivityName=".views.DatabasesActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.views.DatabasesListActivity" />
+                android:value="com.aurora.d20_35_app.views.DatabasesActivity" />
         </activity>
         <activity
             android:name=".views.PlayerCharacterActivity"

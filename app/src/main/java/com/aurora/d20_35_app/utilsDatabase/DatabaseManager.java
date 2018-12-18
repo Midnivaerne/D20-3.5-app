@@ -8,6 +8,7 @@ import android.util.Xml;
 
 import com.aurora.d20_35_app.enums.DatabaseUsage;
 import com.aurora.d20_35_app.enums.ItemType;
+import com.aurora.d20_35_app.models.Databases;
 import com.aurora.d20_35_app.models.Races;
 
 import org.xml.sax.SAXException;
@@ -146,8 +147,12 @@ public class DatabaseManager {
         for (ItemType type : ItemType.values()) {
             tmp.addAll(type.getDAO(databaseHolder).getSources());//this is unsafe/unchecked
         }
-        databaseHolder.getDatabasesList().clear();
-        databaseHolder.getDatabasesList().addAll(new ArrayList<>(new HashSet<>(tmp)));
+        List<Databases> tmp2 = new ArrayList<>();
+        for (String source : tmp) {
+            tmp2.add(new Databases(source, source));
+        }
+        databaseHolder.DATABASES_LIST.clear();
+        databaseHolder.DATABASES_LIST.addAll(new ArrayList<Databases>(new HashSet<>(tmp2)));
     }
 
     private static void loadDataFromFileToHolder(DatabaseHolder databaseHolder, String filename) {

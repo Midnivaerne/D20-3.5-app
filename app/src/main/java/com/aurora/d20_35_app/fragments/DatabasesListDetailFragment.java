@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aurora.d20_35_app.R;
-import com.aurora.d20_35_app.views.DatabasesListActivity;
-import com.aurora.d20_35_app.views.DatabasesListDetailActivity;
+import com.aurora.d20_35_app.models.Databases;
+import com.aurora.d20_35_app.views.DatabasesActivity;
+import com.aurora.d20_35_app.views.DatabasesListItemDetailActivity;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import androidx.fragment.app.Fragment;
@@ -18,8 +19,8 @@ import static com.aurora.d20_35_app.utilsDatabase.DatabaseHolder.getDatabaseHold
 
 /**
  * A fragment representing a single Rules set detail screen.
- * This fragment is either contained in a {@link DatabasesListActivity}
- * in two-pane mode (on tablets) or a {@link DatabasesListDetailActivity}
+ * This fragment is either contained in a {@link DatabasesActivity}
+ * in two-pane mode (on tablets) or a {@link DatabasesListItemDetailActivity}
  * on handsets.
  */
 public class DatabasesListDetailFragment extends Fragment {
@@ -32,7 +33,7 @@ public class DatabasesListDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private String item;
+    private Databases item;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -46,12 +47,12 @@ public class DatabasesListDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            item = getDatabaseHolder(super.getContext()).getDatabasesList().get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID)));
+            item = getDatabaseHolder(super.getContext()).DATABASES_LIST.get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID)));
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(item);
+                appBarLayout.setTitle(item.getName());
             }
         }
     }
@@ -62,7 +63,7 @@ public class DatabasesListDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.activity_databases_list_inner_detail_fragment, container, false);
 
         if (item != null) {
-            ((TextView) rootView.findViewById(R.id.rulesset_detail)).setText(item);
+            ((TextView) rootView.findViewById(R.id.rulesset_detail)).setText(item.getName());
         }
 
         return rootView;

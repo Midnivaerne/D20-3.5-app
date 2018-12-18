@@ -18,14 +18,14 @@ import androidx.appcompat.widget.Toolbar;
  * An activity representing a single Rules set detail screen. This
  * activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
- * in a {@link DatabasesListActivity}.
+ * in a {@link DatabasesActivity}.
  */
-public class DatabasesListDetailActivity extends AppCompatActivity {
+public class DatabasesListItemDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_databases_list_inner_detail);
+        setContentView(R.layout.activity_databases_list_item_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
@@ -77,7 +77,7 @@ public class DatabasesListDetailActivity extends AppCompatActivity {
             //
             // http://developer.android.com/design/patterns/navigation.html#up-vs-back
             //
-            navigateUpTo(new Intent(this, DatabasesListActivity.class));
+            navigateUpTo(new Intent(this, DatabasesActivity.class));
             return true;
         }
         return super.onOptionsItemSelected(item);

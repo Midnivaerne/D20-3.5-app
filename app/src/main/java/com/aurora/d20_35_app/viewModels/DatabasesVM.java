@@ -1,5 +1,6 @@
 package com.aurora.d20_35_app.viewModels;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -12,11 +13,9 @@ import android.widget.TextView;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.fragments.DatabasesListDetailFragment;
 import com.aurora.d20_35_app.helper.ActivityViewModel;
-import com.aurora.d20_35_app.helper.Item;
-import com.aurora.d20_35_app.utilsDatabase.DatabaseHolder;
-import com.aurora.d20_35_app.views.DatabasesListActivity;
-import com.aurora.d20_35_app.views.DatabasesListDetailActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.aurora.d20_35_app.models.Databases;
+import com.aurora.d20_35_app.views.DatabasesActivity;
+import com.aurora.d20_35_app.views.DatabasesListItemDetailActivity;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
@@ -25,7 +24,9 @@ import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
 
-public class DatabasesListVM extends ActivityViewModel<DatabasesListActivity> {
+import static com.aurora.d20_35_app.utilsDatabase.DatabaseHolder.getDatabaseHolder;
+
+public class DatabasesVM extends ActivityViewModel<DatabasesActivity> {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -34,18 +35,10 @@ public class DatabasesListVM extends ActivityViewModel<DatabasesListActivity> {
     private boolean mTwoPane;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public DatabasesListVM(DatabasesListActivity activity) {
+    public DatabasesVM(DatabasesActivity activity) {
         super(activity);
         showBackButton();
 
-        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         if (getActivity().findViewById(R.id.activity_databases_detail_container) != null) {
             // The detail container view will be present only in the
@@ -60,23 +53,28 @@ public class DatabasesListVM extends ActivityViewModel<DatabasesListActivity> {
         setupRecyclerView((RecyclerView) recyclerView);
     }
 
+    public void addDatabaseOnClick(View view, Activity activity) {
+        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                .setAction("Action", null).show();
+    }
+
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this.getActivity(), DatabaseHolder.getDatabaseHolder(super.getActivity()).getDatabasesList(), mTwoPane));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(this.getActivity(), getDatabaseHolder(super.getActivity()).DATABASES_LIST, mTwoPane));
     }
 
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final DatabasesListActivity mParentActivity;
-        private final List<String> mValues;
+        private final DatabasesActivity mParentActivity;
+        private final List<Databases> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Item item = (Item) view.getTag();
+                Databases databases = (Databases) view.getTag();
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
-                    arguments.putString(DatabasesListDetailFragment.ARG_ITEM_ID, String.valueOf(item.getItemID()));
+                    arguments.putString(DatabasesListDetailFragment.ARG_ITEM_ID, String.valueOf(databases.getItemID()));
                     DatabasesListDetailFragment fragment = new DatabasesListDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
@@ -84,16 +82,16 @@ public class DatabasesListVM extends ActivityViewModel<DatabasesListActivity> {
                             .commit();
                 } else {
                     Context context = view.getContext();
-                    Intent intent = new Intent(context, DatabasesListDetailActivity.class);
-                    intent.putExtra(DatabasesListDetailFragment.ARG_ITEM_ID, String.valueOf(item.getItemID()));
+                    Intent intent = new Intent(context, DatabasesListItemDetailActivity.class);
+                    intent.putExtra(DatabasesListDetailFragment.ARG_ITEM_ID, String.valueOf(databases.getItemID()));
 
                     context.startActivity(intent);
                 }
             }
         };
 
-        SimpleItemRecyclerViewAdapter(DatabasesListActivity parent,
-                                      List<String> items,
+        SimpleItemRecyclerViewAdapter(DatabasesActivity parent,
+                                      List<Databases> items,
                                       boolean twoPane) {
             mValues = items;
             mParentActivity = parent;
@@ -103,14 +101,14 @@ public class DatabasesListVM extends ActivityViewModel<DatabasesListActivity> {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.activity_databases_list_content, parent, false);
+                    .inflate(R.layout.activity_databases_list_item, parent, false);
             return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position));
-            holder.mContentView.setText(mValues.get(position));
+            holder.mIdView.setText(mValues.get(position).getName());
+            holder.mContentView.setText(mValues.get(position).getContent());
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);

@@ -6,6 +6,7 @@ import android.content.Context;
 
 import com.aurora.d20_35_app.dao.ArmourDAO;
 import com.aurora.d20_35_app.dao.ClassesDAO;
+import com.aurora.d20_35_app.dao.DatabasesDAO;
 import com.aurora.d20_35_app.dao.EquipmentDAO;
 import com.aurora.d20_35_app.dao.FeatsDAO;
 import com.aurora.d20_35_app.dao.HeroDAO;
@@ -21,6 +22,7 @@ import com.aurora.d20_35_app.dao.WeaponsDAO;
 import com.aurora.d20_35_app.helper.Rules;
 import com.aurora.d20_35_app.models.Armour;
 import com.aurora.d20_35_app.models.Classes;
+import com.aurora.d20_35_app.models.Databases;
 import com.aurora.d20_35_app.models.Equipment;
 import com.aurora.d20_35_app.models.Feats;
 import com.aurora.d20_35_app.models.Hero;
@@ -54,7 +56,7 @@ import lombok.Setter;
 @Singleton
 @Database(entities = {
         Armour.class, Classes.class, Equipment.class, Feats.class, Hero.class, Monsters.class, Races.class, RaceTemplates.class, Skills.class, Spells.class, Weapons.class,
-        Translations.class,
+        Translations.class, Databases.class,
         RulesCombat.class, RulesSkills.class
 }, version = 1, exportSchema = false)
 @TypeConverters(DataTypeConverters.class)
@@ -87,6 +89,8 @@ public abstract class DatabaseHolder extends RoomDatabase {
     public abstract WeaponsDAO weaponsDAO();
 
     public abstract TranslationsDAO translationsDAO();
+
+    public abstract DatabasesDAO databasesDAO();
 
     public abstract RulesSkillsDAO rulesSkillsDAO();
 
@@ -124,10 +128,6 @@ public abstract class DatabaseHolder extends RoomDatabase {
         INSTANCE = null;
     }
 
-    @Getter
-    @Setter
-    private List<String> databasesList = new ArrayList<String>();
-
     /**
      * An array of races available for player.
      */
@@ -142,7 +142,9 @@ public abstract class DatabaseHolder extends RoomDatabase {
     public final List<Monsters> MONSTERS_LIST = new ArrayList<Monsters>();
     public final List<RaceTemplates> RACE_TEMPLATES_LIST = new ArrayList<RaceTemplates>();
     public final List<Hero> HEROES_LIST = new ArrayList<Hero>();
+
     public final List<Translations> TRANSLATIONS_LIST = new ArrayList<Translations>();
+    public final List<Databases> DATABASES_LIST = new ArrayList<Databases>();
 
 
     /**
@@ -159,7 +161,9 @@ public abstract class DatabaseHolder extends RoomDatabase {
     public final Map<Integer, Monsters> MONSTERS_MAP = new HashMap<Integer, Monsters>();
     public final Map<Integer, RaceTemplates> RACE_TEMPLATES_MAP = new HashMap<Integer, RaceTemplates>();
     public final Map<Integer, Hero> HEROES_MAP = new HashMap<Integer, Hero>();
+
     public final Map<Integer, Translations> TRANSLATIONS_MAP = new HashMap<Integer, Translations>();
+    public final Map<Integer, Databases> DATABASES_MAP = new HashMap<Integer, Databases>();
 
 
     @Getter

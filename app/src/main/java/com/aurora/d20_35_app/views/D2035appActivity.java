@@ -76,7 +76,7 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
             case R.id.action_content:
                 return null; //todo ContentActivity.class
             case R.id.action_database:
-                return DatabasesListActivity.class;
+                return DatabasesActivity.class;
             case R.id.action_settings:
                 return SettingsActivity.class;
             case R.id.action_help:
