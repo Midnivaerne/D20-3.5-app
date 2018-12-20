@@ -25,7 +25,6 @@ public class XmlHandler extends DefaultHandler {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) {
-
         if (ItemType.contains(qName)) {
             itemList = ItemType.valueOf(qName).getDatabaseList(databaseHolder);
             itemMap = ItemType.valueOf(qName).getDatabaseMap(databaseHolder);

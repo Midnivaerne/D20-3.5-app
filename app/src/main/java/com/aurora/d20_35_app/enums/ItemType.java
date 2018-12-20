@@ -12,15 +12,52 @@ import com.aurora.d20_35_app.models.RaceTemplates;
 import com.aurora.d20_35_app.models.Races;
 import com.aurora.d20_35_app.models.Skills;
 import com.aurora.d20_35_app.models.Spells;
-import com.aurora.d20_35_app.models.Weapons;
 import com.aurora.d20_35_app.models.Translations;
 import com.aurora.d20_35_app.models.Databases;
+import com.aurora.d20_35_app.models.Weapons;
 import com.aurora.d20_35_app.utilsDatabase.DatabaseHolder;
 
 import java.util.List;
 import java.util.Map;
 
 public enum ItemType {
+    /**
+     * Databases a.k.a Sources
+     */
+    Databases("Databases") {
+        @Override
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
+            return databaseHolder.databasesDAO();
+        }
+
+        @Override
+        public List<Databases> getDatabaseList(DatabaseHolder databaseHolder) {
+            return databaseHolder.DATABASES_LIST;
+        }
+
+        @Override
+        public Map<Integer, Databases> getDatabaseMap(DatabaseHolder databaseHolder) {
+            return databaseHolder.DATABASES_MAP;
+        }
+
+        @Override
+        public Item getNewObject() {
+            return new Databases();
+        }
+
+        @Override
+        public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+            databaseHolder.databasesDAO().insertAll(databaseHolder.DATABASES_LIST);
+            for (Databases databases : databaseHolder.DATABASES_LIST) {
+                databaseHolder.DATABASES_MAP.put(databases.getItemID(), databases);
+            }
+        }
+
+        @Override
+        public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+            databaseHolder.DATABASES_LIST.addAll(databaseHolder.databasesDAO().getItems());
+        }
+    },
     /**
      * Races
      */
@@ -465,43 +502,6 @@ public enum ItemType {
         @Override
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
             databaseHolder.TRANSLATIONS_LIST.addAll(databaseHolder.translationsDAO().getItems());
-        }
-    },
-    /**
-     * Databases a.k.a Sources
-     */
-    Databases("Databases") {
-        @Override
-        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
-            return databaseHolder.databasesDAO();
-        }
-
-        @Override
-        public List<Databases> getDatabaseList(DatabaseHolder databaseHolder) {
-            return databaseHolder.DATABASES_LIST;
-        }
-
-        @Override
-        public Map<Integer, Databases> getDatabaseMap(DatabaseHolder databaseHolder) {
-            return databaseHolder.DATABASES_MAP;
-        }
-
-        @Override
-        public Item getNewObject() {
-            return new Databases();
-        }
-
-        @Override
-        public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
-            databaseHolder.databasesDAO().insertAll(databaseHolder.DATABASES_LIST);
-            for (Databases databases : databaseHolder.DATABASES_LIST) {
-                databaseHolder.DATABASES_MAP.put(databases.getItemID(), databases);
-            }
-        }
-
-        @Override
-        public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
-            databaseHolder.DATABASES_LIST.addAll(databaseHolder.databasesDAO().getItems());
         }
     };
 

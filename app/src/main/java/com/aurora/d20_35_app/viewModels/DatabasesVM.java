@@ -48,7 +48,7 @@ public class DatabasesVM extends ActivityViewModel<DatabasesActivity> {
             mTwoPane = true;
         }
 
-        View recyclerView = getActivity().findViewById(R.id.activity_databases_list_inner);
+        View recyclerView = getActivity().findViewById(R.id.activity_databases_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
     }

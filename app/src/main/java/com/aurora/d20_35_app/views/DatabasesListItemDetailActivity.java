@@ -62,7 +62,7 @@ public class DatabasesListItemDetailActivity extends AppCompatActivity {
             DatabasesListDetailFragment fragment = new DatabasesListDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.activity_databases_detail_container, fragment)
+                    .add(R.id.activity_databases_item_detail_container, fragment)
                     .commit();
         }
     }

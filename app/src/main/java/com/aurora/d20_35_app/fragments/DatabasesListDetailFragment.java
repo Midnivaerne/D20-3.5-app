@@ -47,7 +47,7 @@ public class DatabasesListDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            item = getDatabaseHolder(super.getContext()).DATABASES_LIST.get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID)));
+            item = getDatabaseHolder(super.getContext()).DATABASES_LIST.get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID))-1);
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);

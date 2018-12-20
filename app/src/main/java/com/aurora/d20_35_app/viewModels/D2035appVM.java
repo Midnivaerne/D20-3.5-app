@@ -1,56 +1,52 @@
 package com.aurora.d20_35_app.viewModels;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
+import android.os.AsyncTask;
 
 import com.aurora.d20_35_app.helper.ActivityViewModel;
+import com.aurora.d20_35_app.interfaces.CustomCallback;
+import com.aurora.d20_35_app.utilsDatabase.DatabaseManager;
 import com.aurora.d20_35_app.views.D2035appActivity;
 
-import androidx.core.content.ContextCompat;
-import androidx.databinding.ObservableField;
-
+import java.util.concurrent.ExecutionException;
 
 public class D2035appVM extends ActivityViewModel<D2035appActivity> {
 
-    public final ObservableField<String> status = new ObservableField<>();
-
-    public D2035appVM(D2035appActivity activity, String status) {
+    public D2035appVM(D2035appActivity activity) {
         super(activity);
-        this.status.set(status);
     }
 
-    public void onResume() {
-    }
-
-    @Override
-    public void onOptionsItemSelected(MenuItem item) {
-        Log.i("Menu ", " Clicked menu item: " + item);
-        if (this.onOptionsItemSelectedStart()) {
-            this.getActivity().startNewActivityFromMain(item.getItemId());
-            super.onOptionsItemSelected(item); //todo check this
-        } else {
-            Toast.makeText(getActivity(), "Write external storage permission needed.", Toast.LENGTH_LONG).show();
+    public void initializeDB(CustomCallback callback) {
+        InitializeDbAsync initializeDbAsync = new InitializeDbAsync(this, callback);
+        try {
+            initializeDbAsync.execute().get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
-    private boolean onOptionsItemSelectedStart() {
-        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }
-        return false;
-    }
+    private static class InitializeDbAsync extends AsyncTask<Void, Void, Void> {
+        private final D2035appVM d2035appVM;
+        private CustomCallback customCallback;
 
-    public void buttonOnClick(View view) {
-        Log.i("Button ", " Clicked " + view.toString());
-        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            this.getActivity().startNewActivityFromMain(view.getId());
-        } else {
-            Toast.makeText(getActivity(), "Write external storage permission needed.", Toast.LENGTH_LONG).show();
+        private InitializeDbAsync(D2035appVM d2035appVM, CustomCallback customCallback) {
+            this.d2035appVM = d2035appVM;
+            this.customCallback = customCallback;
+        }
+
+        @Override
+        protected Void doInBackground(final Void... params) {
+            DatabaseManager.initialDatabasesResolver(d2035appVM.getActivity());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void par) {
+            customCallback.onDatabaseInitialised();
         }
     }
-
 }

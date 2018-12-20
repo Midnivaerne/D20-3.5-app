@@ -18,6 +18,7 @@ public class ActivityViewModel<A extends AppCompatActivity> extends BaseObservab
 
     @Getter
     protected A activity;
+
     private ProgressDialog mProgressDialog;
 
     public ActivityViewModel(A activity) {
@@ -98,9 +99,10 @@ public class ActivityViewModel<A extends AppCompatActivity> extends BaseObservab
         }
     }
 
-    public void showLoading() {
+    public ProgressDialog showLoading() {
         hideLoading();
         mProgressDialog = CommonUtils.showLoadingDialog(this.getActivity());
+        return mProgressDialog;
     }
 
     public void showBackButton() {

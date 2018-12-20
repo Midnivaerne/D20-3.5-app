@@ -43,4 +43,10 @@ public abstract class DatabasesDAO implements BaseDAO<Databases> {
 
     @Query("DELETE FROM Databases")
     public abstract void deleteAll();
+
+
+    @Query("SELECT Translations.Translation FROM Databases INNER JOIN Translations ON Databases.Name = Translations.Name WHERE Translations.Language = :language")
+    public abstract List<String> getNamesTranslated(String language);
+    //todo this^ or translations holder and getting from map
+
 }

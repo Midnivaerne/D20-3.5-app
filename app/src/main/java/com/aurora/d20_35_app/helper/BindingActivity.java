@@ -1,5 +1,6 @@
 package com.aurora.d20_35_app.helper;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -163,10 +164,11 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
         }
     }
 
-    public void showLoading() {
+    public ProgressDialog showLoading() {
         if (mActivityViewModel != null) {
-            mActivityViewModel.showLoading();
+            return mActivityViewModel.showLoading();
         }
+        return null;
     }
 
     public abstract AVM onCreate();

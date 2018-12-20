@@ -99,4 +99,6 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="title_activity_rulesexplanation_">Rules explanation</string>
     <string name="title_activity_content_">Content</string>
+
+    <string name="title_activity_d2035app">D2035appActivity</string>
 </resources>

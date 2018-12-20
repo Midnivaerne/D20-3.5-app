@@ -1,6 +1,7 @@
 package com.aurora.d20_35_app.utilsDatabase;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -8,7 +9,7 @@ import android.util.Xml;
 
 import com.aurora.d20_35_app.enums.DatabaseUsage;
 import com.aurora.d20_35_app.enums.ItemType;
-import com.aurora.d20_35_app.models.Databases;
+import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.models.Races;
 
 import org.xml.sax.SAXException;
@@ -19,9 +20,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -36,19 +34,71 @@ public class DatabaseManager {
     private static String externalPathSeparator = "/Android/data/com.aurora.d20_3.5_app/";
     public static String path = getPublicExternalStorageBaseDir() + externalPathSeparator + "Data/";
 
-    public static void initialDatabasesResolver(Activity activity) {
+    private static ProgressDialog progressDialog;
+    private static final int MAX_PROGRESS = 100;
+    private static final int NUMBER_OF_PROGRESS_INCREASES = 10;
+
+    public static void initialDatabasesResolver(BindingActivity activity) {
+        startProgressBar(activity);
         initialPathSetup();
+        increaseProgressBar();
         SharedPreferences sharedpreferences = activity.getApplicationContext().getSharedPreferences("AppPref", 0);
         if (!sharedpreferences.getBoolean("firstTimeOpened", false)) {
-            Log.i("Database", "First opening");
-            SharedPreferences.Editor editor = sharedpreferences.edit();
-            editor.putBoolean("firstTimeOpened", true);
-            editor.apply();
-            copyFile("test.xml", activity); //todo test - refactor or delete
-            populateAsync(DatabaseHolder.getDatabaseHolder(activity.getApplicationContext()), DatabaseUsage.Startup);
+            onFirstTime(sharedpreferences, activity);
         } else {
-            Log.i("Database", "Another opening");
-            populateAsync(DatabaseHolder.getDatabaseHolder(activity.getApplicationContext()), DatabaseUsage.ReloadFromDatabase); // todo refactor/delete
+            onAnotherTime(sharedpreferences, activity);
+        }
+    }
+
+    private static void onFirstTime(SharedPreferences sharedpreferences, BindingActivity activity) {
+        Log.i("Database", "First opening");
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putBoolean("firstTimeOpened", true);
+        editor.putString("language", "en");
+        editor.apply();
+        copyFile("test.xml", activity); //todo test - refactor or delete
+        increaseProgressBar();
+        chooseDatabaseLoadingType(DatabaseHolder.getDatabaseHolder(activity.getApplicationContext()), DatabaseUsage.Startup, "en");
+    }
+
+    private static void onAnotherTime(SharedPreferences sharedpreferences, BindingActivity activity) {
+        Log.i("Database", "Another opening");
+        increaseProgressBar();
+        chooseDatabaseLoadingType(DatabaseHolder.getDatabaseHolder(activity.getApplicationContext()), DatabaseUsage.ReloadFromDatabase, sharedpreferences.getString("language", "en")); // todo refactor/delete
+    }
+
+    private static void startProgressBar(@NonNull BindingActivity activity) {
+        if (progressDialog != null) {
+            progressDialog = activity.showLoading();
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progressDialog.setMax(MAX_PROGRESS);
+            progressDialog.setTitle("Loading Database");
+            progressDialog.setMessage("Loading...");
+        }
+    }
+
+    private static void increaseProgressBar() {
+        if (progressDialog != null) {
+            int increaseBy;
+            if (progressDialog.getProgress() == MAX_PROGRESS) {
+                return;
+            } else if (progressDialog.getProgress() < MAX_PROGRESS && (progressDialog.getProgress() > (MAX_PROGRESS - (MAX_PROGRESS / NUMBER_OF_PROGRESS_INCREASES)))) {
+                increaseBy = MAX_PROGRESS - progressDialog.getProgress();
+            } else {
+                increaseBy = MAX_PROGRESS / NUMBER_OF_PROGRESS_INCREASES;
+            }
+            progressDialog.incrementProgressBy(increaseBy);
+        }
+    }
+
+    private static void closeProgressBar() {
+        if (progressDialog != null) {
+            if (progressDialog.getProgress() != MAX_PROGRESS) {
+                progressDialog.incrementProgressBy(MAX_PROGRESS - progressDialog.getProgress());
+            }
+            progressDialog.setMessage("Finished");
+            progressDialog.cancel();
+            progressDialog = null;
         }
     }
 
@@ -86,30 +136,22 @@ public class DatabaseManager {
         }
     }
 
-    private static void populateAsync(@NonNull final DatabaseHolder databaseHolder, DatabaseUsage usage) {
-        PopulateDbAsync task = new PopulateDbAsync(databaseHolder, usage);
-        task.execute();
-    }
-
     public static void clearWholeDatabaseAndAllHolders(DatabaseHolder databaseHolder) {
         for (ItemType type : ItemType.values()) {
             type.deleteAll(databaseHolder);
         }
-
     }
 
     public static void clearWholeDatabase(DatabaseHolder databaseHolder) {
         for (ItemType type : ItemType.values()) {
             type.deleteAllFromDatabase(databaseHolder);
         }
-
     }
 
     public static void clearAllHolders(DatabaseHolder databaseHolder) {
         for (ItemType type : ItemType.values()) {
             type.deleteAllFromHolder(databaseHolder);
         }
-
     }
 
     public static void closeDatabase(DatabaseHolder databaseHolder) {
@@ -119,40 +161,61 @@ public class DatabaseManager {
 
     private static void loadRulesFromFileToHolderAndDatabase(DatabaseHolder databaseHolder, String filename, boolean reload, ItemType itemType) {
         if (reload) {
-            itemType.deleteAll(databaseHolder);
+            if (itemType == null) {
+                for (ItemType it : ItemType.values()) {
+                    it.deleteAll(databaseHolder);
+                }
+            } else {
+                itemType.deleteAll(databaseHolder);
+            }
         }
+        increaseProgressBar();
         loadDataFromFileToHolder(databaseHolder, filename);
         loadDataFromHolderToDatabase(databaseHolder, reload, itemType);
     }
 
-    public static void loadDataFromDatabaseToHolder(DatabaseHolder databaseHolder, boolean reload, ItemType itemType) {
-        if (reload) {
-            itemType.deleteAllFromHolder(databaseHolder);
-        }
+    private static void loadDataFromDatabaseToHolder(DatabaseHolder databaseHolder, boolean reload, ItemType itemType) {
         //todo check first if rules present?
-        itemType.fromDatabaseToHolder(databaseHolder);
+        if (reload) {
+            if (itemType != null) {
+                itemType.deleteAllFromHolder(databaseHolder);
+            } else {
+                for (ItemType it : ItemType.values()) {
+                    it.deleteAllFromHolder(databaseHolder);
+                }
+            }
+        }
+        increaseProgressBar();
+        if (itemType != null) {
+            itemType.fromDatabaseToHolder(databaseHolder);
+        } else {
+            for (ItemType it : ItemType.values()) {
+                it.fromDatabaseToHolder(databaseHolder);
+            }
+        }
+        increaseProgressBar();
     }
 
     private static void loadDataFromHolderToDatabase(DatabaseHolder databaseHolder, boolean reload, ItemType itemType) {
-        if (reload) {
-            itemType.deleteAllFromDatabase(databaseHolder);
-        }
         //todo check first if rules present?
-        itemType.fromHolderToDatabase(databaseHolder);
-    }
-
-    @SuppressWarnings("unchecked")
-    private static void generateDataLists(DatabaseHolder databaseHolder) {
-        List<String> tmp = new ArrayList<>();
-        for (ItemType type : ItemType.values()) {
-            tmp.addAll(type.getDAO(databaseHolder).getSources());//this is unsafe/unchecked
+        if (reload) {
+            if (itemType != null) {
+                itemType.deleteAllFromDatabase(databaseHolder);
+            } else {
+                for (ItemType it : ItemType.values()) {
+                    it.deleteAllFromDatabase(databaseHolder);
+                }
+            }
         }
-        List<Databases> tmp2 = new ArrayList<>();
-        for (String source : tmp) {
-            tmp2.add(new Databases(source, source));
+        increaseProgressBar();
+        if (itemType != null) {
+            itemType.fromHolderToDatabase(databaseHolder);
+        } else {
+            for (ItemType it : ItemType.values()) {
+                it.fromHolderToDatabase(databaseHolder);
+            }
         }
-        databaseHolder.DATABASES_LIST.clear();
-        databaseHolder.DATABASES_LIST.addAll(new ArrayList<Databases>(new HashSet<>(tmp2)));
+        increaseProgressBar();
     }
 
     private static void loadDataFromFileToHolder(DatabaseHolder databaseHolder, String filename) {
@@ -165,7 +228,7 @@ public class DatabaseManager {
         } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
-
+        increaseProgressBar();
     }
 
     public static void writeDataToFile(DatabaseHolder databaseHolder) {
@@ -177,43 +240,85 @@ public class DatabaseManager {
 
     }
 
+    private static void chooseDatabaseLoadingType(DatabaseHolder databaseHolder, DatabaseUsage usage, String language) {
+        //String filename = "standardRulesData.xml";
+        String filenames[] = {"test.xml", "translations_for_app"}; //todo refactor
+        switch (usage) {
+            case Startup:
+                for (String filename : filenames) {
+                    loadRulesFromFileToHolderAndDatabase(databaseHolder, filename, false, null);
+                }
+                break;
+            case ReloadFromFile:
+                for (String filename : filenames) {
+                    loadRulesFromFileToHolderAndDatabase(databaseHolder, filename, true, null);
+                }
+                break;
+            case ReloadFromDatabase:
+                loadDataFromDatabaseToHolder(databaseHolder, true, null);
+                break;
+            case ReloadFromHolder:
+                loadDataFromHolderToDatabase(databaseHolder, true, null);
+                break;
+            case Another:
+                break;
+        }
+        TranslationsHolder.loadAllTranslationsForLanguage(databaseHolder, language);
+    }
+
+    private static void populateAsync(@NonNull final DatabaseHolder databaseHolder, DatabaseUsage usage, String language) {
+        PopulateDbAsync task = new PopulateDbAsync(databaseHolder, usage, language);
+        task.execute();
+    }
+
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
         private final DatabaseHolder databaseHolder;
         private final DatabaseUsage usage;
+        private final String language;
 
-        PopulateDbAsync(DatabaseHolder databaseHolder, DatabaseUsage usage) {
+        PopulateDbAsync(DatabaseHolder databaseHolder, DatabaseUsage usage, String language) {
             this.databaseHolder = databaseHolder;
             this.usage = usage;
+            this.language = language;
         }
 
         @Override
         protected Void doInBackground(final Void... params) {
-            //String filename = "standardRulesData.xml";
-            String filename = "test.xml"; //todo refactor
-            ItemType itemType = ItemType.Races; //todo refactor
-            switch (usage) {
-                case Startup:
-                    loadRulesFromFileToHolderAndDatabase(databaseHolder, filename, false, itemType);
-                    generateDataLists(databaseHolder);
-                    break;
-                case ReloadFromFile:
-                    loadRulesFromFileToHolderAndDatabase(databaseHolder, filename, true, itemType);
-                    generateDataLists(databaseHolder);
-                    break;
-                case ReloadFromDatabase:
-                    loadDataFromDatabaseToHolder(databaseHolder, true, itemType);
-                    generateDataLists(databaseHolder);
-                    break;
-                case ReloadFromHolder:
-                    loadDataFromHolderToDatabase(databaseHolder, true, itemType);
-                    generateDataLists(databaseHolder);
-                    break;
-                case Another:
-                    generateDataLists(databaseHolder);
-            }
+            chooseDatabaseLoadingType(databaseHolder, usage, language);
             return null;
         }
+
+        @Override
+        protected void onPostExecute(final Void vo) {
+            super.onPostExecute(vo);
+            increaseProgressBar();
+            closeProgressBar();
+        }
+    }
+
+    private static void chooseDatabaseActions(DatabaseHolder databaseHolder) {
+        ItemType itemType = ItemType.Races; //todo delete
+        System.out.println("AllFromDb " + itemType.getAllFromDatabase(databaseHolder)); //todo delete
+        System.out.println("DaoRaceFromName " + (itemType.getDAO(databaseHolder)).getItemWithName("Test_race_name1")); //todo delete
+
+        System.out.println("FirstFromList " + (itemType.getDatabaseList(databaseHolder).get(0))); //todo delete
+        System.out.println("Id\"1\" FromMap " + (itemType.getDatabaseMap(databaseHolder).get("1"))); //todo delete
+
+        System.out.println("DaoNames " + itemType.getDAO(databaseHolder).getNames()); //todo delete
+        System.out.println("FirstNameFromList " + itemType.getDatabaseList(databaseHolder).get(0).getName()); //todo delete
+        System.out.println("Id\"1\" NameFromMap " + itemType.getDatabaseMap(databaseHolder).get("1").getName()); //todo delete
+
+        System.out.println("FirstDescrFromList(ToRaces) " + ((Races) itemType.getDatabaseList(databaseHolder).get(0)).getRaceDescription()); //todo delete
+        System.out.println("Id\"1\" DescrFromMap(ToRaces) " + ((Races) itemType.getDatabaseMap(databaseHolder).get("1")).getRaceDescription()); //todo delete
+
+        // todo delete
+        System.out.println("why?");
+        System.out.println("Races " + (itemType.getDAO(databaseHolder)).getItems());
+        System.out.println("ItemRaces " + (itemType.getDAO(databaseHolder)).getItemsAsItem());
+        //*/
+
+        closeDatabase(databaseHolder); //todo need to close(?)
     }
 
     public static class ConnectDbAsync extends AsyncTask<Void, Void, Void> {
@@ -226,27 +331,7 @@ public class DatabaseManager {
 
         @Override
         protected Void doInBackground(final Void... params) {
-            ItemType itemType = ItemType.Races; //todo delete
-            System.out.println("AllFromDb " + itemType.getAllFromDatabase(databaseHolder)); //todo delete
-            System.out.println("DaoRaceFromName " + (itemType.getDAO(databaseHolder)).getItemWithName("Test_race_name1")); //todo delete
-
-            System.out.println("FirstFromList " + (itemType.getDatabaseList(databaseHolder).get(0))); //todo delete
-            System.out.println("Id\"1\" FromMap " + (itemType.getDatabaseMap(databaseHolder).get("1"))); //todo delete
-
-            System.out.println("DaoNames " + itemType.getDAO(databaseHolder).getNames()); //todo delete
-            System.out.println("FirstNameFromList " + itemType.getDatabaseList(databaseHolder).get(0).getName()); //todo delete
-            System.out.println("Id\"1\" NameFromMap " + itemType.getDatabaseMap(databaseHolder).get("1").getName()); //todo delete
-
-            System.out.println("FirstDescrFromList(ToRaces) " + ((Races) itemType.getDatabaseList(databaseHolder).get(0)).getRaceDescription()); //todo delete
-            System.out.println("Id\"1\" DescrFromMap(ToRaces) " + ((Races) itemType.getDatabaseMap(databaseHolder).get("1")).getRaceDescription()); //todo delete
-
-            // todo delete
-            System.out.println("why?");
-            System.out.println("Races " + (itemType.getDAO(databaseHolder)).getItems());
-            System.out.println("ItemRaces " + (itemType.getDAO(databaseHolder)).getItemsAsItem());
-            //*/
-
-            closeDatabase(databaseHolder); //todo need to close(?)
+            chooseDatabaseActions(databaseHolder);
             return null;
         }
     }

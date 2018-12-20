@@ -3,6 +3,7 @@ package com.aurora.d20_35_app.enums;
 import com.aurora.d20_35_app.helper.Item;
 import com.aurora.d20_35_app.models.Armour;
 import com.aurora.d20_35_app.models.Races;
+import com.aurora.d20_35_app.models.Translations;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +29,9 @@ public enum DBColumnNames {
             item.setSource(data);
         }
     },
+    ////////////////////////////////////////////////////////////////
+    //////////////////////////  DATABASES  ////////////////////////
+
     //////////////////////////////////////////////////////////////
     //////////////////////////  ARMOUR  //////////////////////////
     ColArmourPrice(Armour.armourPriceColumnName, false) {
@@ -154,7 +158,7 @@ public enum DBColumnNames {
         public void setParameter(Item item, String data) {
             ((Races) item).setFavouriteClass(data);
         }
-    }
+    },
     ///////////////////////////////////////////////////////////////////////
     //////////////////////////  RACE TEMPLATES  //////////////////////////
 
@@ -166,7 +170,27 @@ public enum DBColumnNames {
 
     ////////////////////////////////////////////////////////////////
     //////////////////////////  WEAPONS  //////////////////////////
-    ;
+
+    ////////////////////////////////////////////////////////////////
+    //////////////////////////  TRANSLATIONS  //////////////////////
+    ColCategory(Translations.categoryColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((Translations) item).setCategory(data);
+        }
+    },
+    ColLanguage(Translations.languageColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((Translations) item).setLanguage(data);
+        }
+    },
+    ColTranslation(Translations.transColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((Translations) item).setTrans(data);
+        }
+    };
 
     private String columnName;
 

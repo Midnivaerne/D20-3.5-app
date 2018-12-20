@@ -28,6 +28,9 @@ public abstract class TranslationsDAO implements BaseDAO<Translations> {
     @Query("SELECT * FROM Translations")
     public abstract List<Translations> getItems();
 
+    @Query("SELECT * FROM Translations WHERE Language == :language")
+    public abstract List<Translations> getItemsForLanguage(String language);
+
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("SELECT * FROM Translations")
     public abstract List<Item> getItemsAsItem(); // above doesn't show Item fields (but they are created/loaded)
@@ -43,4 +46,19 @@ public abstract class TranslationsDAO implements BaseDAO<Translations> {
 
     @Query("DELETE FROM Translations")
     public abstract void deleteAll();
+
+    @Query("SELECT Translation FROM Translations")
+    public abstract List<String> getAllTranslations();
+
+    @Query("SELECT Translation FROM Translations WHERE Language == :language")
+    public abstract List<String> getAllTranslationsForLanguage(String language);
+
+    @Query("SELECT * FROM Translations WHERE Source == :source AND Language == :language")
+    public abstract List<Translations> getTranslationsWithSourceForLanguage(String source, String language);
+
+    @Query("SELECT * FROM Translations WHERE Item_ID == :itemID AND Language == :language")
+    public abstract Translations getTranslationWithIdForLanguage(int itemID, String language);
+
+    @Query("SELECT * FROM Translations WHERE Name == :name AND Language == :language")
+    public abstract Translations getTranslationWithNameForLanguage(String name, String language);
 }
