@@ -6,6 +6,8 @@
         </Databases_Item>
     </Databases>
     <Translations>
+
+        <!-- English -->
         <Translations_Item>
             <Name>translations_for_app_source_name</Name>
             <Source>translations_for_app_source</Source>
@@ -221,5 +223,64 @@
             <Language>en</Language>
             <Translation>D2035appActivity</Translation>
         </Translations_Item>
+
+        <!-- Polish -->
+
+        <Translations_Item>
+            <Name>translations_for_app_source_name</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>pl</Language>
+            <Translation>Tłumaczenia applikacji</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>action_settings</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>pl</Language>
+            <Translation>Ustawienia</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>DM_button</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>pl</Language>
+            <Translation>Narzędzia mistrza Gry</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>PC_button</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>pl</Language>
+            <Translation>Narzędzia Gracza</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_dm_</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>pl</Language>
+            <Translation>Narzędzia mistrza Gry</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_pc_</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>pl</Language>
+            <Translation>Bohaterowie Gracza</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>action_help</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>pl</Language>
+            <Translation>Pomoc</Translation>
+        </Translations_Item>
+
     </Translations>
 </Database>

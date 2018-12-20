@@ -15,6 +15,10 @@ public class DMActivity extends BindingActivity<ActivityDmBinding, DMVM> {
     }
 
     @Override
+    protected void setTranslatedTexts() {
+    }
+
+    @Override
     public int getBindingVariable() {
         return BR.viewModel;
     }

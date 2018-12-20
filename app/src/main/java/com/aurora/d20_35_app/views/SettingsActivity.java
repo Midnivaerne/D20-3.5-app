@@ -25,6 +25,8 @@ import java.util.List;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.app.NavUtils;
 
+import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On
  * handset devices, settings are presented as a single list. On tablets,
@@ -164,6 +166,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void onBuildHeaders(List<Header> target) {
         loadHeadersFromResource(R.xml.pref_headers, target);
+        target.get(R.id.pref_header_general).title = translate("pref_header_general");
+        target.get(R.id.pref_header_notifications).title = translate("pref_header_notifications");
+        target.get(R.id.pref_header_data_sync).title = translate("pref_header_data_sync");
     }
 
     /**
@@ -187,6 +192,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_general);
+            getPreferenceScreen().getPreference(R.id.pref_title_social_recommendations).setTitle(translate("pref_title_social_recommendations"));
+            getPreferenceScreen().getPreference(R.id.pref_title_social_recommendations).setSummary(translate("pref_description_social_recommendations"));
+            getPreferenceScreen().getPreference(R.id.pref_title_display_name).setTitle(translate("pref_title_display_name"));
+            getPreferenceScreen().getPreference(R.id.pref_title_display_name).setDefaultValue(translate("pref_default_display_name"));
+            getPreferenceScreen().getPreference(R.id.pref_title_add_friends_to_messages).setTitle(translate("pref_title_add_friends_to_messages"));
+            ((ListPreference) getPreferenceScreen().getPreference(R.id.pref_title_add_friends_to_messages)).setEntries(new String[]{translate("pref_example_list_titles")}); //todo set array
+            ((ListPreference) getPreferenceScreen().getPreference(R.id.pref_title_add_friends_to_messages)).setEntryValues(new String[]{translate("pref_example_list_values")}); //todo set array
+
             setHasOptionsMenu(true);
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
@@ -218,6 +231,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_notification);
+
+            getPreferenceScreen().getPreference(R.id.pref_title_new_message_notifications).setTitle(translate("pref_title_new_message_notifications"));
+            getPreferenceScreen().getPreference(R.id.pref_title_ringtone).setTitle(translate("pref_title_ringtone"));
+            getPreferenceScreen().getPreference(R.id.pref_title_vibrate).setTitle(translate("pref_title_vibrate"));
+
             setHasOptionsMenu(true);
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences
@@ -248,6 +266,12 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_data_sync);
+
+            getPreferenceScreen().getPreference(R.id.pref_title_sync_frequency).setTitle(translate("pref_title_sync_frequency"));
+            ((ListPreference) getPreferenceScreen().getPreference(R.id.pref_title_sync_frequency)).setEntries(new String[]{translate("pref_sync_frequency_titles")}); //todo set array
+            ((ListPreference) getPreferenceScreen().getPreference(R.id.pref_title_sync_frequency)).setEntryValues(new String[]{translate("pref_sync_frequency_values")}); //todo set array
+            getPreferenceScreen().getPreference(R.id.pref_title_system_sync_settings).setTitle(translate("pref_title_system_sync_settings"));
+
             setHasOptionsMenu(true);
 
             // Bind the summaries of EditText/List/Dialog/Ringtone preferences

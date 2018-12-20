@@ -37,6 +37,10 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
     }
 
     @Override
+    protected void setTranslatedTexts() {
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         checkPermissions();

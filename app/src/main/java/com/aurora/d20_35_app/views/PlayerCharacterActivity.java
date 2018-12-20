@@ -1,13 +1,17 @@
 package com.aurora.d20_35_app.views;
 
+import android.annotation.SuppressLint;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toolbar;
 
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.databinding.ActivityPlayerCharacterBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.viewModels.PlayerCharacterVM;
+
+import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
 
 
 public class PlayerCharacterActivity extends BindingActivity<ActivityPlayerCharacterBinding, PlayerCharacterVM> {
@@ -34,6 +38,12 @@ public class PlayerCharacterActivity extends BindingActivity<ActivityPlayerChara
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_player_character, menu);
         return true;
+    }
+
+    @SuppressLint("NewApi")
+    @Override
+    protected void setTranslatedTexts() {
+        ((Toolbar)findViewById(R.id.toolbar)).setTitle(translate("app_name"));
     }
 
     @Override

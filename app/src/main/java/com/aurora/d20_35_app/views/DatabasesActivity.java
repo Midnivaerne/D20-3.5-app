@@ -20,7 +20,6 @@ import androidx.annotation.RequiresApi;
  */
 public class DatabasesActivity extends BindingActivity<ActivityDatabasesBinding, DatabasesVM> {
 
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public DatabasesVM onCreate() {
@@ -40,11 +39,13 @@ public class DatabasesActivity extends BindingActivity<ActivityDatabasesBinding,
 
     @Override
     public void onFragmentAttached() {
-
     }
 
     @Override
     public void onFragmentDetached(String tag) {
+    }
 
+    @Override
+    protected void setTranslatedTexts() {
     }
 }

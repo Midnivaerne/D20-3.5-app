@@ -32,7 +32,10 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bind();
+        setTranslatedTexts();
     }
+
+    protected abstract void setTranslatedTexts();
 
     public void bind() {
         mViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId());

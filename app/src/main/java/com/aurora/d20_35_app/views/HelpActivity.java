@@ -16,6 +16,10 @@ public class HelpActivity extends BindingActivity<ActivityHelpBinding, HelpVM> {
     }
 
     @Override
+    protected void setTranslatedTexts() {
+    }
+
+    @Override
     public int getBindingVariable() {
         return BR.viewModel;
     }

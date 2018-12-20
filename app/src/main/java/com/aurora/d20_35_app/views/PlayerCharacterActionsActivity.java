@@ -2,6 +2,7 @@ package com.aurora.d20_35_app.views;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
@@ -13,6 +14,10 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+
+;
 
 public class PlayerCharacterActionsActivity extends BindingActivity<ActivityPlayerCharacterActionsBinding, PlayerCharacterActionsVM>
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -29,8 +34,14 @@ public class PlayerCharacterActionsActivity extends BindingActivity<ActivityPlay
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         return new PlayerCharacterActionsVM(this);
+    }
+
+    @Override
+    protected void setTranslatedTexts() {
+        (findViewById(R.id.nav_header_desc)).setContentDescription(translate("nav_header_desc"));
+        ((TextView) findViewById(R.id.nav_header_title)).setText(translate("nav_header_title"));
+        ((TextView) findViewById(R.id.nav_header_subtitle)).setText(translate("nav_header_subtitle"));
     }
 
     @Override

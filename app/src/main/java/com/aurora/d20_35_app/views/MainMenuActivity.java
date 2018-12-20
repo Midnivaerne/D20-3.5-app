@@ -3,12 +3,16 @@ package com.aurora.d20_35_app.views;
 import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Button;
 
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.databinding.ActivityMainMenuBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.viewModels.MainMenuVM;
+
+import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
 
 public class MainMenuActivity extends BindingActivity<ActivityMainMenuBinding, MainMenuVM> {
 
@@ -17,7 +21,21 @@ public class MainMenuActivity extends BindingActivity<ActivityMainMenuBinding, M
     @Override
     public MainMenuVM onCreate() {
         setSupportActionBar(getMViewDataBinding().toolbar);
+        setTranslatedTexts();
         return new MainMenuVM(this, getIntent().getStringExtra(KEY_STATUS));
+    }
+
+    @Override
+    protected void setTranslatedTexts() {
+        getActionBar().setTitle(translate("app_name"));
+        ((Button)findViewById(R.id.DM_button)).setText(translate("DM_button"));
+        ((Button)findViewById(R.id.PC_button)).setText(translate("PC_button"));
+        ((MenuItem)findViewById(R.id.action_rules)).setTitle(translate("action_rules"));
+        ((MenuItem)findViewById(R.id.action_content)).setTitle(translate("action_content"));
+        ((MenuItem)findViewById(R.id.action_database)).setTitle(translate("action_database"));
+        ((MenuItem)findViewById(R.id.action_settings)).setTitle(translate("action_settings"));
+        ((MenuItem)findViewById(R.id.action_help)).setTitle(translate("action_help"));
+        ((MenuItem)findViewById(R.id.action_exit)).setTitle(translate("action_exit"));
     }
 
     @Override
