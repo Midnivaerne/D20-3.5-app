@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.utils.NetworkUtils;
 
 import androidx.annotation.IdRes;
@@ -30,9 +31,14 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        setApplicationTheme();
         super.onCreate(savedInstanceState);
         bind();
-        setTranslatedTexts();
+    }
+
+    protected void setApplicationTheme() {
+        int themeId = this.getApplicationContext().getSharedPreferences("AppPref", 0).getInt("AppThemeId", R.style.AppTheme);
+        setTheme(themeId);
     }
 
     protected abstract void setTranslatedTexts();
@@ -54,6 +60,7 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
     protected void onStart() {
         super.onStart();
         mActivityViewModel.onStart();
+        setTranslatedTexts();
     }
 
     @Override

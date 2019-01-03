@@ -28,22 +28,25 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
     private static String[] permissionTypeStringManifest = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private static final int REQUEST_CODE_PERMISSION_ALL = 1;
 
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public D2035appVM onCreate() {
-        this.getWindow().setBackgroundDrawable(getDrawable(R.drawable.loading_screen));
         return new D2035appVM(this);
-    }
-
-    @Override
-    protected void setTranslatedTexts() {
     }
 
     @Override
     public void onStart() {
         super.onStart();
         checkPermissions();
+    }
+
+
+    @Override
+    protected void setApplicationTheme() {
+    }
+
+    @Override
+    protected void setTranslatedTexts() {
     }
 
     @Override
@@ -123,7 +126,7 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
 
     @Override
     public void onDatabaseInitialised() {
-        this.startActivity(new Intent(this, MainMenuActivity.class));
+        startActivity(new Intent(this, MainMenuActivity.class));
         finish();
     }
 }

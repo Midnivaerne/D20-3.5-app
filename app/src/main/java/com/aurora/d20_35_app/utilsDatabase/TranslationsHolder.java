@@ -3,14 +3,13 @@ package com.aurora.d20_35_app.utilsDatabase;
 import com.aurora.d20_35_app.models.Translations;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 public class TranslationsHolder {
-    public static final Map<String, String> TRANSLATIONS_NAMES_MAP = new HashMap<String, String>();
+    private static final Map<String, String> TRANSLATIONS_NAMES_MAP = new HashMap<String, String>();
 
-    public static void loadAllTranslationsForLanguage(DatabaseHolder databaseHolder, String language) {
+    static void loadAllTranslationsForLanguage(DatabaseHolder databaseHolder, String language) {
         TRANSLATIONS_NAMES_MAP.clear();
         String usedLanguage;
         if (language != null && !language.equals("")) {
@@ -19,10 +18,9 @@ public class TranslationsHolder {
             usedLanguage = "en";
         }
 
-        List trans = databaseHolder.translationsDAO().getItemsForLanguage(usedLanguage);
-        Iterator iterator = trans.iterator();
-        while (iterator.hasNext()) {
-            TRANSLATIONS_NAMES_MAP.put(((Translations) iterator.next()).getName(), ((Translations) iterator.next()).getTrans());
+        List translations = databaseHolder.translationsDAO().getItemsForLanguage(usedLanguage);
+        for (Object translation : translations) {
+            TRANSLATIONS_NAMES_MAP.put(((Translations) translation).getName(), ((Translations) translation).getTrans());
         }
     }
 

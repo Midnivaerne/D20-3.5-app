@@ -34,12 +34,15 @@ public class DatabaseManager {
     private static String externalPathSeparator = "/Android/data/com.aurora.d20_3.5_app/";
     public static String path = getPublicExternalStorageBaseDir() + externalPathSeparator + "Data/";
 
+    //String filename = "standardRulesData.xml";
+    private static final String[] FILENAMES = {"test.xml", "translations_for_app.xml"}; //todo refactor
+
     private static ProgressDialog progressDialog;
     private static final int MAX_PROGRESS = 100;
     private static final int NUMBER_OF_PROGRESS_INCREASES = 10;
 
+
     public static void initialDatabasesResolver(BindingActivity activity) {
-        startProgressBar(activity);
         initialPathSetup();
         increaseProgressBar();
         SharedPreferences sharedpreferences = activity.getApplicationContext().getSharedPreferences("AppPref", 0);
@@ -56,7 +59,7 @@ public class DatabaseManager {
         editor.putBoolean("firstTimeOpened", true);
         editor.putString("language", "en");
         editor.apply();
-        copyFile("test.xml", activity); //todo test - refactor or delete
+        copyAllFilesFromAssets(activity);
         increaseProgressBar();
         chooseDatabaseLoadingType(DatabaseHolder.getDatabaseHolder(activity.getApplicationContext()), DatabaseUsage.Startup, "en");
     }
@@ -67,9 +70,9 @@ public class DatabaseManager {
         chooseDatabaseLoadingType(DatabaseHolder.getDatabaseHolder(activity.getApplicationContext()), DatabaseUsage.ReloadFromDatabase, sharedpreferences.getString("language", "en")); // todo refactor/delete
     }
 
-    private static void startProgressBar(@NonNull BindingActivity activity) {
+    public static void startProgressBar(@NonNull BindingActivity activity) {
+        progressDialog = activity.showLoading();
         if (progressDialog != null) {
-            progressDialog = activity.showLoading();
             progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             progressDialog.setMax(MAX_PROGRESS);
             progressDialog.setTitle("Loading Database");
@@ -99,6 +102,12 @@ public class DatabaseManager {
             progressDialog.setMessage("Finished");
             progressDialog.cancel();
             progressDialog = null;
+        }
+    }
+
+    private static void copyAllFilesFromAssets(Activity activity) {
+        for (String filename : FILENAMES) {
+            copyFile(filename, activity); //todo test - refactor or delete
         }
     }
 
@@ -159,7 +168,7 @@ public class DatabaseManager {
         DatabaseHolder.destroyInstance();
     }
 
-    private static void loadRulesFromFileToHolderAndDatabase(DatabaseHolder databaseHolder, String filename, boolean reload, ItemType itemType) {
+    private static void loadRulesFromFileToHolderAndDatabase(DatabaseHolder databaseHolder, String[] filenames, boolean reload, ItemType itemType) {
         if (reload) {
             if (itemType == null) {
                 for (ItemType it : ItemType.values()) {
@@ -170,7 +179,9 @@ public class DatabaseManager {
             }
         }
         increaseProgressBar();
-        loadDataFromFileToHolder(databaseHolder, filename);
+        for (String filename : filenames) {
+            loadDataFromFileToHolder(databaseHolder, filename);
+        }
         loadDataFromHolderToDatabase(databaseHolder, reload, itemType);
     }
 
@@ -241,18 +252,12 @@ public class DatabaseManager {
     }
 
     private static void chooseDatabaseLoadingType(DatabaseHolder databaseHolder, DatabaseUsage usage, String language) {
-        //String filename = "standardRulesData.xml";
-        String filenames[] = {"test.xml", "translations_for_app"}; //todo refactor
         switch (usage) {
             case Startup:
-                for (String filename : filenames) {
-                    loadRulesFromFileToHolderAndDatabase(databaseHolder, filename, false, null);
-                }
+                loadRulesFromFileToHolderAndDatabase(databaseHolder, FILENAMES, false, null);
                 break;
             case ReloadFromFile:
-                for (String filename : filenames) {
-                    loadRulesFromFileToHolderAndDatabase(databaseHolder, filename, true, null);
-                }
+                loadRulesFromFileToHolderAndDatabase(databaseHolder, FILENAMES, true, null);
                 break;
             case ReloadFromDatabase:
                 loadDataFromDatabaseToHolder(databaseHolder, true, null);
@@ -266,7 +271,7 @@ public class DatabaseManager {
         TranslationsHolder.loadAllTranslationsForLanguage(databaseHolder, language);
     }
 
-    private static void populateAsync(@NonNull final DatabaseHolder databaseHolder, DatabaseUsage usage, String language) {
+    public static void populateAsync(@NonNull final DatabaseHolder databaseHolder, DatabaseUsage usage, String language) {
         PopulateDbAsync task = new PopulateDbAsync(databaseHolder, usage, language);
         task.execute();
     }

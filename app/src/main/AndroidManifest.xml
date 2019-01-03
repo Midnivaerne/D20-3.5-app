@@ -12,14 +12,13 @@
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
-        android:label="app_name"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".views.D2035appActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="title_activity_d2035app">
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -27,16 +26,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".views.MainMenuActivity"
-            android:label="app_name">
+        <activity android:name=".views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.aurora.d20_35_app.views.D2035appActivity" />
         </activity>
         <activity
             android:name=".views.DMActivity"
-            android:label="title_activity_dm_"
             android:parentActivityName=".views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -44,7 +40,6 @@
         </activity>
         <activity
             android:name=".views.PCActivity"
-            android:label="title_activity_pc_"
             android:parentActivityName=".views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -52,7 +47,6 @@
         </activity>
         <activity
             android:name=".views.RulesActivity"
-            android:label="title_activity_rulesexplanation_"
             android:parentActivityName=".views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -60,7 +54,6 @@
         </activity>
         <activity
             android:name=".fragments.D2035appContentFragment"
-            android:label="title_activity_content_"
             android:parentActivityName=".views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -68,7 +61,6 @@
         </activity>
         <activity
             android:name=".views.SettingsActivity"
-            android:label="title_activity_settings_"
             android:parentActivityName=".views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -76,7 +68,6 @@
         </activity>
         <activity
             android:name=".views.HelpActivity"
-            android:label="title_activity_help_"
             android:parentActivityName=".views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -84,7 +75,6 @@
         </activity>
         <activity
             android:name=".views.DatabasesActivity"
-            android:label="title_rulesset_list"
             android:parentActivityName=".views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -92,7 +82,6 @@
         </activity>
         <activity
             android:name=".views.DatabasesListItemDetailActivity"
-            android:label="title_rulesset_detail"
             android:parentActivityName=".views.DatabasesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -100,7 +89,6 @@
         </activity>
         <activity
             android:name=".views.PlayerCharacterActivity"
-            android:label="title_activity_player_character_"
             android:parentActivityName=".views.PCActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -108,7 +96,6 @@
         </activity>
         <activity
             android:name=".views.PlayerCharacterActionsActivity"
-            android:label="title_activity_player_character_actions_"
             android:parentActivityName=".views.PlayerCharacterActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

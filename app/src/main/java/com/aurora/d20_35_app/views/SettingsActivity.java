@@ -128,6 +128,16 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         setupActionBar();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setTranslatedTexts();
+    }
+
+    private void setTranslatedTexts() {
+        getSupportActionBar().setTitle(translate("title_activity_settings_"));
+    }
+
     /**
      * Set up the {@link android.app.ActionBar}, if the API is available.
      */
@@ -208,6 +218,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // guidelines.
             bindPreferenceSummaryToValue(findPreference("example_text"));
             bindPreferenceSummaryToValue(findPreference("example_list"));
+
+
+            //this.getApplicationContext().getSharedPreferences("AppPref", 0).edit().putInt("AppThemeId", R.style.AppTheme_Dark).apply(); //todo implement themes
+            //this.getApplicationContext().getSharedPreferences("AppPref", 0).edit().putInt("AppThemeId", R.style.AppTheme).apply(); //todo implement themes
         }
 
         @Override

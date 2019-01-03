@@ -4,15 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.aurora.d20_35_app.viewModels.D2035appVM" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/launch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@{viewModel.getBackground()}"
         tools:context=".views.D2035appActivity">
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

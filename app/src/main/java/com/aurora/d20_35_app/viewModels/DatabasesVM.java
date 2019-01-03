@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
 
 import static com.aurora.d20_35_app.utilsDatabase.DatabaseHolder.getDatabaseHolder;
+import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
 
 public class DatabasesVM extends ActivityViewModel<DatabasesActivity> {
 
@@ -107,8 +108,8 @@ public class DatabasesVM extends ActivityViewModel<DatabasesActivity> {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).getName());
-            holder.mContentView.setText(mValues.get(position).getContent());
+            holder.mIdView.setText(translate(mValues.get(position).getName()));
+            holder.mContentView.setText(translate(mValues.get(position).getContent()));
 
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);

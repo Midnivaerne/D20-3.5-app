@@ -9,4 +9,6 @@
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
 
+    <attr name="launch_screen_list" format="reference" />
+
 </resources>

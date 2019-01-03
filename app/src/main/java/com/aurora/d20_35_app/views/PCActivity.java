@@ -1,6 +1,6 @@
 package com.aurora.d20_35_app.views;
 
-import android.view.MenuItem;
+import android.view.Menu;
 
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
@@ -19,11 +19,6 @@ public class PCActivity extends BindingActivity<ActivityPcBinding, PCVM> {
     }
 
     @Override
-    protected void setTranslatedTexts() {
-        ((MenuItem)findViewById(R.id.action_settings)).setTitle(translate("action_settings"));
-    }
-
-    @Override
     public int getBindingVariable() {
         return BR.viewModel;
     }
@@ -31,6 +26,19 @@ public class PCActivity extends BindingActivity<ActivityPcBinding, PCVM> {
     @Override
     public int getLayoutId() {
         return R.layout.activity_pc;
+    }
+
+    @Override
+    protected void setTranslatedTexts() {
+        getSupportActionBar().setTitle(translate("title_activity_pc_"));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_player_character, menu);
+        menu.findItem(R.id.action_settings).setTitle(translate("action_settings"));
+        return true;
     }
 
     @Override

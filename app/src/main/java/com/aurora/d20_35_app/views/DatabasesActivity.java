@@ -10,6 +10,8 @@ import com.aurora.d20_35_app.viewModels.DatabasesVM;
 
 import androidx.annotation.RequiresApi;
 
+import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+
 /**
  * An activity representing a list of Rules Sets. This activity
  * has different presentations for handset and tablet-size devices. On
@@ -47,5 +49,6 @@ public class DatabasesActivity extends BindingActivity<ActivityDatabasesBinding,
 
     @Override
     protected void setTranslatedTexts() {
+        getSupportActionBar().setTitle(translate("title_rulesset_list"));
     }
 }

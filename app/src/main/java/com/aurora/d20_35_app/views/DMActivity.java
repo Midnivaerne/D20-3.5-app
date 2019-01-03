@@ -6,6 +6,8 @@ import com.aurora.d20_35_app.databinding.ActivityDmBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.viewModels.DMVM;
 
+import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+
 public class DMActivity extends BindingActivity<ActivityDmBinding, DMVM> {
 
     @Override
@@ -35,6 +37,6 @@ public class DMActivity extends BindingActivity<ActivityDmBinding, DMVM> {
 
     @Override
     public void onFragmentDetached(String tag) {
-
+        getSupportActionBar().setTitle(translate("title_activity_dm_"));
     }
 }

@@ -8,6 +8,8 @@ import com.aurora.d20_35_app.databinding.ActivityRulesBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.viewModels.RulesVM;
 
+import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+
 public class RulesActivity extends BindingActivity<ActivityRulesBinding, RulesVM> {
 
     @Override
@@ -26,9 +28,9 @@ public class RulesActivity extends BindingActivity<ActivityRulesBinding, RulesVM
         return R.layout.activity_rules;
     }
 
-
     @Override
     protected void setTranslatedTexts() {
+        getSupportActionBar().setTitle(translate("title_rulesset_detail"));
     }
 
     @Override

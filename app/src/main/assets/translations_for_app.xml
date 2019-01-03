@@ -6,7 +6,6 @@
         </Databases_Item>
     </Databases>
     <Translations>
-
         <!-- English -->
         <Translations_Item>
             <Name>translations_for_app_source_name</Name>
@@ -22,6 +21,14 @@
             <Category>translations_for_app</Category>
             <Language>en</Language>
             <Translation>D20 3.5 app</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_d2035app</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>D2035appActivity</Translation>
         </Translations_Item>
 
         <Translations_Item>
@@ -214,14 +221,6 @@
             <Category>translations_for_app</Category>
             <Language>en</Language>
             <Translation>Content</Translation>
-        </Translations_Item>
-
-        <Translations_Item>
-            <Name>title_activity_d2035app</Name>
-            <Source>translations_for_app_source</Source>
-            <Category>translations_for_app</Category>
-            <Language>en</Language>
-            <Translation>D2035appActivity</Translation>
         </Translations_Item>
 
         <!-- Polish -->
