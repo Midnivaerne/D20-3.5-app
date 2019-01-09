@@ -1,14 +1,10 @@
 package com.aurora.d20_35_app.views;
 
-import android.os.Build;
-
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.databinding.ActivityDatabasesBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.viewModels.DatabasesVM;
-
-import androidx.annotation.RequiresApi;
 
 import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
 
@@ -22,7 +18,7 @@ import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
  */
 public class DatabasesActivity extends BindingActivity<ActivityDatabasesBinding, DatabasesVM> {
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     @Override
     public DatabasesVM onCreate() {
         setSupportActionBar(findViewById(R.id.toolbar));

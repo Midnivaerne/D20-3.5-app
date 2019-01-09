@@ -67,7 +67,7 @@ public class MainMenuActivity extends BindingActivity<ActivityMainMenuBinding, M
     private Class<?> chooseNewActivity(int destinationID) {
         switch (destinationID) {
             case R.id.PC_button:
-                return PCActivity.class;
+                return PlayerCharactersListActivity.class;
             case R.id.DM_button:
                 return DMActivity.class;
             case R.id.action_rules:

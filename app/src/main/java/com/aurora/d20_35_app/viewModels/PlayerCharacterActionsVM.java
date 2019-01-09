@@ -9,11 +9,11 @@ import com.google.android.material.snackbar.Snackbar;
 public class PlayerCharacterActionsVM extends ActivityViewModel<PlayerCharacterActionsActivity> {
     public PlayerCharacterActionsVM(PlayerCharacterActionsActivity activity) {
         super(activity);
-
+        showBackButton();
     }
 
-    public void PlayerCharacterActionsButtonOnClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+    public void playerCharacterActionsButtonOnClick(View view) {
+        Snackbar.make(view, "FindMe2", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
 }

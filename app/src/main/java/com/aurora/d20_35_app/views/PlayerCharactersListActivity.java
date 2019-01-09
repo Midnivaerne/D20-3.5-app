@@ -4,18 +4,18 @@ import android.view.Menu;
 
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
-import com.aurora.d20_35_app.databinding.ActivityPcBinding;
+import com.aurora.d20_35_app.databinding.ActivityPlayerCharactersListBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
-import com.aurora.d20_35_app.viewModels.PCVM;
+import com.aurora.d20_35_app.viewModels.PlayerCharactersListVM;
 
 import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
 
-public class PCActivity extends BindingActivity<ActivityPcBinding, PCVM> {
+public class PlayerCharactersListActivity extends BindingActivity<ActivityPlayerCharactersListBinding, PlayerCharactersListVM> {
 
     @Override
-    public PCVM onCreate() {
+    public PlayerCharactersListVM onCreate() {
         setSupportActionBar(findViewById(R.id.toolbar));
-        return new PCVM(this);
+        return new PlayerCharactersListVM(this);
     }
 
     @Override
@@ -25,7 +25,7 @@ public class PCActivity extends BindingActivity<ActivityPcBinding, PCVM> {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_pc;
+        return R.layout.activity_player_characters_list;
     }
 
     @Override
@@ -35,8 +35,7 @@ public class PCActivity extends BindingActivity<ActivityPcBinding, PCVM> {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_player_character, menu);
+        getMenuInflater().inflate(R.menu.menu_player_characters_list, menu);
         menu.findItem(R.id.action_settings).setTitle(translate("action_settings"));
         return true;
     }

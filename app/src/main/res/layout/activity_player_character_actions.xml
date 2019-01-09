@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.aurora.d20_35_app.viewModels.PlayerCharacterActionsVM" />
@@ -51,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
                 android:layout_margin="@dimen/fab_margin"
-                android:onClick="@{(v) -> viewModel.PlayerCharacterActionsButtonOnClick(v)}"
+                android:onClick="@{(v) -> viewModel.playerCharacterActionsButtonOnClick(v)}"
                 app:srcCompat="@android:drawable/ic_dialog_email" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -39,7 +39,7 @@
                 android:value="com.aurora.d20_35_app.views.MainMenuActivity" />
         </activity>
         <activity
-            android:name=".views.PCActivity"
+            android:name=".views.PlayerCharactersListActivity"
             android:parentActivityName=".views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -89,10 +89,10 @@
         </activity>
         <activity
             android:name=".views.PlayerCharacterActivity"
-            android:parentActivityName=".views.PCActivity">
+            android:parentActivityName=".views.PlayerCharactersListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.views.PCActivity" />
+                android:value="com.aurora.d20_35_app.views.PlayerCharactersListActivity" />
         </activity>
         <activity
             android:name=".views.PlayerCharacterActionsActivity"
@@ -102,6 +102,7 @@
                 android:value="com.aurora.d20_35_app.views.PlayerCharacterActivity" />
         </activity>
         <activity android:name=".views.RulesDetailActivity" />
+        <activity android:name=".views.PlayerCharactersListFrameItemDetailActivity" />
     </application>
 
 </manifest>

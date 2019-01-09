@@ -27,9 +27,10 @@ public class TranslationsHolder {
     public static String translate(String name) {
         if (TRANSLATIONS_NAMES_MAP.containsKey(name)) {
             return TRANSLATIONS_NAMES_MAP.get(name);
-        } else {
+        } else if (name != null) {
             return emergencyNameToTranslationConverter(name);
         }
+        return null;
     }
 
     private static String emergencyNameToTranslationConverter(String name) {

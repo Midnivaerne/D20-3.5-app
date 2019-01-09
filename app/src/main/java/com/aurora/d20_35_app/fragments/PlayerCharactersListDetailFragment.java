@@ -7,9 +7,9 @@ import android.widget.TextView;
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.helper.BindingFragment;
-import com.aurora.d20_35_app.models.Databases;
-import com.aurora.d20_35_app.views.DatabasesActivity;
-import com.aurora.d20_35_app.views.DatabasesListItemDetailActivity;
+import com.aurora.d20_35_app.models.Hero;
+import com.aurora.d20_35_app.views.PlayerCharactersListActivity;
+import com.aurora.d20_35_app.views.PlayerCharactersListFrameItemDetailActivity;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import static com.aurora.d20_35_app.utilsDatabase.DatabaseHolder.getDatabaseHolder;
@@ -17,16 +17,16 @@ import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
 
 /**
  * A fragment representing a single Rules set detail screen.
- * This fragment is either contained in a {@link DatabasesActivity}
- * in two-pane mode (on tablets) or a {@link DatabasesListItemDetailActivity}
+ * This fragment is either contained in a {@link PlayerCharactersListActivity}
+ * in two-pane mode (on tablets) or a {@link PlayerCharactersListFrameItemDetailActivity}
  * on handsets.
  */
-public class DatabasesListDetailFragment extends BindingFragment {
+public class PlayerCharactersListDetailFragment extends BindingFragment {
 
     public static final String ARG_ITEM_ID = "item_id";
-    private Databases item;
+    private Hero item;
 
-    public DatabasesListDetailFragment() {
+    public PlayerCharactersListDetailFragment() {
     }
 
     @Override
@@ -36,7 +36,7 @@ public class DatabasesListDetailFragment extends BindingFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_databases_list_inner_detail_fragment;
+        return R.layout.activity_player_characters_list_frame_item_detail_contents_fragment;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class DatabasesListDetailFragment extends BindingFragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            item = getDatabaseHolder(super.getContext()).DATABASES_LIST.get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID)) - 1);
+            item = getDatabaseHolder(super.getContext()).HEROES_LIST.get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID)) - 1);
         }
     }
 
@@ -52,11 +52,11 @@ public class DatabasesListDetailFragment extends BindingFragment {
     protected void setTranslatedTexts() {
         if (item != null) {
             Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.databases_toolbar_layout);
+            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.activity_player_characters_list_frame_item_detail_toolbar_layout);
             if (appBarLayout != null) {
                 appBarLayout.setTitle(translate(item.getName()));
             }
-            ((TextView) getMRootView().findViewById(R.id.database_detail)).setText(translate(item.getName()));
+            ((TextView) getMRootView().findViewById(R.id.activity_player_characters_list_frame_item_detail_container)).setText(translate(item.getName()));
         }
     }
 }

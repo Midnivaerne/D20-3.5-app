@@ -22,15 +22,18 @@ import androidx.databinding.ViewDataBinding;
 import lombok.Getter;
 import lombok.NonNull;
 
-public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends ActivityViewModel> extends AppCompatActivity implements FragmentViewModel.Callback {
+public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends ActivityViewModel> extends AppCompatActivity implements BindingFragment.Callback {
 
     @Getter
     private VDB mViewDataBinding;
     @Getter
     private AVM mActivityViewModel;
+    @Getter
+    private Boolean isSavedInstanceStateNull;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        isSavedInstanceStateNull = savedInstanceState == null;
         setApplicationTheme();
         super.onCreate(savedInstanceState);
         bind();

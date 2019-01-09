@@ -11,15 +11,21 @@ import com.aurora.d20_35_app.utils.CommonUtils;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.BaseObservable;
+import androidx.lifecycle.ViewModel;
 import lombok.Getter;
 
-public class ActivityViewModel<A extends AppCompatActivity> extends BaseObservable {
+public class ActivityViewModel<A extends AppCompatActivity> extends ViewModel {
 
     @Getter
     protected A activity;
 
     private ProgressDialog mProgressDialog;
+
+    /**
+     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
+     * device.
+     */
+    protected boolean mTwoPane;
 
     public ActivityViewModel(A activity) {
         this.activity = activity;
@@ -110,6 +116,16 @@ public class ActivityViewModel<A extends AppCompatActivity> extends BaseObservab
         ActionBar actionBar = getActivity().getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    public void checkTwoPane(int id) {
+        if (getActivity().findViewById(id) != null) {
+            // The detail container view will be present only in the
+            // large-screen layouts (res/values-w900dp).
+            // If this view is present, then the
+            // activity should be in two-pane mode.
+            mTwoPane = true;
         }
     }
 

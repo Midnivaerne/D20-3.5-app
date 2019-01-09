@@ -11,19 +11,19 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
-import dagger.android.support.AndroidSupportInjection;
 import lombok.Getter;
 import lombok.NonNull;
 
-public abstract class FragmentViewModel<T extends ViewDataBinding, V extends ActivityViewModel> extends Fragment {
+public abstract class BindingFragment<T extends ViewDataBinding, V extends ActivityViewModel> extends Fragment {
 
     @Getter
     private BindingActivity mActivity;
+    @Getter
     private View mRootView;
     @Getter
     private T mViewDataBinding;
     @Getter
-    private V mViewModel;
+    private V mActivityViewModel;
 
     /**
      * Override for set binding variable
@@ -46,6 +46,7 @@ public abstract class FragmentViewModel<T extends ViewDataBinding, V extends Act
         if (context instanceof BindingActivity) {
             BindingActivity activity = (BindingActivity) context;
             this.mActivity = activity;
+            mActivityViewModel = (V) getMActivity().getMActivityViewModel();
             activity.onFragmentAttached();
         }
     }
@@ -54,7 +55,6 @@ public abstract class FragmentViewModel<T extends ViewDataBinding, V extends Act
     public void onCreate(@Nullable Bundle savedInstanceState) {
         performDependencyInjection();
         super.onCreate(savedInstanceState);
-        mViewModel = getMViewModel();
         setHasOptionsMenu(false);
     }
 
@@ -62,8 +62,11 @@ public abstract class FragmentViewModel<T extends ViewDataBinding, V extends Act
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mViewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
         mRootView = mViewDataBinding.getRoot();
+        setTranslatedTexts();
         return mRootView;
     }
+
+    protected abstract void setTranslatedTexts();
 
     @Override
     public void onDetach() {
@@ -74,7 +77,7 @@ public abstract class FragmentViewModel<T extends ViewDataBinding, V extends Act
     @Override
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mViewDataBinding.setVariable(getBindingVariable(), mViewModel);
+        mViewDataBinding.setVariable(getBindingVariable(), mActivityViewModel);
         mViewDataBinding.executePendingBindings();
     }
 
@@ -89,7 +92,7 @@ public abstract class FragmentViewModel<T extends ViewDataBinding, V extends Act
     }
 
     private void performDependencyInjection() {
-        AndroidSupportInjection.inject(this);
+        //AndroidSupportInjection.inject(this); todo learn and fix
     }
 
     public interface Callback {

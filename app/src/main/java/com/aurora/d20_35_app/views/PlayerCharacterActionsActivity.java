@@ -17,8 +17,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
 
-;
-
 public class PlayerCharacterActionsActivity extends BindingActivity<ActivityPlayerCharacterActionsBinding, PlayerCharacterActionsVM>
         implements NavigationView.OnNavigationItemSelectedListener {
 

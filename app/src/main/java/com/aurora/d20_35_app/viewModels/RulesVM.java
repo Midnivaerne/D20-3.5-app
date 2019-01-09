@@ -25,17 +25,13 @@ import lombok.NonNull;
 import static com.aurora.d20_35_app.utilsDatabase.DatabaseHolder.getDatabaseHolder;
 
 public class RulesVM extends ActivityViewModel<RulesActivity> {
-    /**
-     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-     * device.
-     */
-    private boolean mTwoPane;
 
     public RulesVM(RulesActivity activity) {
         super(activity);
         showBackButton();
-        //todo load rules category
+        checkTwoPane(R.id.activity_rules_explanation_container);
 
+        //todo load rules category
 
         FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -44,15 +40,6 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
                 view.scrollTo(0, 0);//TODO implement mvvm version
             }
         });
-
-
-        if (getActivity().findViewById(R.id.activity_rules_explanation_container) != null) {
-            // The detail container view will be present only in the
-            // large-screen layouts (res/values-w900dp).
-            // If this view is present, then the
-            // activity should be in two-pane mode.
-            mTwoPane = true;
-        }
 
         View recyclerView = getActivity().findViewById(R.id.activity_rules_list_inner);
         assert recyclerView != null;
