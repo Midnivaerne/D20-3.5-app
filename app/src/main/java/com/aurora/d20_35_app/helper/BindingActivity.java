@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -181,6 +182,26 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
         if (mActivityViewModel != null) {
             return mActivityViewModel.showLoading();
         }
+        return null;
+    }
+
+    public void startNewActivityWithId(int destinationID) {
+        if (destinationID == R.id.action_exit) {
+            Log.i("Content ", " Exiting");
+            finish();
+            moveTaskToBack(true);
+        } else {
+            Class<?> destination = chooseNewActivity(destinationID);
+            if (destination != null) {
+                Intent intent_rules = new Intent(this, destination);
+                this.startActivity(intent_rules);
+            } else {
+                Log.i("Content ", " Empty destination");
+            }
+        }
+    }
+
+    protected Class<?> chooseNewActivity(int destinationID) {
         return null;
     }
 

@@ -1,7 +1,5 @@
 package com.aurora.d20_35_app.views;
 
-import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.widget.Button;
 
@@ -53,18 +51,8 @@ public class MainMenuActivity extends BindingActivity<ActivityMainMenuBinding, M
         return true;
     }
 
-    public void startNewActivityFromMain(int destinationID) {
-        if (destinationID == R.id.action_exit) {
-            Log.i("Content ", " Exiting");
-            finish();
-            moveTaskToBack(true);
-        } else {
-            Intent intent_rules = new Intent(this, chooseNewActivity(destinationID));
-            this.startActivity(intent_rules);
-        }
-    }
-
-    private Class<?> chooseNewActivity(int destinationID) {
+    @Override
+    protected Class<?> chooseNewActivity(int destinationID) {
         switch (destinationID) {
             case R.id.PC_button:
                 return PlayerCharactersListActivity.class;

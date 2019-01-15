@@ -1,119 +1,72 @@
 package com.aurora.d20_35_app.viewModels;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.aurora.d20_35_app.R;
+import com.aurora.d20_35_app.fragments.PlayerCharacterAllSectionsPagerAdapter;
 import com.aurora.d20_35_app.helper.ActivityViewModel;
+import com.aurora.d20_35_app.models.Hero;
 import com.aurora.d20_35_app.views.PlayerCharacterActivity;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
+import lombok.Getter;
+import lombok.Setter;
+
+import static com.aurora.d20_35_app.utilsDatabase.DatabaseHolder.getDatabaseHolder;
 
 public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity> {
-    /**
-     * The {@link androidx.viewpager.widget.PagerAdapter} that will provide
-     * fragments for each of the sections. We use a
-     * {@link FragmentPagerAdapter} derivative, which will keep every
-     * loaded fragment in memory. If this becomes too memory intensive, it
-     * may be best to switch to a
-     * {@link androidx.fragment.app.FragmentStatePagerAdapter}.
-     */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
 
-    /**
-     * The {@link ViewPager} that will host the section contents.
-     */
+    private TabLayout mTabLayout;
+    private PlayerCharacterAllSectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+
+    @Getter
+    @Setter
+    private Hero hero;
 
     public PlayerCharacterVM(PlayerCharacterActivity activity) {
         super(activity);
-
         showBackButton();
+        setHero(getDatabaseHolder(activity).HEROES_LIST.get(Integer.parseInt(activity.getIntent().getStringExtra(PlayerCharacterActivity.HERO_ID))));
+        setTabs();
+    }
 
-        getActivity().getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getActivity().getSupportFragmentManager());
-
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) getActivity().findViewById(R.id.container);
+    private void setTabs() {
+        mTabLayout = (TabLayout) getActivity().findViewById(R.id.player_character_tabs);
+        mSectionsPagerAdapter = new PlayerCharacterAllSectionsPagerAdapter(getActivity().getSupportFragmentManager());
+        mViewPager = (ViewPager) getActivity().findViewById(R.id.player_character_container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.addOnPageChangeListener(new customTabChangeListener(mTabLayout));
+        mTabLayout.addOnTabSelectedListener(new customTabSelectionListener(mViewPager));
+    }
+}
 
-        FloatingActionButton fab = (FloatingActionButton) getActivity().findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "FindMe1", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+class customTabChangeListener extends TabLayout.TabLayoutOnPageChangeListener {
+    customTabChangeListener(TabLayout tabLayout) {
+        super(tabLayout);
+    }
+}
+
+class customTabSelectionListener implements TabLayout.OnTabSelectedListener {
+    customTabSelectionListener(ViewPager viewPager) {
+        this.tabViewPager = viewPager;
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
+    private ViewPager tabViewPager;
+    private int position;
 
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_player_character, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
+    @Override
+    public void onTabSelected(TabLayout.Tab tab) {
+        position = tab.getPosition();
+        tabViewPager.setCurrentItem(position);
     }
 
-    /**
-     * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
-     * one of the sections/tabs/pages.
-     */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    @Override
+    public void onTabUnselected(TabLayout.Tab tab) {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
-        }
-
-        @Override
-        public int getCount() {
-            // Show 3 total pages.
-            return 3;
-        }
     }
 
+    @Override
+    public void onTabReselected(TabLayout.Tab tab) {
+
+    }
 }

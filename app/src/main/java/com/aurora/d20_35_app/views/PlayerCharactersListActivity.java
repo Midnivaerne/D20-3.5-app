@@ -35,8 +35,8 @@ public class PlayerCharactersListActivity extends BindingActivity<ActivityPlayer
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_player_characters_list, menu);
-        menu.findItem(R.id.action_settings).setTitle(translate("action_settings"));
+        getMenuInflater().inflate(R.menu.menu_player_character, menu);
+        menu.findItem(R.id.character_settings_action).setTitle(translate("action_settings"));
         return true;
     }
 

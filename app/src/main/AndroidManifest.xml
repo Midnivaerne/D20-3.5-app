@@ -94,13 +94,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.aurora.d20_35_app.views.PlayerCharactersListActivity" />
         </activity>
-        <activity
-            android:name=".views.PlayerCharacterActionsActivity"
-            android:parentActivityName=".views.PlayerCharacterActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.views.PlayerCharacterActivity" />
-        </activity>
         <activity android:name=".views.RulesDetailActivity" />
         <activity android:name=".views.PlayerCharactersListFrameItemDetailActivity" />
     </application>

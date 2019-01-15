@@ -1,20 +1,24 @@
 package com.aurora.d20_35_app.helper;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.aurora.d20_35_app.utils.CommonUtils;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModel;
 import lombok.Getter;
 
-public class ActivityViewModel<A extends AppCompatActivity> extends ViewModel {
+public class ActivityViewModel<A extends BindingActivity> extends ViewModel {
 
     @Getter
     protected A activity;
@@ -72,7 +76,12 @@ public class ActivityViewModel<A extends AppCompatActivity> extends ViewModel {
     }
 
     public void onOptionsItemSelected(MenuItem item) {
-
+        Log.i("Menu ", " Clicked menu item: " + item);
+        if (this.onOptionsItemSelectedStart()) {
+            this.getActivity().startNewActivityWithId(item.getItemId());
+        } else {
+            Toast.makeText(getActivity(), "Write external storage permission needed.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void onConfigurationChanged(Configuration newConfig) {
@@ -130,5 +139,12 @@ public class ActivityViewModel<A extends AppCompatActivity> extends ViewModel {
     }
 
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    }
+
+    protected boolean onOptionsItemSelectedStart() {
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        return false;
     }
 }

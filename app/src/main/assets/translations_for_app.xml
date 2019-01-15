@@ -184,30 +184,6 @@
         </Translations_Item>
 
         <Translations_Item>
-            <Name>nav_header_title</Name>
-            <Source>translations_for_app_source</Source>
-            <Category>translations_for_app</Category>
-            <Language>en</Language>
-            <Translation>Android Studio</Translation>
-        </Translations_Item>
-
-        <Translations_Item>
-            <Name>nav_header_subtitle</Name>
-            <Source>translations_for_app_source</Source>
-            <Category>translations_for_app</Category>
-            <Language>en</Language>
-            <Translation>android.studio@android.com</Translation>
-        </Translations_Item>
-
-        <Translations_Item>
-            <Name>nav_header_desc</Name>
-            <Source>translations_for_app_source</Source>
-            <Category>translations_for_app</Category>
-            <Language>en</Language>
-            <Translation>Navigation header</Translation>
-        </Translations_Item>
-
-        <Translations_Item>
             <Name>title_activity_rulesexplanation_</Name>
             <Source>translations_for_app_source</Source>
             <Category>translations_for_app</Category>
@@ -283,3 +259,6 @@
 
     </Translations>
 </Database>
+
+to translate:
+    action_actions
