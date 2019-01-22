@@ -22,7 +22,7 @@ import java.util.List;
 import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
 
-import static com.aurora.d20_35_app.utilsDatabase.DatabaseHolder.getDatabaseHolder;
+import static com.aurora.d20_35_app.utils.database.DatabaseHolder.getDatabaseHolder;
 
 public class RulesVM extends ActivityViewModel<RulesActivity> {
 

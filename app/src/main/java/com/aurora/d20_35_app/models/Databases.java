@@ -19,12 +19,17 @@ public class Databases extends Item {
         super();
     }
 
-    public Databases(String name, String source) {
-        super(name, source);
+    public Databases(String name,
+                     String source,
+                     String idAsNameBackup) {
+        super(name, source, idAsNameBackup);
     }
 
     public Databases clone() {
-        return new Databases(getName(), getSource());
+        return new Databases(
+                getName(),
+                getSource(),
+                getIdAsNameBackup());
     }
 }
 

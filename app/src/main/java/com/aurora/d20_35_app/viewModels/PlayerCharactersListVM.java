@@ -11,20 +11,22 @@ import android.widget.TextView;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.fragments.PlayerCharactersListDetailFragment;
 import com.aurora.d20_35_app.helper.ActivityViewModel;
-import com.aurora.d20_35_app.models.Hero;
+import com.aurora.d20_35_app.helper.Item;
+import com.aurora.d20_35_app.models.userData.Hero;
+import com.aurora.d20_35_app.models.userData.HeroPlayer;
 import com.aurora.d20_35_app.views.PlayerCharacterActivity;
 import com.aurora.d20_35_app.views.PlayerCharactersListActivity;
 import com.aurora.d20_35_app.views.PlayerCharactersListFrameItemDetailActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.List;
+import java.util.Map;
 
 import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
 
-import static com.aurora.d20_35_app.utilsDatabase.DatabaseHolder.getDatabaseHolder;
-import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.utils.database.DatabaseHolder.getDatabaseHolder;
+import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
 
 public class PlayerCharactersListVM extends ActivityViewModel<PlayerCharactersListActivity> {
     public PlayerCharactersListVM(PlayerCharactersListActivity activity) {
@@ -44,13 +46,13 @@ public class PlayerCharactersListVM extends ActivityViewModel<PlayerCharactersLi
 
 
     private void setupRecyclerView(RecyclerView recyclerView) {
-        recyclerView.setAdapter(new PCRecyclerViewAdapter(this.getActivity(), getDatabaseHolder(super.getActivity()).HEROES_LIST, mTwoPane));
+        recyclerView.setAdapter(new PCRecyclerViewAdapter(this.getActivity(), getDatabaseHolder(super.getActivity()).HEROES_PLAYER_MAP, mTwoPane));
     }
 
     public static class PCRecyclerViewAdapter extends RecyclerView.Adapter<PCRecyclerViewAdapter.ViewHolder> {
 
         private final PlayerCharactersListActivity mParentActivity;
-        private final List<Hero> mValues;
+        private final Map<Integer, HeroPlayer> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
             @Override
@@ -58,7 +60,7 @@ public class PlayerCharactersListVM extends ActivityViewModel<PlayerCharactersLi
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
                     arguments.putString(PlayerCharactersListDetailFragment.ARG_ITEM_ID, getListId(view));
-                    arguments.putString(PlayerCharacterActivity.HERO_ID, getHeroId(view));
+                    arguments.putString(PlayerCharacterActivity.HERO_PLAYER_ID, getHeroId(view));
                     PlayerCharactersListDetailFragment fragment = new PlayerCharactersListDetailFragment();
                     fragment.setArguments(arguments);
                     mParentActivity.getSupportFragmentManager().beginTransaction()
@@ -68,7 +70,7 @@ public class PlayerCharactersListVM extends ActivityViewModel<PlayerCharactersLi
                     Context context = view.getContext();
                     Intent intent = new Intent(context, PlayerCharactersListFrameItemDetailActivity.class);
                     intent.putExtra(PlayerCharactersListDetailFragment.ARG_ITEM_ID, getListId(view));
-                    intent.putExtra(PlayerCharacterActivity.HERO_ID, getHeroId(view));
+                    intent.putExtra(PlayerCharacterActivity.HERO_PLAYER_ID, getHeroId(view));
                     context.startActivity(intent);
                 }
             }
@@ -79,25 +81,25 @@ public class PlayerCharactersListVM extends ActivityViewModel<PlayerCharactersLi
             public void onClick(View view) {
                 Context context = view.getContext();
                 Intent intent = new Intent(context, PlayerCharacterActivity.class);
-                intent.putExtra(PlayerCharacterActivity.HERO_ID, getHeroId(view));
+                intent.putExtra(PlayerCharacterActivity.HERO_PLAYER_ID, getHeroId(view));
                 context.startActivity(intent);
             }
         };
 
         private String getListId(View view) {
-            Hero hero = (Hero) view.getTag();
-            int listId = hero.getItemID();
+            Item heroPlayer = (HeroPlayer) view.getTag();
+            int listId = heroPlayer.getItemID();
             return String.valueOf(listId);
         }
 
         private String getHeroId(View view) {
-            Hero hero = (Hero) view.getTag();
-            int listId = hero.getItemID();
-            return String.valueOf(mValues.get(listId - 1).getItemID()-1); //todo refactor -1/-1
+            HeroPlayer heroPlayer = (HeroPlayer) view.getTag();
+            int listId = heroPlayer.getItemID();
+            return String.valueOf(mValues.get(listId).getItemID());
         }
 
         PCRecyclerViewAdapter(PlayerCharactersListActivity parent,
-                              List<Hero> items,
+                              Map<Integer, HeroPlayer> items,
                               boolean twoPane) {
             mValues = items;
             mParentActivity = parent;
@@ -113,15 +115,17 @@ public class PlayerCharactersListVM extends ActivityViewModel<PlayerCharactersLi
 
         @Override
         public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-            holder.mIdView.setText(translate(mValues.get(position).getName()));
-            holder.mIdView.setTag(mValues.get(position));
+            Hero hero = mValues.get(position + 1);
+
+            holder.mIdView.setText(translate(hero.getName()));
+            holder.mIdView.setTag(hero);
             holder.mIdView.setOnClickListener(mOnClickListener);
 
-            holder.mContentView.setText(translate(mValues.get(position).getContent()));
-            holder.mContentView.setTag(mValues.get(position));
+            holder.mContentView.setText(translate(hero.getContent()));
+            holder.mContentView.setTag(hero);
             holder.mContentView.setOnClickListener(mOnClickListener);
 
-            holder.mOpenButton.setTag(mValues.get(position));
+            holder.mOpenButton.setTag(hero);
             holder.mOpenButton.setOnClickListener(playerCharactersListItemButtonOnClickListener);
         }
 

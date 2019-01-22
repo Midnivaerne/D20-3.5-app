@@ -2,8 +2,8 @@ package com.aurora.d20_35_app.enums;
 
 import com.aurora.d20_35_app.models.Armour;
 import com.aurora.d20_35_app.models.Classes;
-import com.aurora.d20_35_app.utilsDatabase.DatabaseHolder;
-import com.aurora.d20_35_app.utilsDatabase.DatabaseManager;
+import com.aurora.d20_35_app.utils.database.DatabaseHolder;
+import com.aurora.d20_35_app.utils.database.DatabaseManager;
 
 import org.junit.After;
 import org.junit.Assert;

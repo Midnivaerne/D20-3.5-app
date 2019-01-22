@@ -5,10 +5,6 @@
     tools:context="com.aurora.d20_35_app.views.PlayerCharactersListActivity"
     tools:ignore="MenuTitle">
     <item
-        android:id="@+id/characters_list_actions_action"
-        android:orderInCategory="100"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/characters_list_settings_action"
         android:orderInCategory="100"
         app:showAsAction="never" />

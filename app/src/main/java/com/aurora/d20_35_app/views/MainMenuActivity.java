@@ -9,7 +9,7 @@ import com.aurora.d20_35_app.databinding.ActivityMainMenuBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.viewModels.MainMenuVM;
 
-import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
 
 public class MainMenuActivity extends BindingActivity<ActivityMainMenuBinding, MainMenuVM> {
 

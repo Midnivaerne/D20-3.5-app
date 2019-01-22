@@ -6,7 +6,7 @@ import com.aurora.d20_35_app.databinding.ActivityDatabasesBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.viewModels.DatabasesVM;
 
-import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
 
 /**
  * An activity representing a list of Rules Sets. This activity

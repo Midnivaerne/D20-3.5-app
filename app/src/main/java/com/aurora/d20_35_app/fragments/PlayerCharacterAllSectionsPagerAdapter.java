@@ -1,5 +1,7 @@
 package com.aurora.d20_35_app.fragments;
 
+import com.aurora.d20_35_app.viewModels.PlayerCharacterVM;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -10,23 +12,26 @@ import androidx.fragment.app.FragmentPagerAdapter;
  */
 public class PlayerCharacterAllSectionsPagerAdapter extends FragmentPagerAdapter {
 
-    public PlayerCharacterAllSectionsPagerAdapter(FragmentManager fragmentManager) {
+    private PlayerCharacterVM playerCharacterVM;
+
+    public PlayerCharacterAllSectionsPagerAdapter(FragmentManager fragmentManager, PlayerCharacterVM playerCharacterVM) {
         super(fragmentManager);
+        this.playerCharacterVM = playerCharacterVM;
     }
 
     @Override
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return PlayerCharacterFirstPlaceholderFragment.newInstance(position);
+                return PlayerCharacterFirstPlaceholderFragment.newInstance(position, playerCharacterVM);
             case 1:
-                return PlayerCharacterSecondPlaceholderFragment.newInstance(position);
+                return PlayerCharacterSecondPlaceholderFragment.newInstance(position, playerCharacterVM);
             case 2:
-                return PlayerCharacterThirdPlaceholderFragment.newInstance(position);
+                return PlayerCharacterThirdPlaceholderFragment.newInstance(position, playerCharacterVM);
             case 3:
-                return PlayerCharacterFourthPlaceholderFragment.newInstance(position);
+                return PlayerCharacterFourthPlaceholderFragment.newInstance(position, playerCharacterVM);
             case 4:
-                return PlayerCharacterFifthPlaceholderFragment.newInstance(position);
+                return PlayerCharacterDescriptionPlaceholderFragment.newInstance(position, playerCharacterVM);
             default:
                 return null;
         }

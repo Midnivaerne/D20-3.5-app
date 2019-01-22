@@ -22,8 +22,8 @@ import java.util.List;
 import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
 
-import static com.aurora.d20_35_app.utilsDatabase.DatabaseHolder.getDatabaseHolder;
-import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.utils.database.DatabaseHolder.getDatabaseHolder;
+import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
 
 public class DatabasesVM extends ActivityViewModel<DatabasesActivity> {
 

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.aurora.d20_35_app.R;
+import com.aurora.d20_35_app.viewModels.PlayerCharacterVM;
 
 import androidx.fragment.app.Fragment;
 
@@ -27,7 +28,7 @@ public class PlayerCharacterSecondPlaceholderFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static PlayerCharacterSecondPlaceholderFragment newInstance(int sectionNumber) {
+    public static PlayerCharacterSecondPlaceholderFragment newInstance(int sectionNumber, PlayerCharacterVM playerCharacterVM) {
         PlayerCharacterSecondPlaceholderFragment fragment = new PlayerCharacterSecondPlaceholderFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);

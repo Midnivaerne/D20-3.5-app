@@ -42,7 +42,25 @@
                     app:layout_scrollFlags="scroll|enterAlways"
                     app:popupTheme="@style/AppTheme.PopupOverlay">
 
+                    <FrameLayout
+                        android:id="@+id/drawer_button"
+                        android:layout_width="50dp"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_alignParentEnd="true"
+                        android:layout_gravity="center_vertical|end"
+                        android:clickable="true"
+                        android:fitsSystemWindows="true"
+                        android:focusable="true"
+                        android:onClick="@{(v) -> viewModel.menuOnClick()}">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:src="@android:drawable/ic_menu_more" />
+                    </FrameLayout>
                 </androidx.appcompat.widget.Toolbar>
+
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/player_character_tabs"

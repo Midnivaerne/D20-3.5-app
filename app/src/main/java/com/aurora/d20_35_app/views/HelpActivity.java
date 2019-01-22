@@ -6,7 +6,7 @@ import com.aurora.d20_35_app.databinding.ActivityHelpBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.viewModels.HelpVM;
 
-import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
 
 
 public class HelpActivity extends BindingActivity<ActivityHelpBinding, HelpVM> {

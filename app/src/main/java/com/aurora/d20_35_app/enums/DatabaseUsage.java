@@ -5,6 +5,9 @@ public enum DatabaseUsage {
     ReloadFromFile,
     ReloadFromDatabase,
     ReloadFromHolder,
-    Another
+    Another,
+    ClearDatabaseAndHolder,
+    ClearDatabase,
+    ClearHolder
 
 }

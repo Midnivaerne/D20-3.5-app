@@ -7,13 +7,13 @@ import android.widget.TextView;
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.helper.BindingFragment;
-import com.aurora.d20_35_app.models.Hero;
+import com.aurora.d20_35_app.models.userData.Hero;
 import com.aurora.d20_35_app.views.PlayerCharactersListActivity;
 import com.aurora.d20_35_app.views.PlayerCharactersListFrameItemDetailActivity;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
-import static com.aurora.d20_35_app.utilsDatabase.DatabaseHolder.getDatabaseHolder;
-import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.utils.database.DatabaseHolder.getDatabaseHolder;
+import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
 
 /**
  * A fragment representing a single Rules set detail screen.
@@ -44,7 +44,7 @@ public class PlayerCharactersListDetailFragment extends BindingFragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            item = getDatabaseHolder(super.getContext()).HEROES_LIST.get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID)) - 1);
+            item = getDatabaseHolder(super.getContext()).HEROES_PLAYER_LIST.get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID)) - 1);
         }
     }
 

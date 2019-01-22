@@ -16,7 +16,7 @@ import lombok.Setter;
 @Data
 @Entity(tableName = "Translations", inheritSuperIndices = true,
         indices = {@Index(value = {"Source"})},
-        foreignKeys = @ForeignKey(entity = Databases.class, parentColumns = "Source", childColumns = "Source",onDelete = ForeignKey.CASCADE))
+        foreignKeys = @ForeignKey(entity = Databases.class, parentColumns = "Source", childColumns = "Source", onDelete = ForeignKey.CASCADE))
 public class Translations extends Item {
 
     @Ignore
@@ -24,8 +24,13 @@ public class Translations extends Item {
         super();
     }
 
-    public Translations(String name, String source, String category, String language, String trans) {
-        super(name, source);
+    public Translations(String name,
+                        String source,
+                        String idAsNameBackup,
+                        String category,
+                        String language,
+                        String trans) {
+        super(name, source, idAsNameBackup);
         this.category = category;
         this.language = language;
         this.trans = trans;
@@ -54,7 +59,13 @@ public class Translations extends Item {
     private String trans;
 
     public Translations clone() {
-        return new Translations(getName(), getSource(), this.category, this.language, this.trans);
+        return new Translations(
+                getName(),
+                getSource(),
+                getIdAsNameBackup(),
+                getCategory(),
+                getLanguage(),
+                getTrans());
     }
 
 }

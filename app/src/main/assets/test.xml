@@ -30,16 +30,48 @@
             <RaceDescription>gdsfgdfgdfgffgdf</RaceDescription>
         </Races_Item>
     </Races>
-    <Hero>
-        <Hero_Item>
+    <HeroPlayer>
+        <HeroPlayer_Item>
             <Name>Hero_Name</Name>
             <Source>Player_Hero_Source</Source>
-        </Hero_Item>
-        <Hero_Item>
+            <IdAsNameBackup>
+                Classes{1=classNameTagWithId1},Races{1=raceNameTagwithId1},Deities{1=NameTagWithId1}
+            </IdAsNameBackup>
+            <Player>Player</Player>
+            <ClassAndLevel>1=1</ClassAndLevel>
+            <Race>1</Race>
+            <Alignment>5</Alignment>
+            <Deity>1</Deity>
+            <Size>3</Size>
+            <Age>80</Age>
+            <Gender>M</Gender>
+            <Height>180</Height>
+            <Weight>70</Weight>
+            <Eyes>blue</Eyes>
+            <Hair>dark</Hair>
+            <Skin>white</Skin>
+        </HeroPlayer_Item>
+        <HeroPlayer_Item>
             <Name>Another_Hero_Name</Name>
             <Source>Player_Hero_Source</Source>
-        </Hero_Item>
-    </Hero>
+            <IdAsNameBackup>
+                Classes{1=classNameTagWithId1,2=classNameTagWithId2},Races{1=raceNameTagwithId1,1=raceTemplateNameTagwithId1},Deities{2=NameTagWithId2}
+            </IdAsNameBackup>
+            <Player>Player</Player>
+            <ClassAndLevel>1=1,2=1</ClassAndLevel>
+            <Race>1+1</Race>
+            <Alignment>5</Alignment>
+            <Deity>2</Deity>
+            <Size>3</Size>
+            <Age>36</Age>
+            <Gender>F</Gender>
+            <Height>160</Height>
+            <Weight>60</Weight>
+            <Eyes>violet</Eyes>
+            <Hair>silver</Hair>
+            <Skin>white</Skin>
+        </HeroPlayer_Item>
+    </HeroPlayer>
     <Translations>
         <Translations_Item>
             <Name>Test_race_source_name</Name>

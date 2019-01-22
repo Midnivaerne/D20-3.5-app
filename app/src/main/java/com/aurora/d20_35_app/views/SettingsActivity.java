@@ -25,7 +25,7 @@ import java.util.List;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.app.NavUtils;
 
-import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On

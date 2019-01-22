@@ -1,7 +1,6 @@
 package com.aurora.d20_35_app.views;
 
 import android.annotation.SuppressLint;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -17,13 +16,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import lombok.NonNull;
 
-import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
 
 
 public class PlayerCharacterActivity extends BindingActivity<ActivityPlayerCharacterBinding, PlayerCharacterVM>
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static final String HERO_ID = "hero_id";
+    public static final String HERO_PLAYER_ID = "hero_id";
 
     @Override
     public PlayerCharacterVM onCreate() {
@@ -33,7 +32,7 @@ public class PlayerCharacterActivity extends BindingActivity<ActivityPlayerChara
     }
 
     private void drawerSetup() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.player_character_drawer_layout);  //TODO investigate if working here and if needs to be moved
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.player_character_drawer_layout);  //TODO investigate if needs to be moved
         drawer.addDrawerListener(new customDrawerListener());
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.player_character_actions_drawer);
@@ -50,34 +49,13 @@ public class PlayerCharacterActivity extends BindingActivity<ActivityPlayerChara
         return R.layout.activity_player_character;
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_player_characters_list, menu);
-        menu.findItem(R.id.characters_list_actions_action).setTitle(translate("action_actions"));
-        menu.findItem(R.id.characters_list_settings_action).setTitle(translate("action_settings"));
-        return true;
-    }
-
     @SuppressLint("NewApi")
     @Override
     protected void setTranslatedTexts() {
         getSupportActionBar().setTitle(translate(getMActivityViewModel().getHero().getName()));
     }
 
-    @Override
-    protected Class<?> chooseNewActivity(int destinationID) {
-        switch (destinationID) {
-            case R.id.characters_list_actions_action:
-                drawerActions();
-                return null;
-            case R.id.characters_list_settings_action:
-                return null; //todo change
-        }
-        return null;
-    }
-
-    private void drawerActions() {
+    public void drawerActions() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.player_character_drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);

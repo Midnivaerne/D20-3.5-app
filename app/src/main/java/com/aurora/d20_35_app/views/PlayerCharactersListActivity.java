@@ -8,7 +8,7 @@ import com.aurora.d20_35_app.databinding.ActivityPlayerCharactersListBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.viewModels.PlayerCharactersListVM;
 
-import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
 
 public class PlayerCharactersListActivity extends BindingActivity<ActivityPlayerCharactersListBinding, PlayerCharactersListVM> {
 
@@ -35,8 +35,8 @@ public class PlayerCharactersListActivity extends BindingActivity<ActivityPlayer
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_player_character, menu);
-        menu.findItem(R.id.character_settings_action).setTitle(translate("action_settings"));
+        getMenuInflater().inflate(R.menu.menu_player_characters_list, menu);
+        menu.findItem(R.id.characters_list_settings_action).setTitle(translate("action_settings"));
         return true;
     }
 

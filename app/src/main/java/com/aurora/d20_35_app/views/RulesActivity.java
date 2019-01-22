@@ -8,7 +8,7 @@ import com.aurora.d20_35_app.databinding.ActivityRulesBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.viewModels.RulesVM;
 
-import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
 
 public class RulesActivity extends BindingActivity<ActivityRulesBinding, RulesVM> {
 

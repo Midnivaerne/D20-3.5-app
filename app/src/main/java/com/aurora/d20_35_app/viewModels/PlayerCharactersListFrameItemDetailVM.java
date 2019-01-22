@@ -18,7 +18,7 @@ public class PlayerCharactersListFrameItemDetailVM extends ActivityViewModel<Pla
     public void playerCharactersListItemDetailButtonOnClick(View view) {
         Context context = view.getContext();
         Intent intent = new Intent(context, PlayerCharacterActivity.class);
-        intent.putExtra(PlayerCharacterActivity.HERO_ID, getActivity().getIntent().getStringExtra(PlayerCharacterActivity.HERO_ID));
+        intent.putExtra(PlayerCharacterActivity.HERO_PLAYER_ID, getActivity().getIntent().getStringExtra(PlayerCharacterActivity.HERO_PLAYER_ID));
         context.startActivity(intent);
     }
 }

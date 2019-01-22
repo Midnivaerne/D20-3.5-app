@@ -12,8 +12,8 @@ import com.aurora.d20_35_app.views.DatabasesActivity;
 import com.aurora.d20_35_app.views.DatabasesListItemDetailActivity;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
-import static com.aurora.d20_35_app.utilsDatabase.DatabaseHolder.getDatabaseHolder;
-import static com.aurora.d20_35_app.utilsDatabase.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.utils.database.DatabaseHolder.getDatabaseHolder;
+import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
 
 /**
  * A fragment representing a single Rules set detail screen.

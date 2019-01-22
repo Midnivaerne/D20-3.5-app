@@ -1,9 +1,9 @@
 package com.aurora.d20_35_app.enums;
 
-import com.aurora.d20_35_app.models.RulesCombat;
-import com.aurora.d20_35_app.models.RulesSkills;
-import com.aurora.d20_35_app.utilsDatabase.DatabaseHolder;
-import com.aurora.d20_35_app.utilsDatabase.DatabaseManager;
+import com.aurora.d20_35_app.models.constants.RulesCombat;
+import com.aurora.d20_35_app.models.constants.RulesSkills;
+import com.aurora.d20_35_app.utils.database.DatabaseHolder;
+import com.aurora.d20_35_app.utils.database.DatabaseManager;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -72,13 +72,13 @@ public class RulesTypeTest {
 
     @Test
     public void getNewObjectTest() {
-        Assert.assertEquals(com.aurora.d20_35_app.models.RulesCombat.class, RulesCombat.getNewObject().getClass());
+        Assert.assertEquals(com.aurora.d20_35_app.models.constants.RulesCombat.class, RulesCombat.getNewObject().getClass());
         Assert.assertEquals(new RulesCombat(), RulesCombat.getNewObject());
 
-        Assert.assertNotEquals(com.aurora.d20_35_app.models.RulesSkills.class, RulesCombat.getNewObject().getClass());
+        Assert.assertNotEquals(com.aurora.d20_35_app.models.constants.RulesSkills.class, RulesCombat.getNewObject().getClass());
         Assert.assertNotEquals(new RulesSkills(), RulesCombat.getNewObject());
 
-        Assert.assertNotEquals(com.aurora.d20_35_app.models.RulesCombat.class, RulesSkills.getNewObject().getClass());
+        Assert.assertNotEquals(com.aurora.d20_35_app.models.constants.RulesCombat.class, RulesSkills.getNewObject().getClass());
         Assert.assertNotEquals(new RulesCombat(), RulesSkills.getNewObject());
     }
 
