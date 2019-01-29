@@ -1,8 +1,8 @@
 package com.aurora.d20_35_app.helper;
 
 import com.aurora.d20_35_app.enums.RulesType;
-import com.aurora.d20_35_app.models.RulesCombat;
-import com.aurora.d20_35_app.models.RulesSkills;
+import com.aurora.d20_35_app.models.constants.RulesCombat;
+import com.aurora.d20_35_app.models.constants.RulesSkills;
 
 import androidx.room.ColumnInfo;
 import androidx.room.PrimaryKey;

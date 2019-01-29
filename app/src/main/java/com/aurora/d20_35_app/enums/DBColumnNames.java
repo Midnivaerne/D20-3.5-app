@@ -1,8 +1,11 @@
 package com.aurora.d20_35_app.enums;
 
 import com.aurora.d20_35_app.helper.Item;
-import com.aurora.d20_35_app.models.Armour;
-import com.aurora.d20_35_app.models.Races;
+import com.aurora.d20_35_app.models.Translations;
+import com.aurora.d20_35_app.models.settingSpecific.Races;
+import com.aurora.d20_35_app.models.usables.Armour;
+import com.aurora.d20_35_app.models.userData.HeroDescription;
+import com.aurora.d20_35_app.models.userData.HeroPlayer;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -28,6 +31,15 @@ public enum DBColumnNames {
             item.setSource(data);
         }
     },
+    ColIdAsNameBackup(Item.idAsNameBackupColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            item.setIdAsNameBackup(data);
+        }
+    },
+    ////////////////////////////////////////////////////////////////
+    //////////////////////////  DATABASES  ////////////////////////
+
     //////////////////////////////////////////////////////////////
     //////////////////////////  ARMOUR  //////////////////////////
     ColArmourPrice(Armour.armourPriceColumnName, false) {
@@ -99,8 +111,93 @@ public enum DBColumnNames {
     //////////////////////////////////////////////////////////////
     //////////////////////////  FEATS  //////////////////////////
 
-    /////////////////////////////////////////////////////////////
-    //////////////////////////  HERO  //////////////////////////
+
+    ///////////////////////////////////////////////////////////////
+    ////////////////////////  HERO PLAYER /////////////////////////
+
+    //////////////////////////////////////////////////////////////////
+    //////////////////////  HERO DESCRIPTION  ///////////////////////
+    ColHeroPlayer(HeroDescription.heroPlayerColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((HeroPlayer) item).getHeroDescription().setHeroPlayer(data);
+        }
+    },
+
+    ColHeroClassAndLevel(HeroDescription.heroClassAndLevelColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((HeroPlayer) item).getHeroDescription().setHeroClassAndLevel(data);
+        }
+    },
+
+    ColHeroRace(HeroDescription.heroRaceColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((HeroPlayer) item).getHeroDescription().setHeroRace(data);
+        }
+    },
+    ColHeroAlignment(HeroDescription.heroAlignmentColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((HeroPlayer) item).getHeroDescription().setHeroAlignment(Integer.parseInt(data));
+        }
+    },
+    ColHeroDeity(HeroDescription.heroDeityColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((HeroPlayer) item).getHeroDescription().setHeroDeity(Integer.parseInt(data));
+        }
+    },
+    ColHeroSize(HeroDescription.heroSizeColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((HeroPlayer) item).getHeroDescription().setHeroSize(Integer.parseInt(data));
+        }
+    },
+    ColHeroAge(HeroDescription.heroAgeColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((HeroPlayer) item).getHeroDescription().setHeroAge(Integer.parseInt(data));
+        }
+    },
+    ColHeroGender(HeroDescription.heroGenderColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((HeroPlayer) item).getHeroDescription().setHeroGender(data);
+        }
+    },
+    ColHeroHeight(HeroDescription.heroHeightColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((HeroPlayer) item).getHeroDescription().setHeroHeight(data);
+        }
+    },
+    ColHeroWeight(HeroDescription.heroWeightColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((HeroPlayer) item).getHeroDescription().setHeroWeight(data);
+        }
+    },
+    ColHeroEyes(HeroDescription.heroEyesColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((HeroPlayer) item).getHeroDescription().setHeroEyes(data);
+        }
+    },
+    ColHeroHair(HeroDescription.heroHairColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((HeroPlayer) item).getHeroDescription().setHeroHair(data);
+        }
+    },
+    ColHeroSkin(HeroDescription.heroSkinColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((HeroPlayer) item).getHeroDescription().setHeroSkin(data);
+        }
+    },
+
 
     /////////////////////////////////////////////////////////////////
     //////////////////////////  MONSTERS  //////////////////////////
@@ -154,7 +251,7 @@ public enum DBColumnNames {
         public void setParameter(Item item, String data) {
             ((Races) item).setFavouriteClass(data);
         }
-    }
+    },
     ///////////////////////////////////////////////////////////////////////
     //////////////////////////  RACE TEMPLATES  //////////////////////////
 
@@ -166,7 +263,30 @@ public enum DBColumnNames {
 
     ////////////////////////////////////////////////////////////////
     //////////////////////////  WEAPONS  //////////////////////////
-    ;
+
+    //////////////////////////////////////////////////////////////
+    //////////////////////////  DEITIES  //////////////////////////
+
+    ////////////////////////////////////////////////////////////////
+    //////////////////////////  TRANSLATIONS  //////////////////////
+    ColCategory(Translations.categoryColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((Translations) item).setCategory(data);
+        }
+    },
+    ColLanguage(Translations.languageColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((Translations) item).setLanguage(data);
+        }
+    },
+    ColTranslation(Translations.transColumnName, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            ((Translations) item).setTrans(data);
+        }
+    };
 
     private String columnName;
 

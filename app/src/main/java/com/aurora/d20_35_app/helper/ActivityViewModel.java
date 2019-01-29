@@ -1,24 +1,40 @@
 package com.aurora.d20_35_app.helper;
 
-import android.app.ProgressDialog;
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
-import com.aurora.d20_35_app.utils.CommonUtils;
+import com.aurora.d20_35_app.R;
 
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.BaseObservable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModel;
 import lombok.Getter;
 
-public class ActivityViewModel<A extends AppCompatActivity> extends BaseObservable {
+public class ActivityViewModel<A extends BindingActivity> extends ViewModel {
 
     @Getter
     protected A activity;
-    private ProgressDialog mProgressDialog;
+
+    private ConstraintLayout mConstraintLayout;
+    private ProgressBar mProgressBar;
+
+    /**
+     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
+     * device.
+     */
+    protected boolean mTwoPane;
 
     public ActivityViewModel(A activity) {
         this.activity = activity;
@@ -65,7 +81,12 @@ public class ActivityViewModel<A extends AppCompatActivity> extends BaseObservab
     }
 
     public void onOptionsItemSelected(MenuItem item) {
-
+        Log.i("Menu ", " Clicked menu item: " + item);
+        if (this.onOptionsItemSelectedStart()) {
+            this.getActivity().startNewActivityWithId(item.getItemId());
+        } else {
+            Toast.makeText(getActivity(), "Write external storage permission needed.", Toast.LENGTH_LONG).show();
+        }
     }
 
     public void onConfigurationChanged(Configuration newConfig) {
@@ -93,14 +114,32 @@ public class ActivityViewModel<A extends AppCompatActivity> extends BaseObservab
     }
 
     public void hideLoading() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.cancel();
+        if (mProgressBar != null && mProgressBar.isShown()) {
+            mProgressBar.setVisibility(View.INVISIBLE);
+        }
+        if (mConstraintLayout != null && mConstraintLayout.isShown()) {
+            mConstraintLayout.setVisibility(View.INVISIBLE);
         }
     }
 
-    public void showLoading() {
+    public ProgressBar showLoading() {
         hideLoading();
-        mProgressDialog = CommonUtils.showLoadingDialog(this.getActivity());
+        //mProgressBar.setContentView(R.layout.progress_bar); ?
+        mConstraintLayout = (ConstraintLayout) getActivity().findViewById(R.id.loading_layout);
+        if (mConstraintLayout != null) {
+            mConstraintLayout.setBackground(new ColorDrawable(Color.TRANSPARENT));
+            mConstraintLayout.setVisibility(View.VISIBLE);
+        }
+        mProgressBar = getActivity().findViewById(R.id.pb_loading);
+        if (mProgressBar != null) {
+            mProgressBar.setVisibility(View.VISIBLE);
+            mProgressBar.setIndeterminate(true);
+            //mProgressBar.setCancelable(false);
+            //mProgressBar.setCanceledOnTouchOutside(false);
+            //mProgressBar.setTitle("Loading Database");
+            //mProgressBar.setMessage("Loading...");
+        }
+        return mProgressBar;
     }
 
     public void showBackButton() {
@@ -111,6 +150,23 @@ public class ActivityViewModel<A extends AppCompatActivity> extends BaseObservab
         }
     }
 
+    public void checkTwoPane(int id) {
+        if (getActivity().findViewById(id) != null) {
+            // The detail container view will be present only in the
+            // large-screen layouts (res/values-w900dp).
+            // If this view is present, then the
+            // activity should be in two-pane mode.
+            mTwoPane = true;
+        }
+    }
+
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    }
+
+    protected boolean onOptionsItemSelectedStart() {
+        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        return false;
     }
 }

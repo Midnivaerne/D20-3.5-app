@@ -4,11 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ProgressBar;
 
+import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.utils.NetworkUtils;
 
 import androidx.annotation.IdRes;
@@ -20,18 +24,29 @@ import androidx.databinding.ViewDataBinding;
 import lombok.Getter;
 import lombok.NonNull;
 
-public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends ActivityViewModel> extends AppCompatActivity implements FragmentViewModel.Callback {
+public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends ActivityViewModel> extends AppCompatActivity implements BindingFragment.Callback {
 
     @Getter
     private VDB mViewDataBinding;
     @Getter
     private AVM mActivityViewModel;
+    @Getter
+    private Boolean isSavedInstanceStateNull;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
+        isSavedInstanceStateNull = savedInstanceState == null;
+        setApplicationTheme();
         super.onCreate(savedInstanceState);
         bind();
     }
+
+    protected void setApplicationTheme() {
+        int themeId = this.getApplicationContext().getSharedPreferences("AppPref", 0).getInt("AppThemeId", R.style.AppTheme);
+        setTheme(themeId);
+    }
+
+    protected abstract void setTranslatedTexts();
 
     public void bind() {
         mViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
@@ -50,6 +65,7 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
     protected void onStart() {
         super.onStart();
         mActivityViewModel.onStart();
+        setTranslatedTexts();
     }
 
     @Override
@@ -104,7 +120,6 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        System.out.println("entering 4");
         mActivityViewModel.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
@@ -161,13 +176,37 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
     public void hideLoading() {
         if (mActivityViewModel != null) {
             mActivityViewModel.hideLoading();
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
     }
 
-    public void showLoading() {
+    public ProgressBar showLoading() {
         if (mActivityViewModel != null) {
-            mActivityViewModel.showLoading();
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            return mActivityViewModel.showLoading();
         }
+        return null;
+    }
+
+    public void startNewActivityWithId(int destinationID) {
+        if (destinationID == R.id.action_exit) {
+            Log.i("Content ", " Exiting");
+            finish();
+            moveTaskToBack(true);
+        } else {
+            Class<?> destination = chooseNewActivity(destinationID);
+            if (destination != null) {
+                Intent intent_rules = new Intent(this, destination);
+                this.startActivity(intent_rules);
+            } else {
+                Log.i("Content ", " Empty destination");
+            }
+        }
+    }
+
+    protected Class<?> chooseNewActivity(int destinationID) {
+        return null;
     }
 
     public abstract AVM onCreate();

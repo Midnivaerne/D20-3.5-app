@@ -4,11 +4,13 @@ import com.aurora.d20_35_app.helper.BaseDAO;
 import com.aurora.d20_35_app.helper.Item;
 import com.aurora.d20_35_app.models.Translations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.RoomWarnings;
+import androidx.room.Transaction;
 
 @Dao
 public abstract class TranslationsDAO implements BaseDAO<Translations> {
@@ -25,8 +27,26 @@ public abstract class TranslationsDAO implements BaseDAO<Translations> {
     @Query("SELECT DISTINCT Source FROM Translations")
     public abstract List<String> getSources();
 
+    @Transaction
+    public List<Translations> getItemWithSuperFields() {
+        ArrayList<Translations> result = new ArrayList<>();
+        result.addAll(getItems());
+        ArrayList<Item> resultItem = new ArrayList<>();
+        resultItem.addAll(getItemsAsItem());
+        for (int i = 0; i < result.size(); i++) {
+            result.get(i).setItemID(resultItem.get(i).getItemID());
+            result.get(i).setName(resultItem.get(i).getName());
+            result.get(i).setSource(resultItem.get(i).getSource());
+            result.get(i).setIdAsNameBackup(resultItem.get(i).getIdAsNameBackup());
+        }
+        return result;
+    }
+
     @Query("SELECT * FROM Translations")
     public abstract List<Translations> getItems();
+
+    @Query("SELECT * FROM Translations WHERE Language == :language")
+    public abstract List<Translations> getItemsForLanguage(String language);
 
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("SELECT * FROM Translations")
@@ -43,4 +63,19 @@ public abstract class TranslationsDAO implements BaseDAO<Translations> {
 
     @Query("DELETE FROM Translations")
     public abstract void deleteAll();
+
+    @Query("SELECT Translation FROM Translations")
+    public abstract List<String> getAllTranslations();
+
+    @Query("SELECT Translation FROM Translations WHERE Language == :language")
+    public abstract List<String> getAllTranslationsForLanguage(String language);
+
+    @Query("SELECT * FROM Translations WHERE Source == :source AND Language == :language")
+    public abstract List<Translations> getTranslationsWithSourceForLanguage(String source, String language);
+
+    @Query("SELECT * FROM Translations WHERE Item_ID == :itemID AND Language == :language")
+    public abstract Translations getTranslationWithIdForLanguage(int itemID, String language);
+
+    @Query("SELECT * FROM Translations WHERE Name == :name AND Language == :language")
+    public abstract Translations getTranslationWithNameForLanguage(String name, String language);
 }

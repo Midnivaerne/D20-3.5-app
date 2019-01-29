@@ -2,24 +2,66 @@ package com.aurora.d20_35_app.enums;
 
 import com.aurora.d20_35_app.helper.BaseDAO;
 import com.aurora.d20_35_app.helper.Item;
-import com.aurora.d20_35_app.models.Armour;
-import com.aurora.d20_35_app.models.Classes;
-import com.aurora.d20_35_app.models.Equipment;
-import com.aurora.d20_35_app.models.Feats;
-import com.aurora.d20_35_app.models.Hero;
-import com.aurora.d20_35_app.models.Monsters;
-import com.aurora.d20_35_app.models.RaceTemplates;
-import com.aurora.d20_35_app.models.Races;
-import com.aurora.d20_35_app.models.Skills;
-import com.aurora.d20_35_app.models.Spells;
+import com.aurora.d20_35_app.models.Databases;
 import com.aurora.d20_35_app.models.Translations;
-import com.aurora.d20_35_app.models.Weapons;
-import com.aurora.d20_35_app.utilsDatabase.DatabaseHolder;
+import com.aurora.d20_35_app.models.settingSpecific.Classes;
+import com.aurora.d20_35_app.models.settingSpecific.Deities;
+import com.aurora.d20_35_app.models.settingSpecific.Feats;
+import com.aurora.d20_35_app.models.settingSpecific.HeroNPC;
+import com.aurora.d20_35_app.models.settingSpecific.Monsters;
+import com.aurora.d20_35_app.models.settingSpecific.RaceTemplates;
+import com.aurora.d20_35_app.models.settingSpecific.Races;
+import com.aurora.d20_35_app.models.settingSpecific.Skills;
+import com.aurora.d20_35_app.models.settingSpecific.Spells;
+import com.aurora.d20_35_app.models.usables.Armour;
+import com.aurora.d20_35_app.models.usables.Equipment;
+import com.aurora.d20_35_app.models.usables.Weapons;
+import com.aurora.d20_35_app.models.userData.HeroDescription;
+import com.aurora.d20_35_app.models.userData.HeroPlayer;
+import com.aurora.d20_35_app.utils.database.DatabaseHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public enum ItemType {
+    /**
+     * Databases a.k.a Sources
+     */
+    Databases("Databases") {
+        @Override
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
+            return databaseHolder.databasesDAO();
+        }
+
+        @Override
+        public List<Databases> getDatabaseList(DatabaseHolder databaseHolder) {
+            return databaseHolder.DATABASES_LIST;
+        }
+
+        @Override
+        public Map<Integer, Databases> getDatabaseMap(DatabaseHolder databaseHolder) {
+            return databaseHolder.DATABASES_MAP;
+        }
+
+        @Override
+        public Item getNewObject() {
+            return new Databases();
+        }
+
+        @Override
+        public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+            databaseHolder.databasesDAO().insertAll(databaseHolder.DATABASES_LIST);
+        }
+
+        @Override
+        public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+            databaseHolder.DATABASES_LIST.addAll(databaseHolder.databasesDAO().getItems());
+            for (Databases databases : databaseHolder.DATABASES_LIST) {
+                databaseHolder.DATABASES_MAP.put(databases.getItemID(), databases);
+            }
+        }
+    },
     /**
      * Races
      */
@@ -307,14 +349,14 @@ public enum ItemType {
         @Override
         public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
             databaseHolder.spellsDAO().insertAll(databaseHolder.SPELLS_LIST);
-            for (Spells spells : databaseHolder.SPELLS_LIST) {
-                databaseHolder.SPELLS_MAP.put(spells.getItemID(), spells);
-            }
         }
 
         @Override
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
             databaseHolder.SPELLS_LIST.addAll(databaseHolder.spellsDAO().getItems());
+            for (Spells spells : databaseHolder.SPELLS_LIST) {
+                databaseHolder.SPELLS_MAP.put(spells.getItemID(), spells);
+            }
         }
 
     },
@@ -393,44 +435,141 @@ public enum ItemType {
         }
     },
     /**
-     * Hero
+     * HeroPlayer
      */
-    Hero("Hero") {
+    HeroPlayer("HeroPlayer") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
-            return databaseHolder.heroDAO();
+            return databaseHolder.heroPlayerDAO();
         }
 
         @Override
-        public List<Hero> getDatabaseList(DatabaseHolder databaseHolder) {
-            return databaseHolder.HEROES_LIST;
+        public List<HeroPlayer> getDatabaseList(DatabaseHolder databaseHolder) {
+            return databaseHolder.HEROES_PLAYER_LIST;
         }
 
         @Override
-        public Map<Integer, Hero> getDatabaseMap(DatabaseHolder databaseHolder) {
-            return databaseHolder.HEROES_MAP;
+        public Map<Integer, HeroPlayer> getDatabaseMap(DatabaseHolder databaseHolder) {
+            return databaseHolder.HEROES_PLAYER_MAP;
         }
 
         @Override
         public Item getNewObject() {
-            return new Hero();
+            return new HeroPlayer();
         }
 
         @Override
         public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
-            databaseHolder.heroDAO().insertAll(databaseHolder.HEROES_LIST);
-            for (Hero hero : databaseHolder.HEROES_LIST) {
-                databaseHolder.HEROES_MAP.put(hero.getItemID(), hero);
+            List<Long> baseHeroIds = databaseHolder.heroPlayerDAO().insertAll(databaseHolder.HEROES_PLAYER_LIST);
+            List<HeroDescription> descriptions = new ArrayList<>();
+            for (int i = 0; i < baseHeroIds.size(); i++) {
+                Integer heroId = baseHeroIds.get(i) != null ? baseHeroIds.get(i).intValue() : null;
+                databaseHolder.HEROES_PLAYER_LIST.get(i).setItemID(heroId);
+                HeroDescription description = databaseHolder.HEROES_PLAYER_LIST.get(i).getHeroDescription();
+                description.setHeroParentItemID(heroId);
+                descriptions.add(description);
             }
+            databaseHolder.heroDescriptionDAO().insertAll(descriptions);
         }
 
         @Override
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
-            databaseHolder.HEROES_LIST.addAll(databaseHolder.heroDAO().getItems());
+            List<HeroPlayer> heroes = databaseHolder.heroPlayerDAO().getItemWithSuperFields();
+            List<Integer> heroesIds = new ArrayList<>();
+            databaseHolder.HEROES_PLAYER_LIST.addAll(heroes);
+            for (HeroPlayer heroPlayer : databaseHolder.HEROES_PLAYER_LIST) {
+                databaseHolder.HEROES_PLAYER_MAP.put(heroPlayer.getItemID(), heroPlayer);
+                heroesIds.add(heroPlayer.getItemID());
+                heroPlayer.backupNamesFromIdCreator();
+            }
+            List<HeroDescription> descriptions = databaseHolder.heroDescriptionDAO().getHeroDescriptionsWithSuperFieldsWithParentIdIn(heroesIds);
+            for (int i = 0; i < heroes.size(); i++) {
+                descriptions.get(i).backupNamesFromIdCreator();
+                databaseHolder.HEROES_PLAYER_LIST.get(i).setHeroDescription(descriptions.get(i));
+                for (HeroDescription desc : descriptions) {
+                    if (desc.getHeroParentItemID().equals(heroesIds.get(i))) {
+                        databaseHolder.HEROES_PLAYER_MAP.get(heroesIds.get(i)).setHeroDescription(desc);
+                    }
+                }
+            }
         }
     },
     /**
-     * Hero
+     * HeroNPC
+     */
+    HeroNPC("HeroNPC") {
+        @Override
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
+            return databaseHolder.heroNPCDAO();
+        }
+
+        @Override
+        public List<HeroNPC> getDatabaseList(DatabaseHolder databaseHolder) {
+            return databaseHolder.HEROES_NPC_LIST;
+        }
+
+        @Override
+        public Map<Integer, HeroNPC> getDatabaseMap(DatabaseHolder databaseHolder) {
+            return databaseHolder.HEROES_NPC_MAP;
+        }
+
+        @Override
+        public Item getNewObject() {
+            return new HeroNPC();
+        }
+
+        @Override
+        public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+            databaseHolder.heroNPCDAO().insertAll(databaseHolder.HEROES_NPC_LIST);
+        }
+
+        @Override
+        public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+            databaseHolder.HEROES_NPC_LIST.addAll(databaseHolder.heroNPCDAO().getItems());
+            for (HeroNPC heroNPC : databaseHolder.HEROES_NPC_LIST) {
+                databaseHolder.HEROES_NPC_MAP.put(heroNPC.getItemID(), heroNPC);
+            }
+        }
+    },
+    /**
+     * Deities
+     */
+    Deities("Deities") {
+        @Override
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
+            return databaseHolder.deitiesDAO();
+        }
+
+        @Override
+        public List<Deities> getDatabaseList(DatabaseHolder databaseHolder) {
+            return databaseHolder.DEITIES_LIST;
+        }
+
+        @Override
+        public Map<Integer, Deities> getDatabaseMap(DatabaseHolder databaseHolder) {
+            return databaseHolder.DEITIES_MAP;
+        }
+
+        @Override
+        public Item getNewObject() {
+            return new Deities();
+        }
+
+        @Override
+        public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+            databaseHolder.deitiesDAO().insertAll(databaseHolder.DEITIES_LIST);
+        }
+
+        @Override
+        public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+            databaseHolder.DEITIES_LIST.addAll(databaseHolder.deitiesDAO().getItems());
+            for (Deities deity : databaseHolder.DEITIES_LIST) {
+                databaseHolder.DEITIES_MAP.put(deity.getItemID(), deity);
+            }
+        }
+    },
+    /**
+     * Translations
      */
     Translations("Translations") {
         @Override
@@ -456,16 +595,15 @@ public enum ItemType {
         @Override
         public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
             databaseHolder.translationsDAO().insertAll(databaseHolder.TRANSLATIONS_LIST);
-            for (Translations translations : databaseHolder.TRANSLATIONS_LIST) {
-                databaseHolder.TRANSLATIONS_MAP.put(translations.getItemID(), translations);
-            }
         }
 
         @Override
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
             databaseHolder.TRANSLATIONS_LIST.addAll(databaseHolder.translationsDAO().getItems());
+            for (Translations translations : databaseHolder.TRANSLATIONS_LIST) {
+                databaseHolder.TRANSLATIONS_MAP.put(translations.getItemID(), translations);
+            }
         }
-
     };
 
     private String itemType;

@@ -2,9 +2,9 @@ package com.aurora.d20_35_app.enums;
 
 import com.aurora.d20_35_app.helper.BaseDAO;
 import com.aurora.d20_35_app.helper.Rules;
-import com.aurora.d20_35_app.models.RulesCombat;
-import com.aurora.d20_35_app.models.RulesSkills;
-import com.aurora.d20_35_app.utilsDatabase.DatabaseHolder;
+import com.aurora.d20_35_app.models.constants.RulesCombat;
+import com.aurora.d20_35_app.models.constants.RulesSkills;
+import com.aurora.d20_35_app.utils.database.DatabaseHolder;
 
 import java.util.List;
 import java.util.Map;

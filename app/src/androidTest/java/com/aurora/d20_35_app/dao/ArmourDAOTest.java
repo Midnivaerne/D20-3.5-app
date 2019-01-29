@@ -1,8 +1,8 @@
 package com.aurora.d20_35_app.dao;
 
-import com.aurora.d20_35_app.models.Armour;
-import com.aurora.d20_35_app.utilsDatabase.DatabaseHolder;
-import com.aurora.d20_35_app.utilsDatabase.DatabaseManager;
+import com.aurora.d20_35_app.models.usables.Armour;
+import com.aurora.d20_35_app.utils.database.DatabaseHolder;
+import com.aurora.d20_35_app.utils.database.DatabaseManager;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -24,9 +24,9 @@ import static java.lang.Math.toIntExact;
 @RunWith(AndroidJUnit4.class)
 public class ArmourDAOTest {
 
-    private static final Armour ARMOUR1 = new Armour("name1", "source1", "price1", "1", "1", "1", "1", "1", "1", "1", "1", "1");
-    private static final Armour ARMOUR2 = new Armour("name2", "source2", "price2", "2", "2", "2", "2", "2", "2", "2", "2", "2");
-    private static final Armour ARMOUR3 = new Armour("name3", "source3", "price3", "3", "3", "3", "3", "3", "3", "3", "3", "3");
+    private static final Armour ARMOUR1 = new Armour("name1", "source1", "1=idBqp1", "price1", "1", "1", "1", "1", "1", "1", "1", "1", "1");
+    private static final Armour ARMOUR2 = new Armour("name2", "source2", "2=idBqp2", "price2", "2", "2", "2", "2", "2", "2", "2", "2", "2");
+    private static final Armour ARMOUR3 = new Armour("name3", "source3", "3=idBqp3", "price3", "3", "3", "3", "3", "3", "3", "3", "3", "3");
     private DatabaseHolder mDatabaseHolder;
 
     @Before

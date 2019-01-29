@@ -4,7 +4,9 @@ import com.aurora.d20_35_app.helper.Item;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,7 +14,9 @@ import lombok.Setter;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Entity(tableName = "Translations", inheritSuperIndices = true)
+@Entity(tableName = "Translations", inheritSuperIndices = true,
+        indices = {@Index(value = {"Source"})},
+        foreignKeys = @ForeignKey(entity = Databases.class, parentColumns = "Source", childColumns = "Source", onDelete = ForeignKey.CASCADE))
 public class Translations extends Item {
 
     @Ignore
@@ -20,8 +24,13 @@ public class Translations extends Item {
         super();
     }
 
-    public Translations(String name, String source, String category, String language, String trans) {
-        super(name, source);
+    public Translations(String name,
+                        String source,
+                        String idAsNameBackup,
+                        String category,
+                        String language,
+                        String trans) {
+        super(name, source, idAsNameBackup);
         this.category = category;
         this.language = language;
         this.trans = trans;
@@ -50,7 +59,13 @@ public class Translations extends Item {
     private String trans;
 
     public Translations clone() {
-        return new Translations(getName(), getSource(), this.category, this.language, this.trans);
+        return new Translations(
+                getName(),
+                getSource(),
+                getIdAsNameBackup(),
+                getCategory(),
+                getLanguage(),
+                getTrans());
     }
 
 }

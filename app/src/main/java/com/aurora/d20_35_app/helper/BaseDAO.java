@@ -30,6 +30,8 @@ public interface BaseDAO<T> {
 
     List<String> getSources();
 
+    List<T> getItemWithSuperFields();
+
     List<T> getItems();
 
     List<Item> getItemsAsItem();

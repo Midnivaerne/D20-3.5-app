@@ -1,56 +1,99 @@
 package com.aurora.d20_35_app.viewModels;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
+import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
+import android.view.Display;
+import android.view.Gravity;
 
 import com.aurora.d20_35_app.helper.ActivityViewModel;
+import com.aurora.d20_35_app.interfaces.CustomCallback;
+import com.aurora.d20_35_app.utils.database.DatabaseManager;
 import com.aurora.d20_35_app.views.D2035appActivity;
 
-import androidx.core.content.ContextCompat;
-import androidx.databinding.ObservableField;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.concurrent.ExecutionException;
 
+import static com.aurora.d20_35_app.utils.CommonUtils.randomWithRange;
+import static com.aurora.d20_35_app.utils.CommonUtils.resizeInputStreamToBitmap;
 
 public class D2035appVM extends ActivityViewModel<D2035appActivity> {
 
-    public final ObservableField<String> status = new ObservableField<>();
+    private static final int MIN_LEVEL_DRAWABLE = 1;
+    private static final int MAX_LEVEL_DRAWABLE = 6;
+    private int appDimensionWidth;
+    private int appDimensionHeight;
 
-    public D2035appVM(D2035appActivity activity, String status) {
+    public D2035appVM(D2035appActivity activity) {
         super(activity);
-        this.status.set(status);
+        setDimensions();
     }
 
-    public void onResume() {
+    private void setDimensions() {
+        Display display = getActivity().getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        appDimensionWidth = size.x;
+        appDimensionHeight = size.y;
     }
 
-    @Override
-    public void onOptionsItemSelected(MenuItem item) {
-        Log.i("Menu ", " Clicked menu item: " + item);
-        if (this.onOptionsItemSelectedStart()) {
-            this.getActivity().startNewActivityFromMain(item.getItemId());
-            super.onOptionsItemSelected(item); //todo check this
-        } else {
-            Toast.makeText(getActivity(), "Write external storage permission needed.", Toast.LENGTH_LONG).show();
+    public Drawable getBackground() {
+        int launchImageNumber = randomWithRange(MIN_LEVEL_DRAWABLE, MAX_LEVEL_DRAWABLE);
+        InputStream inputStream = null;
+        try {
+            inputStream = getActivity().getAssets().open("launch_image_" + launchImageNumber + ".png");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Bitmap bitmapResized = resizeInputStreamToBitmap(inputStream, appDimensionWidth, appDimensionHeight);
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(getActivity().getResources(), bitmapResized);
+        bitmapDrawable.setGravity(Gravity.FILL);
+        bitmapDrawable.setAlpha(255);
+        bitmapDrawable.setVisible(true, true);
+        return bitmapDrawable;
+    }
+
+    public void initializeDB(CustomCallback callback) {
+        InitializeDbAsync initializeDbAsync = new InitializeDbAsync(this, callback);
+        try {
+            initializeDbAsync.execute().get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
-    private boolean onOptionsItemSelectedStart() {
-        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }
-        return false;
-    }
+    private static class InitializeDbAsync extends AsyncTask<Void, Void, Void> {
+        private final D2035appVM d2035appVM;
+        private CustomCallback customCallback;
 
-    public void buttonOnClick(View view) {
-        Log.i("Button ", " Clicked " + view.toString());
-        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            this.getActivity().startNewActivityFromMain(view.getId());
-        } else {
-            Toast.makeText(getActivity(), "Write external storage permission needed.", Toast.LENGTH_LONG).show();
+        private InitializeDbAsync(D2035appVM d2035appVM, CustomCallback customCallback) {
+            this.d2035appVM = d2035appVM;
+            this.customCallback = customCallback;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            DatabaseManager.startProgressBar(d2035appVM.getActivity());
+        }
+
+        @Override
+        protected Void doInBackground(final Void... params) {
+            DatabaseManager.initialDatabasesResolver(d2035appVM.getActivity());
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void par) {
+            DatabaseManager.closeProgressBar(d2035appVM.getActivity());
+            try {
+                Thread.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            customCallback.onDatabaseInitialised();
         }
     }
-
 }

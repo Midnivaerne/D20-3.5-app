@@ -2,7 +2,7 @@ package com.aurora.d20_35_app.ActivitiesInstrumentedTest;
 
 import android.content.Context;
 
-import com.aurora.d20_35_app.views.D2035appActivity;
+import com.aurora.d20_35_app.views.MainMenuActivity;
 
 import org.junit.After;
 import org.junit.Before;
@@ -17,17 +17,17 @@ import static org.junit.Assert.assertEquals;
 public class d2035AppViewInstrumentedTest {
 
     @Rule
-    public ActivityTestRule<D2035appActivity> mainActivityActivityTestRule = new ActivityTestRule<D2035appActivity>(D2035appActivity.class);
-    private D2035appActivity D2035appActivity = null;
+    public ActivityTestRule<MainMenuActivity> mainActivityActivityTestRule = new ActivityTestRule<MainMenuActivity>(MainMenuActivity.class);
+    private MainMenuActivity MainMenuActivity = null;
 
     @Before
     public void setUp() throws Exception {
-        D2035appActivity = mainActivityActivityTestRule.getActivity();
+        MainMenuActivity = mainActivityActivityTestRule.getActivity();
     }
 
     @After
     public void tearDown() throws Exception {
-        D2035appActivity = null;
+        MainMenuActivity = null;
     }
 
     @Test

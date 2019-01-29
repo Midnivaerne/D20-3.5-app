@@ -1,18 +1,18 @@
 package com.aurora.d20_35_app.utils;
 
 import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.provider.Settings;
 import android.util.Patterns;
 
-import com.aurora.d20_35_app.R;
-
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -50,16 +50,67 @@ public final class CommonUtils {
         return new String(buffer, "UTF-8");
     }
 
-    public static ProgressDialog showLoadingDialog(Context context) {
-        ProgressDialog progressDialog = new ProgressDialog(context);
-        progressDialog.show();
-        if (progressDialog.getWindow() != null) {
-            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    public static int randomWithRange(int min, int max) {
+        int range = (max - min) + 1;
+        return (int) (Math.random() * range) + min;
+    }
+
+    public static Bitmap resizeInputStreamToBitmap(InputStream inputStream, int reqWidth, int reqHeight) {
+        // BEST QUALITY MATCH
+        // Decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(inputStream, null, options); //todo investigate if null
+
+        // Calculate inSampleSize
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        final String imageType = options.outMimeType;
+        options.inPreferredConfig = Bitmap.Config.RGB_565;
+        int inSampleSize = 1;
+
+        if (height > reqHeight) {
+            inSampleSize = Math.round((float) height / (float) reqHeight);
         }
-        progressDialog.setContentView(R.layout.progress_dialog);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setCancelable(false);
-        progressDialog.setCanceledOnTouchOutside(false);
-        return progressDialog;
+
+        int expectedWidth = width / inSampleSize;
+
+        if (expectedWidth > reqWidth) {
+            //if(Math.round((float)width / (float)reqWidth) > inSampleSize) // If bigger SampSize..
+            inSampleSize = Math.round((float) width / (float) reqWidth);
+        }
+
+        options.inSampleSize = inSampleSize;
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+
+        return BitmapFactory.decodeStream(inputStream, null, options);
+    }
+
+    public static void copyFile(Path source, Path destination) {
+        try (InputStream in = Files.newInputStream(source);
+             OutputStream out = Files.newOutputStream(destination)) {
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void copyFileFromAssets(InputStream in, Path destination) {
+        try (OutputStream out = Files.newOutputStream(destination)) {
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

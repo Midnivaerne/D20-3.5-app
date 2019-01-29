@@ -1,17 +1,91 @@
-<Races>
-    <Races_Item>
-        <Name>Test_race_name1</Name>
-        <Source>Test_race_source</Source>
-        <RaceDescription>bla bla bla descr test11oneonone</RaceDescription>
-    </Races_Item>
-    <Races_Item>
-        <Name>Test_race_name2</Name>
-        <Source>Test_race_source</Source>
-        <RaceDescription>trutututu asdasdffgdf</RaceDescription>
-    </Races_Item>
-    <Races_Item>
-        <Name>Test_race_name3</Name>
-        <Source>Test_race_source2</Source>
-        <RaceDescription>gdsfgdfgdfgffgdf</RaceDescription>
-    </Races_Item>
-</Races>
+<Database>
+    <Databases>
+        <Databases_Item>
+            <Name>Test_race_source_name</Name>
+            <Source>Test_race_source</Source>
+        </Databases_Item>
+        <Databases_Item>
+            <Name>Test_race_source2_name</Name>
+            <Source>Test_race_source2</Source>
+        </Databases_Item>
+        <Databases_Item>
+            <Name>Player_Hero_Source_name</Name>
+            <Source>Player_Hero_Source</Source>
+        </Databases_Item>
+    </Databases>
+    <Races>
+        <Races_Item>
+            <Name>Test_race_name1</Name>
+            <Source>Test_race_source</Source>
+            <RaceDescription>bla bla bla descr test11oneonone</RaceDescription>
+        </Races_Item>
+        <Races_Item>
+            <Name>Test_race_name2</Name>
+            <Source>Test_race_source</Source>
+            <RaceDescription>trutututu asdasdffgdf</RaceDescription>
+        </Races_Item>
+        <Races_Item>
+            <Name>Test_race_name3</Name>
+            <Source>Test_race_source2</Source>
+            <RaceDescription>gdsfgdfgdfgffgdf</RaceDescription>
+        </Races_Item>
+    </Races>
+    <HeroPlayer>
+        <HeroPlayer_Item>
+            <Name>Hero_Name</Name>
+            <Source>Player_Hero_Source</Source>
+            <IdAsNameBackup>
+                Classes{1=classNameTagWithId1},Races{1=raceNameTagwithId1},Deities{1=NameTagWithId1}
+            </IdAsNameBackup>
+            <Player>Player</Player>
+            <ClassAndLevel>1=1</ClassAndLevel>
+            <Race>1</Race>
+            <Alignment>5</Alignment>
+            <Deity>1</Deity>
+            <Size>3</Size>
+            <Age>80</Age>
+            <Gender>M</Gender>
+            <Height>180</Height>
+            <Weight>70</Weight>
+            <Eyes>blue</Eyes>
+            <Hair>dark</Hair>
+            <Skin>white</Skin>
+        </HeroPlayer_Item>
+        <HeroPlayer_Item>
+            <Name>Another_Hero_Name</Name>
+            <Source>Player_Hero_Source</Source>
+            <IdAsNameBackup>
+                Classes{1=classNameTagWithId1,2=classNameTagWithId2},Races{1=raceNameTagwithId1,1=raceTemplateNameTagwithId1},Deities{2=NameTagWithId2}
+            </IdAsNameBackup>
+            <Player>Player</Player>
+            <ClassAndLevel>1=1,2=1</ClassAndLevel>
+            <Race>1+1</Race>
+            <Alignment>5</Alignment>
+            <Deity>2</Deity>
+            <Size>3</Size>
+            <Age>36</Age>
+            <Gender>F</Gender>
+            <Height>160</Height>
+            <Weight>60</Weight>
+            <Eyes>violet</Eyes>
+            <Hair>silver</Hair>
+            <Skin>white</Skin>
+        </HeroPlayer_Item>
+    </HeroPlayer>
+    <Translations>
+        <Translations_Item>
+            <Name>Test_race_source_name</Name>
+            <Source>Test_race_source</Source>
+            <Category>Sources_Names</Category>
+            <Language>en</Language>
+            <Translation>Eng name of source of test race</Translation>
+        </Translations_Item>
+        <Translations_Item>
+            <Name>Test_race_name1</Name>
+            <Source>Test_race_source</Source>
+            <Category>Races_Names</Category>
+            <Language>en</Language>
+            <Translation>Eng name of test race</Translation>
+        </Translations_Item>
+    </Translations>
+</Database>

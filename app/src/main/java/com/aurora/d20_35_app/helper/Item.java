@@ -1,6 +1,9 @@
 package com.aurora.d20_35_app.helper;
 
 import com.aurora.d20_35_app.enums.ItemType;
+import com.aurora.d20_35_app.utils.CustomStringParsers;
+
+import java.util.Map;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Ignore;
@@ -20,12 +23,14 @@ public class Item {
     public static final String nameColumnName = "Name";
     @Ignore
     public static final String sourceColumnName = "Source";
+    @Ignore
+    public static final String idAsNameBackupColumnName = "IdAsNameBackup";
 
     @Getter
     @Setter
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = itemIdColumnName)
-    private int itemID;
+    private Integer itemID;
 
     @Getter
     @Setter
@@ -39,22 +44,41 @@ public class Item {
 
     @Getter
     @Setter
+    @ColumnInfo(name = idAsNameBackupColumnName)
+    private String idAsNameBackup;
+
+    @Getter
+    @Setter
     @Ignore
     private String content;
     @Ignore
     public String details;
 
+    @Getter
+    @Setter
+    @Ignore
+    private Map<ItemType, Map<Integer, String>> backupNames;
+
     @Ignore
     public Item() {
     }
 
-    public Item(String name, String source) {
+    public Item(String name, String source, String idAsNameBackup) {
         this.name = name;
         this.source = source;
+        this.idAsNameBackup = idAsNameBackup;
+        backupNamesFromIdCreator();
+    }
+
+    @Ignore
+    public void backupNamesFromIdCreator() {
+        if (idAsNameBackup != null && !"".equals(idAsNameBackup)) {
+            backupNames = CustomStringParsers.StringWithCommaAndBracketsToMap(idAsNameBackup);
+        }
     }
 
     public Item clone() {
-        return new Item(name, source);
+        return new Item(name, source, idAsNameBackup);
     }
 
     protected boolean canEqual(Object other) {

@@ -6,6 +6,8 @@ import com.aurora.d20_35_app.databinding.ActivityHelpBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.viewModels.HelpVM;
 
+import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
+
 
 public class HelpActivity extends BindingActivity<ActivityHelpBinding, HelpVM> {
 
@@ -13,6 +15,11 @@ public class HelpActivity extends BindingActivity<ActivityHelpBinding, HelpVM> {
     public HelpVM onCreate() {
         setSupportActionBar(getMViewDataBinding().toolbar);
         return new HelpVM(this);
+    }
+
+    @Override
+    protected void setTranslatedTexts() {
+        getSupportActionBar().setTitle(translate("title_activity_help_"));
     }
 
     @Override

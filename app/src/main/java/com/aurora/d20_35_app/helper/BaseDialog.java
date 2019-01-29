@@ -15,7 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import lombok.Getter;
 import lombok.NonNull;
 
-public class BaseDialog extends FragmentViewModel {
+public class BaseDialog extends BindingFragment {
 
     @Getter
     private BindingActivity mActivity;
@@ -38,6 +38,11 @@ public class BaseDialog extends FragmentViewModel {
             this.mActivity = mActivity;
             mActivity.onFragmentAttached();
         }
+    }
+
+    @Override
+    protected void setTranslatedTexts() {
+
     }
 
     @NonNull
