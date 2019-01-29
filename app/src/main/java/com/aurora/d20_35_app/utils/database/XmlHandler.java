@@ -46,7 +46,7 @@ public class XmlHandler extends DefaultHandler {
     public void endElement(String uri, String localName, String qName) {
         for (int i = 0; i < DBColumnNames.values().length; i++) {
             if (DBColumnNames.values()[i].getColumnIsUsed()) {
-                DBColumnNames.values()[i].setParameter(item, data.toString());
+                DBColumnNames.values()[i].setParameter(item, data.toString().trim());
                 Objects.requireNonNull(DBColumnNames.fromString(qName)).setColumnIsUsed(false);
                 break;
             }

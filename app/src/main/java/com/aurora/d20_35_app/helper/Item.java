@@ -71,8 +71,10 @@ public class Item {
     }
 
     @Ignore
-    private void backupNamesFromIdCreator() {
-        backupNames = CustomStringParsers.StringWithCommaAndBracketsToMap(idAsNameBackup);
+    public void backupNamesFromIdCreator() {
+        if (idAsNameBackup != null && !"".equals(idAsNameBackup)) {
+            backupNames = CustomStringParsers.StringWithCommaAndBracketsToMap(idAsNameBackup);
+        }
     }
 
     public Item clone() {

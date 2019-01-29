@@ -87,6 +87,7 @@ public class D2035appVM extends ActivityViewModel<D2035appActivity> {
 
         @Override
         protected void onPostExecute(Void par) {
+            DatabaseManager.closeProgressBar(d2035appVM.getActivity());
             try {
                 Thread.sleep(1);
             } catch (InterruptedException e) {

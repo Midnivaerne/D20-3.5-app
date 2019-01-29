@@ -1,6 +1,5 @@
 package com.aurora.d20_35_app.helper;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -9,7 +8,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ProgressBar;
 
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.utils.NetworkUtils;
@@ -175,11 +176,14 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
     public void hideLoading() {
         if (mActivityViewModel != null) {
             mActivityViewModel.hideLoading();
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
     }
 
-    public ProgressDialog showLoading() {
+    public ProgressBar showLoading() {
         if (mActivityViewModel != null) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             return mActivityViewModel.showLoading();
         }
         return null;

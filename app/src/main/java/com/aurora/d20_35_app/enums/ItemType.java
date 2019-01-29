@@ -461,36 +461,30 @@ public enum ItemType {
         @Override
         public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
             List<Long> baseHeroIds = databaseHolder.heroPlayerDAO().insertAll(databaseHolder.HEROES_PLAYER_LIST);
-            System.out.println("playersFromDB>"+databaseHolder.heroPlayerDAO().getItems());//todo delete
-            System.out.println("ids>"+baseHeroIds);//todo delete
             List<HeroDescription> descriptions = new ArrayList<>();
             for (int i = 0; i < baseHeroIds.size(); i++) {
-                System.out.println("i:"+i+">id="+baseHeroIds.get(i));//todo delete
                 Integer heroId = baseHeroIds.get(i) != null ? baseHeroIds.get(i).intValue() : null;
-                System.out.println("heroId="+heroId);//todo delete
                 databaseHolder.HEROES_PLAYER_LIST.get(i).setItemID(heroId);
                 HeroDescription description = databaseHolder.HEROES_PLAYER_LIST.get(i).getHeroDescription();
-                System.out.println("description="+description);//todo delete
-                System.out.println("description.name="+description.getName());//todo delete
                 description.setHeroParentItemID(heroId);
-                System.out.println("HeroParentItemID="+description.getHeroParentItemID());//todo delete
                 descriptions.add(description);
             }
-            System.out.println("All|" + descriptions);//todo delete
             databaseHolder.heroDescriptionDAO().insertAll(descriptions);
         }
 
         @Override
         public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
-            List<HeroPlayer> heroes = databaseHolder.heroPlayerDAO().getItems();
+            List<HeroPlayer> heroes = databaseHolder.heroPlayerDAO().getItemWithSuperFields();
             List<Integer> heroesIds = new ArrayList<>();
             databaseHolder.HEROES_PLAYER_LIST.addAll(heroes);
             for (HeroPlayer heroPlayer : databaseHolder.HEROES_PLAYER_LIST) {
                 databaseHolder.HEROES_PLAYER_MAP.put(heroPlayer.getItemID(), heroPlayer);
                 heroesIds.add(heroPlayer.getItemID());
+                heroPlayer.backupNamesFromIdCreator();
             }
-            List<HeroDescription> descriptions = databaseHolder.heroDescriptionDAO().getHeroDescriptionsWithParentIdIn(heroesIds);
+            List<HeroDescription> descriptions = databaseHolder.heroDescriptionDAO().getHeroDescriptionsWithSuperFieldsWithParentIdIn(heroesIds);
             for (int i = 0; i < heroes.size(); i++) {
+                descriptions.get(i).backupNamesFromIdCreator();
                 databaseHolder.HEROES_PLAYER_LIST.get(i).setHeroDescription(descriptions.get(i));
                 for (HeroDescription desc : descriptions) {
                     if (desc.getHeroParentItemID().equals(heroesIds.get(i))) {

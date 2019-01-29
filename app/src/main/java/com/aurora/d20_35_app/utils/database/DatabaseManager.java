@@ -1,25 +1,27 @@
 package com.aurora.d20_35_app.utils.database;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.util.Xml;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.aurora.d20_35_app.enums.DatabaseUsage;
 import com.aurora.d20_35_app.enums.ItemType;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.models.userData.HeroPlayer;
+import com.aurora.d20_35_app.utils.CommonUtils;
 
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlSerializer;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -37,7 +39,7 @@ public class DatabaseManager {
     //String filename = "standardRulesData.xml";
     private static final String[] FILENAMES = {"test.xml", "translations_for_app.xml"}; //todo refactor
 
-    private static ProgressDialog progressDialog;
+    private static ProgressBar progressBar;
     private static final int MAX_PROGRESS = 100;
     private static final int NUMBER_OF_PROGRESS_INCREASES = 10;
 
@@ -71,71 +73,59 @@ public class DatabaseManager {
     }
 
     public static void startProgressBar(@NonNull BindingActivity activity) {
-        progressDialog = activity.showLoading();
-        if (progressDialog != null) {
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            progressDialog.setMax(MAX_PROGRESS);
-            progressDialog.setTitle("Loading Database");
-            progressDialog.setMessage("Loading...");
+        progressBar = activity.showLoading();
+        if (progressBar != null) {
+            progressBar.setMax(MAX_PROGRESS);
         }
     }
 
     private static void increaseProgressBar() {
-        if (progressDialog != null) {
+        if (progressBar != null) {
             int increaseBy;
-            if (progressDialog.getProgress() == MAX_PROGRESS) {
+            if (progressBar.getProgress() == MAX_PROGRESS) {
                 return;
-            } else if (progressDialog.getProgress() < MAX_PROGRESS && (progressDialog.getProgress() > (MAX_PROGRESS - (MAX_PROGRESS / NUMBER_OF_PROGRESS_INCREASES)))) {
-                increaseBy = MAX_PROGRESS - progressDialog.getProgress();
+            } else if (progressBar.getProgress() < MAX_PROGRESS && (progressBar.getProgress() > (MAX_PROGRESS - (MAX_PROGRESS / NUMBER_OF_PROGRESS_INCREASES)))) {
+                increaseBy = MAX_PROGRESS - progressBar.getProgress();
             } else {
                 increaseBy = MAX_PROGRESS / NUMBER_OF_PROGRESS_INCREASES;
             }
-            progressDialog.incrementProgressBy(increaseBy);
+            progressBar.incrementProgressBy(increaseBy);
         }
     }
 
-    private static void closeProgressBar() {
-        if (progressDialog != null) {
-            if (progressDialog.getProgress() != MAX_PROGRESS) {
-                progressDialog.incrementProgressBy(MAX_PROGRESS - progressDialog.getProgress());
+    public static void closeProgressBar(@NonNull BindingActivity activity) {
+        if (progressBar != null) {
+            if (progressBar.getProgress() != MAX_PROGRESS) {
+                progressBar.incrementProgressBy(MAX_PROGRESS - progressBar.getProgress());
             }
-            progressDialog.setMessage("Finished");
-            progressDialog.cancel();
-            progressDialog = null;
+            progressBar.setVisibility(View.GONE);
+            progressBar = null;
+            activity.hideLoading();
         }
     }
 
     private static void copyAllFilesFromAssets(Activity activity) {
         for (String filename : FILENAMES) {
-            copyFile(filename, activity); //todo test - refactor or delete
-        }
-    }
-
-    private static void copyFile(String fileName, Activity activity) {
-        try {
-            InputStream in = activity.getAssets().open(fileName);
-            OutputStream out = new FileOutputStream(new File(path, fileName));
-            byte[] buffer = new byte[1024];
-            int read;
-            while ((read = in.read(buffer)) != -1) {
-                out.write(buffer, 0, read);
+            try (InputStream source = activity.getAssets().open(filename)) {
+                Path destination = FileSystems.getDefault().getPath(path, filename);
+                CommonUtils.copyFileFromAssets(source, destination); //todo test - refactor or delete
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            in.close();
-            in = null;
-            out.flush();
-            out.close();
-            out = null;
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
     private static void initialPathSetup() {
         Log.i("Database directory:", "checking if directory: " + path + " exist...");
-        if (!new File(path).exists()) {
+        Path dir = FileSystems.getDefault().getPath(path);
+        if (Files.notExists(dir)) {
             Log.i("Database directory:", "directory " + path + " doesn't exist, creating...");
-            Boolean fileCreated = new File(String.valueOf(path)).mkdirs();
-            if (fileCreated) {
+            try {
+                Files.createDirectories(dir);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (Files.exists(dir)) {
                 Log.i("Database directory:", "created directory:" + path);
             } else {
                 Log.e("Database directory:", "failed to create directory:" + path);
@@ -232,11 +222,11 @@ public class DatabaseManager {
 
     private static void loadDataFromFileToHolder(DatabaseHolder databaseHolder, String filename) {
         try {
-            File inputFile = new File(path + /*File.separator +*/ filename);
+            Path inputFile = FileSystems.getDefault().getPath(path, filename);
             SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
             SAXParser saxParser = saxParserFactory.newSAXParser();
             XmlHandler xmlHandler = new XmlHandler(databaseHolder);
-            saxParser.parse(inputFile, xmlHandler);
+            saxParser.parse(inputFile.toFile(), xmlHandler);
         } catch (IOException | SAXException | ParserConfigurationException e) {
             e.printStackTrace();
         }
@@ -245,7 +235,12 @@ public class DatabaseManager {
 
     public static void writeDataToFile(DatabaseHolder databaseHolder) {
         String filename = "testFile.xml";
-        File outputFile = new File(path + File.separator + filename);
+        Path outPath = FileSystems.getDefault().getPath(path, filename);
+        try {
+            Path outFile = Files.createFile(outPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         XmlSerializer xmlSerializer = Xml.newSerializer(); //todo continue
         //out = new ObjectOutputStream(new FileOutputStream(new File(getFilesDir(),"")+File.separator+filename));
         //out.writeObject(myPersonObject);
@@ -286,8 +281,7 @@ public class DatabaseManager {
     }
 
     public static void dbCheckup() {
-        System.out.println("db data errors, need fix");
-        //todo implement db checkup and fix
+        System.out.println("db data errors, need fix");   //todo implement db checkup and fix
     }
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
@@ -312,7 +306,6 @@ public class DatabaseManager {
         protected void onPostExecute(final Void vo) {
             super.onPostExecute(vo);
             increaseProgressBar();
-            closeProgressBar();
         }
     }
 

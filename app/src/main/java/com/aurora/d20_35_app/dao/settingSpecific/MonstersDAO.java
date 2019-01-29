@@ -4,11 +4,13 @@ import com.aurora.d20_35_app.helper.BaseDAO;
 import com.aurora.d20_35_app.helper.Item;
 import com.aurora.d20_35_app.models.settingSpecific.Monsters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.RoomWarnings;
+import androidx.room.Transaction;
 
 @Dao
 public abstract class MonstersDAO  implements BaseDAO<Monsters> {
@@ -24,6 +26,21 @@ public abstract class MonstersDAO  implements BaseDAO<Monsters> {
 
     @Query("SELECT DISTINCT Source FROM Monsters")
     public abstract List<String> getSources();
+
+    @Transaction
+    public List<Monsters> getItemWithSuperFields() {
+        ArrayList<Monsters> result = new ArrayList<>();
+        result.addAll(getItems());
+        ArrayList<Item> resultItem = new ArrayList<>();
+        resultItem.addAll(getItemsAsItem());
+        for (int i = 0; i < result.size(); i++) {
+            result.get(i).setItemID(resultItem.get(i).getItemID());
+            result.get(i).setName(resultItem.get(i).getName());
+            result.get(i).setSource(resultItem.get(i).getSource());
+            result.get(i).setIdAsNameBackup(resultItem.get(i).getIdAsNameBackup());
+        }
+        return result;
+    }
 
     @Query("SELECT * FROM Monsters")
     public abstract List<Monsters> getItems();

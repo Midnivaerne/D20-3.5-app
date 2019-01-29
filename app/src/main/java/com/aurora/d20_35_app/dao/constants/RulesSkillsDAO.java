@@ -4,11 +4,13 @@ import com.aurora.d20_35_app.helper.BaseDAO;
 import com.aurora.d20_35_app.helper.Item;
 import com.aurora.d20_35_app.models.constants.RulesSkills;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.RoomWarnings;
+import androidx.room.Transaction;
 
 @Dao
 public abstract class RulesSkillsDAO implements BaseDAO<RulesSkills> {
@@ -27,6 +29,19 @@ public abstract class RulesSkillsDAO implements BaseDAO<RulesSkills> {
         return null;
     }
 
+    @Transaction
+    public List<RulesSkills> getItemWithSuperFields() {
+        ArrayList<RulesSkills> result = new ArrayList<>();
+        result.addAll(getItems());
+        ArrayList<Item> resultItem = new ArrayList<>();
+        resultItem.addAll(getItemsAsItem());
+        for (int i = 0; i < result.size(); i++) {
+            result.get(i).setItemID(resultItem.get(i).getItemID());
+            result.get(i).setName(resultItem.get(i).getName());
+        }
+        return result;
+    }
+
     @Query("SELECT * FROM RulesSkills")
     public abstract List<RulesSkills> getItems();
 
@@ -35,7 +50,7 @@ public abstract class RulesSkillsDAO implements BaseDAO<RulesSkills> {
     public abstract List<Item> getItemsAsItem(); // above doesn't show Item fields (but they are created/loaded)
 
     @Override
-    public List<RulesSkills> getItemsWithSource(String source){
+    public List<RulesSkills> getItemsWithSource(String source) {
         return null;
     }
 

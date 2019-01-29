@@ -20,7 +20,7 @@ public class CustomStringParsers {
             }
             return out;
         }
-        Log.e("CustomStringParsers ", " stringToSplit is empty");
+        Log.e("CustomStringParsers ", " StringWithCommaToTable > stringToSplit is empty");
         return null;
     }
 
@@ -43,7 +43,7 @@ public class CustomStringParsers {
             }
             return out;
         }
-        Log.e("CustomStringParsers ", " stringToSplit is empty");
+        Log.e("CustomStringParsers ", "StringWithCommaAndBracketsToMap > stringToSplit is empty");
         return null;
     }
 
@@ -74,7 +74,7 @@ public class CustomStringParsers {
             }
             return out;
         }
-        Log.e("CustomStringParsers ", " tableObject or stringToSplit is empty");
+        Log.e("CustomStringParsers ", "bracketContents > tableObject or stringToSplit is empty");
         return null;
     }
 }

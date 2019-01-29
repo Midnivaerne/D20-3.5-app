@@ -3,12 +3,11 @@ package com.aurora.d20_35_app.models.userData;
 import com.aurora.d20_35_app.enums.ItemType;
 import com.aurora.d20_35_app.helper.Item;
 import com.aurora.d20_35_app.models.Databases;
-import com.aurora.d20_35_app.models.constants.Alignments;
-import com.aurora.d20_35_app.models.constants.Sizes;
-import com.aurora.d20_35_app.models.settingSpecific.Deities;
 import com.aurora.d20_35_app.utils.CustomStringParsers;
 import com.aurora.d20_35_app.utils.database.DatabaseHolder;
 import com.aurora.d20_35_app.utils.database.DatabaseManager;
+
+import java.util.Map;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -27,9 +26,10 @@ import lombok.Setter;
         foreignKeys = {
                 @ForeignKey(entity = Databases.class, parentColumns = "Source", childColumns = "Source", onDelete = ForeignKey.CASCADE),
                 @ForeignKey(entity = HeroPlayer.class, parentColumns = "Item_ID", childColumns = "ParentItemID", onDelete = ForeignKey.CASCADE),
-                @ForeignKey(entity = Alignments.class, parentColumns = "Item_ID", childColumns = "Alignment"),
-                @ForeignKey(entity = Deities.class, parentColumns = "Item_ID", childColumns = "Deity"),
-                @ForeignKey(entity = Sizes.class, parentColumns = "Item_ID", childColumns = "Size")}
+                //todo uncomment when tables and data will be ready
+                /**@ForeignKey(entity = Alignments.class, parentColumns = "Item_ID", childColumns = "Alignment"),
+                 @ForeignKey(entity = Deities.class, parentColumns = "Item_ID", childColumns = "Deity"),
+                 @ForeignKey(entity = Sizes.class, parentColumns = "Item_ID", childColumns = "Size")**/}
 )
 
 public class HeroDescription extends Item {
@@ -131,14 +131,14 @@ public class HeroDescription extends Item {
     private String heroClassAndLevel;
 
     @Ignore
-    public String getHeroClassAndLevelStringFromId(DatabaseHolder databaseHolder) {
+    public String getHeroClassAndLevelStringFromId(DatabaseHolder databaseHolder, Map<ItemType, Map<Integer, String>> backupNames) {
         StringBuilder heroClassesOut = new StringBuilder();
         String[] heroClasses = CustomStringParsers.StringWithCommaToTable(heroClassAndLevel);
         for (String classes : heroClasses) {
             int id = Integer.parseInt((classes.split("=")[0]));
             String className;
-            String classNameFromBackup = getBackupNames().get(ItemType.Classes).get(id);
-            Item aHeroClass = ItemType.Classes.getDAO(databaseHolder).getItemWithId(id);
+            String classNameFromBackup = backupNames.get(ItemType.Classes).get(id);
+            Item aHeroClass = databaseHolder.CLASSES_MAP.get(id);
             if (aHeroClass != null) {
                 className = aHeroClass.getName();
                 if (!className.equals(classNameFromBackup)) {

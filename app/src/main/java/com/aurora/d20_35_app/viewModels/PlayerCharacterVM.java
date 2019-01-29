@@ -3,12 +3,15 @@ package com.aurora.d20_35_app.viewModels;
 import android.app.Activity;
 
 import com.aurora.d20_35_app.R;
+import com.aurora.d20_35_app.enums.ItemType;
 import com.aurora.d20_35_app.fragments.PlayerCharacterAllSectionsPagerAdapter;
 import com.aurora.d20_35_app.helper.ActivityViewModel;
 import com.aurora.d20_35_app.models.userData.HeroPlayer;
 import com.aurora.d20_35_app.utils.database.DatabaseHolder;
 import com.aurora.d20_35_app.views.PlayerCharacterActivity;
 import com.google.android.material.tabs.TabLayout;
+
+import java.util.Map;
 
 import androidx.viewpager.widget.ViewPager;
 import lombok.Getter;
@@ -39,7 +42,8 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
     private void loadHeroData(Activity activity) {
         DatabaseHolder databaseHolder = getDatabaseHolder(activity);
         this.setHero(databaseHolder.HEROES_PLAYER_MAP.get(Integer.parseInt(activity.getIntent().getStringExtra(PlayerCharacterActivity.HERO_PLAYER_ID))));
-        String classesAndLevelText = getHero().getHeroDescription().getHeroClassAndLevelStringFromId(databaseHolder);
+        Map<ItemType, Map<Integer, String>> backupNames = getHero().getBackupNames();
+        String classesAndLevelText = getHero().getHeroDescription().getHeroClassAndLevelStringFromId(databaseHolder, backupNames);
         String raceText = getHero().getHeroDescription().getRaceStringFromId(databaseHolder);
         String alignmentText = getHero().getHeroDescription().getAlignmentStringFromId(databaseHolder);
         String deityText = getHero().getHeroDescription().getDeityStringFromId(databaseHolder);

@@ -4,11 +4,13 @@ import com.aurora.d20_35_app.helper.BaseDAO;
 import com.aurora.d20_35_app.helper.Item;
 import com.aurora.d20_35_app.models.constants.RulesCombat;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.RoomWarnings;
+import androidx.room.Transaction;
 
 @Dao
 public abstract class RulesCombatDAO implements BaseDAO<RulesCombat> {
@@ -25,6 +27,19 @@ public abstract class RulesCombatDAO implements BaseDAO<RulesCombat> {
     @Override
     public List<String> getSources() {
         return null;
+    }
+
+    @Transaction
+    public List<RulesCombat> getItemWithSuperFields() {
+        ArrayList<RulesCombat> result = new ArrayList<>();
+        result.addAll(getItems());
+        ArrayList<Item> resultItem = new ArrayList<>();
+        resultItem.addAll(getItemsAsItem());
+        for (int i = 0; i < result.size(); i++) {
+            result.get(i).setItemID(resultItem.get(i).getItemID());
+            result.get(i).setName(resultItem.get(i).getName());
+        }
+        return result;
     }
 
     @Query("SELECT * FROM RulesCombat")
