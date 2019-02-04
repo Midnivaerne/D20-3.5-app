@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_player_character_statistics_combat"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/fragment_player_character_statistics_combat_hit_points"
+        layout="@layout/fragment_usables_statistics_combat_hit_points" />
+
+    <include
+        android:id="@+id/fragment_player_character_statistics_combat_damage_reduction"
+        layout="@layout/fragment_number_value_with_description_box" />
+
+    <include
+        android:id="@+id/fragment_player_character_statistics_combat_armour_class"
+        layout="@layout/fragment_number_value_with_description_box" />
+
+    <include
+        android:id="@+id/fragment_player_character_statistics_combat_armour_class_touch"
+        layout="@layout/fragment_number_value_with_description_box" />
+
+    <include
+        android:id="@+id/fragment_player_character_statistics_combat_armour_class_flatfooted"
+        layout="@layout/fragment_number_value_with_description_box" />
+
+    <include
+        android:id="@+id/fragment_player_character_statistics_combat_speed"
+        layout="@layout/fragment_number_value_with_description_box" />
+
+    <include
+        android:id="@+id/fragment_player_character_statistics_combat_initiative"
+        layout="@layout/fragment_number_value_with_description_rollable_box" />
+
+    <include
+        android:id="@+id/fragment_player_character_statistics_attack"
+        layout="@layout/fragment_number_value_with_description_rollable_box" />
+
+    <include
+        android:id="@+id/fragment_player_character_statistics_attack_mele"
+        layout="@layout/fragment_number_value_with_description_rollable_box" />
+
+    <include
+        android:id="@+id/fragment_player_character_statistics_attack_ranged"
+        layout="@layout/fragment_number_value_with_description_rollable_box" />
+
+    <include
+        android:id="@+id/fragment_player_character_statistics_graple"
+        layout="@layout/fragment_number_value_with_description_rollable_box" />
+
+    <include
+        android:id="@+id/fragment_player_character_statistics_spell_resistance"
+        layout="@layout/fragment_number_value_with_description_box" />
+
+</RelativeLayout>

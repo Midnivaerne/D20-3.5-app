@@ -7,8 +7,6 @@ import com.aurora.d20_35_app.utils.CustomStringParsers;
 import com.aurora.d20_35_app.utils.database.DatabaseHolder;
 import com.aurora.d20_35_app.utils.database.DatabaseManager;
 
-import java.util.Map;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -131,13 +129,13 @@ public class HeroDescription extends Item {
     private String heroClassAndLevel;
 
     @Ignore
-    public String getHeroClassAndLevelStringFromId(DatabaseHolder databaseHolder, Map<ItemType, Map<Integer, String>> backupNames) {
+    public String getHeroClassAndLevelStringFromId(DatabaseHolder databaseHolder) {
         StringBuilder heroClassesOut = new StringBuilder();
         String[] heroClasses = CustomStringParsers.StringWithCommaToTable(heroClassAndLevel);
         for (String classes : heroClasses) {
             int id = Integer.parseInt((classes.split("=")[0]));
             String className;
-            String classNameFromBackup = backupNames.get(ItemType.Classes).get(id);
+            String classNameFromBackup = getBackupNames().get(ItemType.Classes).get(id);
             Item aHeroClass = databaseHolder.CLASSES_MAP.get(id);
             if (aHeroClass != null) {
                 className = aHeroClass.getName();

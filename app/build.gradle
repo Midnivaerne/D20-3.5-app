@@ -19,6 +19,14 @@ android {
             }
         }
     }
+    sourceSets {
+        main{
+            res.srcDirs=['src/main/res',
+                         'src/main/resMain',
+                         'src/main/resMaster',
+                         'src/main/resPlayer']
+        }
+    }
 
     buildTypes {
         release {

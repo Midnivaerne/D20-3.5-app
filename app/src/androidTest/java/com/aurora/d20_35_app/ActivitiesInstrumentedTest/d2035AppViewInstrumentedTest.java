@@ -2,7 +2,7 @@ package com.aurora.d20_35_app.ActivitiesInstrumentedTest;
 
 import android.content.Context;
 
-import com.aurora.d20_35_app.views.MainMenuActivity;
+import com.aurora.main.views.MainMenuActivity;
 
 import org.junit.After;
 import org.junit.Before;

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.aurora.player.viewModels.PlayerCharacterVM" />
+    </data>
+
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/fragment_player_character_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:context="com.aurora.player.fragments.PlayerCharacterEquipmentPlaceholderFragment">
+
+            <include
+                android:id="@+id/fragment_player_character_equipment_weapons"
+                layout="@layout/fragment_player_character_equipment_weapons" />
+
+            <include
+                android:id="@+id/fragment_player_character_equipment_armour"
+                layout="@layout/fragment_player_character_equipment_armour" />
+
+            <include
+                android:id="@+id/fragment_player_character_equipment_shield"
+                layout="@layout/fragment_player_character_equipment_armour" />
+
+            <include
+                android:id="@+id/fragment_player_character_equipment_worn"
+                layout="@layout/fragment_player_character_equipment_worn" />
+
+            <include
+                android:id="@+id/fragment_player_character_equipment_containers"
+                layout="@layout/fragment_player_character_equipment_containers" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/fragment_player_character_equipment_load"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:context="com.aurora.player.fragments.PlayerCharacterEquipmentPlaceholderFragment">
+
+                <include
+                    android:id="@+id/fragment_player_character_equipment_load_current"
+                    layout="@layout/fragment_number_value_with_description_box" />
+
+                <include
+                    android:id="@+id/fragment_player_character_equipment_load_max"
+                    layout="@layout/fragment_number_value_with_description_box" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+</layout>

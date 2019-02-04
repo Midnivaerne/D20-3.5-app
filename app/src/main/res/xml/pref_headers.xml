@@ -4,17 +4,17 @@
 
     <header
         android:id="@+id/pref_header_general"
-        android:fragment="com.aurora.d20_35_app.views.SettingsActivity$GeneralPreferenceFragment"
+        android:fragment="com.aurora.main.views.SettingsActivity$GeneralPreferenceFragment"
         android:icon="@drawable/ic_info_black_24dp" />
 
     <header
         android:id="@+id/pref_header_notifications"
-        android:fragment="com.aurora.d20_35_app.views.SettingsActivity$NotificationPreferenceFragment"
+        android:fragment="com.aurora.main.views.SettingsActivity$NotificationPreferenceFragment"
         android:icon="@drawable/ic_notifications_black_24dp" />
 
     <header
         android:id="@+id/pref_header_data_sync"
-        android:fragment="com.aurora.d20_35_app.views.SettingsActivity$DataSyncPreferenceFragment"
+        android:fragment="com.aurora.main.views.SettingsActivity$DataSyncPreferenceFragment"
         android:icon="@drawable/ic_sync_black_24dp" />
 
 </preference-headers>

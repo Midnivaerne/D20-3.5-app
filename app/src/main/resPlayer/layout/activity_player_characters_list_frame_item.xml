@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.aurora.player.viewModels.PlayerCharactersListVM" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/open_character"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/id_pc_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_marginStart="@dimen/text_margin"
+                android:layout_marginTop="@dimen/text_margin"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="@dimen/text_margin"
+                android:textAppearance="?attr/textAppearanceListItem" />
+
+            <TextView
+                android:id="@+id/pc_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start"
+                android:layout_margin="@dimen/text_margin"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="35dp"
+                android:textAppearance="?attr/textAppearanceListItem" />
+        </LinearLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/open_character"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical|end"
+            android:src="@drawable/ic_menu_send" />
+
+    </RelativeLayout>
+</layout>
