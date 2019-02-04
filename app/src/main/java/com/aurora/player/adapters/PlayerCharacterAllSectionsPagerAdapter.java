@@ -2,7 +2,7 @@ package com.aurora.player.adapters;
 
 import com.aurora.player.fragments.PlayerCharacterDescriptionsPlaceholderFragment;
 import com.aurora.player.fragments.PlayerCharacterEquipmentPlaceholderFragment;
-import com.aurora.player.fragments.PlayerCharacterFourthPlaceholderFragment;
+import com.aurora.player.fragments.PlayerCharacterFeaturesPlaceholderFragment;
 import com.aurora.player.fragments.PlayerCharacterSkillsPlaceholderFragment;
 import com.aurora.player.fragments.PlayerCharacterStatisticsPlaceholderFragment;
 import com.aurora.player.viewModels.PlayerCharacterVM;
@@ -34,7 +34,7 @@ public class PlayerCharacterAllSectionsPagerAdapter extends FragmentPagerAdapter
             case 2:
                 return PlayerCharacterEquipmentPlaceholderFragment.newInstance(position, playerCharacterVM);
             case 3:
-                return PlayerCharacterFourthPlaceholderFragment.newInstance(position, playerCharacterVM);
+                return PlayerCharacterFeaturesPlaceholderFragment.newInstance(position, playerCharacterVM);
             case 4:
                 return PlayerCharacterDescriptionsPlaceholderFragment.newInstance(position, playerCharacterVM);
             default:

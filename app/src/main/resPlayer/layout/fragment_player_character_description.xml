@@ -12,7 +12,7 @@
             type="com.aurora.player.viewModels.PlayerCharacterVM" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -20,10 +20,9 @@
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/player_character_description_container"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintTop_toBottomOf="@+id/player_character_description_tabs" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/player_character_description_tabs"
@@ -31,6 +30,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
+            app:layout_constraintBottom_toTopOf="@+id/player_character_description_container"
             app:tabBackground="@drawable/player_character_tabs_color_selector"
             app:tabIndicatorColor="?attr/colorAccent"
             app:tabIndicatorHeight="4dp">
@@ -50,5 +50,6 @@
                 android:layout_height="wrap_content"
                 android:icon="@android:drawable/btn_star" />
         </com.google.android.material.tabs.TabLayout>
-    </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

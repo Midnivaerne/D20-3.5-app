@@ -13,22 +13,22 @@ import androidx.fragment.app.Fragment;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class PlayerCharacterFourthPlaceholderFragment extends Fragment {
+public class PlayerCharacterFeaturesPlaceholderFragment extends Fragment {
     /**
      * The fragment argument representing the section number for this
      * fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
 
-    public PlayerCharacterFourthPlaceholderFragment() {
+    public PlayerCharacterFeaturesPlaceholderFragment() {
     }
 
     /**
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static PlayerCharacterFourthPlaceholderFragment newInstance(int sectionNumber, PlayerCharacterVM playerCharacterVM) {
-        PlayerCharacterFourthPlaceholderFragment fragment = new PlayerCharacterFourthPlaceholderFragment();
+    public static PlayerCharacterFeaturesPlaceholderFragment newInstance(int sectionNumber, PlayerCharacterVM playerCharacterVM) {
+        PlayerCharacterFeaturesPlaceholderFragment fragment = new PlayerCharacterFeaturesPlaceholderFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
@@ -37,7 +37,7 @@ public class PlayerCharacterFourthPlaceholderFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_player_character_fourth, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_player_character_features, container, false);
         loadHeroDataFromVMtoView(rootView);
         return rootView;
     }

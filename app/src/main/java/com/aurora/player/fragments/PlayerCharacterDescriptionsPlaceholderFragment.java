@@ -54,7 +54,6 @@ public class PlayerCharacterDescriptionsPlaceholderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_player_character_description, container, false);
-
         loadHeroDataFromVMtoView(rootView);
         return rootView;
     }
@@ -68,7 +67,7 @@ public class PlayerCharacterDescriptionsPlaceholderFragment extends Fragment {
     }
 
     private void setInnerTabs() {
-        mDescriptionsSectionsPagerAdapter = new PlayerCharacterAllDescriptionsSectionsPagerAdapter(playerCharacterVM.getActivity().getSupportFragmentManager(), playerCharacterVM);
+        mDescriptionsSectionsPagerAdapter = new PlayerCharacterAllDescriptionsSectionsPagerAdapter(getChildFragmentManager(), playerCharacterVM);
         mInnerTabLayout = (TabLayout) playerCharacterVM.getActivity().findViewById(R.id.player_character_description_tabs);
         mInnerViewPager = (ViewPager) playerCharacterVM.getActivity().findViewById(R.id.player_character_description_container);
         mInnerViewPager.setAdapter(mDescriptionsSectionsPagerAdapter);

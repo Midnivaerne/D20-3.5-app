@@ -12,7 +12,6 @@
             type="com.aurora.player.viewModels.PlayerCharacterVM" />
     </data>
 
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
