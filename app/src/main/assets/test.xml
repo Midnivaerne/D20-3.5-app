@@ -60,9 +60,9 @@
             <Player>Player</Player>
             <ClassAndLevel>1=1,2=1</ClassAndLevel>
             <Race>1+1</Race>
-            <Alignment>5</Alignment>
-            <Deity>2</Deity>
-            <Size>3</Size>
+            <Alignment>1</Alignment>
+            <Deity>1</Deity>
+            <Size>1</Size>
             <Age>36</Age>
             <Gender>F</Gender>
             <Height>160</Height>

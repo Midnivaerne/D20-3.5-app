@@ -9,19 +9,19 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Entity(tableName = "RulesCombat", inheritSuperIndices = true)
-public class RulesCombat extends Rules {
+@Entity(tableName = "RulesSizes", inheritSuperIndices = true)
+public class RulesSizes extends Rules {
 
     @Ignore
-    public RulesCombat() {
+    public RulesSizes() {
         super();
     }
 
-    public RulesCombat(String name) {
+    public RulesSizes(String name) {
         super(name);
     }
 
-    public RulesCombat clone() {
-        return new RulesCombat(getName());
+    public RulesSizes clone() {
+        return new RulesSizes(getName());
     }
 }

@@ -1,5 +1,7 @@
 package com.aurora.d20_35_app.helper;
 
+import com.aurora.d20_35_app.models.helpers.Item;
+
 import java.util.List;
 
 import androidx.room.Delete;

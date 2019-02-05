@@ -1,6 +1,6 @@
 package com.aurora.d20_35_app.models.usables;
 
-import com.aurora.d20_35_app.helper.Item;
+import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.Databases;
 
 import androidx.room.ColumnInfo;
@@ -52,74 +52,74 @@ public class Armour extends Item {
     }
 
     @Ignore
-    public static final String armourPriceColumnName = "ArmourPrice";
+    public static final String ARMOUR_PRICE_COLUMN_NAME = "ArmourPrice";
     @Ignore
-    public static final String armourDeflectionColumnName = "ArmourDeflection";
+    public static final String ARMOUR_DEFLECTION_COLUMN_NAME = "ArmourDeflection";
     @Ignore
-    public static final String armourMaxDexterityBonusColumnName = "ArmourMaxDexterityBonus";
+    public static final String ARMOUR_MAX_DEXTERITY_BONUS_COLUMN_NAME = "ArmourMaxDexterityBonus";
     @Ignore
-    public static final String armourPenaltyColumnName = "ArmourPenalty";
+    public static final String ARMOUR_PENALTY_COLUMN_NAME = "ArmourPenalty";
     @Ignore
-    public static final String armourArcaneFailureColumnName = "ArmourArcaneFailure";
+    public static final String ARMOUR_ARCANE_FAILURE_COLUMN_NAME = "ArmourArcaneFailure";
     @Ignore
-    public static final String armourMaxSpeedColumnName = "ArmourMaxSpeed";
+    public static final String ARMOUR_MAX_SPEED_COLUMN_NAME = "ArmourMaxSpeed";
     @Ignore
-    public static final String armourWeightColumnName = "ArmourWeight";
+    public static final String ARMOUR_WEIGHT_COLUMN_NAME = "ArmourWeight";
     @Ignore
-    public static final String armourSpecialPropertiesColumnName = "ArmourSpecialProperties";
+    public static final String ARMOUR_SPECIAL_PROPERTIES_COLUMN_NAME = "ArmourSpecialProperties";
     @Ignore
-    public static final String armourMaterialColumnName = "ArmourMaterial";
+    public static final String ARMOUR_MATERIAL_COLUMN_NAME = "ArmourMaterial";
     @Ignore
-    public static final String armourMagicImprovementsColumnName = "ArmourMagicImprovements";
+    public static final String ARMOUR_MAGIC_IMPROVEMENTS_COLUMN_NAME = "ArmourMagicImprovements";
 
     @Getter
     @Setter
-    @ColumnInfo(name = armourPriceColumnName)
+    @ColumnInfo(name = ARMOUR_PRICE_COLUMN_NAME)
     private String armourPrice;
 
     @Getter
     @Setter
-    @ColumnInfo(name = armourDeflectionColumnName)
+    @ColumnInfo(name = ARMOUR_DEFLECTION_COLUMN_NAME)
     private String armourDeflection;
 
     @Getter
     @Setter
-    @ColumnInfo(name = armourMaxDexterityBonusColumnName)
+    @ColumnInfo(name = ARMOUR_MAX_DEXTERITY_BONUS_COLUMN_NAME)
     private String armourMaxDexterityBonus;
 
     @Getter
     @Setter
-    @ColumnInfo(name = armourPenaltyColumnName)
+    @ColumnInfo(name = ARMOUR_PENALTY_COLUMN_NAME)
     private String armourPenalty;
 
     @Getter
     @Setter
-    @ColumnInfo(name = armourArcaneFailureColumnName)
+    @ColumnInfo(name = ARMOUR_ARCANE_FAILURE_COLUMN_NAME)
     private String armourArcaneFailure;
 
     @Getter
     @Setter
-    @ColumnInfo(name = armourMaxSpeedColumnName)
+    @ColumnInfo(name = ARMOUR_MAX_SPEED_COLUMN_NAME)
     private String armourMaxSpeed;
 
     @Getter
     @Setter
-    @ColumnInfo(name = armourWeightColumnName)
+    @ColumnInfo(name = ARMOUR_WEIGHT_COLUMN_NAME)
     private String armourWeight;
 
     @Getter
     @Setter
-    @ColumnInfo(name = armourSpecialPropertiesColumnName)
+    @ColumnInfo(name = ARMOUR_SPECIAL_PROPERTIES_COLUMN_NAME)
     private String armourSpecialProperties;
 
     @Getter
     @Setter
-    @ColumnInfo(name = armourMaterialColumnName)
+    @ColumnInfo(name = ARMOUR_MATERIAL_COLUMN_NAME)
     private String armourMaterial;
 
     @Getter
     @Setter
-    @ColumnInfo(name = armourMagicImprovementsColumnName)
+    @ColumnInfo(name = ARMOUR_MAGIC_IMPROVEMENTS_COLUMN_NAME)
     private String armourMagicImprovements;
 
     public Armour clone() {

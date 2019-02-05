@@ -1,7 +1,7 @@
 package com.aurora.d20_35_app.dao.userData;
 
 import com.aurora.d20_35_app.helper.BaseDAO;
-import com.aurora.d20_35_app.helper.Item;
+import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.userData.HeroDescription;
 
 import java.util.ArrayList;

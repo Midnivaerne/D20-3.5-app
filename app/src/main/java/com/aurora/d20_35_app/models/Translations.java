@@ -1,6 +1,6 @@
 package com.aurora.d20_35_app.models;
 
-import com.aurora.d20_35_app.helper.Item;
+import com.aurora.d20_35_app.models.helpers.Item;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -37,25 +37,25 @@ public class Translations extends Item {
     }
 
     @Ignore
-    public static final String categoryColumnName = "Category";
+    public static final String CATEGORY_COLUMN_NAME = "Category";
     @Ignore
-    public static final String languageColumnName = "Language";
+    public static final String LANGUAGE_COLUMN_NAME = "Language";
     @Ignore
-    public static final String transColumnName = "Translation";
+    public static final String TRANS_COLUMN_NAME = "Translation";
 
     @Getter
     @Setter
-    @ColumnInfo(name = categoryColumnName)
+    @ColumnInfo(name = CATEGORY_COLUMN_NAME)
     private String category;
 
     @Getter
     @Setter
-    @ColumnInfo(name = languageColumnName)
+    @ColumnInfo(name = LANGUAGE_COLUMN_NAME)
     private String language;
 
     @Getter
     @Setter
-    @ColumnInfo(name = transColumnName)
+    @ColumnInfo(name = TRANS_COLUMN_NAME)
     private String trans;
 
     public Translations clone() {

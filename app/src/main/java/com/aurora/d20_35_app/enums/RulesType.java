@@ -1,7 +1,9 @@
 package com.aurora.d20_35_app.enums;
 
 import com.aurora.d20_35_app.helper.BaseDAO;
-import com.aurora.d20_35_app.helper.Rules;
+import com.aurora.d20_35_app.models.constants.RulesAlignments;
+import com.aurora.d20_35_app.models.constants.RulesSizes;
+import com.aurora.d20_35_app.models.helpers.Rules;
 import com.aurora.d20_35_app.models.constants.RulesCombat;
 import com.aurora.d20_35_app.models.constants.RulesSkills;
 import com.aurora.d20_35_app.utils.database.DatabaseHolder;
@@ -11,9 +13,57 @@ import java.util.Map;
 
 public enum RulesType {
     /**
+     * RulesSizes
+     */
+    RULES_SIZES("RulesSizes") {
+        @Override
+        public List getDatabaseList(DatabaseHolder databaseHolder) {
+            return databaseHolder.RULES_SIZES_LIST;
+        }
+
+        @Override
+        public Map getDatabaseMap(DatabaseHolder databaseHolder) {
+            return databaseHolder.RULES_SIZES_MAP;
+        }
+
+        @Override
+        public Rules getNewObject() {
+            return new RulesSizes();
+        }
+
+        @Override
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
+            return databaseHolder.rulesSizesDAO();
+        }
+    },
+    /**
+     * RulesAlignments
+     */
+    RULES_ALIGNMENTS("RulesAlignments") {
+        @Override
+        public List getDatabaseList(DatabaseHolder databaseHolder) {
+            return databaseHolder.RULES_ALIGNMENTS_LIST;
+        }
+
+        @Override
+        public Map getDatabaseMap(DatabaseHolder databaseHolder) {
+            return databaseHolder.RULES_ALIGNMENTS_MAP;
+        }
+
+        @Override
+        public Rules getNewObject() {
+            return new RulesAlignments();
+        }
+
+        @Override
+        public BaseDAO getDAO(DatabaseHolder databaseHolder) {
+            return databaseHolder.rulesAlignmentsDAO();
+        }
+    },
+    /**
      * RulesCombat
      */
-    RulesCombat("RulesCombat") {
+    RULES_COMBAT("RulesCombat") {
         @Override
         public List getDatabaseList(DatabaseHolder databaseHolder) {
             return databaseHolder.RULES_COMBAT_LIST;
@@ -37,7 +87,7 @@ public enum RulesType {
     /**
      * RulesSkills
      */
-    RulesSkills("RulesSkills") {
+    RULES_SKILLS("RulesSkills") {
         @Override
         public List getDatabaseList(DatabaseHolder databaseHolder) {
             return databaseHolder.RULES_SKILLS_LIST;

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.aurora.d20_35_app.R;
 import com.aurora.main.fragments.RulesDetailFragment;
 import com.aurora.d20_35_app.helper.ActivityViewModel;
-import com.aurora.d20_35_app.helper.Rules;
+import com.aurora.d20_35_app.models.helpers.Rules;
 import com.aurora.main.views.RulesActivity;
 import com.aurora.main.views.RulesDetailActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

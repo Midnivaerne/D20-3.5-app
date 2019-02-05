@@ -1,6 +1,6 @@
 package com.aurora.d20_35_app.utils.database;
 
-import com.aurora.d20_35_app.helper.Item;
+import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.settingSpecific.Races;
 
 import java.util.ArrayList;

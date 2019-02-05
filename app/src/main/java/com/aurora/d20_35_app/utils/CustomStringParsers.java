@@ -31,7 +31,7 @@ public class CustomStringParsers {
                 String[] stringWithoutBracketsTable = StringWithCommaToTable(deBracket(stringToSplit));
                 for (String tableObject : stringWithoutBracketsTable) {
                     if (ItemType.contains(tableObject.trim())) {
-                        out.put(ItemType.valueOf(tableObject.trim()), bracketContents(tableObject.trim(), stringToSplit));
+                        out.put(ItemType.fromString(tableObject.trim()), bracketContents(tableObject.trim(), stringToSplit));
                     } else {
                         Log.e("CustomStringParsers ", " ItemType " + tableObject.trim() + " not identified");
                     }

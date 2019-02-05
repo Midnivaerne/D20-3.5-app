@@ -1,7 +1,7 @@
 package com.aurora.d20_35_app.dao;
 
 import com.aurora.d20_35_app.helper.BaseDAO;
-import com.aurora.d20_35_app.helper.Item;
+import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.Databases;
 
 import java.util.ArrayList;

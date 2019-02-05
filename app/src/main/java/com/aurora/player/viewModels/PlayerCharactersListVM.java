@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.aurora.d20_35_app.R;
 import com.aurora.player.fragments.PlayerCharactersListDetailFragment;
 import com.aurora.d20_35_app.helper.ActivityViewModel;
-import com.aurora.d20_35_app.helper.Item;
+import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.userData.Hero;
 import com.aurora.d20_35_app.models.userData.HeroPlayer;
 import com.aurora.player.views.PlayerCharacterActivity;

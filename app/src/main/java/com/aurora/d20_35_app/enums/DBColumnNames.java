@@ -1,6 +1,6 @@
 package com.aurora.d20_35_app.enums;
 
-import com.aurora.d20_35_app.helper.Item;
+import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.Translations;
 import com.aurora.d20_35_app.models.settingSpecific.Races;
 import com.aurora.d20_35_app.models.usables.Armour;
@@ -12,91 +12,115 @@ import lombok.Setter;
 
 public enum DBColumnNames {
 
-    //////////////////////////  ITEM  //////////////////////////
-    ColItemID(Item.itemIdColumnName, false) {
+
+    ////////////////////////////////////////////////////////////////
+    //////////////////////////  Databases  ////////////////////////
+
+    /**
+     * Core rules data
+     */
+    //////////////////////////////////////////////////////////////
+    //////////////////////////  RULES  //////////////////////////
+    COL_RULES_ID(Item.ITEM_ID_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             item.setItemID(Integer.parseInt(data));
         }
     },
-    ColName(Item.nameColumnName, false) {
+    COL_RULES_NAME(Item.ITEM_NAME_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             item.setName(data);
         }
     },
-    ColSource(Item.sourceColumnName, false) {
+
+    /**
+     * Data more or less depending on setting
+     */
+    /////////////////////////////////////////////////////////////
+    //////////////////////////  ITEM  //////////////////////////
+    COL_ITEM_ID(Item.ITEM_ID_COLUMN_NAME, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            item.setItemID(Integer.parseInt(data));
+        }
+    },
+    COL_ITEM_NAME(Item.ITEM_NAME_COLUMN_NAME, false) {
+        @Override
+        public void setParameter(Item item, String data) {
+            item.setName(data);
+        }
+    },
+    COL_SOURCE(Item.SOURCE_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             item.setSource(data);
         }
     },
-    ColIdAsNameBackup(Item.idAsNameBackupColumnName, false) {
+    COL_ID_AS_NAME_BACKUP(Item.ID_AS_NAME_BACKUP_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             item.setIdAsNameBackup(data);
         }
     },
-    ////////////////////////////////////////////////////////////////
-    //////////////////////////  DATABASES  ////////////////////////
 
     //////////////////////////////////////////////////////////////
     //////////////////////////  ARMOUR  //////////////////////////
-    ColArmourPrice(Armour.armourPriceColumnName, false) {
+    COL_ARMOUR_PRICE(Armour.ARMOUR_PRICE_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Armour) item).setArmourPrice(data);
         }
     },
-    ColArmourDeflection(Armour.armourDeflectionColumnName, false) {
+    COL_ARMOUR_DEFLECTION(Armour.ARMOUR_DEFLECTION_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Armour) item).setArmourDeflection(data);
         }
     },
-    ColArmourMaxDexterityBonus(Armour.armourMaxDexterityBonusColumnName, false) {
+    ColArmourMaxDexterityBonus(Armour.ARMOUR_MAX_DEXTERITY_BONUS_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Armour) item).setArmourMaxDexterityBonus(data);
         }
     },
-    ColArmourPenalty(Armour.armourPenaltyColumnName, false) {
+    COL_ARMOUR_PENALTY(Armour.ARMOUR_PENALTY_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Armour) item).setArmourPenalty(data);
         }
     },
-    ColArmourArcaneFailure(Armour.armourArcaneFailureColumnName, false) {
+    COL_ARMOUR_ARCANE_FAILURE(Armour.ARMOUR_ARCANE_FAILURE_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Armour) item).setArmourArcaneFailure(data);
         }
     },
-    ColArmourMaxSpeed(Armour.armourMaxSpeedColumnName, false) {
+    COL_ARMOUR_MAX_SPEED(Armour.ARMOUR_MAX_SPEED_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Armour) item).setArmourMaxSpeed(data);
         }
     },
-    ColArmourWeight(Armour.armourWeightColumnName, false) {
+    COL_ARMOUR_WEIGHT(Armour.ARMOUR_WEIGHT_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Armour) item).setArmourWeight(data);
         }
     },
-    ColArmourSpecialProperties(Armour.armourSpecialPropertiesColumnName, false) {
+    COL_ARMOUR_SPECIAL_PROPERTIES(Armour.ARMOUR_SPECIAL_PROPERTIES_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Armour) item).setArmourSpecialProperties(data);
         }
     },
-    ColArmourMaterial(Armour.armourMaterialColumnName, false) {
+    COL_ARMOUR_MATERIAL(Armour.ARMOUR_MATERIAL_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Armour) item).setArmourMaterial(data);
         }
     },
-    ColArmourMagicImprovements(Armour.armourMagicImprovementsColumnName, false) {
+    COL_ARMOUR_MAGIC_IMPROVEMENTS(Armour.ARMOUR_MAGIC_IMPROVEMENTS_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Armour) item).setArmourMagicImprovements(data);
@@ -117,81 +141,81 @@ public enum DBColumnNames {
 
     //////////////////////////////////////////////////////////////////
     //////////////////////  HERO DESCRIPTION  ///////////////////////
-    ColHeroPlayer(HeroDescription.heroPlayerColumnName, false) {
+    COL_HERO_PLAYER(HeroDescription.HERO_PLAYER_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((HeroPlayer) item).getHeroDescription().setHeroPlayer(data);
         }
     },
 
-    ColHeroClassAndLevel(HeroDescription.heroClassAndLevelColumnName, false) {
+    COL_HERO_CLASS_AND_LEVEL(HeroDescription.HERO_CLASS_AND_LEVEL_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((HeroPlayer) item).getHeroDescription().setHeroClassAndLevel(data);
         }
     },
 
-    ColHeroRace(HeroDescription.heroRaceColumnName, false) {
+    COL_HERO_RACE(HeroDescription.HERO_RACE_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((HeroPlayer) item).getHeroDescription().setHeroRace(data);
         }
     },
-    ColHeroAlignment(HeroDescription.heroAlignmentColumnName, false) {
+    COL_HERO_ALIGNMENT(HeroDescription.HERO_ALIGNMENT_ID_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
-            ((HeroPlayer) item).getHeroDescription().setHeroAlignment(Integer.parseInt(data));
+            ((HeroPlayer) item).getHeroDescription().setHeroAlignmentId(Integer.parseInt(data));
         }
     },
-    ColHeroDeity(HeroDescription.heroDeityColumnName, false) {
+    COL_HERO_DEITY(HeroDescription.HERO_DEITY_ID_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
-            ((HeroPlayer) item).getHeroDescription().setHeroDeity(Integer.parseInt(data));
+            ((HeroPlayer) item).getHeroDescription().setHeroDeityId(Integer.parseInt(data));
         }
     },
-    ColHeroSize(HeroDescription.heroSizeColumnName, false) {
+    COL_HERO_SIZE(HeroDescription.HERO_SIZE_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
-            ((HeroPlayer) item).getHeroDescription().setHeroSize(Integer.parseInt(data));
+            ((HeroPlayer) item).getHeroDescription().setHeroSizeId(Integer.parseInt(data));
         }
     },
-    ColHeroAge(HeroDescription.heroAgeColumnName, false) {
+    COL_HERO_AGE(HeroDescription.HERO_AGE_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((HeroPlayer) item).getHeroDescription().setHeroAge(Integer.parseInt(data));
         }
     },
-    ColHeroGender(HeroDescription.heroGenderColumnName, false) {
+    COL_HERO_GENDER(HeroDescription.HERO_GENDER_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((HeroPlayer) item).getHeroDescription().setHeroGender(data);
         }
     },
-    ColHeroHeight(HeroDescription.heroHeightColumnName, false) {
+    COL_HERO_HEIGHT(HeroDescription.HERO_HEIGHT_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((HeroPlayer) item).getHeroDescription().setHeroHeight(data);
         }
     },
-    ColHeroWeight(HeroDescription.heroWeightColumnName, false) {
+    COL_HERO_WEIGHT(HeroDescription.HERO_WEIGHT_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((HeroPlayer) item).getHeroDescription().setHeroWeight(data);
         }
     },
-    ColHeroEyes(HeroDescription.heroEyesColumnName, false) {
+    COL_HERO_EYES(HeroDescription.HERO_EYES_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((HeroPlayer) item).getHeroDescription().setHeroEyes(data);
         }
     },
-    ColHeroHair(HeroDescription.heroHairColumnName, false) {
+    COL_HERO_HAIR(HeroDescription.HERO_HAIR_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((HeroPlayer) item).getHeroDescription().setHeroHair(data);
         }
     },
-    ColHeroSkin(HeroDescription.heroSkinColumnName, false) {
+    COL_HERO_SKIN(HeroDescription.HERO_SKIN_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((HeroPlayer) item).getHeroDescription().setHeroSkin(data);
@@ -204,49 +228,49 @@ public enum DBColumnNames {
 
     //////////////////////////////////////////////////////////////
     //////////////////////////  RACES  //////////////////////////
-    ColRaceDescription(Races.raceDescriptionColumnName, false) {
+    COL_RACE_DESCRIPTION(Races.RACE_DESCRIPTION_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Races) item).setRaceDescription(data);
         }
     },
-    ColRaceAttributeModifiers(Races.raceAttributeModifiersColumnName, false) {
+    COL_RACE_ATTRIBUTE_MODIFIERS(Races.RACE_ATTRIBUTE_MODIFIERS_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Races) item).setRaceAttributeModifiers(data);
         }
     },
-    ColRaceSize(Races.raceSizeColumnName, false) {
+    COL_RACE_SIZE(Races.RACE_SIZE_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Races) item).setRaceSize(data);
         }
     },
-    ColRaceSpeed(Races.raceSpeedColumnName, false) {
+    COL_RACE_SPEED(Races.RACE_SPEED_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Races) item).setRaceSpeed(data);
         }
     },
-    ColRaceFeats(Races.raceFeatsColumnName, false) {
+    COL_RACE_FEATS(Races.RACE_FEATS_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Races) item).setRaceFeats(data);
         }
     },
-    ColRaceSkills(Races.raceSkillsColumnName, false) {
+    COL_RACE_SKILLS(Races.RACE_SKILLS_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Races) item).setRaceSkills(data);
         }
     },
-    ColRaceLanguages(Races.raceLanguagesColumnName, false) {
+    COL_RACE_LANGUAGES(Races.RACE_LANGUAGES_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Races) item).setRaceLanguages(data);
         }
     },
-    ColFavouriteClass(Races.favouriteClassColumnName, false) {
+    COL_FAVOURITE_CLASS(Races.RACE_FAVOURITE_CLASS_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Races) item).setFavouriteClass(data);
@@ -269,19 +293,19 @@ public enum DBColumnNames {
 
     ////////////////////////////////////////////////////////////////
     //////////////////////////  TRANSLATIONS  //////////////////////
-    ColCategory(Translations.categoryColumnName, false) {
+    COL_CATEGORY(Translations.CATEGORY_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Translations) item).setCategory(data);
         }
     },
-    ColLanguage(Translations.languageColumnName, false) {
+    COL_LANGUAGE(Translations.LANGUAGE_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Translations) item).setLanguage(data);
         }
     },
-    ColTranslation(Translations.transColumnName, false) {
+    COL_TRANSLATION(Translations.TRANS_COLUMN_NAME, false) {
         @Override
         public void setParameter(Item item, String data) {
             ((Translations) item).setTrans(data);

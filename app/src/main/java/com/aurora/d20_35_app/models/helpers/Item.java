@@ -1,4 +1,4 @@
-package com.aurora.d20_35_app.helper;
+package com.aurora.d20_35_app.models.helpers;
 
 import com.aurora.d20_35_app.enums.ItemType;
 import com.aurora.d20_35_app.utils.CustomStringParsers;
@@ -18,33 +18,33 @@ import lombok.Setter;
 public class Item {
 
     @Ignore
-    public static final String itemIdColumnName = "Item_ID";
+    public static final String ITEM_ID_COLUMN_NAME = "Item_ID";
     @Ignore
-    public static final String nameColumnName = "Name";
+    public static final String ITEM_NAME_COLUMN_NAME = "Name";
     @Ignore
-    public static final String sourceColumnName = "Source";
+    public static final String SOURCE_COLUMN_NAME = "Source";
     @Ignore
-    public static final String idAsNameBackupColumnName = "IdAsNameBackup";
+    public static final String ID_AS_NAME_BACKUP_COLUMN_NAME = "IdAsNameBackup";
 
     @Getter
     @Setter
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = itemIdColumnName)
+    @ColumnInfo(name = ITEM_ID_COLUMN_NAME)
     private Integer itemID;
 
     @Getter
     @Setter
-    @ColumnInfo(name = nameColumnName)
+    @ColumnInfo(name = ITEM_NAME_COLUMN_NAME)
     private String name;
 
     @Getter
     @Setter
-    @ColumnInfo(name = sourceColumnName)
+    @ColumnInfo(name = SOURCE_COLUMN_NAME)
     private String source;
 
     @Getter
     @Setter
-    @ColumnInfo(name = idAsNameBackupColumnName)
+    @ColumnInfo(name = ID_AS_NAME_BACKUP_COLUMN_NAME)
     private String idAsNameBackup;
 
     @Getter

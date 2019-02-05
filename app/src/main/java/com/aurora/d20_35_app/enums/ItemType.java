@@ -1,7 +1,7 @@
 package com.aurora.d20_35_app.enums;
 
 import com.aurora.d20_35_app.helper.BaseDAO;
-import com.aurora.d20_35_app.helper.Item;
+import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.Databases;
 import com.aurora.d20_35_app.models.Translations;
 import com.aurora.d20_35_app.models.settingSpecific.Classes;
@@ -28,7 +28,7 @@ public enum ItemType {
     /**
      * Databases a.k.a Sources
      */
-    Databases("Databases") {
+    DATABASES("Databases") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.databasesDAO();
@@ -65,7 +65,7 @@ public enum ItemType {
     /**
      * Races
      */
-    Races("Races") {
+    RACES("Races") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.racesDAO();
@@ -102,7 +102,7 @@ public enum ItemType {
     /**
      * Classes
      */
-    Classes("Classes") {
+    CLASSES("Classes") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.classesDAO();
@@ -139,7 +139,7 @@ public enum ItemType {
     /**
      * Skills
      */
-    Skills("Skills") {
+    SKILLS("Skills") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.skillsDAO();
@@ -176,7 +176,7 @@ public enum ItemType {
     /**
      * Feats
      */
-    Feats("Feats") {
+    FEATS("Feats") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.featsDAO();
@@ -213,7 +213,7 @@ public enum ItemType {
     /**
      * Weapons
      */
-    Weapons("Weapons") {
+    WEAPONS("Weapons") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.weaponsDAO();
@@ -251,7 +251,7 @@ public enum ItemType {
     /**
      * Armour
      */
-    Armour("Armour") {
+    ARMOUR("Armour") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.armourDAO();
@@ -288,7 +288,7 @@ public enum ItemType {
     /**
      * Equipment
      */
-    Equipment("Equipment") {
+    EQUIPMENT("Equipment") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.equipmentDAO();
@@ -325,7 +325,7 @@ public enum ItemType {
     /**
      * Spells
      */
-    Spells("Spells") {
+    SPELLS("Spells") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.spellsDAO();
@@ -363,7 +363,7 @@ public enum ItemType {
     /**
      * Monsters
      */
-    Monsters("Monsters") {
+    MONSTERS("Monsters") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.monstersDAO();
@@ -400,7 +400,7 @@ public enum ItemType {
     /**
      * RaceTemplates
      */
-    RaceTemplates("RaceTemplates") {
+    RACE_TEMPLATES("RaceTemplates") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.raceTemplatesDAO();
@@ -437,7 +437,7 @@ public enum ItemType {
     /**
      * HeroPlayer
      */
-    HeroPlayer("HeroPlayer") {
+    HERO_PLAYER("HeroPlayer") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.heroPlayerDAO();
@@ -497,7 +497,7 @@ public enum ItemType {
     /**
      * HeroNPC
      */
-    HeroNPC("HeroNPC") {
+    HERO_NPC("HeroNPC") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.heroNPCDAO();
@@ -534,7 +534,7 @@ public enum ItemType {
     /**
      * Deities
      */
-    Deities("Deities") {
+    DEITIES("Deities") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.deitiesDAO();
@@ -571,7 +571,7 @@ public enum ItemType {
     /**
      * Translations
      */
-    Translations("Translations") {
+    TRANSLATIONS("Translations") {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.translationsDAO();
@@ -615,6 +615,15 @@ public enum ItemType {
     @Override
     public String toString() {
         return this.itemType;
+    }
+
+    public static ItemType fromString(String itemTypeString) {
+        for (ItemType itemType : ItemType.values()) {
+            if (itemType.toString().equalsIgnoreCase(itemTypeString)) {
+                return itemType;
+            }
+        }
+        throw new IllegalArgumentException("No ItemType with value " + itemTypeString + " found");
     }
 
     public static boolean contains(String name) {

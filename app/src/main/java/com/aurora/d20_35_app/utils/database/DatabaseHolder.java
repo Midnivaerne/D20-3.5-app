@@ -6,7 +6,9 @@ import android.content.Context;
 
 import com.aurora.d20_35_app.dao.DatabasesDAO;
 import com.aurora.d20_35_app.dao.TranslationsDAO;
+import com.aurora.d20_35_app.dao.constants.RulesAlignmentsDAO;
 import com.aurora.d20_35_app.dao.constants.RulesCombatDAO;
+import com.aurora.d20_35_app.dao.constants.RulesSizesDAO;
 import com.aurora.d20_35_app.dao.constants.RulesSkillsDAO;
 import com.aurora.d20_35_app.dao.settingSpecific.ClassesDAO;
 import com.aurora.d20_35_app.dao.settingSpecific.DeitiesDAO;
@@ -22,13 +24,13 @@ import com.aurora.d20_35_app.dao.usables.EquipmentDAO;
 import com.aurora.d20_35_app.dao.usables.WeaponsDAO;
 import com.aurora.d20_35_app.dao.userData.HeroDescriptionDAO;
 import com.aurora.d20_35_app.dao.userData.HeroPlayerDAO;
-import com.aurora.d20_35_app.helper.Rules;
 import com.aurora.d20_35_app.models.Databases;
 import com.aurora.d20_35_app.models.Translations;
-import com.aurora.d20_35_app.models.constants.Alignments;
+import com.aurora.d20_35_app.models.constants.RulesAlignments;
 import com.aurora.d20_35_app.models.constants.RulesCombat;
+import com.aurora.d20_35_app.models.constants.RulesSizes;
 import com.aurora.d20_35_app.models.constants.RulesSkills;
-import com.aurora.d20_35_app.models.constants.Sizes;
+import com.aurora.d20_35_app.models.helpers.Rules;
 import com.aurora.d20_35_app.models.settingSpecific.Classes;
 import com.aurora.d20_35_app.models.settingSpecific.Deities;
 import com.aurora.d20_35_app.models.settingSpecific.Feats;
@@ -68,7 +70,7 @@ import lombok.Setter;
         Monsters.class, Races.class, RaceTemplates.class, Skills.class, Spells.class, Weapons.class,
         Deities.class,
         Translations.class, Databases.class,
-        RulesCombat.class, RulesSkills.class, Alignments.class, Sizes.class
+        RulesCombat.class, RulesSkills.class, RulesAlignments.class, RulesSizes.class
 }, version = 1, exportSchema = false)
 @TypeConverters(DataTypeConverters.class)
 @SuppressLint("UseSparseArrays")
@@ -109,6 +111,10 @@ public abstract class DatabaseHolder extends RoomDatabase {
 
     public abstract DatabasesDAO databasesDAO();
 
+    public abstract RulesSizesDAO rulesSizesDAO();
+
+    public abstract RulesAlignmentsDAO rulesAlignmentsDAO();
+
     public abstract RulesSkillsDAO rulesSkillsDAO();
 
     public abstract RulesCombatDAO rulesCombatDAO();
@@ -146,6 +152,21 @@ public abstract class DatabaseHolder extends RoomDatabase {
     }
 
     /**
+     * Lists to hold database items
+     */
+    public final List<Databases> DATABASES_LIST = new ArrayList<Databases>();
+
+    ///////////////////////LISTS FOR RULES///////////////////////////
+    @Getter
+    @Setter
+    private List<Rules> rulesList = new ArrayList<Rules>();
+    public final List<RulesSizes> RULES_SIZES_LIST = new ArrayList<RulesSizes>();
+    public final List<RulesAlignments> RULES_ALIGNMENTS_LIST = new ArrayList<RulesAlignments>();
+    public final List<RulesCombat> RULES_COMBAT_LIST = new ArrayList<RulesCombat>();
+    public final List<RulesSkills> RULES_SKILLS_LIST = new ArrayList<RulesSkills>();
+
+    ///////////////////////LISTS FOR SETTING///////////////////////////
+    /**
      * An array of races available for heroPlayer.
      */
     public final List<Races> RACES_LIST = new ArrayList<Races>();
@@ -163,9 +184,21 @@ public abstract class DatabaseHolder extends RoomDatabase {
     public final List<Deities> DEITIES_LIST = new ArrayList<Deities>();
 
     public final List<Translations> TRANSLATIONS_LIST = new ArrayList<Translations>();
-    public final List<Databases> DATABASES_LIST = new ArrayList<Databases>();
+    ////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Maps to hold database items with ids
+     */
+    public final Map<Integer, Databases> DATABASES_MAP = new HashMap<Integer, Databases>();
+
+    ///////////////////////MAPS FOR RULES///////////////////////////
+    public final Map<Integer, RulesSizes> RULES_SIZES_MAP = new HashMap<Integer, RulesSizes>();
+    public final Map<Integer, RulesAlignments> RULES_ALIGNMENTS_MAP = new HashMap<Integer, RulesAlignments>();
+    public final Map<Integer, RulesCombat> RULES_COMBAT_MAP = new HashMap<Integer, RulesCombat>();
+    public final Map<Integer, RulesSkills> RULES_SKILLS_MAP = new HashMap<Integer, RulesSkills>();
 
 
+    ///////////////////////MAPS FOR SETTING///////////////////////////
     /**
      * A map of races, by ID.
      */
@@ -184,18 +217,7 @@ public abstract class DatabaseHolder extends RoomDatabase {
     public final Map<Integer, Deities> DEITIES_MAP = new HashMap<Integer, Deities>();
 
     public final Map<Integer, Translations> TRANSLATIONS_MAP = new HashMap<Integer, Translations>();
-    public final Map<Integer, Databases> DATABASES_MAP = new HashMap<Integer, Databases>();
-
-
-    @Getter
-    @Setter
-    private List<Rules> rulesList = new ArrayList<Rules>();
-
-    public final List<RulesCombat> RULES_COMBAT_LIST = new ArrayList<RulesCombat>();
-    public final List<RulesSkills> RULES_SKILLS_LIST = new ArrayList<RulesSkills>();
-
-    public final Map<Integer, RulesCombat> RULES_COMBAT_MAP = new HashMap<Integer, RulesCombat>();
-    public final Map<Integer, RulesSkills> RULES_SKILLS_MAP = new HashMap<Integer, RulesSkills>();
+    ////////////////////////////////////////////////////////////////////////////
 
 }
 

@@ -1,7 +1,7 @@
 package com.aurora.d20_35_app.dao.constants;
 
 import com.aurora.d20_35_app.helper.BaseDAO;
-import com.aurora.d20_35_app.models.constants.RulesSkills;
+import com.aurora.d20_35_app.models.constants.RulesAlignments;
 import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.helpers.Rules;
 
@@ -14,15 +14,15 @@ import androidx.room.RoomWarnings;
 import androidx.room.Transaction;
 
 @Dao
-public abstract class RulesSkillsDAO implements BaseDAO<RulesSkills> {
+public abstract class RulesAlignmentsDAO implements BaseDAO<RulesAlignments> {
 
-    @Query("SELECT COUNT(*) from RulesSkills")
+    @Query("SELECT COUNT(*) from RulesAlignments")
     public abstract int countItems();
 
-    @Query("SELECT Item_ID FROM RulesSkills")
+    @Query("SELECT Item_ID FROM RulesAlignments")
     public abstract List<Integer> getIds();
 
-    @Query("SELECT Name FROM RulesSkills")
+    @Query("SELECT Name FROM RulesAlignments")
     public abstract List<String> getNames();
 
     @Override
@@ -31,8 +31,8 @@ public abstract class RulesSkillsDAO implements BaseDAO<RulesSkills> {
     }
 
     @Transaction
-    public List<RulesSkills> getItemWithSuperFields() {
-        ArrayList<RulesSkills> result = new ArrayList<>();
+    public List<RulesAlignments> getItemWithSuperFields() {
+        ArrayList<RulesAlignments> result = new ArrayList<>();
         result.addAll(getItems());
         ArrayList<Rules> resultItem = new ArrayList<>();
         resultItem.addAll(getItemsAsRules());
@@ -43,11 +43,11 @@ public abstract class RulesSkillsDAO implements BaseDAO<RulesSkills> {
         return result;
     }
 
-    @Query("SELECT * FROM RulesSkills")
-    public abstract List<RulesSkills> getItems();
+    @Query("SELECT * FROM RulesAlignments")
+    public abstract List<RulesAlignments> getItems();
 
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    @Query("SELECT * FROM RulesSkills")
+    @Query("SELECT * FROM RulesAlignments")
     public abstract List<Rules> getItemsAsRules(); // above doesn't show Item fields (but they are created/loaded)
 
     @Override
@@ -56,17 +56,17 @@ public abstract class RulesSkillsDAO implements BaseDAO<RulesSkills> {
     }
 
     @Override
-    public List<RulesSkills> getItemsWithSource(String source) {
+    public List<RulesAlignments> getItemsWithSource(String source) {
         return null;
     }
 
-    @Query("SELECT * FROM RulesSkills WHERE Item_ID == :itemID")
-    public abstract RulesSkills getItemWithId(int itemID);
+    @Query("SELECT * FROM RulesAlignments WHERE Item_ID == :itemID")
+    public abstract RulesAlignments getItemWithId(int itemID);
 
-    @Query("SELECT * FROM RulesSkills WHERE Name == :name")
-    public abstract RulesSkills getItemWithName(String name);
+    @Query("SELECT * FROM RulesAlignments WHERE Name == :name")
+    public abstract RulesAlignments getItemWithName(String name);
 
-    @Query("DELETE FROM RulesSkills")
+    @Query("DELETE FROM RulesAlignments")
     public abstract void deleteAll();
 
 }

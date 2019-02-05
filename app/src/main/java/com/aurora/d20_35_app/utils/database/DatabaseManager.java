@@ -63,13 +63,13 @@ public class DatabaseManager {
         editor.apply();
         copyAllFilesFromAssets(activity);
         increaseProgressBar();
-        chooseDatabaseLoadingType(DatabaseHolder.getDatabaseHolder(activity.getApplicationContext()), DatabaseUsage.Startup, "en");
+        chooseDatabaseLoadingType(DatabaseHolder.getDatabaseHolder(activity.getApplicationContext()), DatabaseUsage.STARTUP, "en");
     }
 
     private static void onAnotherTime(SharedPreferences sharedpreferences, BindingActivity activity) {
-        Log.i("Database", "Another opening");
+        Log.i("Database", "ANOTHER opening");
         increaseProgressBar();
-        chooseDatabaseLoadingType(DatabaseHolder.getDatabaseHolder(activity.getApplicationContext()), DatabaseUsage.ReloadFromDatabase, sharedpreferences.getString("language", "en")); // todo refactor/delete
+        chooseDatabaseLoadingType(DatabaseHolder.getDatabaseHolder(activity.getApplicationContext()), DatabaseUsage.RELOAD_FROM_DATABASE, sharedpreferences.getString("language", "en")); // todo refactor/delete
     }
 
     public static void startProgressBar(@NonNull BindingActivity activity) {
@@ -160,21 +160,21 @@ public class DatabaseManager {
 
     private static void clear(DatabaseHolder databaseHolder, DatabaseUsage databaseUsage, ItemType itemType) {
         switch (databaseUsage) {
-            case ClearDatabaseAndHolder:
+            case CLEAR_DATABASE_AND_HOLDER:
                 if (itemType != null) {
                     itemType.deleteAll(databaseHolder);
                 } else {
                     clearWholeDatabaseAndAllHolders(databaseHolder);
                 }
                 break;
-            case ClearHolder:
+            case CLEAR_HOLDER:
                 if (itemType != null) {
                     itemType.deleteAllFromHolder(databaseHolder);
                 } else {
                     clearAllHolders(databaseHolder);
                 }
                 break;
-            case ClearDatabase:
+            case CLEAR_DATABASE:
                 if (itemType != null) {
                     itemType.deleteAllFromDatabase(databaseHolder);
                 } else {
@@ -250,26 +250,26 @@ public class DatabaseManager {
     private static void chooseDatabaseLoadingType(DatabaseHolder databaseHolder, DatabaseUsage usage, String language) {
         ItemType itemType = null;
         switch (usage) {
-            case Startup:
+            case STARTUP:
                 loadRulesFromFileToHolderAndDatabaseAndReloadHolder(databaseHolder, FILENAMES, itemType);
-                clear(databaseHolder, DatabaseUsage.ClearHolder, itemType);
+                clear(databaseHolder, DatabaseUsage.CLEAR_HOLDER, itemType);
                 loadDataFromDatabaseToHolder(databaseHolder, itemType);
                 break;
-            case ReloadFromFile:
-                clear(databaseHolder, DatabaseUsage.ClearDatabaseAndHolder, itemType);
+            case RELOAD_FROM_FILE:
+                clear(databaseHolder, DatabaseUsage.CLEAR_DATABASE_AND_HOLDER, itemType);
                 loadRulesFromFileToHolderAndDatabaseAndReloadHolder(databaseHolder, FILENAMES, itemType);
-                clear(databaseHolder, DatabaseUsage.ClearHolder, itemType);
+                clear(databaseHolder, DatabaseUsage.CLEAR_HOLDER, itemType);
                 loadDataFromDatabaseToHolder(databaseHolder, itemType);
                 break;
-            case ReloadFromDatabase:
-                clear(databaseHolder, DatabaseUsage.ClearHolder, itemType);
+            case RELOAD_FROM_DATABASE:
+                clear(databaseHolder, DatabaseUsage.CLEAR_HOLDER, itemType);
                 loadDataFromDatabaseToHolder(databaseHolder, itemType);
                 break;
-            case ReloadFromHolder:
-                clear(databaseHolder, DatabaseUsage.ClearDatabase, itemType);
+            case RELOAD_FROM_HOLDER:
+                clear(databaseHolder, DatabaseUsage.CLEAR_DATABASE, itemType);
                 loadDataFromHolderToDatabase(databaseHolder, itemType);
                 break;
-            case Another:
+            case ANOTHER:
                 break;
         }
         TranslationsHolder.loadAllTranslationsForLanguage(databaseHolder, language);
@@ -310,7 +310,7 @@ public class DatabaseManager {
     }
 
     private static void chooseDatabaseActions(DatabaseHolder databaseHolder) {
-        ItemType itemType = ItemType.HeroPlayer; //todo delete
+        ItemType itemType = ItemType.HERO_PLAYER; //todo delete
         System.out.println("AllFromDb " + itemType.getAllFromDatabase(databaseHolder)); //todo delete
         System.out.println("DaoRaceFromName " + (itemType.getDAO(databaseHolder)).getItemWithName("Test_race_name1")); //todo delete
 

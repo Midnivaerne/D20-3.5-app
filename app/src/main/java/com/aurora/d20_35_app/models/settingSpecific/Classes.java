@@ -1,6 +1,6 @@
 package com.aurora.d20_35_app.models.settingSpecific;
 
-import com.aurora.d20_35_app.helper.Item;
+import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.Databases;
 
 import androidx.room.Entity;

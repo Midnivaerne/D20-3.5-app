@@ -1,8 +1,9 @@
 package com.aurora.d20_35_app.dao.constants;
 
 import com.aurora.d20_35_app.helper.BaseDAO;
-import com.aurora.d20_35_app.helper.Item;
 import com.aurora.d20_35_app.models.constants.RulesCombat;
+import com.aurora.d20_35_app.models.helpers.Item;
+import com.aurora.d20_35_app.models.helpers.Rules;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +34,8 @@ public abstract class RulesCombatDAO implements BaseDAO<RulesCombat> {
     public List<RulesCombat> getItemWithSuperFields() {
         ArrayList<RulesCombat> result = new ArrayList<>();
         result.addAll(getItems());
-        ArrayList<Item> resultItem = new ArrayList<>();
-        resultItem.addAll(getItemsAsItem());
+        ArrayList<Rules> resultItem = new ArrayList<>();
+        resultItem.addAll(getItemsAsRules());
         for (int i = 0; i < result.size(); i++) {
             result.get(i).setItemID(resultItem.get(i).getItemID());
             result.get(i).setName(resultItem.get(i).getName());
@@ -47,7 +48,12 @@ public abstract class RulesCombatDAO implements BaseDAO<RulesCombat> {
 
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("SELECT * FROM RulesCombat")
-    public abstract List<Item> getItemsAsItem(); // above doesn't show Item fields (but they are created/loaded)
+    public abstract List<Rules> getItemsAsRules(); // above doesn't show Item fields (but they are created/loaded)
+
+    @Override
+    public List<Item> getItemsAsItem() {
+        return null;
+    }
 
     @Override
     public List<RulesCombat> getItemsWithSource(String source) {

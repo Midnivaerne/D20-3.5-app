@@ -1,6 +1,6 @@
 package com.aurora.d20_35_app.models.constants;
 
-import com.aurora.d20_35_app.helper.Rules;
+import com.aurora.d20_35_app.models.helpers.Rules;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;

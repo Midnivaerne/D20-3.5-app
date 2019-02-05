@@ -1,8 +1,8 @@
 package com.aurora.d20_35_app.enums;
 
 public enum DataLocation {
-    Internal("Internal"),
-    External("External");
+    INTERNAL("Internal"),
+    EXTERNAL("External");
 
     private String DataLocationValue;
 
