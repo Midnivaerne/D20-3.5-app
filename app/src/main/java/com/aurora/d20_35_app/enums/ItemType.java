@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public enum ItemType {
+public enum ItemType implements CoreTypeHelper<ItemType,Item> {
     /**
      * Databases a.k.a Sources
      */
@@ -616,53 +616,4 @@ public enum ItemType {
     public String toString() {
         return this.itemType;
     }
-
-    public static ItemType fromString(String itemTypeString) {
-        for (ItemType itemType : ItemType.values()) {
-            if (itemType.toString().equalsIgnoreCase(itemTypeString)) {
-                return itemType;
-            }
-        }
-        throw new IllegalArgumentException("No ItemType with value " + itemTypeString + " found");
-    }
-
-    public static boolean contains(String name) {
-        for (ItemType it : ItemType.values()) {
-            if (it.toString().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public abstract BaseDAO<Item> getDAO(DatabaseHolder databaseHolder);
-
-    public abstract List<? extends Item> getDatabaseList(DatabaseHolder databaseHolder);
-
-    public abstract Map<Integer, ? extends Item> getDatabaseMap(DatabaseHolder databaseHolder);
-
-    public List<Item> getAllFromDatabase(DatabaseHolder databaseHolder) {
-        return getDAO(databaseHolder).getItems();
-    }
-
-    public abstract Item getNewObject();
-
-    public abstract void fromHolderToDatabase(DatabaseHolder databaseHolder);
-
-    public abstract void fromDatabaseToHolder(DatabaseHolder databaseHolder);
-
-    public void deleteAll(DatabaseHolder databaseHolder) {
-        deleteAllFromDatabase(databaseHolder);
-        deleteAllFromHolder(databaseHolder);
-    }
-
-    public void deleteAllFromHolder(DatabaseHolder databaseHolder) {
-        getDatabaseList(databaseHolder).clear();
-        getDatabaseMap(databaseHolder).clear();
-    }
-
-    public void deleteAllFromDatabase(DatabaseHolder databaseHolder) {
-        getDAO(databaseHolder).deleteAll();
-    }
-
 }

@@ -1,38 +1,19 @@
 package com.aurora.d20_35_app.enums;
 
-import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.Translations;
+import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.settingSpecific.Races;
 import com.aurora.d20_35_app.models.usables.Armour;
 import com.aurora.d20_35_app.models.userData.HeroDescription;
 import com.aurora.d20_35_app.models.userData.HeroPlayer;
 
 import lombok.Getter;
-import lombok.Setter;
 
-public enum DBColumnNames {
+public enum DBSettingColumnNames implements DBColumnNamesMethods<DBSettingColumnNames, Item> {
 
 
     ////////////////////////////////////////////////////////////////
     //////////////////////////  Databases  ////////////////////////
-
-    /**
-     * Core rules data
-     */
-    //////////////////////////////////////////////////////////////
-    //////////////////////////  RULES  //////////////////////////
-    COL_RULES_ID(Item.ITEM_ID_COLUMN_NAME, false) {
-        @Override
-        public void setParameter(Item item, String data) {
-            item.setItemID(Integer.parseInt(data));
-        }
-    },
-    COL_RULES_NAME(Item.ITEM_NAME_COLUMN_NAME, false) {
-        @Override
-        public void setParameter(Item item, String data) {
-            item.setName(data);
-        }
-    },
 
     /**
      * Data more or less depending on setting
@@ -312,13 +293,18 @@ public enum DBColumnNames {
         }
     };
 
+    @Getter
     private String columnName;
 
     @Getter
-    @Setter
     private Boolean columnIsUsed;
 
-    DBColumnNames(String columnName, boolean colBool) {
+    @Override
+    public void setColumnIsUsed(Boolean columnIsUsed) {
+        this.columnIsUsed = columnIsUsed;
+    }
+
+    DBSettingColumnNames(String columnName, boolean colBool) {
         this.columnName = columnName;
         this.columnIsUsed = colBool;
     }
@@ -328,23 +314,4 @@ public enum DBColumnNames {
         return this.columnName;
     }
 
-    public static DBColumnNames fromString(String name) {
-        for (DBColumnNames b : DBColumnNames.values()) {
-            if (b.columnName.equals(name)) {
-                return b;
-            }
-        }
-        return null;
-    }
-
-    public static boolean contains(String name) {
-        for (DBColumnNames it : DBColumnNames.values()) {
-            if (it.toString().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public abstract void setParameter(Item item, String data);
 }

@@ -1,8 +1,11 @@
 package com.aurora.d20_35_app.models.userData;
 
 import com.aurora.d20_35_app.enums.ItemType;
-import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.Databases;
+import com.aurora.d20_35_app.models.constants.RulesAlignments;
+import com.aurora.d20_35_app.models.constants.RulesSizes;
+import com.aurora.d20_35_app.models.helpers.Item;
+import com.aurora.d20_35_app.models.settingSpecific.Deities;
 import com.aurora.d20_35_app.utils.CustomStringParsers;
 import com.aurora.d20_35_app.utils.database.DatabaseHolder;
 import com.aurora.d20_35_app.utils.database.DatabaseManager;
@@ -24,10 +27,9 @@ import lombok.Setter;
         foreignKeys = {
                 @ForeignKey(entity = Databases.class, parentColumns = "Source", childColumns = "Source", onDelete = ForeignKey.CASCADE),
                 @ForeignKey(entity = HeroPlayer.class, parentColumns = "Item_ID", childColumns = "ParentItemID", onDelete = ForeignKey.CASCADE),
-                //todo uncomment when tables and data will be ready
-                /**@ForeignKey(entity = RulesAlignments.class, parentColumns = "Item_ID", childColumns = "Alignment"),
-                 @ForeignKey(entity = Deities.class, parentColumns = "Item_ID", childColumns = "Deity"),
-                 @ForeignKey(entity = RulesSizes.class, parentColumns = "Item_ID", childColumns = "Size")**/}
+                @ForeignKey(entity = RulesAlignments.class, parentColumns = "Item_ID", childColumns = "AlignmentId"),
+                @ForeignKey(entity = RulesSizes.class, parentColumns = "Item_ID", childColumns = "SizeId"),
+                @ForeignKey(entity = Deities.class, parentColumns = "Item_ID", childColumns = "DeityId")}
 )
 
 public class HeroDescription extends Item {

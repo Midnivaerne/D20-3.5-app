@@ -3,6 +3,7 @@ package com.aurora.d20_35_app.utils;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
+import com.aurora.d20_35_app.enums.CoreTypeHelper;
 import com.aurora.d20_35_app.enums.ItemType;
 
 import java.util.HashMap;
@@ -30,8 +31,8 @@ public class CustomStringParsers {
             if (stringToSplit.contains("{") && stringToSplit.contains("}") && stringToSplit.contains("=")) {
                 String[] stringWithoutBracketsTable = StringWithCommaToTable(deBracket(stringToSplit));
                 for (String tableObject : stringWithoutBracketsTable) {
-                    if (ItemType.contains(tableObject.trim())) {
-                        out.put(ItemType.fromString(tableObject.trim()), bracketContents(tableObject.trim(), stringToSplit));
+                    if (CoreTypeHelper.contains(tableObject.trim(), ItemType.class)) {
+                        out.put(CoreTypeHelper.fromString(tableObject.trim(), ItemType.class), bracketContents(tableObject.trim(), stringToSplit));
                     } else {
                         Log.e("CustomStringParsers ", " ItemType " + tableObject.trim() + " not identified");
                     }

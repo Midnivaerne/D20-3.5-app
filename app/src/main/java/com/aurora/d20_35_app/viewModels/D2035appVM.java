@@ -26,6 +26,9 @@ public class D2035appVM extends ActivityViewModel<D2035appActivity> {
     private static final int MAX_LEVEL_DRAWABLE = 6;
     private int appDimensionWidth;
     private int appDimensionHeight;
+    private static final String ASSETS_LAUNCH_IMAGES_DIR = "launchImages/";
+    private static final String ASSETS_LAUNCH_IMAGES_PREFIX = "launch_image_";
+    private static final String ASSETS_LAUNCH_IMAGES_EXTENSION = ".png";
 
     public D2035appVM(D2035appActivity activity) {
         super(activity);
@@ -44,7 +47,7 @@ public class D2035appVM extends ActivityViewModel<D2035appActivity> {
         int launchImageNumber = randomWithRange(MIN_LEVEL_DRAWABLE, MAX_LEVEL_DRAWABLE);
         InputStream inputStream = null;
         try {
-            inputStream = getActivity().getAssets().open("launch_image_" + launchImageNumber + ".png");
+            inputStream = getActivity().getAssets().open(ASSETS_LAUNCH_IMAGES_DIR + ASSETS_LAUNCH_IMAGES_PREFIX + launchImageNumber + ASSETS_LAUNCH_IMAGES_EXTENSION);
         } catch (IOException e) {
             e.printStackTrace();
         }

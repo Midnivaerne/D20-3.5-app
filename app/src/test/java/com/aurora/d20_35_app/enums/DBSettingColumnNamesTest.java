@@ -5,11 +5,11 @@ import com.aurora.d20_35_app.models.helpers.Item;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static com.aurora.d20_35_app.enums.DBColumnNames.*;
-import static com.aurora.d20_35_app.enums.DBColumnNames.fromString;
+import static com.aurora.d20_35_app.enums.DBSettingColumnNames.*;
+import static com.aurora.d20_35_app.enums.DBSettingColumnNames.fromString;
 import static com.aurora.d20_35_app.models.helpers.Item.*;
 
-public class DBColumnNamesTest {
+public class DBSettingColumnNamesTest {
 
     @Test
     public void toStringTest() {

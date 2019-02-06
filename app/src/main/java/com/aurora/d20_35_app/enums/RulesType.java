@@ -2,16 +2,16 @@ package com.aurora.d20_35_app.enums;
 
 import com.aurora.d20_35_app.helper.BaseDAO;
 import com.aurora.d20_35_app.models.constants.RulesAlignments;
-import com.aurora.d20_35_app.models.constants.RulesSizes;
-import com.aurora.d20_35_app.models.helpers.Rules;
 import com.aurora.d20_35_app.models.constants.RulesCombat;
+import com.aurora.d20_35_app.models.constants.RulesSizes;
 import com.aurora.d20_35_app.models.constants.RulesSkills;
+import com.aurora.d20_35_app.models.helpers.Rules;
 import com.aurora.d20_35_app.utils.database.DatabaseHolder;
 
 import java.util.List;
 import java.util.Map;
 
-public enum RulesType {
+public enum RulesType implements CoreTypeHelper<RulesType, Rules> {
     /**
      * RulesSizes
      */
@@ -29,6 +29,19 @@ public enum RulesType {
         @Override
         public Rules getNewObject() {
             return new RulesSizes();
+        }
+
+        @Override
+        public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+            databaseHolder.rulesSizesDAO().insertAll(databaseHolder.RULES_SIZES_LIST);
+        }
+
+        @Override
+        public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+            databaseHolder.RULES_SIZES_LIST.addAll(databaseHolder.rulesSizesDAO().getItems());
+            for (RulesSizes rulesSizes : databaseHolder.RULES_SIZES_LIST) {
+                databaseHolder.RULES_SIZES_MAP.put(rulesSizes.getItemID(), rulesSizes);
+            }
         }
 
         @Override
@@ -56,6 +69,19 @@ public enum RulesType {
         }
 
         @Override
+        public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+            databaseHolder.rulesAlignmentsDAO().insertAll(databaseHolder.RULES_ALIGNMENTS_LIST);
+        }
+
+        @Override
+        public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+            databaseHolder.RULES_ALIGNMENTS_LIST.addAll(databaseHolder.rulesAlignmentsDAO().getItems());
+            for (RulesAlignments rulesAlignments : databaseHolder.RULES_ALIGNMENTS_LIST) {
+                databaseHolder.RULES_ALIGNMENTS_MAP.put(rulesAlignments.getItemID(), rulesAlignments);
+            }
+        }
+
+        @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.rulesAlignmentsDAO();
         }
@@ -77,6 +103,19 @@ public enum RulesType {
         @Override
         public Rules getNewObject() {
             return new RulesCombat();
+        }
+
+        @Override
+        public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+            databaseHolder.rulesCombatDAO().insertAll(databaseHolder.RULES_COMBAT_LIST);
+        }
+
+        @Override
+        public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+            databaseHolder.RULES_COMBAT_LIST.addAll(databaseHolder.rulesCombatDAO().getItems());
+            for (RulesCombat rulesCombat : databaseHolder.RULES_COMBAT_LIST) {
+                databaseHolder.RULES_COMBAT_MAP.put(rulesCombat.getItemID(), rulesCombat);
+            }
         }
 
         @Override
@@ -104,6 +143,19 @@ public enum RulesType {
         }
 
         @Override
+        public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+            databaseHolder.rulesSkillsDAO().insertAll(databaseHolder.RULES_SKILLS_LIST);
+        }
+
+        @Override
+        public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+            databaseHolder.RULES_SKILLS_LIST.addAll(databaseHolder.rulesSkillsDAO().getItems());
+            for (RulesSkills rulesSkills : databaseHolder.RULES_SKILLS_LIST) {
+                databaseHolder.RULES_SKILLS_MAP.put(rulesSkills.getItemID(), rulesSkills);
+            }
+        }
+
+        @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.rulesSkillsDAO();
         }
@@ -120,24 +172,4 @@ public enum RulesType {
         return this.rulesType;
     }
 
-    public static boolean contains(String name) {
-        for (RulesType it : RulesType.values()) {
-            if (it.toString().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public abstract List getDatabaseList(DatabaseHolder databaseHolder);
-
-    public abstract Map getDatabaseMap(DatabaseHolder databaseHolder);
-
-    public abstract Rules getNewObject();
-
-    public abstract BaseDAO<Rules> getDAO(DatabaseHolder databaseHolder);
-
-    public List<Rules> getAllFromDatabase(DatabaseHolder databaseHolder) {
-        return getDAO(databaseHolder).getItems();
-    }
 }

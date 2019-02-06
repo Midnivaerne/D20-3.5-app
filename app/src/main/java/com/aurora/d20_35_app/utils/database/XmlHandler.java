@@ -1,8 +1,12 @@
 package com.aurora.d20_35_app.utils.database;
 
-import com.aurora.d20_35_app.enums.DBColumnNames;
+import com.aurora.d20_35_app.enums.CoreTypeHelper;
+import com.aurora.d20_35_app.enums.DBColumnNamesMethods;
+import com.aurora.d20_35_app.enums.DBRulesColumnNames;
+import com.aurora.d20_35_app.enums.DBSettingColumnNames;
 import com.aurora.d20_35_app.enums.ItemType;
-import com.aurora.d20_35_app.models.helpers.Item;
+import com.aurora.d20_35_app.enums.RulesType;
+import com.aurora.d20_35_app.models.helpers.CoreHelper;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
@@ -16,8 +20,9 @@ public class XmlHandler extends DefaultHandler {
     private final DatabaseHolder databaseHolder;
     private List itemList = null;
     private Map itemMap = null;
-    private Item item = null;
+    private CoreHelper item = null;
     private StringBuilder data = null;
+    private Class dbPart = null;
 
     public XmlHandler(DatabaseHolder databaseHolder) {
         this.databaseHolder = databaseHolder;
@@ -25,16 +30,46 @@ public class XmlHandler extends DefaultHandler {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) {
-        if (ItemType.contains(qName)) {
-            itemList = ItemType.fromString(qName).getDatabaseList(databaseHolder);
-            itemMap = ItemType.fromString(qName).getDatabaseMap(databaseHolder);
-        } else if (qName.contains("_Item") && ItemType.contains(qName.split("_")[0])) {
-            item = ItemType.fromString(qName.split("_")[0]).getNewObject();
-        } else if (DBColumnNames.contains(qName)) {
-            Objects.requireNonNull(DBColumnNames.fromString(qName)).setColumnIsUsed(true);
+        if (CoreTypeHelper.contains(qName, RulesType.class) || CoreTypeHelper.contains(qName, ItemType.class)) {
+            setupListAndMap(qName);
+        } else if (qName.contains("_Item") && (CoreTypeHelper.contains(qName.split("_")[0], RulesType.class) || CoreTypeHelper.contains(qName.split("_")[0], ItemType.class))) {
+            setupItem(qName);
+        } else if (DBColumnNamesMethods.contains(qName, DBRulesColumnNames.class) || DBColumnNamesMethods.contains(qName, DBSettingColumnNames.class)) {
+            setupObject(qName);
         }
         data = new StringBuilder();
     }
+
+    private void setupListAndMap(String qName) {
+        if (CoreTypeHelper.contains(qName, RulesType.class)) {
+            itemList = CoreTypeHelper.fromString(qName, RulesType.class).getDatabaseList(databaseHolder);
+            itemMap = CoreTypeHelper.fromString(qName, RulesType.class).getDatabaseMap(databaseHolder);
+            dbPart = DBRulesColumnNames.class;
+        } else if (CoreTypeHelper.contains(qName, ItemType.class)) {
+            itemList = CoreTypeHelper.fromString(qName, ItemType.class).getDatabaseList(databaseHolder);
+            itemMap = CoreTypeHelper.fromString(qName, ItemType.class).getDatabaseMap(databaseHolder);
+            dbPart = DBSettingColumnNames.class;
+        }
+    }
+
+    private void setupItem(String qName) {
+        if (CoreTypeHelper.contains(qName.split("_")[0], RulesType.class)) {
+            item = CoreTypeHelper.fromString(qName.split("_")[0], RulesType.class).getNewObject();
+        }
+        if (CoreTypeHelper.contains(qName.split("_")[0], ItemType.class)) {
+            item = CoreTypeHelper.fromString(qName.split("_")[0], ItemType.class).getNewObject();
+        }
+    }
+
+    private void setupObject(String qName) {
+        if (DBColumnNamesMethods.contains(qName, DBRulesColumnNames.class)) {
+            Objects.requireNonNull(DBColumnNamesMethods.fromString(qName, DBRulesColumnNames.class)).setColumnIsUsed(true);
+        }
+        if (DBColumnNamesMethods.contains(qName, DBSettingColumnNames.class)) {
+            Objects.requireNonNull(DBColumnNamesMethods.fromString(qName, DBSettingColumnNames.class)).setColumnIsUsed(true);
+        }
+    }
+
 
     @Override
     public void characters(char ch[], int start, int length) { //todo probably to change
@@ -44,14 +79,16 @@ public class XmlHandler extends DefaultHandler {
     @Override
     @SuppressWarnings("unchecked")
     public void endElement(String uri, String localName, String qName) {
-        for (int i = 0; i < DBColumnNames.values().length; i++) {
-            if (DBColumnNames.values()[i].getColumnIsUsed()) {
-                DBColumnNames.values()[i].setParameter(item, data.toString().trim());
-                Objects.requireNonNull(DBColumnNames.fromString(qName)).setColumnIsUsed(false);
+        System.out.println("title>>" + qName);//todo delete
+        System.out.println("data>>" + data.toString().trim());//todo delete
+        for (int i = 0; i < dbPart.getEnumConstants().length; i++) {
+            if (((DBColumnNamesMethods) dbPart.getEnumConstants()[i]).getColumnIsUsed()) {
+                ((DBColumnNamesMethods) dbPart.getEnumConstants()[i]).setParameter((item), data.toString().trim());
+                ((DBColumnNamesMethods) Objects.requireNonNull(DBColumnNamesMethods.fromString(qName, dbPart))).setColumnIsUsed(false);
                 break;
             }
         }
-        if (qName.contains("_Item") && ItemType.contains(qName.split("_")[0])) {
+        if (qName.contains("_Item") && (CoreTypeHelper.contains(qName.split("_")[0], RulesType.class) || CoreTypeHelper.contains(qName.split("_")[0], ItemType.class))) {
             itemList.add(item); //warning suppressed
             itemMap.put(itemMap.size() + 1, item); //warning suppressed
         }

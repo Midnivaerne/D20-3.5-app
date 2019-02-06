@@ -15,7 +15,7 @@ import lombok.Setter;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
-public class Item {
+public class Item implements CoreHelper {
 
     @Ignore
     public static final String ITEM_ID_COLUMN_NAME = "Item_ID";
