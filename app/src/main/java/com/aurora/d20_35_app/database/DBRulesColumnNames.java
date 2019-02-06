@@ -1,6 +1,5 @@
-package com.aurora.d20_35_app.enums;
+package com.aurora.d20_35_app.database;
 
-import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.helpers.Rules;
 
 import lombok.Getter;
@@ -12,13 +11,13 @@ public enum DBRulesColumnNames implements DBColumnNamesMethods<DBRulesColumnName
      */
     //////////////////////////////////////////////////////////////
     //////////////////////////  RULES  //////////////////////////
-    COL_RULES_ID(Item.ITEM_ID_COLUMN_NAME, false) {
+    COL_RULES_ID(DBColumnNames.ITEM_ID_COLUMN_NAME, false) {
         @Override
         public void setParameter(Rules item, String data) {
             item.setItemID(Integer.parseInt(data));
         }
     },
-    COL_RULES_NAME(Item.ITEM_NAME_COLUMN_NAME, false) {
+    COL_RULES_NAME(DBColumnNames.ITEM_NAME_COLUMN_NAME, false) {
         @Override
         public void setParameter(Rules item, String data) {
             item.setName(data);

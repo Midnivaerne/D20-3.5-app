@@ -1,8 +1,8 @@
-package com.aurora.d20_35_app.enums;
+package com.aurora.d20_35_app.models.typeHelpers;
 
 import com.aurora.d20_35_app.helper.BaseDAO;
 import com.aurora.d20_35_app.models.helpers.CoreHelper;
-import com.aurora.d20_35_app.utils.database.DatabaseHolder;
+import com.aurora.d20_35_app.database.DatabaseHolder;
 
 import java.util.List;
 import java.util.Map;

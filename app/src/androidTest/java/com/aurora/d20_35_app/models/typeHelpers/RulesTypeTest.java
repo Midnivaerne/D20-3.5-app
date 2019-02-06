@@ -1,9 +1,9 @@
-package com.aurora.d20_35_app.enums;
+package com.aurora.d20_35_app.models.typeHelpers;
 
 import com.aurora.d20_35_app.models.constants.RulesCombat;
 import com.aurora.d20_35_app.models.constants.RulesSkills;
-import com.aurora.d20_35_app.utils.database.DatabaseHolder;
-import com.aurora.d20_35_app.utils.database.DatabaseManager;
+import com.aurora.d20_35_app.database.DatabaseHolder;
+import com.aurora.d20_35_app.database.DatabaseManager;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -13,9 +13,9 @@ import org.junit.Test;
 import androidx.room.Room;
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import static com.aurora.d20_35_app.enums.RulesType.RulesCombat;
-import static com.aurora.d20_35_app.enums.RulesType.RulesSkills;
-import static com.aurora.d20_35_app.enums.RulesType.contains;
+import static com.aurora.d20_35_app.models.typeHelpers.RulesType.RulesCombat;
+import static com.aurora.d20_35_app.models.typeHelpers.RulesType.RulesSkills;
+import static com.aurora.d20_35_app.models.typeHelpers.RulesType.contains;
 
 public class RulesTypeTest {
 

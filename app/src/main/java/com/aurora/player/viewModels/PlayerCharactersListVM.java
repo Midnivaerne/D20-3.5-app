@@ -25,8 +25,8 @@ import java.util.Map;
 import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
 
-import static com.aurora.d20_35_app.utils.database.DatabaseHolder.getDatabaseHolder;
-import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.database.DatabaseHolder.getDatabaseHolder;
+import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
 
 public class PlayerCharactersListVM extends ActivityViewModel<PlayerCharactersListActivity> {
     public PlayerCharactersListVM(PlayerCharactersListActivity activity) {

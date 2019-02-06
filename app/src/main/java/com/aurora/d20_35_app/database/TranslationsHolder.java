@@ -1,4 +1,4 @@
-package com.aurora.d20_35_app.utils.database;
+package com.aurora.d20_35_app.database;
 
 import com.aurora.d20_35_app.models.Translations;
 

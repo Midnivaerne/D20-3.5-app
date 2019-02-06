@@ -11,7 +11,7 @@ import com.aurora.master.views.DMActivity;
 import com.aurora.player.views.PlayerCharactersListActivity;
 import com.aurora.main.viewModels.MainMenuVM;
 
-import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
 
 public class MainMenuActivity extends BindingActivity<ActivityMainMenuBinding, MainMenuVM> {
 

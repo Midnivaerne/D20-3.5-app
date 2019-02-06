@@ -1,7 +1,8 @@
 package com.aurora.d20_35_app.models.helpers;
 
-import com.aurora.d20_35_app.enums.ItemType;
+import com.aurora.d20_35_app.models.typeHelpers.ItemType;
 import com.aurora.d20_35_app.utils.CustomStringParsers;
+import com.aurora.d20_35_app.database.DBColumnNames;
 
 import java.util.Map;
 
@@ -17,34 +18,25 @@ import lombok.Setter;
 @Data
 public class Item implements CoreHelper {
 
-    @Ignore
-    public static final String ITEM_ID_COLUMN_NAME = "Item_ID";
-    @Ignore
-    public static final String ITEM_NAME_COLUMN_NAME = "Name";
-    @Ignore
-    public static final String SOURCE_COLUMN_NAME = "Source";
-    @Ignore
-    public static final String ID_AS_NAME_BACKUP_COLUMN_NAME = "IdAsNameBackup";
-
     @Getter
     @Setter
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = ITEM_ID_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.ITEM_ID_COLUMN_NAME)
     private Integer itemID;
 
     @Getter
     @Setter
-    @ColumnInfo(name = ITEM_NAME_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.ITEM_NAME_COLUMN_NAME)
     private String name;
 
     @Getter
     @Setter
-    @ColumnInfo(name = SOURCE_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.SOURCE_COLUMN_NAME)
     private String source;
 
     @Getter
     @Setter
-    @ColumnInfo(name = ID_AS_NAME_BACKUP_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.ID_AS_NAME_BACKUP_COLUMN_NAME)
     private String idAsNameBackup;
 
     @Getter

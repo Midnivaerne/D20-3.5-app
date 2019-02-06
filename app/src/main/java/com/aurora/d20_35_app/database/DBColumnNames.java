@@ -1,0 +1,45 @@
+package com.aurora.d20_35_app.database;
+
+public class DBColumnNames {
+    public static final String ITEM_ID_COLUMN_NAME = "Item_ID";
+    public static final String ITEM_NAME_COLUMN_NAME = "Name";
+    public static final String SOURCE_COLUMN_NAME = "Source";
+    public static final String ID_AS_NAME_BACKUP_COLUMN_NAME = "IdAsNameBackup";
+    public static final String HERO_PARENT_ITEM_ID_COLUMN_NAME = "ParentItemID";
+    public static final String HERO_PLAYER_COLUMN_NAME = "Player";
+    public static final String HERO_CLASS_AND_LEVEL_COLUMN_NAME = "ClassAndLevel";
+    public static final String HERO_RACE_COLUMN_NAME = "Race";
+    public static final String HERO_ALIGNMENT_ID_COLUMN_NAME = "AlignmentId";
+    public static final String HERO_DEITY_ID_COLUMN_NAME = "DeityId";
+    public static final String HERO_SIZE_COLUMN_NAME = "SizeId";
+    public static final String HERO_AGE_COLUMN_NAME = "Age";
+    public static final String HERO_GENDER_COLUMN_NAME = "Gender";
+    public static final String HERO_HEIGHT_COLUMN_NAME = "Height";
+    public static final String HERO_WEIGHT_COLUMN_NAME = "Weight";
+    public static final String HERO_EYES_COLUMN_NAME = "Eyes";
+    public static final String HERO_HAIR_COLUMN_NAME = "Hair";
+    public static final String HERO_SKIN_COLUMN_NAME = "Skin";
+    public static final String CATEGORY_COLUMN_NAME = "Category";
+    public static final String LANGUAGE_COLUMN_NAME = "Language";
+    public static final String TRANS_COLUMN_NAME = "Translation";
+    public static final String ARMOUR_PRICE_COLUMN_NAME = "ArmourPrice";
+    public static final String ARMOUR_DEFLECTION_COLUMN_NAME = "ArmourDeflection";
+    public static final String ARMOUR_MAX_DEXTERITY_BONUS_COLUMN_NAME = "ArmourMaxDexterityBonus";
+    public static final String ARMOUR_PENALTY_COLUMN_NAME = "ArmourPenalty";
+    public static final String ARMOUR_ARCANE_FAILURE_COLUMN_NAME = "ArmourArcaneFailure";
+    public static final String ARMOUR_MAX_SPEED_COLUMN_NAME = "ArmourMaxSpeed";
+    public static final String ARMOUR_WEIGHT_COLUMN_NAME = "ArmourWeight";
+    public static final String ARMOUR_SPECIAL_PROPERTIES_COLUMN_NAME = "ArmourSpecialProperties";
+    public static final String ARMOUR_MATERIAL_COLUMN_NAME = "ArmourMaterial";
+    public static final String ARMOUR_MAGIC_IMPROVEMENTS_COLUMN_NAME = "ArmourMagicImprovements";
+    public static final String RACE_DESCRIPTION_COLUMN_NAME = "RaceDescription";
+    public static final String RACE_ATTRIBUTE_MODIFIERS_COLUMN_NAME = "RaceAttributeModifiers";
+    public static final String RACE_SIZE_COLUMN_NAME = "RaceSize";
+    public static final String RACE_SPEED_COLUMN_NAME = "RaceSpeed";
+    public static final String RACE_FEATS_COLUMN_NAME = "RaceFeats";
+    public static final String RACE_SKILLS_COLUMN_NAME = "RaceSkillModifiers";
+    public static final String RACE_LANGUAGES_COLUMN_NAME = "RaceLanguages";
+    public static final String RACE_FAVOURITE_CLASS_COLUMN_NAME = "FavouriteClass";
+    public static final String RULE_ID_COLUMN_NAME = "Item_ID";
+    public static final String RULE_NAME_COLUMN_NAME = "Name";
+}

@@ -1,14 +1,15 @@
 package com.aurora.d20_35_app.models.userData;
 
-import com.aurora.d20_35_app.enums.ItemType;
+import com.aurora.d20_35_app.models.typeHelpers.ItemType;
 import com.aurora.d20_35_app.models.Databases;
 import com.aurora.d20_35_app.models.constants.RulesAlignments;
 import com.aurora.d20_35_app.models.constants.RulesSizes;
 import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.settingSpecific.Deities;
 import com.aurora.d20_35_app.utils.CustomStringParsers;
-import com.aurora.d20_35_app.utils.database.DatabaseHolder;
-import com.aurora.d20_35_app.utils.database.DatabaseManager;
+import com.aurora.d20_35_app.database.DBColumnNames;
+import com.aurora.d20_35_app.database.DatabaseHolder;
+import com.aurora.d20_35_app.database.DatabaseManager;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -73,61 +74,19 @@ public class HeroDescription extends Item {
         this.heroSkin = heroSkin;
     }
 
-    @Ignore
-    public static final String HERO_PARENT_ITEM_ID_COLUMN_NAME = "ParentItemID";
-
-    @Ignore
-    public static final String HERO_PLAYER_COLUMN_NAME = "Player";
-
-    @Ignore
-    public static final String HERO_CLASS_AND_LEVEL_COLUMN_NAME = "ClassAndLevel";
-
-    @Ignore
-    public static final String HERO_RACE_COLUMN_NAME = "Race";
-
-    @Ignore
-    public static final String HERO_ALIGNMENT_ID_COLUMN_NAME = "AlignmentId";
-
-    @Ignore
-    public static final String HERO_DEITY_ID_COLUMN_NAME = "DeityId";
-
-    @Ignore
-    public static final String HERO_SIZE_COLUMN_NAME = "SizeId";
-
-    @Ignore
-    public static final String HERO_AGE_COLUMN_NAME = "Age";
-
-    @Ignore
-    public static final String HERO_GENDER_COLUMN_NAME = "Gender";
-
-    @Ignore
-    public static final String HERO_HEIGHT_COLUMN_NAME = "Height";
-
-    @Ignore
-    public static final String HERO_WEIGHT_COLUMN_NAME = "Weight";
-
-    @Ignore
-    public static final String HERO_EYES_COLUMN_NAME = "Eyes";
-
-    @Ignore
-    public static final String HERO_HAIR_COLUMN_NAME = "Hair";
-
-    @Ignore
-    public static final String HERO_SKIN_COLUMN_NAME = "Skin";
-
     @Getter
     @Setter
-    @ColumnInfo(name = HERO_PARENT_ITEM_ID_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.HERO_PARENT_ITEM_ID_COLUMN_NAME)
     private Integer heroParentItemID;
 
     @Getter
     @Setter
-    @ColumnInfo(name = HERO_PLAYER_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.HERO_PLAYER_COLUMN_NAME)
     private String heroPlayer;
 
     @Getter
     @Setter
-    @ColumnInfo(name = HERO_CLASS_AND_LEVEL_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.HERO_CLASS_AND_LEVEL_COLUMN_NAME)
     private String heroClassAndLevel;
 
     @Ignore
@@ -156,7 +115,7 @@ public class HeroDescription extends Item {
 
     @Getter
     @Setter
-    @ColumnInfo(name = HERO_RACE_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.HERO_RACE_COLUMN_NAME)
     private String heroRace;
 
     public String getRaceStringFromId(DatabaseHolder databaseHolder) {
@@ -165,7 +124,7 @@ public class HeroDescription extends Item {
 
     @Getter
     @Setter
-    @ColumnInfo(name = HERO_ALIGNMENT_ID_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.HERO_ALIGNMENT_ID_COLUMN_NAME)
     private Integer heroAlignmentId;
 
     public String getAlignmentStringFromId(DatabaseHolder databaseHolder) {
@@ -174,7 +133,7 @@ public class HeroDescription extends Item {
 
     @Getter
     @Setter
-    @ColumnInfo(name = HERO_DEITY_ID_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.HERO_DEITY_ID_COLUMN_NAME)
     private Integer heroDeityId;
 
     public String getDeityStringFromId(DatabaseHolder databaseHolder) {
@@ -183,7 +142,7 @@ public class HeroDescription extends Item {
 
     @Getter
     @Setter
-    @ColumnInfo(name = HERO_SIZE_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.HERO_SIZE_COLUMN_NAME)
     private Integer heroSizeId;
 
     public String getSizeStringFromId(DatabaseHolder databaseHolder) {
@@ -192,37 +151,37 @@ public class HeroDescription extends Item {
 
     @Getter
     @Setter
-    @ColumnInfo(name = HERO_AGE_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.HERO_AGE_COLUMN_NAME)
     private Integer heroAge;
 
     @Getter
     @Setter
-    @ColumnInfo(name = HERO_GENDER_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.HERO_GENDER_COLUMN_NAME)
     private String heroGender;
 
     @Getter
     @Setter
-    @ColumnInfo(name = HERO_HEIGHT_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.HERO_HEIGHT_COLUMN_NAME)
     private String heroHeight;
 
     @Getter
     @Setter
-    @ColumnInfo(name = HERO_WEIGHT_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.HERO_WEIGHT_COLUMN_NAME)
     private String heroWeight;
 
     @Getter
     @Setter
-    @ColumnInfo(name = HERO_EYES_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.HERO_EYES_COLUMN_NAME)
     private String heroEyes;
 
     @Getter
     @Setter
-    @ColumnInfo(name = HERO_HAIR_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.HERO_HAIR_COLUMN_NAME)
     private String heroHair;
 
     @Getter
     @Setter
-    @ColumnInfo(name = HERO_SKIN_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.HERO_SKIN_COLUMN_NAME)
     private String heroSkin;
 
 

@@ -2,6 +2,7 @@ package com.aurora.d20_35_app.models.settingSpecific;
 
 import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.Databases;
+import com.aurora.d20_35_app.database.DBColumnNames;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -48,61 +49,44 @@ public class Races extends Item {
         this.favouriteClass = favouriteClass;
     }
 
-    @Ignore
-    public static final String RACE_DESCRIPTION_COLUMN_NAME = "RaceDescription";
-    @Ignore
-    public static final String RACE_ATTRIBUTE_MODIFIERS_COLUMN_NAME = "RaceAttributeModifiers";
-    @Ignore
-    public static final String RACE_SIZE_COLUMN_NAME = "RaceSize";
-    @Ignore
-    public static final String RACE_SPEED_COLUMN_NAME = "RaceSpeed";
-    @Ignore
-    public static final String RACE_FEATS_COLUMN_NAME = "RaceFeats";
-    @Ignore
-    public static final String RACE_SKILLS_COLUMN_NAME = "RaceSkillModifiers";
-    @Ignore
-    public static final String RACE_LANGUAGES_COLUMN_NAME = "RaceLanguages";
-    @Ignore
-    public static final String RACE_FAVOURITE_CLASS_COLUMN_NAME = "FavouriteClass";
-
     @Getter
     @Setter
-    @ColumnInfo(name = RACE_DESCRIPTION_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.RACE_DESCRIPTION_COLUMN_NAME)
     private String raceDescription;
 
     @Getter
     @Setter
-    @ColumnInfo(name = RACE_ATTRIBUTE_MODIFIERS_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.RACE_ATTRIBUTE_MODIFIERS_COLUMN_NAME)
     private String raceAttributeModifiers;
 
     @Getter
     @Setter
-    @ColumnInfo(name = RACE_SIZE_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.RACE_SIZE_COLUMN_NAME)
     private String raceSize;
 
     @Getter
     @Setter
-    @ColumnInfo(name = RACE_SPEED_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.RACE_SPEED_COLUMN_NAME)
     private String raceSpeed;
 
     @Getter
     @Setter
-    @ColumnInfo(name = RACE_FEATS_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.RACE_FEATS_COLUMN_NAME)
     private String raceFeats;
 
     @Getter
     @Setter
-    @ColumnInfo(name = RACE_SKILLS_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.RACE_SKILLS_COLUMN_NAME)
     private String raceSkills;
 
     @Getter
     @Setter
-    @ColumnInfo(name = RACE_LANGUAGES_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.RACE_LANGUAGES_COLUMN_NAME)
     private String raceLanguages;
 
     @Getter
     @Setter
-    @ColumnInfo(name = RACE_FAVOURITE_CLASS_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.RACE_FAVOURITE_CLASS_COLUMN_NAME)
     private String favouriteClass;
 
     public Races clone() {

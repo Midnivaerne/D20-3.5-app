@@ -3,8 +3,8 @@ package com.aurora.d20_35_app.utils;
 import android.annotation.SuppressLint;
 import android.util.Log;
 
-import com.aurora.d20_35_app.enums.CoreTypeHelper;
-import com.aurora.d20_35_app.enums.ItemType;
+import com.aurora.d20_35_app.models.typeHelpers.CoreTypeHelper;
+import com.aurora.d20_35_app.models.typeHelpers.ItemType;
 
 import java.util.HashMap;
 import java.util.Map;

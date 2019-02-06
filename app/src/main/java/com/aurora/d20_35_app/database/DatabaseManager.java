@@ -1,4 +1,4 @@
-package com.aurora.d20_35_app.utils.database;
+package com.aurora.d20_35_app.database;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -8,8 +8,7 @@ import android.util.Xml;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.aurora.d20_35_app.enums.DatabaseUsage;
-import com.aurora.d20_35_app.enums.ItemType;
+import com.aurora.d20_35_app.models.typeHelpers.ItemType;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.models.userData.HeroPlayer;
 import com.aurora.d20_35_app.utils.CommonUtils;

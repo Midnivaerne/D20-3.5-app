@@ -1,8 +1,8 @@
 package com.aurora.d20_35_app.dao;
 
 import com.aurora.d20_35_app.models.Classes;
-import com.aurora.d20_35_app.utils.database.DatabaseHolder;
-import com.aurora.d20_35_app.utils.database.DatabaseManager;
+import com.aurora.d20_35_app.database.DatabaseHolder;
+import com.aurora.d20_35_app.database.DatabaseManager;
 
 import org.junit.After;
 import org.junit.Assert;

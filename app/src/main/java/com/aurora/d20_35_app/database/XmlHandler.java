@@ -1,11 +1,8 @@
-package com.aurora.d20_35_app.utils.database;
+package com.aurora.d20_35_app.database;
 
-import com.aurora.d20_35_app.enums.CoreTypeHelper;
-import com.aurora.d20_35_app.enums.DBColumnNamesMethods;
-import com.aurora.d20_35_app.enums.DBRulesColumnNames;
-import com.aurora.d20_35_app.enums.DBSettingColumnNames;
-import com.aurora.d20_35_app.enums.ItemType;
-import com.aurora.d20_35_app.enums.RulesType;
+import com.aurora.d20_35_app.models.typeHelpers.CoreTypeHelper;
+import com.aurora.d20_35_app.models.typeHelpers.ItemType;
+import com.aurora.d20_35_app.models.typeHelpers.RulesType;
 import com.aurora.d20_35_app.models.helpers.CoreHelper;
 
 import org.xml.sax.Attributes;

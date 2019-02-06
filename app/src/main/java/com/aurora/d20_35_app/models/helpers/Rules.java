@@ -1,10 +1,11 @@
 package com.aurora.d20_35_app.models.helpers;
 
-import com.aurora.d20_35_app.enums.RulesType;
+import com.aurora.d20_35_app.models.typeHelpers.RulesType;
 import com.aurora.d20_35_app.models.constants.RulesAlignments;
 import com.aurora.d20_35_app.models.constants.RulesCombat;
 import com.aurora.d20_35_app.models.constants.RulesSizes;
 import com.aurora.d20_35_app.models.constants.RulesSkills;
+import com.aurora.d20_35_app.database.DBColumnNames;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Ignore;
@@ -18,20 +19,15 @@ import lombok.Setter;
 @Data
 public class Rules implements CoreHelper {
 
-    @Ignore
-    public static final String RULE_ID_COLUMN_NAME = "Item_ID";
-    @Ignore
-    public static final String RULE_NAME_COLUMN_NAME = "Name";
-
     @Getter
     @Setter
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = RULE_ID_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.RULE_ID_COLUMN_NAME)
     private int itemID;
 
     @Getter
     @Setter
-    @ColumnInfo(name = RULE_NAME_COLUMN_NAME)
+    @ColumnInfo(name = DBColumnNames.RULE_NAME_COLUMN_NAME)
     private String name;
 
     @Getter

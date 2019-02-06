@@ -8,7 +8,7 @@ import com.aurora.d20_35_app.databinding.ActivityPlayerCharactersListBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.player.viewModels.PlayerCharactersListVM;
 
-import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
 
 public class PlayerCharactersListActivity extends BindingActivity<ActivityPlayerCharactersListBinding, PlayerCharactersListVM> {
 

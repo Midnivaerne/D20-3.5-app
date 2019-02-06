@@ -12,7 +12,7 @@ import com.aurora.player.viewModels.PlayerCharacterVM;
 
 import androidx.fragment.app.Fragment;
 
-import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
 
 /**
  * A placeholder fragment containing a simple view.

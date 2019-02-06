@@ -12,8 +12,8 @@ import com.aurora.player.views.PlayerCharactersListActivity;
 import com.aurora.player.views.PlayerCharactersListFrameItemDetailActivity;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 
-import static com.aurora.d20_35_app.utils.database.DatabaseHolder.getDatabaseHolder;
-import static com.aurora.d20_35_app.utils.database.TranslationsHolder.translate;
+import static com.aurora.d20_35_app.database.DatabaseHolder.getDatabaseHolder;
+import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
 
 /**
  * A fragment representing a single Rules set detail screen.

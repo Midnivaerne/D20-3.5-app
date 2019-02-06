@@ -1,4 +1,4 @@
-package com.aurora.d20_35_app.enums;
+package com.aurora.d20_35_app.database;
 
 import com.aurora.d20_35_app.models.helpers.CoreHelper;
 

@@ -5,7 +5,7 @@ import android.app.Activity;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.helper.ActivityViewModel;
 import com.aurora.d20_35_app.models.userData.HeroPlayer;
-import com.aurora.d20_35_app.utils.database.DatabaseHolder;
+import com.aurora.d20_35_app.database.DatabaseHolder;
 import com.aurora.player.adapters.CustomTabChangeListener;
 import com.aurora.player.adapters.CustomTabSelectionListener;
 import com.aurora.player.adapters.PlayerCharacterAllSectionsPagerAdapter;
@@ -16,7 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 import lombok.Getter;
 import lombok.Setter;
 
-import static com.aurora.d20_35_app.utils.database.DatabaseHolder.getDatabaseHolder;
+import static com.aurora.d20_35_app.database.DatabaseHolder.getDatabaseHolder;
 
 public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity> {
 
