@@ -11,7 +11,7 @@ import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.databinding.ActivityD2035appBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
-import com.aurora.d20_35_app.interfaces.CustomCallback;
+import com.aurora.d20_35_app.database.CustomCallback;
 import com.aurora.d20_35_app.viewModels.D2035appVM;
 import com.aurora.main.views.MainMenuActivity;
 

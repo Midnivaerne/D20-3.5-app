@@ -8,8 +8,9 @@ import android.util.Xml;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.aurora.d20_35_app.models.typeHelpers.ItemType;
 import com.aurora.d20_35_app.helper.BindingActivity;
+import com.aurora.d20_35_app.models.typeHelpers.CoreTypeHelper;
+import com.aurora.d20_35_app.models.typeHelpers.ItemType;
 import com.aurora.d20_35_app.models.userData.HeroPlayer;
 import com.aurora.d20_35_app.utils.CommonUtils;
 
@@ -134,19 +135,19 @@ public class DatabaseManager {
     }
 
     public static void clearWholeDatabaseAndAllHolders(DatabaseHolder databaseHolder) {
-        for (ItemType type : ItemType.values()) {
+        for (CoreTypeHelper type : CoreTypeHelper.values()) {
             type.deleteAll(databaseHolder);
         }
     }
 
     public static void clearWholeDatabase(DatabaseHolder databaseHolder) {
-        for (ItemType type : ItemType.values()) {
+        for (CoreTypeHelper type : CoreTypeHelper.values()) {
             type.deleteAllFromDatabase(databaseHolder);
         }
     }
 
     public static void clearAllHolders(DatabaseHolder databaseHolder) {
-        for (ItemType type : ItemType.values()) {
+        for (CoreTypeHelper type : CoreTypeHelper.values()) {
             type.deleteAllFromHolder(databaseHolder);
         }
     }
@@ -156,7 +157,7 @@ public class DatabaseManager {
         DatabaseHolder.destroyInstance();
     }
 
-    private static void clear(DatabaseHolder databaseHolder, DatabaseUsage databaseUsage, ItemType itemType) {
+    private static void clear(DatabaseHolder databaseHolder, DatabaseUsage databaseUsage, CoreTypeHelper itemType) {
         switch (databaseUsage) {
             case CLEAR_DATABASE_AND_HOLDER:
                 if (itemType != null) {
@@ -184,7 +185,7 @@ public class DatabaseManager {
         }
     }
 
-    private static void loadRulesFromFileToHolderAndDatabaseAndReloadHolder(DatabaseHolder databaseHolder, String[] filenames, ItemType itemType) {
+    private static void loadRulesFromFileToHolderAndDatabaseAndReloadHolder(DatabaseHolder databaseHolder, String[] filenames, CoreTypeHelper itemType) {
         increaseProgressBar();
         for (String filename : filenames) {
             loadDataFromFileToHolder(databaseHolder, filename);
@@ -192,26 +193,26 @@ public class DatabaseManager {
         loadDataFromHolderToDatabase(databaseHolder, itemType);
     }
 
-    private static void loadDataFromDatabaseToHolder(DatabaseHolder databaseHolder, ItemType itemType) {
+    private static void loadDataFromDatabaseToHolder(DatabaseHolder databaseHolder, CoreTypeHelper itemType) {
         //todo check first if rules present?
         increaseProgressBar();
         if (itemType != null) {
             itemType.fromDatabaseToHolder(databaseHolder);
         } else {
-            for (ItemType it : ItemType.values()) {
+            for (CoreTypeHelper it : CoreTypeHelper.values()) {
                 it.fromDatabaseToHolder(databaseHolder);
             }
         }
         increaseProgressBar();
     }
 
-    private static void loadDataFromHolderToDatabase(DatabaseHolder databaseHolder, ItemType itemType) {
+    private static void loadDataFromHolderToDatabase(DatabaseHolder databaseHolder, CoreTypeHelper itemType) {
         //todo check first if rules present?
         increaseProgressBar();
         if (itemType != null) {
             itemType.fromHolderToDatabase(databaseHolder);
         } else {
-            for (ItemType it : ItemType.values()) {
+            for (CoreTypeHelper it : CoreTypeHelper.values()) { //todo other sorting
                 it.fromHolderToDatabase(databaseHolder);
             }
         }
@@ -246,7 +247,7 @@ public class DatabaseManager {
     }
 
     private static void chooseDatabaseLoadingType(DatabaseHolder databaseHolder, DatabaseUsage usage, String language) {
-        ItemType itemType = null;
+        CoreTypeHelper itemType = null;
         switch (usage) {
             case STARTUP:
                 loadRulesFromFileToHolderAndDatabaseAndReloadHolder(databaseHolder, FILENAMES, itemType);

@@ -9,6 +9,10 @@
             <Source>Test_race_source2</Source>
         </Databases_Item>
         <Databases_Item>
+            <Name>Test_bigger_source_name</Name>
+            <Source>Test_bigger_source</Source>
+        </Databases_Item>
+        <Databases_Item>
             <Name>Player_Hero_Source_name</Name>
             <Source>Player_Hero_Source</Source>
         </Databases_Item>
@@ -30,6 +34,12 @@
             <RaceDescription>gdsfgdfgdfgffgdf</RaceDescription>
         </Races_Item>
     </Races>
+    <Deities>
+        <Deities_Item>
+            <Name>Test_deity_name1</Name>
+            <Source>Test_race_source</Source>
+        </Deities_Item>
+    </Deities>
     <HeroPlayer>
         <HeroPlayer_Item>
             <Name>Hero_Name</Name>
@@ -40,9 +50,9 @@
             <Player>Player</Player>
             <ClassAndLevel>1=1</ClassAndLevel>
             <Race>1</Race>
-            <Alignment>5</Alignment>
-            <Deity>1</Deity>
-            <Size>3</Size>
+            <AlignmentId>1</AlignmentId>
+            <DeityId>1</DeityId>
+            <SizeId>1</SizeId>
             <Age>80</Age>
             <Gender>M</Gender>
             <Height>180</Height>
@@ -55,14 +65,14 @@
             <Name>Another_Hero_Name</Name>
             <Source>Player_Hero_Source</Source>
             <IdAsNameBackup>
-                Classes{1=classNameTagWithId1,2=classNameTagWithId2},Races{1=raceNameTagwithId1,1=raceTemplateNameTagwithId1},Deities{2=NameTagWithId2}
+                Classes{1=classNameTagWithId1,2=classNameTagWithId2},Races{1=raceNameTagwithId1,1=raceTemplateNameTagwithId1},Deities{1=NameTagWithId1}
             </IdAsNameBackup>
             <Player>Player</Player>
             <ClassAndLevel>1=1,2=1</ClassAndLevel>
             <Race>1+1</Race>
-            <Alignment>1</Alignment>
-            <Deity>1</Deity>
-            <Size>1</Size>
+            <AlignmentId>1</AlignmentId>
+            <DeityId>1</DeityId>
+            <SizeId>1</SizeId>
             <Age>36</Age>
             <Gender>F</Gender>
             <Height>160</Height>

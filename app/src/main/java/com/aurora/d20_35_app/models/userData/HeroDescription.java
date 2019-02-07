@@ -1,15 +1,15 @@
 package com.aurora.d20_35_app.models.userData;
 
-import com.aurora.d20_35_app.models.typeHelpers.ItemType;
+import com.aurora.d20_35_app.database.DBColumnNames;
+import com.aurora.d20_35_app.database.DatabaseHolder;
+import com.aurora.d20_35_app.database.DatabaseManager;
 import com.aurora.d20_35_app.models.Databases;
 import com.aurora.d20_35_app.models.constants.RulesAlignments;
 import com.aurora.d20_35_app.models.constants.RulesSizes;
 import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.settingSpecific.Deities;
+import com.aurora.d20_35_app.models.typeHelpers.ItemType;
 import com.aurora.d20_35_app.utils.CustomStringParsers;
-import com.aurora.d20_35_app.database.DBColumnNames;
-import com.aurora.d20_35_app.database.DatabaseHolder;
-import com.aurora.d20_35_app.database.DatabaseManager;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -128,7 +128,7 @@ public class HeroDescription extends Item {
     private Integer heroAlignmentId;
 
     public String getAlignmentStringFromId(DatabaseHolder databaseHolder) {
-        return String.valueOf(heroAlignmentId); //todo get Alignment from this id
+        return databaseHolder.RULES_ALIGNMENTS_MAP.get(heroAlignmentId).getName();//todo translate
     }
 
     @Getter
@@ -137,7 +137,7 @@ public class HeroDescription extends Item {
     private Integer heroDeityId;
 
     public String getDeityStringFromId(DatabaseHolder databaseHolder) {
-        return String.valueOf(heroDeityId); //todo get Deity from this id
+        return databaseHolder.DEITIES_MAP.get(heroDeityId).getName();//todo translate
     }
 
     @Getter
@@ -146,7 +146,7 @@ public class HeroDescription extends Item {
     private Integer heroSizeId;
 
     public String getSizeStringFromId(DatabaseHolder databaseHolder) {
-        return String.valueOf(heroSizeId); //todo get Size from this id
+        return databaseHolder.RULES_SIZES_MAP.get(heroSizeId).getName();//todo translate
     }
 
     @Getter

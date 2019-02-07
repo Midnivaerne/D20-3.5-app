@@ -9,7 +9,7 @@ import android.view.Display;
 import android.view.Gravity;
 
 import com.aurora.d20_35_app.helper.ActivityViewModel;
-import com.aurora.d20_35_app.interfaces.CustomCallback;
+import com.aurora.d20_35_app.database.CustomCallback;
 import com.aurora.d20_35_app.database.DatabaseManager;
 import com.aurora.d20_35_app.views.D2035appActivity;
 

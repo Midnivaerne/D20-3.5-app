@@ -76,10 +76,9 @@ public class XmlHandler extends DefaultHandler {
     @Override
     @SuppressWarnings("unchecked")
     public void endElement(String uri, String localName, String qName) {
-        System.out.println("title>>" + qName);//todo delete
-        System.out.println("data>>" + data.toString().trim());//todo delete
         for (int i = 0; i < dbPart.getEnumConstants().length; i++) {
             if (((DBColumnNamesMethods) dbPart.getEnumConstants()[i]).getColumnIsUsed()) {
+
                 ((DBColumnNamesMethods) dbPart.getEnumConstants()[i]).setParameter((item), data.toString().trim());
                 ((DBColumnNamesMethods) Objects.requireNonNull(DBColumnNamesMethods.fromString(qName, dbPart))).setColumnIsUsed(false);
                 break;
