@@ -1,5 +1,6 @@
 package com.aurora.d20_35_app.models.typeHelpers;
 
+import com.aurora.d20_35_app.database.DBTableNames;
 import com.aurora.d20_35_app.database.DatabaseHolder;
 import com.aurora.d20_35_app.helper.BaseDAO;
 import com.aurora.d20_35_app.models.Databases;
@@ -28,7 +29,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     /**
      * Databases a.k.a Sources
      */
-    DATABASES("Databases") {
+    DATABASES(DBTableNames.DATABASES) {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.databasesDAO();
@@ -65,7 +66,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     /**
      * Skills
      */
-    SKILLS("Skills") {
+    SKILLS(DBTableNames.SKILLS) {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.skillsDAO();
@@ -102,7 +103,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     /**
      * Feats
      */
-    FEATS("Feats") {
+    FEATS(DBTableNames.FEATS) {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.featsDAO();
@@ -139,7 +140,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     /**
      * Races
      */
-    RACES("Races") {
+    RACES(DBTableNames.RACES) {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.racesDAO();
@@ -176,7 +177,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     /**
      * Classes
      */
-    CLASSES("Classes") {
+    CLASSES(DBTableNames.CLASSES) {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.classesDAO();
@@ -213,7 +214,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     /**
      * Weapons
      */
-    WEAPONS("Weapons") {
+    WEAPONS(DBTableNames.WEAPONS) {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.weaponsDAO();
@@ -251,7 +252,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     /**
      * Armour
      */
-    ARMOUR("Armour") {
+    ARMOUR(DBTableNames.ARMOUR) {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.armourDAO();
@@ -288,7 +289,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     /**
      * Equipment
      */
-    EQUIPMENT("Equipment") {
+    EQUIPMENT(DBTableNames.EQUIPMENT) {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.equipmentDAO();
@@ -325,7 +326,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     /**
      * Spells
      */
-    SPELLS("Spells") {
+    SPELLS(DBTableNames.SPELLS) {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.spellsDAO();
@@ -362,7 +363,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     /**
      * Monsters
      */
-    MONSTERS("Monsters") {
+    MONSTERS(DBTableNames.MONSTERS) {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.monstersDAO();
@@ -399,7 +400,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     /**
      * RaceTemplates
      */
-    RACE_TEMPLATES("RaceTemplates") {
+    RACE_TEMPLATES(DBTableNames.RACE_TEMPLATES) {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.raceTemplatesDAO();
@@ -436,7 +437,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     /**
      * Deities
      */
-    DEITIES("Deities") {
+    DEITIES(DBTableNames.DEITIES) {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.deitiesDAO();
@@ -473,7 +474,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     /**
      * HeroNPC
      */
-    HERO_NPC("HeroNPC") {
+    HERO_NPC(DBTableNames.HERO_NPC) {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.heroNPCDAO();
@@ -510,7 +511,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     /**
      * HeroPlayer
      */
-    HERO_PLAYER("HeroPlayer") {
+    HERO_PLAYER(DBTableNames.HERO_PLAYER) {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.heroPlayerDAO();
@@ -570,7 +571,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     /**
      * Translations
      */
-    TRANSLATIONS("Translations") {
+    TRANSLATIONS(DBTableNames.TRANSLATIONS) {
         @Override
         public BaseDAO getDAO(DatabaseHolder databaseHolder) {
             return databaseHolder.translationsDAO();

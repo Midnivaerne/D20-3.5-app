@@ -29,10 +29,8 @@ public abstract class HeroNPCDAO implements BaseDAO<HeroNPC> {
 
     @Transaction
     public List<HeroNPC> getItemWithSuperFields() {
-        ArrayList<HeroNPC> result = new ArrayList<>();
-        result.addAll(getItems());
-        ArrayList<Item> resultItem = new ArrayList<>();
-        resultItem.addAll(getItemsAsItem());
+        ArrayList<HeroNPC> result = new ArrayList<>(getItems());
+        ArrayList<Item> resultItem = new ArrayList<>(getItemsAsItem());
         for (int i = 0; i < result.size(); i++) {
             result.get(i).setItemID(resultItem.get(i).getItemID());
             result.get(i).setName(resultItem.get(i).getName());

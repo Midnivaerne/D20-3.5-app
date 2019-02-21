@@ -21,9 +21,9 @@ import static java.lang.Math.toIntExact;
 
 @RunWith(AndroidJUnit4.class)
 public class FeatsDAOTest {
-    private static final Feats FEATS1 = new Feats("name1", "source1");
-    private static final Feats FEATS2 = new Feats("name2", "source2");
-    private static final Feats FEATS3 = new Feats("name3", "source3");
+    private static final Feats FEATS1 = new Feats("name1", "source1", "1=name1");
+    private static final Feats FEATS2 = new Feats("name2", "source2", "2=name2");
+    private static final Feats FEATS3 = new Feats("name3", "source3", "3=name3");
     private DatabaseHolder mDatabaseHolder;
 
     @Before

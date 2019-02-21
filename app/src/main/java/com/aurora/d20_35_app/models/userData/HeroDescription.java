@@ -21,18 +21,25 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import static com.aurora.d20_35_app.database.DBColumnNames.HERO_ALIGNMENT_ID_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBColumnNames.HERO_DEITY_ID_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBColumnNames.HERO_PARENT_ITEM_ID_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBColumnNames.HERO_SIZE_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBColumnNames.ITEM_ID_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBColumnNames.SOURCE_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBTableNames.HERO_DESCRIPTION;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Entity(tableName = "HeroDescription", inheritSuperIndices = true,
-        indices = {@Index("Source"), @Index("ParentItemID"), @Index("AlignmentId"), @Index("DeityId"), @Index("SizeId")},
+@Entity(tableName = HERO_DESCRIPTION, inheritSuperIndices = true,
+        indices = {@Index(SOURCE_COLUMN_NAME), @Index(HERO_PARENT_ITEM_ID_COLUMN_NAME), @Index(HERO_ALIGNMENT_ID_COLUMN_NAME), @Index(HERO_DEITY_ID_COLUMN_NAME), @Index(HERO_SIZE_COLUMN_NAME)},
         foreignKeys = {
-                @ForeignKey(entity = Databases.class, parentColumns = "Source", childColumns = "Source", onDelete = ForeignKey.CASCADE),
-                @ForeignKey(entity = HeroPlayer.class, parentColumns = "Item_ID", childColumns = "ParentItemID", onDelete = ForeignKey.CASCADE),
-                @ForeignKey(entity = RulesAlignments.class, parentColumns = "Item_ID", childColumns = "AlignmentId"),
-                @ForeignKey(entity = RulesSizes.class, parentColumns = "Item_ID", childColumns = "SizeId"),
-                @ForeignKey(entity = Deities.class, parentColumns = "Item_ID", childColumns = "DeityId")}
+                @ForeignKey(entity = Databases.class, parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
+                @ForeignKey(entity = HeroPlayer.class, parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_ITEM_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
+                @ForeignKey(entity = RulesAlignments.class, parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_ALIGNMENT_ID_COLUMN_NAME),
+                @ForeignKey(entity = RulesSizes.class, parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_SIZE_COLUMN_NAME),
+                @ForeignKey(entity = Deities.class, parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_DEITY_ID_COLUMN_NAME)}
 )
-
 public class HeroDescription extends Item {
 
     @Ignore
@@ -76,7 +83,7 @@ public class HeroDescription extends Item {
 
     @Getter
     @Setter
-    @ColumnInfo(name = DBColumnNames.HERO_PARENT_ITEM_ID_COLUMN_NAME)
+    @ColumnInfo(name = HERO_PARENT_ITEM_ID_COLUMN_NAME)
     private Integer heroParentItemID;
 
     @Getter
@@ -124,7 +131,7 @@ public class HeroDescription extends Item {
 
     @Getter
     @Setter
-    @ColumnInfo(name = DBColumnNames.HERO_ALIGNMENT_ID_COLUMN_NAME)
+    @ColumnInfo(name = HERO_ALIGNMENT_ID_COLUMN_NAME)
     private Integer heroAlignmentId;
 
     public String getAlignmentStringFromId(DatabaseHolder databaseHolder) {
@@ -133,7 +140,7 @@ public class HeroDescription extends Item {
 
     @Getter
     @Setter
-    @ColumnInfo(name = DBColumnNames.HERO_DEITY_ID_COLUMN_NAME)
+    @ColumnInfo(name = HERO_DEITY_ID_COLUMN_NAME)
     private Integer heroDeityId;
 
     public String getDeityStringFromId(DatabaseHolder databaseHolder) {
@@ -142,7 +149,7 @@ public class HeroDescription extends Item {
 
     @Getter
     @Setter
-    @ColumnInfo(name = DBColumnNames.HERO_SIZE_COLUMN_NAME)
+    @ColumnInfo(name = HERO_SIZE_COLUMN_NAME)
     private Integer heroSizeId;
 
     public String getSizeStringFromId(DatabaseHolder databaseHolder) {

@@ -29,10 +29,8 @@ public abstract class FeatsDAO  implements BaseDAO<Feats> {
 
     @Transaction
     public List<Feats> getItemWithSuperFields() {
-        ArrayList<Feats> result = new ArrayList<>();
-        result.addAll(getItems());
-        ArrayList<Item> resultItem = new ArrayList<>();
-        resultItem.addAll(getItemsAsItem());
+        ArrayList<Feats> result = new ArrayList<>(getItems());
+        ArrayList<Item> resultItem = new ArrayList<>(getItemsAsItem());
         for (int i = 0; i < result.size(); i++) {
             result.get(i).setItemID(resultItem.get(i).getItemID());
             result.get(i).setName(resultItem.get(i).getName());

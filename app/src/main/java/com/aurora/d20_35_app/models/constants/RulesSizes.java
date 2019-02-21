@@ -7,9 +7,11 @@ import androidx.room.Ignore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import static com.aurora.d20_35_app.database.DBTableNames.RULES_SIZES;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Entity(tableName = "RulesSizes", inheritSuperIndices = true)
+@Entity(tableName = RULES_SIZES, inheritSuperIndices = true)
 public class RulesSizes extends Rules {
 
     @Ignore

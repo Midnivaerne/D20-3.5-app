@@ -24,6 +24,7 @@ import com.aurora.d20_35_app.dao.usables.EquipmentDAO;
 import com.aurora.d20_35_app.dao.usables.WeaponsDAO;
 import com.aurora.d20_35_app.dao.userData.HeroDescriptionDAO;
 import com.aurora.d20_35_app.dao.userData.HeroPlayerDAO;
+import com.aurora.d20_35_app.dao.userData.HeroStatisticsDAO;
 import com.aurora.d20_35_app.models.Databases;
 import com.aurora.d20_35_app.models.Translations;
 import com.aurora.d20_35_app.models.constants.RulesAlignments;
@@ -40,11 +41,13 @@ import com.aurora.d20_35_app.models.settingSpecific.RaceTemplates;
 import com.aurora.d20_35_app.models.settingSpecific.Races;
 import com.aurora.d20_35_app.models.settingSpecific.Skills;
 import com.aurora.d20_35_app.models.settingSpecific.Spells;
+import com.aurora.d20_35_app.models.typeHelpers.RulesType;
 import com.aurora.d20_35_app.models.usables.Armour;
 import com.aurora.d20_35_app.models.usables.Equipment;
 import com.aurora.d20_35_app.models.usables.Weapons;
 import com.aurora.d20_35_app.models.userData.HeroDescription;
 import com.aurora.d20_35_app.models.userData.HeroPlayer;
+import com.aurora.d20_35_app.models.userData.HeroStatistics;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,12 +68,12 @@ import lombok.Setter;
 
 @Singleton
 @Database(entities = {
-        Armour.class, Classes.class, Equipment.class, Feats.class,
-        HeroPlayer.class, HeroDescription.class, HeroNPC.class,
-        Monsters.class, Races.class, RaceTemplates.class, Skills.class, Spells.class, Weapons.class,
-        Deities.class,
-        Translations.class, Databases.class,
-        RulesCombat.class, RulesSkills.class, RulesAlignments.class, RulesSizes.class
+        Databases.class,
+        RulesCombat.class, RulesSkills.class, RulesAlignments.class, RulesSizes.class,
+        Armour.class, Equipment.class, Feats.class, Skills.class, Spells.class, Weapons.class,
+        Classes.class, Monsters.class, Races.class, RaceTemplates.class, Deities.class,
+        HeroNPC.class, HeroPlayer.class, HeroDescription.class, HeroStatistics.class,
+        Translations.class
 }, version = 1, exportSchema = false)
 @TypeConverters(DataTypeConverters.class)
 @SuppressLint("UseSparseArrays")
@@ -78,6 +81,16 @@ public abstract class DatabaseHolder extends RoomDatabase {
 
     private static DatabaseHolder INSTANCE;
     private static final String DATABASE_NAME = "database.db";
+
+    public abstract DatabasesDAO databasesDAO();
+
+    public abstract RulesSizesDAO rulesSizesDAO();
+
+    public abstract RulesAlignmentsDAO rulesAlignmentsDAO();
+
+    public abstract RulesSkillsDAO rulesSkillsDAO();
+
+    public abstract RulesCombatDAO rulesCombatDAO();
 
     public abstract ArmourDAO armourDAO();
 
@@ -90,6 +103,8 @@ public abstract class DatabaseHolder extends RoomDatabase {
     public abstract HeroPlayerDAO heroPlayerDAO();
 
     public abstract HeroDescriptionDAO heroDescriptionDAO();
+
+    public abstract HeroStatisticsDAO heroStatisticsAbilityScoresDAO();
 
     public abstract HeroNPCDAO heroNPCDAO();
 
@@ -108,16 +123,6 @@ public abstract class DatabaseHolder extends RoomDatabase {
     public abstract DeitiesDAO deitiesDAO();
 
     public abstract TranslationsDAO translationsDAO();
-
-    public abstract DatabasesDAO databasesDAO();
-
-    public abstract RulesSizesDAO rulesSizesDAO();
-
-    public abstract RulesAlignmentsDAO rulesAlignmentsDAO();
-
-    public abstract RulesSkillsDAO rulesSkillsDAO();
-
-    public abstract RulesCombatDAO rulesCombatDAO();
 
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
@@ -140,10 +145,9 @@ public abstract class DatabaseHolder extends RoomDatabase {
     }
 
     private void onCreateRulesList() {
-        String[] rulesTable = {"Combat", "Skills"};
         rulesList.clear();
-        for (int i = 0; i < rulesTable.length; i++) {
-            rulesList.add(new Rules(rulesTable[i]));
+        for (RulesType rt : RulesType.values()) {
+            rulesList.add((Rules) rt.getNewObject());
         }
     }
 
@@ -185,7 +189,7 @@ public abstract class DatabaseHolder extends RoomDatabase {
 
     public final List<Translations> TRANSLATIONS_LIST = new ArrayList<Translations>();
     ////////////////////////////////////////////////////////////////////////////
-
+    ////////////////////////////////////////////////////////////////////////////
     /**
      * Maps to hold database items with ids
      */

@@ -8,10 +8,13 @@ import androidx.room.Index;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import static com.aurora.d20_35_app.database.DBColumnNames.SOURCE_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBTableNames.DATABASES;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Entity(tableName = "Databases", inheritSuperIndices = true,
-        indices = {@Index(value = {"Source"}, unique = true)})
+@Entity(tableName = DATABASES, inheritSuperIndices = true,
+        indices = {@Index(value = {SOURCE_COLUMN_NAME}, unique = true)})
 public class Databases extends Item {
 
     @Ignore

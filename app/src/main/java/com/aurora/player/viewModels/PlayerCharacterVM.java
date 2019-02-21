@@ -29,7 +29,7 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
     private HeroPlayer hero;
 
     @Getter
-    private String heroTextValues[];
+    private String heroDescriptionsTextValues[];
 
     public PlayerCharacterVM(PlayerCharacterActivity activity) {
         super(activity);
@@ -42,19 +42,14 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
         DatabaseHolder databaseHolder = getDatabaseHolder(activity);
         this.setHero(databaseHolder.HEROES_PLAYER_MAP.get(Integer.parseInt(activity.getIntent().getStringExtra(PlayerCharacterActivity.HERO_PLAYER_ID))));
         getHero().getHeroDescription().setBackupNames(getHero().getBackupNames());
-        String classesAndLevelText = getHero().getHeroDescription().getHeroClassAndLevelStringFromId(databaseHolder);
-        String raceText = getHero().getHeroDescription().getRaceStringFromId(databaseHolder);
-        String alignmentText = getHero().getHeroDescription().getAlignmentStringFromId(databaseHolder);
-        String deityText = getHero().getHeroDescription().getDeityStringFromId(databaseHolder);
-        String sizeText = getHero().getHeroDescription().getSizeStringFromId(databaseHolder);
-        heroTextValues = new String[]{
+        heroDescriptionsTextValues = new String[]{
                 getHero().getName(),
                 getHero().getHeroDescription().getHeroPlayer(),
-                classesAndLevelText,
-                raceText,
-                alignmentText,
-                deityText,
-                sizeText,
+                getHero().getHeroDescription().getHeroClassAndLevelStringFromId(databaseHolder),
+                getHero().getHeroDescription().getRaceStringFromId(databaseHolder),
+                getHero().getHeroDescription().getAlignmentStringFromId(databaseHolder),
+                getHero().getHeroDescription().getDeityStringFromId(databaseHolder),
+                getHero().getHeroDescription().getSizeStringFromId(databaseHolder),
                 String.valueOf(getHero().getHeroDescription().getHeroAge()),
                 getHero().getHeroDescription().getHeroGender(),
                 getHero().getHeroDescription().getHeroHeight(),

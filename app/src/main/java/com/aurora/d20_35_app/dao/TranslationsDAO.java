@@ -29,10 +29,8 @@ public abstract class TranslationsDAO implements BaseDAO<Translations> {
 
     @Transaction
     public List<Translations> getItemWithSuperFields() {
-        ArrayList<Translations> result = new ArrayList<>();
-        result.addAll(getItems());
-        ArrayList<Item> resultItem = new ArrayList<>();
-        resultItem.addAll(getItemsAsItem());
+        ArrayList<Translations> result = new ArrayList<>(getItems());
+        ArrayList<Item> resultItem = new ArrayList<>(getItemsAsItem());
         for (int i = 0; i < result.size(); i++) {
             result.get(i).setItemID(resultItem.get(i).getItemID());
             result.get(i).setName(resultItem.get(i).getName());

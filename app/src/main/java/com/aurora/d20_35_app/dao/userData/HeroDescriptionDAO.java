@@ -29,10 +29,8 @@ public abstract class HeroDescriptionDAO implements BaseDAO<HeroDescription> {
 
     @Transaction
     public List<HeroDescription> getItemWithSuperFields() {
-        ArrayList<HeroDescription> result = new ArrayList<>();
-        result.addAll(getItems());
-        ArrayList<Item> resultItem = new ArrayList<>();
-        resultItem.addAll(getItemsAsItem());
+        ArrayList<HeroDescription> result = new ArrayList<>(getItems());
+        ArrayList<Item> resultItem = new ArrayList<>(getItemsAsItem());
         for (int i = 0; i < result.size(); i++) {
             result.get(i).setItemID(resultItem.get(i).getItemID());
             result.get(i).setName(resultItem.get(i).getName());
@@ -63,10 +61,8 @@ public abstract class HeroDescriptionDAO implements BaseDAO<HeroDescription> {
 
     @Transaction
     public List<HeroDescription> getHeroDescriptionsWithSuperFieldsWithParentIdIn(List<Integer> heroes_player_id_list) {
-        ArrayList<HeroDescription> result = new ArrayList<>();
-        result.addAll(getHeroDescriptionsWithParentIdIn(heroes_player_id_list));
-        ArrayList<Item> resultItem = new ArrayList<>();
-        resultItem.addAll(getHeroDescriptionsAsItemWithParentIdIn(heroes_player_id_list));
+        ArrayList<HeroDescription> result = new ArrayList<>(getHeroDescriptionsWithParentIdIn(heroes_player_id_list));
+        ArrayList<Item> resultItem = new ArrayList<>(getHeroDescriptionsAsItemWithParentIdIn(heroes_player_id_list));
         for (int i = 0; i < result.size(); i++) {
             result.get(i).setItemID(resultItem.get(i).getItemID());
             result.get(i).setName(resultItem.get(i).getName());
@@ -76,13 +72,13 @@ public abstract class HeroDescriptionDAO implements BaseDAO<HeroDescription> {
         return result;
     }
 
-    @Query("SELECT * FROM HeroDescription WHERE ParentItemID == :PatentId")
+    @Query("SELECT * FROM HeroDescription WHERE Parent_Item_ID == :PatentId")
     public abstract HeroDescription getHeroDescriptionWithParentId(Integer PatentId);
 
-    @Query("SELECT * FROM HeroDescription WHERE ParentItemID IN (:heroes_player_id_list)")
+    @Query("SELECT * FROM HeroDescription WHERE Parent_Item_ID IN (:heroes_player_id_list)")
     public abstract List<HeroDescription> getHeroDescriptionsWithParentIdIn(List<Integer> heroes_player_id_list);
 
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    @Query("SELECT * FROM HeroDescription WHERE ParentItemID IN (:heroes_player_id_list)")
+    @Query("SELECT * FROM HeroDescription WHERE Parent_Item_ID IN (:heroes_player_id_list)")
     public abstract List<Item> getHeroDescriptionsAsItemWithParentIdIn(List<Integer> heroes_player_id_list);
 }

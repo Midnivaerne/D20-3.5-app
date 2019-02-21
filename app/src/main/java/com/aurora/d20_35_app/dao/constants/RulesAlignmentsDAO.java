@@ -32,10 +32,8 @@ public abstract class RulesAlignmentsDAO implements BaseDAO<RulesAlignments> {
 
     @Transaction
     public List<RulesAlignments> getItemWithSuperFields() {
-        ArrayList<RulesAlignments> result = new ArrayList<>();
-        result.addAll(getItems());
-        ArrayList<Rules> resultItem = new ArrayList<>();
-        resultItem.addAll(getItemsAsRules());
+        ArrayList<RulesAlignments> result = new ArrayList<>(getItems());
+        ArrayList<Rules> resultItem = new ArrayList<>(getItemsAsRules());
         for (int i = 0; i < result.size(); i++) {
             result.get(i).setItemID(resultItem.get(i).getItemID());
             result.get(i).setName(resultItem.get(i).getName());

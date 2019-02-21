@@ -10,11 +10,14 @@ import androidx.room.Index;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import static com.aurora.d20_35_app.database.DBColumnNames.SOURCE_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBTableNames.RACE_TEMPLATES;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Entity(tableName = "RaceTemplates", inheritSuperIndices = true,
-        indices = {@Index(value = {"Source"})},
-        foreignKeys = @ForeignKey(entity = Databases.class, parentColumns = "Source", childColumns = "Source",onDelete = ForeignKey.CASCADE))
+@Entity(tableName = RACE_TEMPLATES, inheritSuperIndices = true,
+        indices = {@Index(value = {SOURCE_COLUMN_NAME})},
+        foreignKeys = @ForeignKey(entity = Databases.class, parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME,onDelete = ForeignKey.CASCADE))
 public class RaceTemplates extends Item {
 
     @Ignore

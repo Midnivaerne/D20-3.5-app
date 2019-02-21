@@ -13,8 +13,8 @@ import org.junit.Test;
 import androidx.room.Room;
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import static com.aurora.d20_35_app.models.typeHelpers.RulesType.RulesCombat;
-import static com.aurora.d20_35_app.models.typeHelpers.RulesType.RulesSkills;
+import static com.aurora.d20_35_app.models.typeHelpers.RulesType.RULES_COMBAT;
+import static com.aurora.d20_35_app.models.typeHelpers.RulesType.RULES_SKILLS;
 import static com.aurora.d20_35_app.models.typeHelpers.RulesType.contains;
 
 public class RulesTypeTest {
@@ -41,60 +41,60 @@ public class RulesTypeTest {
 
     @Test
     public void toStringTest() {
-        Assert.assertEquals("RulesCombat", RulesCombat.toString());
-        Assert.assertNotEquals("RulesSkills", RulesCombat.toString());
-        Assert.assertNotEquals("RulesCombat", RulesSkills.toString());
+        Assert.assertEquals("RulesCombat", RULES_COMBAT.toString());
+        Assert.assertNotEquals("RulesSkills", RULES_COMBAT.toString());
+        Assert.assertNotEquals("RulesCombat", RULES_SKILLS.toString());
     }
 
     @Test
     public void containsTest() {
-        Assert.assertTrue(contains("RulesCombat"));
-        Assert.assertFalse(contains("RandomText"));
+        Assert.assertTrue(contains("RulesCombat", RulesType.class));
+        Assert.assertFalse(contains("RandomText", RulesType.class));
     }
 
     @Test
     public void getDatabaseListTest() {
         RULECOMBAT1.setItemID(1);
         mDatabaseHolder.RULES_COMBAT_LIST.add(RULECOMBAT1);
-        Assert.assertEquals(mDatabaseHolder.RULES_COMBAT_LIST, RulesCombat.getDatabaseList(mDatabaseHolder));
-        Assert.assertNotEquals(mDatabaseHolder.RULES_SKILLS_LIST, RulesCombat.getDatabaseList(mDatabaseHolder));
-        Assert.assertNotEquals(mDatabaseHolder.RULES_COMBAT_LIST, RulesSkills.getDatabaseList(mDatabaseHolder));
+        Assert.assertEquals(mDatabaseHolder.RULES_COMBAT_LIST, RULES_COMBAT.getDatabaseList(mDatabaseHolder));
+        Assert.assertNotEquals(mDatabaseHolder.RULES_SKILLS_LIST, RULES_COMBAT.getDatabaseList(mDatabaseHolder));
+        Assert.assertNotEquals(mDatabaseHolder.RULES_COMBAT_LIST, RULES_SKILLS.getDatabaseList(mDatabaseHolder));
     }
 
     @Test
     public void getDatabaseMapTest() {
         RULECOMBAT1.setItemID(1);
         mDatabaseHolder.RULES_COMBAT_MAP.put(1, RULECOMBAT1);
-        Assert.assertEquals(mDatabaseHolder.RULES_COMBAT_MAP, RulesCombat.getDatabaseMap(mDatabaseHolder));
-        Assert.assertNotEquals(mDatabaseHolder.RULES_SKILLS_MAP, RulesCombat.getDatabaseMap(mDatabaseHolder));
-        Assert.assertNotEquals(mDatabaseHolder.RULES_COMBAT_MAP, RulesSkills.getDatabaseMap(mDatabaseHolder));
+        Assert.assertEquals(mDatabaseHolder.RULES_COMBAT_MAP, RULES_COMBAT.getDatabaseMap(mDatabaseHolder));
+        Assert.assertNotEquals(mDatabaseHolder.RULES_SKILLS_MAP, RULES_COMBAT.getDatabaseMap(mDatabaseHolder));
+        Assert.assertNotEquals(mDatabaseHolder.RULES_COMBAT_MAP, RULES_SKILLS.getDatabaseMap(mDatabaseHolder));
     }
 
     @Test
     public void getNewObjectTest() {
-        Assert.assertEquals(com.aurora.d20_35_app.models.constants.RulesCombat.class, RulesCombat.getNewObject().getClass());
-        Assert.assertEquals(new RulesCombat(), RulesCombat.getNewObject());
+        Assert.assertEquals(com.aurora.d20_35_app.models.constants.RulesCombat.class, RULES_COMBAT.getNewObject().getClass());
+        Assert.assertEquals(new RulesCombat(), RULES_COMBAT.getNewObject());
 
-        Assert.assertNotEquals(com.aurora.d20_35_app.models.constants.RulesSkills.class, RulesCombat.getNewObject().getClass());
-        Assert.assertNotEquals(new RulesSkills(), RulesCombat.getNewObject());
+        Assert.assertNotEquals(com.aurora.d20_35_app.models.constants.RulesSkills.class, RULES_COMBAT.getNewObject().getClass());
+        Assert.assertNotEquals(new RulesSkills(), RULES_COMBAT.getNewObject());
 
-        Assert.assertNotEquals(com.aurora.d20_35_app.models.constants.RulesCombat.class, RulesSkills.getNewObject().getClass());
-        Assert.assertNotEquals(new RulesCombat(), RulesSkills.getNewObject());
+        Assert.assertNotEquals(com.aurora.d20_35_app.models.constants.RulesCombat.class, RULES_SKILLS.getNewObject().getClass());
+        Assert.assertNotEquals(new RulesCombat(), RULES_SKILLS.getNewObject());
     }
 
     @Test
     public void getDAOTest() {
-        Assert.assertEquals(mDatabaseHolder.rulesCombatDAO(), RulesCombat.getDAO(mDatabaseHolder));
-        Assert.assertNotEquals(mDatabaseHolder.rulesSkillsDAO(), RulesCombat.getDAO(mDatabaseHolder));
-        Assert.assertNotEquals(mDatabaseHolder.rulesCombatDAO(), RulesSkills.getDAO(mDatabaseHolder));
+        Assert.assertEquals(mDatabaseHolder.rulesCombatDAO(), RULES_COMBAT.getDAO(mDatabaseHolder));
+        Assert.assertNotEquals(mDatabaseHolder.rulesSkillsDAO(), RULES_COMBAT.getDAO(mDatabaseHolder));
+        Assert.assertNotEquals(mDatabaseHolder.rulesCombatDAO(), RULES_SKILLS.getDAO(mDatabaseHolder));
     }
 
     @Test
     public void getAllFromDatabaseTest() {
         RULECOMBAT1.setItemID(1);
         mDatabaseHolder.rulesCombatDAO().insert(RULECOMBAT1);
-        Assert.assertEquals(RulesCombat.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.rulesCombatDAO().getItems());
-        Assert.assertNotEquals(RulesSkills.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.rulesCombatDAO().getItems());
-        Assert.assertNotEquals(RulesCombat.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.rulesSkillsDAO().getItems());
+        Assert.assertEquals(RULES_COMBAT.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.rulesCombatDAO().getItems());
+        Assert.assertNotEquals(RULES_SKILLS.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.rulesCombatDAO().getItems());
+        Assert.assertNotEquals(RULES_COMBAT.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.rulesSkillsDAO().getItems());
     }
 }

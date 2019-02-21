@@ -22,9 +22,9 @@ import static java.lang.Math.toIntExact;
 @RunWith(AndroidJUnit4.class)
 public class EquipmentDAOTest {
 
-    private static final Equipment EQUIPMENT1 = new Equipment("name1", "source1");
-    private static final Equipment EQUIPMENT2 = new Equipment("name2", "source2");
-    private static final Equipment EQUIPMENT3 = new Equipment("name3", "source3");
+    private static final Equipment EQUIPMENT1 = new Equipment("name1", "source1", "1=name1");
+    private static final Equipment EQUIPMENT2 = new Equipment("name2", "source2", "2=name2");
+    private static final Equipment EQUIPMENT3 = new Equipment("name3", "source3", "3=name3");
     private DatabaseHolder mDatabaseHolder;
 
     @Before

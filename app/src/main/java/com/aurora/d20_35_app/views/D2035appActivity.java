@@ -76,13 +76,7 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
             // request all missing permissions
             final String[] permissions = missingPermissions.toArray(new String[missingPermissions.size()]);
             Log.i("Permissions ", " Asked for " + Arrays.toString(permissions) + " permissions");
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(permissions, REQUEST_CODE_PERMISSION_ALL);
-            } else {
-                Toast.makeText(this, "Required API level 23, exiting", Toast.LENGTH_LONG).show();
-                finish();
-            }
+            requestPermissions(permissions, REQUEST_CODE_PERMISSION_ALL);
         } else {
             final int[] grantResults = new int[permissionTypeStringManifest.length];
             Arrays.fill(grantResults, PackageManager.PERMISSION_GRANTED);

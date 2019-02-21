@@ -12,11 +12,14 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import static com.aurora.d20_35_app.database.DBColumnNames.SOURCE_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBTableNames.HERO_PLAYER;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Entity(tableName = "HeroPlayer", inheritSuperIndices = true,
-        indices = {@Index(value = "Source")},
-        foreignKeys = @ForeignKey(entity = Databases.class, parentColumns = "Source", childColumns = "Source", onDelete = ForeignKey.CASCADE))
+@Entity(tableName = HERO_PLAYER, inheritSuperIndices = true,
+        indices = {@Index(value = SOURCE_COLUMN_NAME)},
+        foreignKeys = @ForeignKey(entity = Databases.class, parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
 public class HeroPlayer extends Hero {
 
     @Ignore
@@ -28,17 +31,17 @@ public class HeroPlayer extends Hero {
     public HeroPlayer(String name,
                       String source,
                       String idAsNameBackup) {
-        new HeroPlayer(name, source, idAsNameBackup, new HeroDescription());
+        new HeroPlayer(name, source, idAsNameBackup, null, null);
     }
 
     public HeroPlayer(String name,
                       String source,
                       String idAsNameBackup,
+
+                      HeroStatistics heroStatistics,
                       HeroDescription heroDescription) {
-        super(name,
-                source,
-                idAsNameBackup);
-        this.heroDescription = heroDescription.clone();
+        super(name, source, idAsNameBackup, heroStatistics);
+        this.heroDescription = heroDescription == null ? new HeroDescription() : heroDescription.clone();
     }
 
     @Ignore
@@ -48,17 +51,11 @@ public class HeroPlayer extends Hero {
     private HeroDescription heroDescription;
 
     public HeroPlayer clone() {
-        if (getHeroDescription() != null) {
-            return new HeroPlayer(
-                    getName(),
-                    getSource(),
-                    getIdAsNameBackup(),
-                    getHeroDescription());
-        } else {
-            return new HeroPlayer(
-                    getName(),
-                    getSource(),
-                    getIdAsNameBackup());
-        }
+        return new HeroPlayer(
+                getName(),
+                getSource(),
+                getIdAsNameBackup(),
+                getHeroStatistics(),
+                getHeroDescription());
     }
 }

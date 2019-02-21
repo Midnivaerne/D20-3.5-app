@@ -7,9 +7,11 @@ import androidx.room.Ignore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import static com.aurora.d20_35_app.database.DBTableNames.RULES_ALIGNMENTS;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Entity(tableName = "RulesAlignments", inheritSuperIndices = true)
+@Entity(tableName = RULES_ALIGNMENTS, inheritSuperIndices = true)
 public class RulesAlignments extends Rules {
 
     @Ignore

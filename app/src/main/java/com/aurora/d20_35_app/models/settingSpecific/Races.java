@@ -14,12 +14,15 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import static com.aurora.d20_35_app.database.DBColumnNames.SOURCE_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBTableNames.RACES;
+
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Entity(tableName = "Races", inheritSuperIndices = true,
-        indices = {@Index(value = {"Source"})},
-        foreignKeys = @ForeignKey(entity = Databases.class, parentColumns = "Source", childColumns = "Source", onDelete = ForeignKey.CASCADE))
+@Entity(tableName = RACES, inheritSuperIndices = true,
+        indices = {@Index(value = {SOURCE_COLUMN_NAME})},
+        foreignKeys = @ForeignKey(entity = Databases.class, parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
 public class Races extends Item {
 
     @Ignore

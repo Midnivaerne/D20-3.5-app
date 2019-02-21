@@ -7,9 +7,11 @@ import androidx.room.Ignore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import static com.aurora.d20_35_app.database.DBTableNames.RULES_COMBAT;
+
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Entity(tableName = "RulesCombat", inheritSuperIndices = true)
+@Entity(tableName = RULES_COMBAT, inheritSuperIndices = true)
 public class RulesCombat extends Rules {
 
     @Ignore

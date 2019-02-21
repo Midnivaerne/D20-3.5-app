@@ -92,7 +92,7 @@ public class PlayerCharacterDescriptionAppearancePlaceholderFragment extends Fra
 
     private void loadHeroDataFromVMtoView(View rootView) {
         RelativeLayout entryOuter;
-        String textValues[] = playerCharacterVM.getHeroTextValues();
+        String textValues[] = playerCharacterVM.getHeroDescriptionsTextValues();
 
         for (int i = 0; i < ID_VALUES.length; i++) {
             entryOuter = (RelativeLayout) rootView.findViewById(ID_VALUES[i]);

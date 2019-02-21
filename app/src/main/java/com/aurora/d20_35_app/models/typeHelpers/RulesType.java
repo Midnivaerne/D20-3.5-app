@@ -1,12 +1,13 @@
 package com.aurora.d20_35_app.models.typeHelpers;
 
+import com.aurora.d20_35_app.database.DBTableNames;
+import com.aurora.d20_35_app.database.DatabaseHolder;
 import com.aurora.d20_35_app.helper.BaseDAO;
 import com.aurora.d20_35_app.models.constants.RulesAlignments;
 import com.aurora.d20_35_app.models.constants.RulesCombat;
 import com.aurora.d20_35_app.models.constants.RulesSizes;
 import com.aurora.d20_35_app.models.constants.RulesSkills;
 import com.aurora.d20_35_app.models.helpers.Rules;
-import com.aurora.d20_35_app.database.DatabaseHolder;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,7 @@ public enum RulesType implements CoreTypeHelper<RulesType, Rules> {
     /**
      * RulesSizes
      */
-    RULES_SIZES("RulesSizes") {
+    RULES_SIZES(DBTableNames.RULES_SIZES) {
         @Override
         public List getDatabaseList(DatabaseHolder databaseHolder) {
             return databaseHolder.RULES_SIZES_LIST;
@@ -52,7 +53,7 @@ public enum RulesType implements CoreTypeHelper<RulesType, Rules> {
     /**
      * RulesAlignments
      */
-    RULES_ALIGNMENTS("RulesAlignments") {
+    RULES_ALIGNMENTS(DBTableNames.RULES_ALIGNMENTS) {
         @Override
         public List getDatabaseList(DatabaseHolder databaseHolder) {
             return databaseHolder.RULES_ALIGNMENTS_LIST;
@@ -89,7 +90,7 @@ public enum RulesType implements CoreTypeHelper<RulesType, Rules> {
     /**
      * RulesCombat
      */
-    RULES_COMBAT("RulesCombat") {
+    RULES_COMBAT(DBTableNames.RULES_COMBAT) {
         @Override
         public List getDatabaseList(DatabaseHolder databaseHolder) {
             return databaseHolder.RULES_COMBAT_LIST;
@@ -126,7 +127,7 @@ public enum RulesType implements CoreTypeHelper<RulesType, Rules> {
     /**
      * RulesSkills
      */
-    RULES_SKILLS("RulesSkills") {
+    RULES_SKILLS(DBTableNames.RULES_SKILLS) {
         @Override
         public List getDatabaseList(DatabaseHolder databaseHolder) {
             return databaseHolder.RULES_SKILLS_LIST;

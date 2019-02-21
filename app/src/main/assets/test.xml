@@ -21,17 +21,17 @@
         <Races_Item>
             <Name>Test_race_name1</Name>
             <Source>Test_race_source</Source>
-            <RaceDescription>bla bla bla descr test11oneonone</RaceDescription>
+            <Race_Description>bla bla bla descr test11oneonone</Race_Description>
         </Races_Item>
         <Races_Item>
             <Name>Test_race_name2</Name>
             <Source>Test_race_source</Source>
-            <RaceDescription>trutututu asdasdffgdf</RaceDescription>
+            <Race_Description>trutututu asdasdffgdf</Race_Description>
         </Races_Item>
         <Races_Item>
             <Name>Test_race_name3</Name>
             <Source>Test_race_source2</Source>
-            <RaceDescription>gdsfgdfgdfgffgdf</RaceDescription>
+            <Race_Description>gdsfgdfgdfgffgdf</Race_Description>
         </Races_Item>
     </Races>
     <Deities>
@@ -44,15 +44,15 @@
         <HeroPlayer_Item>
             <Name>Hero_Name</Name>
             <Source>Player_Hero_Source</Source>
-            <IdAsNameBackup>
+            <Id_As_Name_Backup>
                 Classes{1=classNameTagWithId1},Races{1=raceNameTagwithId1},Deities{1=NameTagWithId1}
-            </IdAsNameBackup>
+            </Id_As_Name_Backup>
             <Player>Player</Player>
-            <ClassAndLevel>1=1</ClassAndLevel>
+            <Class_And_Level>1=1</Class_And_Level>
             <Race>1</Race>
-            <AlignmentId>1</AlignmentId>
-            <DeityId>1</DeityId>
-            <SizeId>1</SizeId>
+            <Alignment_Id>1</Alignment_Id>
+            <Deity_Id>1</Deity_Id>
+            <Size_Id>1</Size_Id>
             <Age>80</Age>
             <Gender>M</Gender>
             <Height>180</Height>
@@ -64,15 +64,15 @@
         <HeroPlayer_Item>
             <Name>Another_Hero_Name</Name>
             <Source>Player_Hero_Source</Source>
-            <IdAsNameBackup>
+            <Id_As_Name_Backup>
                 Classes{1=classNameTagWithId1,2=classNameTagWithId2},Races{1=raceNameTagwithId1,1=raceTemplateNameTagwithId1},Deities{1=NameTagWithId1}
-            </IdAsNameBackup>
+            </Id_As_Name_Backup>
             <Player>Player</Player>
-            <ClassAndLevel>1=1,2=1</ClassAndLevel>
+            <Class_And_Level>1=1,2=1</Class_And_Level>
             <Race>1+1</Race>
-            <AlignmentId>1</AlignmentId>
-            <DeityId>1</DeityId>
-            <SizeId>1</SizeId>
+            <Alignment_Id>1</Alignment_Id>
+            <Deity_Id>1</Deity_Id>
+            <Size_Id>1</Size_Id>
             <Age>36</Age>
             <Gender>F</Gender>
             <Height>160</Height>
