@@ -92,20 +92,11 @@ public class PlayerCharacterDescriptionAppearancePlaceholderFragment extends Fra
 
     private void loadHeroDataFromVMtoView(View rootView) {
         RelativeLayout entryOuter;
-        String textValues[] = playerCharacterVM.getHeroDescriptionsTextValues();
-
         for (int i = 0; i < ID_VALUES.length; i++) {
             entryOuter = (RelativeLayout) rootView.findViewById(ID_VALUES[i]);
-            setEntry(entryOuter, DESCRIPTIONS[i], textValues[i]);
+            ((TextView) entryOuter.findViewById(R.id.fragment_text_value_with_description_box_description)).setText(translate(DESCRIPTIONS[i]));
+            ((TextView) entryOuter.findViewById(R.id.fragment_text_value_with_description_box_text)).setText(translate(playerCharacterVM.getHeroDescriptionsTextValues()[i]));
         }
         //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-    }
-
-    private void setEntry(RelativeLayout entryOuter, String description, String textToSet) {
-        TextView entryTextView;
-        entryTextView = (TextView) entryOuter.findViewById(R.id.fragment_text_value_with_description_box_description);
-        entryTextView.setText(translate(description));
-        entryTextView = (TextView) entryOuter.findViewById(R.id.fragment_text_value_with_description_box_text);
-        entryTextView.setText(translate(textToSet));
     }
 }

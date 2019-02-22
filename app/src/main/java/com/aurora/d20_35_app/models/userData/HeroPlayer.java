@@ -37,7 +37,6 @@ public class HeroPlayer extends Hero {
     public HeroPlayer(String name,
                       String source,
                       String idAsNameBackup,
-
                       HeroStatistics heroStatistics,
                       HeroDescription heroDescription) {
         super(name, source, idAsNameBackup, heroStatistics);

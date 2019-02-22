@@ -30,6 +30,10 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
 
     @Getter
     private String heroDescriptionsTextValues[];
+    @Getter
+    private String heroStatsTextValues[];
+    @Getter
+    private String heroStatisticsTextValues[];
 
     public PlayerCharacterVM(PlayerCharacterActivity activity) {
         super(activity);
@@ -57,6 +61,18 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
                 getHero().getHeroDescription().getHeroEyes(),
                 getHero().getHeroDescription().getHeroHair(),
                 getHero().getHeroDescription().getHeroSkin()};
+
+        heroStatsTextValues = new String[]{
+                getHero().getHeroStatistics().getHeroHitPointsStringFromList(),
+        };
+        heroStatisticsTextValues = new String[]{
+                getHero().getHeroStatistics().getHeroAbilityScoreStr().toString(),
+                getHero().getHeroStatistics().getHeroAbilityScoreDex().toString(),
+                getHero().getHeroStatistics().getHeroAbilityScoreCon().toString(),
+                getHero().getHeroStatistics().getHeroAbilityScoreInt().toString(),
+                getHero().getHeroStatistics().getHeroAbilityScoreWis().toString(),
+                getHero().getHeroStatistics().getHeroAbilityScoreCha().toString()
+        };
     }
 
     private void setTabs() {

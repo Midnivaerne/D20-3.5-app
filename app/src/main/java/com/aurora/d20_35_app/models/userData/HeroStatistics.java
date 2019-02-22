@@ -3,6 +3,8 @@ package com.aurora.d20_35_app.models.userData;
 import com.aurora.d20_35_app.models.Databases;
 import com.aurora.d20_35_app.models.helpers.Item;
 
+import java.util.Arrays;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -72,6 +74,10 @@ public class HeroStatistics extends Item {
     @ColumnInfo(name = HERO_HIT_POINTS_COLUMN_NAME)
     private String heroHitPoints;
 
+    public String getHeroHitPointsStringFromList() {
+        return heroHitPoints.split(",").length == 0 ? heroHitPoints : Integer.toString(Arrays.stream(heroHitPoints.split(",")).mapToInt(Integer::parseInt).sum());
+    }
+
     @Getter
     @Setter
     @ColumnInfo(name = HERO_ABILITY_SCORE_STR_COLUMN_NAME)
@@ -101,6 +107,10 @@ public class HeroStatistics extends Item {
     @Setter
     @ColumnInfo(name = HERO_ABILITY_SCORE_CHA_COLUMN_NAME)
     private Integer heroAbilityScoreCha;
+
+    public static int getStatisticModifier(int stat) {
+        return ((stat / 2) - 5);
+    }
 
     public HeroStatistics clone() {
         return new HeroStatistics(

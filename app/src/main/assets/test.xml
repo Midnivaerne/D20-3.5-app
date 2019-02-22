@@ -60,6 +60,13 @@
             <Eyes>blue</Eyes>
             <Hair>dark</Hair>
             <Skin>white</Skin>
+            <Hero_Hit_Points>10</Hero_Hit_Points>
+            <Hero_Str>16</Hero_Str>
+            <Hero_Dex>15</Hero_Dex>
+            <Hero_Con>7</Hero_Con>
+            <Hero_Int>13</Hero_Int>
+            <Hero_Wis>10</Hero_Wis>
+            <Hero_Cha>8</Hero_Cha>
         </HeroPlayer_Item>
         <HeroPlayer_Item>
             <Name>Another_Hero_Name</Name>
@@ -80,6 +87,13 @@
             <Eyes>violet</Eyes>
             <Hair>silver</Hair>
             <Skin>white</Skin>
+            <Hero_Hit_Points>10,6</Hero_Hit_Points>
+            <Hero_Str>8</Hero_Str>
+            <Hero_Dex>11</Hero_Dex>
+            <Hero_Con>13</Hero_Con>
+            <Hero_Int>9</Hero_Int>
+            <Hero_Wis>15</Hero_Wis>
+            <Hero_Cha>16</Hero_Cha>
         </HeroPlayer_Item>
     </HeroPlayer>
     <Translations>

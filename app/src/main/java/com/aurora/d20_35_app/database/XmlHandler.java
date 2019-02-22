@@ -78,7 +78,6 @@ public class XmlHandler extends DefaultHandler {
     public void endElement(String uri, String localName, String qName) {
         for (int i = 0; i < dbPart.getEnumConstants().length; i++) {
             if (((DBColumnNamesMethods) dbPart.getEnumConstants()[i]).getColumnIsUsed()) {
-
                 ((DBColumnNamesMethods) dbPart.getEnumConstants()[i]).setParameter((item), data.toString().trim());
                 ((DBColumnNamesMethods) Objects.requireNonNull(DBColumnNamesMethods.fromString(qName, dbPart))).setColumnIsUsed(false);
                 break;
