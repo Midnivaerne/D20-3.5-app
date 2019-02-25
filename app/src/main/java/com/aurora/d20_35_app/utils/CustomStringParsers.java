@@ -6,6 +6,7 @@ import android.util.Log;
 import com.aurora.d20_35_app.models.typeHelpers.CoreTypeHelper;
 import com.aurora.d20_35_app.models.typeHelpers.ItemType;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,15 +14,17 @@ public class CustomStringParsers {
 
     public static String[] StringWithCommaToTable(String stringToSplit) {
         if (stringToSplit != null) {
-            String[] out;
-            if (stringToSplit.contains(",")) {
-                out = stringToSplit.split(",");
-            } else {
-                out = new String[]{stringToSplit};
-            }
-            return out;
+            return stringToSplit.split(",");
         }
         Log.e("CustomStringParsers ", " StringWithCommaToTable > stringToSplit is empty");
+        return null;
+    }
+
+    public static String StringWithCommaToSum(String stringToSum) {
+        if (stringToSum != null) {
+            return Integer.toString(Arrays.stream(stringToSum.split(",")).mapToInt(Integer::parseInt).sum());
+        }
+        Log.e("CustomStringParsers ", " StringWithCommaToSum > stringToSum is empty");
         return null;
     }
 

@@ -1,6 +1,7 @@
 package com.aurora.d20_35_app.models.userData;
 
 import com.aurora.d20_35_app.models.Databases;
+import com.aurora.d20_35_app.models.helpers.DataConverter;
 
 import androidx.room.Embedded;
 import androidx.room.Entity;
@@ -20,7 +21,7 @@ import static com.aurora.d20_35_app.database.DBTableNames.HERO_PLAYER;
 @Entity(tableName = HERO_PLAYER, inheritSuperIndices = true,
         indices = {@Index(value = SOURCE_COLUMN_NAME)},
         foreignKeys = @ForeignKey(entity = Databases.class, parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
-public class HeroPlayer extends Hero {
+public class HeroPlayer extends Hero implements DataConverter<HeroPlayer> {
 
     @Ignore
     public HeroPlayer() {

@@ -11,6 +11,9 @@ import com.aurora.d20_35_app.models.settingSpecific.Deities;
 import com.aurora.d20_35_app.models.typeHelpers.ItemType;
 import com.aurora.d20_35_app.utils.CustomStringParsers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -100,11 +103,11 @@ public class HeroDescription extends Item {
     public String getHeroClassAndLevelStringFromId(DatabaseHolder databaseHolder) {
         StringBuilder heroClassesOut = new StringBuilder();
         String[] heroClasses = CustomStringParsers.StringWithCommaToTable(heroClassAndLevel);
+        Map<String, Integer> classAndLevels = new HashMap<>();
         for (String classes : heroClasses) {
-            int id = Integer.parseInt((classes.split("=")[0]));
             String className;
-            String classNameFromBackup = getBackupNames().get(ItemType.CLASSES).get(id);
-            Item aHeroClass = databaseHolder.CLASSES_MAP.get(id);
+            String classNameFromBackup = getBackupNames().get(ItemType.CLASSES).get(Integer.getInteger(classes));
+            Item aHeroClass = databaseHolder.CLASSES_MAP.get(Integer.getInteger(classes));
             if (aHeroClass != null) {
                 className = aHeroClass.getName();
                 if (!className.equals(classNameFromBackup)) {
@@ -114,8 +117,12 @@ public class HeroDescription extends Item {
                 className = classNameFromBackup;
                 DatabaseManager.dbCheckup();
             }
-            String classLevel = classes.split("=")[1];
-            heroClassesOut.append(className).append(" ").append(classLevel).append(" ");
+            if (classAndLevels.containsKey(className)) {
+                classAndLevels.put(className, classAndLevels.get(className) + 1);
+            } else {
+                classAndLevels.put(className, 1);
+            }
+            heroClassesOut.append(className).append(" ").append(classAndLevels.get(className)).append(" ");
         }
         return heroClassesOut.toString();
     }

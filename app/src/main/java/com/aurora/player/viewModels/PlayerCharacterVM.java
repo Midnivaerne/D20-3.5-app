@@ -31,7 +31,7 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
     @Getter
     private String heroDescriptionsTextValues[];
     @Getter
-    private String heroStatsTextValues[];
+    private String heroCombatTextValues[];
     @Getter
     private String heroStatisticsTextValues[];
 
@@ -62,8 +62,19 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
                 getHero().getHeroDescription().getHeroHair(),
                 getHero().getHeroDescription().getHeroSkin()};
 
-        heroStatsTextValues = new String[]{
+        heroCombatTextValues = new String[]{
                 getHero().getHeroStatistics().getHeroHitPointsStringFromList(),
+                getHero().getDamageReduction(getHero()),
+                getHero().getArmourClass(getHero()),
+                getHero().getArmourClassTouch(getHero()),
+                getHero().getArmourClassFlatfooted(getHero()),
+                getHero().getSpeed(getHero()),
+                getHero().getInitiative(getHero()),
+                getHero().getAttack(getHero()),
+                getHero().getAttackMelee(getHero()),
+                getHero().getAttackRanged(getHero()),
+                getHero().getGrapple(getHero()),
+                getHero().getSpellResistance(getHero())
         };
         heroStatisticsTextValues = new String[]{
                 getHero().getHeroStatistics().getHeroAbilityScoreStr().toString(),
@@ -87,5 +98,6 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
     public void menuOnClick() {
         getActivity().drawerActions();
     }
+
 }
 

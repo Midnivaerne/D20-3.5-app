@@ -48,7 +48,7 @@
                 Classes{1=classNameTagWithId1},Races{1=raceNameTagwithId1},Deities{1=NameTagWithId1}
             </Id_As_Name_Backup>
             <Player>Player</Player>
-            <Class_And_Level>1=1</Class_And_Level>
+            <Class_And_Level>1</Class_And_Level>
             <Race>1</Race>
             <Alignment_Id>1</Alignment_Id>
             <Deity_Id>1</Deity_Id>
@@ -75,7 +75,7 @@
                 Classes{1=classNameTagWithId1,2=classNameTagWithId2},Races{1=raceNameTagwithId1,1=raceTemplateNameTagwithId1},Deities{1=NameTagWithId1}
             </Id_As_Name_Backup>
             <Player>Player</Player>
-            <Class_And_Level>1=1,2=1</Class_And_Level>
+            <Class_And_Level>1,2</Class_And_Level>
             <Race>1+1</Race>
             <Alignment_Id>1</Alignment_Id>
             <Deity_Id>1</Deity_Id>

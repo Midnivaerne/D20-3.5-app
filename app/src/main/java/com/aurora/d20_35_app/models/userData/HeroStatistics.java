@@ -2,8 +2,7 @@ package com.aurora.d20_35_app.models.userData;
 
 import com.aurora.d20_35_app.models.Databases;
 import com.aurora.d20_35_app.models.helpers.Item;
-
-import java.util.Arrays;
+import com.aurora.d20_35_app.utils.CustomStringParsers;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -75,7 +74,7 @@ public class HeroStatistics extends Item {
     private String heroHitPoints;
 
     public String getHeroHitPointsStringFromList() {
-        return heroHitPoints.split(",").length == 0 ? heroHitPoints : Integer.toString(Arrays.stream(heroHitPoints.split(",")).mapToInt(Integer::parseInt).sum());
+        return CustomStringParsers.StringWithCommaToSum(heroHitPoints);
     }
 
     @Getter
