@@ -55,4 +55,19 @@ public interface DataConverter<T extends Item> {
         int out = 0;//todo proper value
         return String.valueOf(out);
     }
+
+    default String getFortitude(T combatant) {
+        int out = 0;//todo proper value
+        return String.valueOf(out);
+    }
+
+    default String getReflex(T combatant) {
+        int out = 0;//todo proper value
+        return String.valueOf(out);
+    }
+
+    default String getWill(T combatant) {
+        int out = 0;//todo proper value
+        return String.valueOf(out);
+    }
 }

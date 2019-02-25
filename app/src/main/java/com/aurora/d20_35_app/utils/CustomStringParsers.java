@@ -40,7 +40,6 @@ public class CustomStringParsers {
                         Log.e("CustomStringParsers ", " ItemType " + tableObject.trim() + " not identified");
                     }
                 }
-
             } else {
                 Log.e("CustomStringParsers ", " Wrong format of: " + stringToSplit);
                 throw new IllegalArgumentException("Wrong format");

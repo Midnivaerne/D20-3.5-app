@@ -76,22 +76,22 @@ public class PlayerCharacterStatisticsPlaceholderFragment extends Fragment {
             {R.id.fragment_number_value_with_description_rollable_box_description, R.id.fragment_number_value_with_description_rollable_box_value},
             {R.id.fragment_number_value_with_description_box_description, R.id.fragment_number_value_with_description_box_value}};
 
-    private static final String HERO_STATISTIC_STR_NAME_DESCRIPTION = "hero_statistic_str_name_description";
-    private static final String HERO_STATISTIC_DEX_NAME_DESCRIPTION = "hero_statistic_dex_name_description";
-    private static final String HERO_STATISTIC_CON_NAME_DESCRIPTION = "hero_statistic_con_name_description";
-    private static final String HERO_STATISTIC_INT_NAME_DESCRIPTION = "hero_statistic_int_name_description";
-    private static final String HERO_STATISTIC_WIS_NAME_DESCRIPTION = "hero_statistic_wis_name_description";
-    private static final String HERO_STATISTIC_CHA_NAME_DESCRIPTION = "hero_statistic_cha_name_description";
+    private static final String HERO_ABILITY_SCORES_STR_NAME_DESCRIPTION = "hero_ability_scores_str_name_description";
+    private static final String HERO_ABILITY_SCORES_DEX_NAME_DESCRIPTION = "hero_ability_scores_dex_name_description";
+    private static final String HERO_ABILITY_SCORES_CON_NAME_DESCRIPTION = "hero_ability_scores_con_name_description";
+    private static final String HERO_ABILITY_SCORES_INT_NAME_DESCRIPTION = "hero_ability_scores_int_name_description";
+    private static final String HERO_ABILITY_SCORES_WIS_NAME_DESCRIPTION = "hero_ability_scores_wis_name_description";
+    private static final String HERO_ABILITY_SCORES_CHA_NAME_DESCRIPTION = "hero_ability_scores_cha_name_description";
 
-    private static final String STATISTICS_DESCRIPTIONS[] = {
-            HERO_STATISTIC_STR_NAME_DESCRIPTION,
-            HERO_STATISTIC_DEX_NAME_DESCRIPTION,
-            HERO_STATISTIC_CON_NAME_DESCRIPTION,
-            HERO_STATISTIC_INT_NAME_DESCRIPTION,
-            HERO_STATISTIC_WIS_NAME_DESCRIPTION,
-            HERO_STATISTIC_CHA_NAME_DESCRIPTION};
+    private static final String ABILITY_SCORES_DESCRIPTIONS[] = {
+            HERO_ABILITY_SCORES_STR_NAME_DESCRIPTION,
+            HERO_ABILITY_SCORES_DEX_NAME_DESCRIPTION,
+            HERO_ABILITY_SCORES_CON_NAME_DESCRIPTION,
+            HERO_ABILITY_SCORES_INT_NAME_DESCRIPTION,
+            HERO_ABILITY_SCORES_WIS_NAME_DESCRIPTION,
+            HERO_ABILITY_SCORES_CHA_NAME_DESCRIPTION};
 
-    private static final int ID_STATISTICS_VALUES[] = {
+    private static final int ID_ABILITY_SCORES_VALUES[] = {
             R.id.fragment_player_character_statistics_ability_scores_str,
             R.id.fragment_player_character_statistics_ability_scores_dex,
             R.id.fragment_player_character_statistics_ability_scores_con,
@@ -99,12 +99,30 @@ public class PlayerCharacterStatisticsPlaceholderFragment extends Fragment {
             R.id.fragment_player_character_statistics_ability_scores_wis,
             R.id.fragment_player_character_statistics_ability_scores_cha};
 
-    private static final int ID_STATISTICS_VALUES_SPECIFIC[] = {
+    private static final int ID_ABILITY_SCORES_VALUES_SPECIFIC[] = {
             R.id.fragment_player_character_statistics_ability_scores_score_name,
             R.id.fragment_player_character_statistics_ability_scores_score_value,
             R.id.fragment_player_character_statistics_ability_scores_score_modifier,
             R.id.fragment_player_character_statistics_ability_scores_score_temporary_value,
             R.id.fragment_player_character_statistics_ability_scores_score_temporary_modifier};
+
+    private static final String HERO_SAVING_THROWS_FORT_NAME_DESCRIPTION = "hero_saving_throws_fort_name_description";
+    private static final String HERO_SAVING_THROWS_REFL_NAME_DESCRIPTION = "hero_saving_throws_refl_name_description";
+    private static final String HERO_SAVING_THROWS_WILL_NAME_DESCRIPTION = "hero_saving_throws_will_name_description";
+
+    private static final String SAVING_THROWS_DESCRIPTIONS[] = {
+            HERO_SAVING_THROWS_FORT_NAME_DESCRIPTION,
+            HERO_SAVING_THROWS_REFL_NAME_DESCRIPTION,
+            HERO_SAVING_THROWS_WILL_NAME_DESCRIPTION};
+
+    private static final int ID_SAVING_THROWS_VALUES[] = {
+            R.id.fragment_player_character_statistics_saving_throws_fortitude,
+            R.id.fragment_player_character_statistics_saving_throws_reflex,
+            R.id.fragment_player_character_statistics_saving_throws_will,};
+
+    private static final int ID_SAVING_THROWS_VALUES_SPECIFIC[] = {
+            R.id.fragment_player_character_statistics_saving_throws_throw_name,
+            R.id.fragment_player_character_statistics_saving_throws_throw_value};
 
     private PlayerCharacterVM playerCharacterVM;
 
@@ -132,14 +150,18 @@ public class PlayerCharacterStatisticsPlaceholderFragment extends Fragment {
             ((TextView) rootView.findViewById(ID_COMBAT_VALUES[i]).findViewById(ID_COMBAT_VALUES_SPECIFIC[i][0])).setText(translate(COMBAT_DESCRIPTIONS[i]));
             ((TextView) rootView.findViewById(ID_COMBAT_VALUES[i]).findViewById(ID_COMBAT_VALUES_SPECIFIC[i][1])).setText(playerCharacterVM.getHeroCombatTextValues()[i]);
         }
-        for (int i = 0; i < ID_STATISTICS_VALUES.length; i++) {
-            ((TextView) rootView.findViewById(ID_STATISTICS_VALUES[i]).findViewById(ID_STATISTICS_VALUES_SPECIFIC[0])).setText(translate(STATISTICS_DESCRIPTIONS[i]));
-            ((TextView) rootView.findViewById(ID_STATISTICS_VALUES[i]).findViewById(ID_STATISTICS_VALUES_SPECIFIC[1])).setText(playerCharacterVM.getHeroStatisticsTextValues()[i]);
-            ((TextView) rootView.findViewById(ID_STATISTICS_VALUES[i]).findViewById(ID_STATISTICS_VALUES_SPECIFIC[2])).setText(String.valueOf(HeroStatistics.getStatisticModifier(Integer.parseInt(playerCharacterVM.getHeroStatisticsTextValues()[i]))));
+        for (int i = 0; i < ID_ABILITY_SCORES_VALUES.length; i++) {
+            ((TextView) rootView.findViewById(ID_ABILITY_SCORES_VALUES[i]).findViewById(ID_ABILITY_SCORES_VALUES_SPECIFIC[0])).setText(translate(ABILITY_SCORES_DESCRIPTIONS[i]));
+            ((TextView) rootView.findViewById(ID_ABILITY_SCORES_VALUES[i]).findViewById(ID_ABILITY_SCORES_VALUES_SPECIFIC[1])).setText(playerCharacterVM.getHeroAbilityScoresTextValues()[i]);
+            ((TextView) rootView.findViewById(ID_ABILITY_SCORES_VALUES[i]).findViewById(ID_ABILITY_SCORES_VALUES_SPECIFIC[2])).setText(String.valueOf(HeroStatistics.getStatisticModifier(Integer.parseInt(playerCharacterVM.getHeroAbilityScoresTextValues()[i]))));
 
             //todo add modifiers, don't show if the same as base values
-            ((TextView) rootView.findViewById(ID_STATISTICS_VALUES[i]).findViewById(ID_STATISTICS_VALUES_SPECIFIC[3])).setText(playerCharacterVM.getHeroStatisticsTextValues()[i]);
-            ((TextView) rootView.findViewById(ID_STATISTICS_VALUES[i]).findViewById(ID_STATISTICS_VALUES_SPECIFIC[4])).setText(String.valueOf(HeroStatistics.getStatisticModifier(Integer.parseInt(playerCharacterVM.getHeroStatisticsTextValues()[i]))));
+            ((TextView) rootView.findViewById(ID_ABILITY_SCORES_VALUES[i]).findViewById(ID_ABILITY_SCORES_VALUES_SPECIFIC[3])).setText(playerCharacterVM.getHeroAbilityScoresTextValues()[i]);
+            ((TextView) rootView.findViewById(ID_ABILITY_SCORES_VALUES[i]).findViewById(ID_ABILITY_SCORES_VALUES_SPECIFIC[4])).setText(String.valueOf(HeroStatistics.getStatisticModifier(Integer.parseInt(playerCharacterVM.getHeroAbilityScoresTextValues()[i]))));
+        }
+        for (int i = 0; i < ID_SAVING_THROWS_VALUES.length; i++) {
+            ((TextView) rootView.findViewById(ID_SAVING_THROWS_VALUES[i]).findViewById(ID_SAVING_THROWS_VALUES_SPECIFIC[0])).setText(translate(SAVING_THROWS_DESCRIPTIONS[i]));
+            ((TextView) rootView.findViewById(ID_SAVING_THROWS_VALUES[i]).findViewById(ID_SAVING_THROWS_VALUES_SPECIFIC[1])).setText(playerCharacterVM.getHeroSavingThrowsTextValues()[i]);
         }
     }
 
