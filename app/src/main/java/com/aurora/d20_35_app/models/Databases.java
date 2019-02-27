@@ -1,15 +1,14 @@
 package com.aurora.d20_35_app.models;
 
-import com.aurora.d20_35_app.models.helpers.Item;
+import static com.aurora.d20_35_app.database.DBColumnNames.SOURCE_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBTableNames.DATABASES;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.Index;
+import com.aurora.d20_35_app.models.helpers.Item;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import static com.aurora.d20_35_app.database.DBColumnNames.SOURCE_COLUMN_NAME;
-import static com.aurora.d20_35_app.database.DBTableNames.DATABASES;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

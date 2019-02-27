@@ -1,14 +1,13 @@
 package com.aurora.player.views;
 
-import android.view.Menu;
+import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
 
+import android.view.Menu;
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.databinding.ActivityPlayerCharactersListBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.player.viewModels.PlayerCharactersListVM;
-
-import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
 
 public class PlayerCharactersListActivity extends BindingActivity<ActivityPlayerCharactersListBinding, PlayerCharactersListVM> {
 

@@ -3,7 +3,6 @@ package com.aurora.d20_35_app.models.typeHelpers;
 import com.aurora.d20_35_app.database.DatabaseHolder;
 import com.aurora.d20_35_app.helper.BaseDAO;
 import com.aurora.d20_35_app.models.helpers.CoreHelper;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

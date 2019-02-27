@@ -1,21 +1,20 @@
 package com.aurora.d20_35_app.models.settingSpecific;
 
-import com.aurora.d20_35_app.models.helpers.Item;
-import com.aurora.d20_35_app.models.Databases;
-import com.aurora.d20_35_app.database.DBColumnNames;
+import static com.aurora.d20_35_app.database.DBColumnNames.SOURCE_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBTableNames.RACES;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
+import com.aurora.d20_35_app.database.DBColumnNames;
+import com.aurora.d20_35_app.models.Databases;
+import com.aurora.d20_35_app.models.helpers.Item;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
-import static com.aurora.d20_35_app.database.DBColumnNames.SOURCE_COLUMN_NAME;
-import static com.aurora.d20_35_app.database.DBTableNames.RACES;
 
 
 @EqualsAndHashCode(callSuper = true)

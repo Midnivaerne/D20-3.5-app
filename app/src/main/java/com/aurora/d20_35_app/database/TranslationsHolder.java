@@ -1,7 +1,6 @@
 package com.aurora.d20_35_app.database;
 
 import com.aurora.d20_35_app.models.Translations;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

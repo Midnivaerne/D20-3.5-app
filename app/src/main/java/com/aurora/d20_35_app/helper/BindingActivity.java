@@ -11,16 +11,14 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
-
-import com.aurora.d20_35_app.R;
-import com.aurora.d20_35_app.utils.NetworkUtils;
-
 import androidx.annotation.IdRes;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import com.aurora.d20_35_app.R;
+import com.aurora.d20_35_app.utils.NetworkUtils;
 import lombok.Getter;
 import lombok.NonNull;
 

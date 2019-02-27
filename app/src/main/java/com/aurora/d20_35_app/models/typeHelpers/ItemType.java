@@ -21,7 +21,6 @@ import com.aurora.d20_35_app.models.usables.Weapons;
 import com.aurora.d20_35_app.models.userData.HeroDescription;
 import com.aurora.d20_35_app.models.userData.HeroPlayer;
 import com.aurora.d20_35_app.models.userData.HeroStatistics;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

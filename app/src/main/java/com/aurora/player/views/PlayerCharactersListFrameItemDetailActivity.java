@@ -3,12 +3,11 @@ package com.aurora.player.views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
-import com.aurora.player.fragments.PlayerCharactersListDetailFragment;
 import com.aurora.d20_35_app.databinding.ActivityPlayerCharactersListFrameItemDetailBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
+import com.aurora.player.fragments.PlayerCharactersListDetailFragment;
 import com.aurora.player.viewModels.PlayerCharactersListFrameItemDetailVM;
 
 /**

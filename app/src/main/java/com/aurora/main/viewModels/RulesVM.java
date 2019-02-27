@@ -1,6 +1,8 @@
 package com.aurora.main.viewModels;
 
 
+import static com.aurora.d20_35_app.database.DatabaseHolder.getDatabaseHolder;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,21 +10,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import androidx.recyclerview.widget.RecyclerView;
 import com.aurora.d20_35_app.R;
-import com.aurora.main.fragments.RulesDetailFragment;
 import com.aurora.d20_35_app.helper.ActivityViewModel;
 import com.aurora.d20_35_app.models.helpers.Rules;
+import com.aurora.main.fragments.RulesDetailFragment;
 import com.aurora.main.views.RulesActivity;
 import com.aurora.main.views.RulesDetailActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.List;
-
-import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
-
-import static com.aurora.d20_35_app.database.DatabaseHolder.getDatabaseHolder;
 
 public class RulesVM extends ActivityViewModel<RulesActivity> {
 

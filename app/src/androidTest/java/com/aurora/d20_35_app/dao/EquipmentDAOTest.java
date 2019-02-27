@@ -1,23 +1,20 @@
 package com.aurora.d20_35_app.dao;
 
-import com.aurora.d20_35_app.models.usables.Equipment;
+import static java.lang.Math.toIntExact;
+
+import androidx.room.Room;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 import com.aurora.d20_35_app.database.DatabaseHolder;
 import com.aurora.d20_35_app.database.DatabaseManager;
-
+import com.aurora.d20_35_app.models.usables.Equipment;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import java.util.Arrays;
-import java.util.List;
-
-import androidx.room.Room;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.platform.app.InstrumentationRegistry;
-
-import static java.lang.Math.toIntExact;
 
 @RunWith(AndroidJUnit4.class)
 public class EquipmentDAOTest {

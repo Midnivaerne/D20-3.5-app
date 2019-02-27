@@ -1,24 +1,21 @@
 package com.aurora.d20_35_app.dao;
 
-import com.aurora.d20_35_app.models.usables.Armour;
-import com.aurora.d20_35_app.database.DatabaseHolder;
-import com.aurora.d20_35_app.database.DatabaseManager;
-
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
-import java.util.Arrays;
-import java.util.List;
+import static java.lang.Math.toIntExact;
 
 import androidx.room.Room;
 import androidx.room.Transaction;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
-
-import static java.lang.Math.toIntExact;
+import com.aurora.d20_35_app.database.DatabaseHolder;
+import com.aurora.d20_35_app.database.DatabaseManager;
+import com.aurora.d20_35_app.models.usables.Armour;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 
 @RunWith(AndroidJUnit4.class)

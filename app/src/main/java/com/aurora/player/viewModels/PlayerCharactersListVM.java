@@ -1,5 +1,8 @@
 package com.aurora.player.viewModels;
 
+import static com.aurora.d20_35_app.database.DatabaseHolder.getDatabaseHolder;
+import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,26 +10,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import androidx.recyclerview.widget.RecyclerView;
 import com.aurora.d20_35_app.R;
-import com.aurora.player.fragments.PlayerCharactersListDetailFragment;
 import com.aurora.d20_35_app.helper.ActivityViewModel;
 import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.userData.Hero;
 import com.aurora.d20_35_app.models.userData.HeroPlayer;
+import com.aurora.player.fragments.PlayerCharactersListDetailFragment;
 import com.aurora.player.views.PlayerCharacterActivity;
 import com.aurora.player.views.PlayerCharactersListActivity;
 import com.aurora.player.views.PlayerCharactersListFrameItemDetailActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-
 import java.util.Map;
-
-import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
-
-import static com.aurora.d20_35_app.database.DatabaseHolder.getDatabaseHolder;
-import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
 
 public class PlayerCharactersListVM extends ActivityViewModel<PlayerCharactersListActivity> {
     public PlayerCharactersListVM(PlayerCharactersListActivity activity) {

@@ -1,5 +1,7 @@
 package com.aurora.d20_35_app.database;
 
+import static com.aurora.d20_35_app.utils.ExternalStorageHandler.getPublicExternalStorageBaseDir;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -7,29 +9,22 @@ import android.util.Log;
 import android.util.Xml;
 import android.view.View;
 import android.widget.ProgressBar;
-
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.d20_35_app.models.typeHelpers.CoreTypeHelper;
 import com.aurora.d20_35_app.models.typeHelpers.ItemType;
 import com.aurora.d20_35_app.models.userData.HeroPlayer;
 import com.aurora.d20_35_app.utils.CommonUtils;
-
-import org.xml.sax.SAXException;
-import org.xmlpull.v1.XmlSerializer;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-
 import lombok.NonNull;
-
-import static com.aurora.d20_35_app.utils.ExternalStorageHandler.getPublicExternalStorageBaseDir;
+import org.xml.sax.SAXException;
+import org.xmlpull.v1.XmlSerializer;
 
 public class DatabaseManager {
 

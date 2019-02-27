@@ -1,9 +1,8 @@
 package com.aurora.d20_35_app.models.userData;
 
-import com.aurora.d20_35_app.models.helpers.Item;
-
 import androidx.room.Embedded;
 import androidx.room.Ignore;
+import com.aurora.d20_35_app.models.helpers.Item;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

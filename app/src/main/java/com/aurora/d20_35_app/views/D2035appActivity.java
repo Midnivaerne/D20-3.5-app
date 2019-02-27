@@ -6,21 +6,18 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
-
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
+import com.aurora.d20_35_app.database.CustomCallback;
 import com.aurora.d20_35_app.databinding.ActivityD2035appBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
-import com.aurora.d20_35_app.database.CustomCallback;
 import com.aurora.d20_35_app.viewModels.D2035appVM;
 import com.aurora.main.views.MainMenuActivity;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
 import lombok.Getter;
 
 public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D2035appVM> implements CustomCallback {

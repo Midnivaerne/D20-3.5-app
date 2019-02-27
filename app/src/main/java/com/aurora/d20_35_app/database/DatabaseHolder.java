@@ -3,7 +3,12 @@ package com.aurora.d20_35_app.database;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-
+import androidx.room.Database;
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 import com.aurora.d20_35_app.dao.DatabasesDAO;
 import com.aurora.d20_35_app.dao.TranslationsDAO;
 import com.aurora.d20_35_app.dao.constants.RulesAlignmentsDAO;
@@ -48,20 +53,11 @@ import com.aurora.d20_35_app.models.usables.Weapons;
 import com.aurora.d20_35_app.models.userData.HeroDescription;
 import com.aurora.d20_35_app.models.userData.HeroPlayer;
 import com.aurora.d20_35_app.models.userData.HeroStatistics;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.inject.Singleton;
-
-import androidx.room.Database;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import androidx.room.TypeConverters;
-import androidx.room.migration.Migration;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;

@@ -1,7 +1,6 @@
 package com.aurora.main.viewModels;
 
 import android.view.View;
-
 import com.aurora.d20_35_app.helper.ActivityViewModel;
 import com.aurora.main.views.DatabasesListItemDetailActivity;
 import com.google.android.material.snackbar.Snackbar;

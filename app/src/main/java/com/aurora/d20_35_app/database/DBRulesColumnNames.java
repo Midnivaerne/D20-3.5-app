@@ -1,7 +1,6 @@
 package com.aurora.d20_35_app.database;
 
 import com.aurora.d20_35_app.models.helpers.Rules;
-
 import lombok.Getter;
 
 public enum DBRulesColumnNames implements DBColumnNamesMethods<DBRulesColumnNames, Rules> {

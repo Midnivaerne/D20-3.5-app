@@ -3,7 +3,6 @@ package com.aurora.player.viewModels;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-
 import com.aurora.d20_35_app.helper.ActivityViewModel;
 import com.aurora.player.views.PlayerCharacterActivity;
 import com.aurora.player.views.PlayerCharactersListFrameItemDetailActivity;

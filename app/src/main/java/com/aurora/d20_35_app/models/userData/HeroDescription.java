@@ -1,5 +1,18 @@
 package com.aurora.d20_35_app.models.userData;
 
+import static com.aurora.d20_35_app.database.DBColumnNames.HERO_ALIGNMENT_ID_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBColumnNames.HERO_DEITY_ID_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBColumnNames.HERO_PARENT_ITEM_ID_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBColumnNames.HERO_SIZE_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBColumnNames.ITEM_ID_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBColumnNames.SOURCE_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBTableNames.HERO_DESCRIPTION;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.Index;
 import com.aurora.d20_35_app.database.DBColumnNames;
 import com.aurora.d20_35_app.database.DatabaseHolder;
 import com.aurora.d20_35_app.database.DatabaseManager;
@@ -10,27 +23,12 @@ import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.settingSpecific.Deities;
 import com.aurora.d20_35_app.models.typeHelpers.ItemType;
 import com.aurora.d20_35_app.utils.CustomStringParsers;
-
 import java.util.HashMap;
 import java.util.Map;
-
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Ignore;
-import androidx.room.Index;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
-import static com.aurora.d20_35_app.database.DBColumnNames.HERO_ALIGNMENT_ID_COLUMN_NAME;
-import static com.aurora.d20_35_app.database.DBColumnNames.HERO_DEITY_ID_COLUMN_NAME;
-import static com.aurora.d20_35_app.database.DBColumnNames.HERO_PARENT_ITEM_ID_COLUMN_NAME;
-import static com.aurora.d20_35_app.database.DBColumnNames.HERO_SIZE_COLUMN_NAME;
-import static com.aurora.d20_35_app.database.DBColumnNames.ITEM_ID_COLUMN_NAME;
-import static com.aurora.d20_35_app.database.DBColumnNames.SOURCE_COLUMN_NAME;
-import static com.aurora.d20_35_app.database.DBTableNames.HERO_DESCRIPTION;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

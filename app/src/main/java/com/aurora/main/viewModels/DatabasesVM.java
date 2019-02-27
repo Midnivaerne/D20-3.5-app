@@ -1,5 +1,8 @@
 package com.aurora.main.viewModels;
 
+import static com.aurora.d20_35_app.database.DatabaseHolder.getDatabaseHolder;
+import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -8,22 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import androidx.recyclerview.widget.RecyclerView;
 import com.aurora.d20_35_app.R;
-import com.aurora.main.fragments.DatabasesListDetailFragment;
 import com.aurora.d20_35_app.helper.ActivityViewModel;
 import com.aurora.d20_35_app.models.Databases;
+import com.aurora.main.fragments.DatabasesListDetailFragment;
 import com.aurora.main.views.DatabasesActivity;
 import com.aurora.main.views.DatabasesListItemDetailActivity;
 import com.google.android.material.snackbar.Snackbar;
-
 import java.util.List;
-
-import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
-
-import static com.aurora.d20_35_app.database.DatabaseHolder.getDatabaseHolder;
-import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
 
 public class DatabasesVM extends ActivityViewModel<DatabasesActivity> {
 

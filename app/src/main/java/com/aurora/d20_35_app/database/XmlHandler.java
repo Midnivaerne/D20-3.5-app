@@ -1,16 +1,14 @@
 package com.aurora.d20_35_app.database;
 
+import com.aurora.d20_35_app.models.helpers.CoreHelper;
 import com.aurora.d20_35_app.models.typeHelpers.CoreTypeHelper;
 import com.aurora.d20_35_app.models.typeHelpers.ItemType;
 import com.aurora.d20_35_app.models.typeHelpers.RulesType;
-import com.aurora.d20_35_app.models.helpers.CoreHelper;
-
-import org.xml.sax.Attributes;
-import org.xml.sax.helpers.DefaultHandler;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import org.xml.sax.Attributes;
+import org.xml.sax.helpers.DefaultHandler;
 
 public class XmlHandler extends DefaultHandler {
 

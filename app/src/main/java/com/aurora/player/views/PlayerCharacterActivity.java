@@ -1,22 +1,20 @@
 package com.aurora.player.views;
 
+import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
+
 import android.annotation.SuppressLint;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.databinding.ActivityPlayerCharacterBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.player.viewModels.PlayerCharacterVM;
 import com.google.android.material.navigation.NavigationView;
-
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import lombok.NonNull;
-
-import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
 
 
 public class PlayerCharacterActivity extends BindingActivity<ActivityPlayerCharacterBinding, PlayerCharacterVM>

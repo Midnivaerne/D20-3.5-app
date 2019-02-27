@@ -1,19 +1,5 @@
 package com.aurora.d20_35_app.models.userData;
 
-import com.aurora.d20_35_app.models.Databases;
-import com.aurora.d20_35_app.models.helpers.Item;
-import com.aurora.d20_35_app.utils.CustomStringParsers;
-
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.ForeignKey;
-import androidx.room.Ignore;
-import androidx.room.Index;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
 import static com.aurora.d20_35_app.database.DBColumnNames.HERO_ABILITY_SCORE_CHA_COLUMN_NAME;
 import static com.aurora.d20_35_app.database.DBColumnNames.HERO_ABILITY_SCORE_CON_COLUMN_NAME;
 import static com.aurora.d20_35_app.database.DBColumnNames.HERO_ABILITY_SCORE_DEX_COLUMN_NAME;
@@ -25,6 +11,19 @@ import static com.aurora.d20_35_app.database.DBColumnNames.HERO_PARENT_ITEM_ID_C
 import static com.aurora.d20_35_app.database.DBColumnNames.ITEM_ID_COLUMN_NAME;
 import static com.aurora.d20_35_app.database.DBColumnNames.SOURCE_COLUMN_NAME;
 import static com.aurora.d20_35_app.database.DBTableNames.HERO_STATISTICS;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Ignore;
+import androidx.room.Index;
+import com.aurora.d20_35_app.models.Databases;
+import com.aurora.d20_35_app.models.helpers.Item;
+import com.aurora.d20_35_app.utils.CustomStringParsers;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

@@ -1,13 +1,12 @@
 package com.aurora.d20_35_app.models.constants;
 
-import com.aurora.d20_35_app.models.helpers.Rules;
+import static com.aurora.d20_35_app.database.DBTableNames.RULES_ALIGNMENTS;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import com.aurora.d20_35_app.models.helpers.Rules;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import static com.aurora.d20_35_app.database.DBTableNames.RULES_ALIGNMENTS;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

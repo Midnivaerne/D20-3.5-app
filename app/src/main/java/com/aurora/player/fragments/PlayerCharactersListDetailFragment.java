@@ -1,9 +1,11 @@
 package com.aurora.player.fragments;
 
+import static com.aurora.d20_35_app.database.DatabaseHolder.getDatabaseHolder;
+import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
-
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.helper.BindingFragment;
@@ -11,9 +13,6 @@ import com.aurora.d20_35_app.models.userData.Hero;
 import com.aurora.player.views.PlayerCharactersListActivity;
 import com.aurora.player.views.PlayerCharactersListFrameItemDetailActivity;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
-
-import static com.aurora.d20_35_app.database.DatabaseHolder.getDatabaseHolder;
-import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
 
 /**
  * A fragment representing a single Rules set detail screen.

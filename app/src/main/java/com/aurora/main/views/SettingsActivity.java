@@ -1,5 +1,7 @@
 package com.aurora.main.views;
 
+import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
+
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -17,15 +19,10 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.view.MenuItem;
-
-import com.aurora.d20_35_app.R;
-
-import java.util.List;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.core.app.NavUtils;
-
-import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
+import com.aurora.d20_35_app.R;
+import java.util.List;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On

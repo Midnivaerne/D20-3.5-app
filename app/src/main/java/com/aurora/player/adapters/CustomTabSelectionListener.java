@@ -1,8 +1,7 @@
 package com.aurora.player.adapters;
 
-import com.google.android.material.tabs.TabLayout;
-
 import androidx.viewpager.widget.ViewPager;
+import com.google.android.material.tabs.TabLayout;
 
 public class CustomTabSelectionListener implements TabLayout.OnTabSelectedListener {
     public CustomTabSelectionListener(ViewPager viewPager) {

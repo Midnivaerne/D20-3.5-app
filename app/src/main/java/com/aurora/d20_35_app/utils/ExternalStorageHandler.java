@@ -3,7 +3,6 @@ package com.aurora.d20_35_app.utils;
 import android.content.Context;
 import android.os.Environment;
 import android.os.StatFs;
-
 import java.io.File;
 
 public class ExternalStorageHandler {

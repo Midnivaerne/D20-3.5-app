@@ -1,20 +1,19 @@
 package com.aurora.d20_35_app.models.userData;
 
-import com.aurora.d20_35_app.models.Databases;
-import com.aurora.d20_35_app.models.helpers.DataConverter;
+import static com.aurora.d20_35_app.database.DBColumnNames.SOURCE_COLUMN_NAME;
+import static com.aurora.d20_35_app.database.DBTableNames.HERO_PLAYER;
 
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
+import com.aurora.d20_35_app.models.Databases;
+import com.aurora.d20_35_app.models.helpers.DataConverter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-
-import static com.aurora.d20_35_app.database.DBColumnNames.SOURCE_COLUMN_NAME;
-import static com.aurora.d20_35_app.database.DBTableNames.HERO_PLAYER;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

@@ -5,7 +5,6 @@ import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.settingSpecific.Races;
 import com.aurora.d20_35_app.models.usables.Armour;
 import com.aurora.d20_35_app.models.userData.HeroPlayer;
-
 import lombok.Getter;
 
 public enum DBSettingColumnNames implements DBColumnNamesMethods<DBSettingColumnNames, Item> {

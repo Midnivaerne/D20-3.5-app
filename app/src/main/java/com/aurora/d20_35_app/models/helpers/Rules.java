@@ -1,15 +1,14 @@
 package com.aurora.d20_35_app.models.helpers;
 
-import com.aurora.d20_35_app.models.typeHelpers.RulesType;
+import androidx.room.ColumnInfo;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+import com.aurora.d20_35_app.database.DBColumnNames;
 import com.aurora.d20_35_app.models.constants.RulesAlignments;
 import com.aurora.d20_35_app.models.constants.RulesCombat;
 import com.aurora.d20_35_app.models.constants.RulesSizes;
 import com.aurora.d20_35_app.models.constants.RulesSkills;
-import com.aurora.d20_35_app.database.DBColumnNames;
-
-import androidx.room.ColumnInfo;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
+import com.aurora.d20_35_app.models.typeHelpers.RulesType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

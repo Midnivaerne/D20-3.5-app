@@ -8,7 +8,6 @@ import com.aurora.d20_35_app.models.constants.RulesCombat;
 import com.aurora.d20_35_app.models.constants.RulesSizes;
 import com.aurora.d20_35_app.models.constants.RulesSkills;
 import com.aurora.d20_35_app.models.helpers.Rules;
-
 import java.util.List;
 import java.util.Map;
 

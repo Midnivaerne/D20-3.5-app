@@ -1,16 +1,14 @@
 package com.aurora.d20_35_app.dao.usables;
 
-import com.aurora.d20_35_app.helper.BaseDAO;
-import com.aurora.d20_35_app.models.helpers.Item;
-import com.aurora.d20_35_app.models.usables.Equipment;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.RoomWarnings;
 import androidx.room.Transaction;
+import com.aurora.d20_35_app.helper.BaseDAO;
+import com.aurora.d20_35_app.models.helpers.Item;
+import com.aurora.d20_35_app.models.usables.Equipment;
+import java.util.ArrayList;
+import java.util.List;
 
 @Dao
 public abstract class EquipmentDAO  implements BaseDAO<Equipment> {

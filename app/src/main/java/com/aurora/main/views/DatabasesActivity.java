@@ -1,12 +1,12 @@
 package com.aurora.main.views;
 
+import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
+
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.databinding.ActivityDatabasesBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.main.viewModels.DatabasesVM;
-
-import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
 
 /**
  * An activity representing a list of Rules Sets. This activity

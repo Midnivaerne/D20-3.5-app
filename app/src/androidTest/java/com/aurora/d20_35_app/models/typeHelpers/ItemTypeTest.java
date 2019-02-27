@@ -1,21 +1,19 @@
 package com.aurora.d20_35_app.models.typeHelpers;
 
-import com.aurora.d20_35_app.models.usables.Armour;
-import com.aurora.d20_35_app.models.settingSpecific.Classes;
+import static com.aurora.d20_35_app.models.typeHelpers.ItemType.ARMOUR;
+import static com.aurora.d20_35_app.models.typeHelpers.ItemType.CLASSES;
+import static com.aurora.d20_35_app.models.typeHelpers.ItemType.contains;
+
+import androidx.room.Room;
+import androidx.test.platform.app.InstrumentationRegistry;
 import com.aurora.d20_35_app.database.DatabaseHolder;
 import com.aurora.d20_35_app.database.DatabaseManager;
-
+import com.aurora.d20_35_app.models.settingSpecific.Classes;
+import com.aurora.d20_35_app.models.usables.Armour;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import androidx.room.Room;
-import androidx.test.platform.app.InstrumentationRegistry;
-
-import static com.aurora.d20_35_app.models.typeHelpers.ItemType.ARMOUR;
-import static com.aurora.d20_35_app.models.typeHelpers.ItemType.CLASSES;
-import static com.aurora.d20_35_app.models.typeHelpers.ItemType.contains;
 
 public class ItemTypeTest {
 

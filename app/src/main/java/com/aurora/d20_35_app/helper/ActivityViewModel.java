@@ -13,13 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import com.aurora.d20_35_app.R;
-
 import androidx.appcompat.app.ActionBar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModel;
+import com.aurora.d20_35_app.R;
 import lombok.Getter;
 
 public class ActivityViewModel<A extends BindingActivity> extends ViewModel {

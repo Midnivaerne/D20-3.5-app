@@ -3,12 +3,11 @@ package com.aurora.main.views;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.databinding.ActivityDatabasesListItemDetailBinding;
-import com.aurora.main.fragments.DatabasesListDetailFragment;
 import com.aurora.d20_35_app.helper.BindingActivity;
+import com.aurora.main.fragments.DatabasesListDetailFragment;
 import com.aurora.main.viewModels.DatabasesListItemDetailVM;
 
 /**

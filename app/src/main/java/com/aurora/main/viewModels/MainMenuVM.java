@@ -5,12 +5,10 @@ import android.content.pm.PackageManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-
-import com.aurora.d20_35_app.helper.ActivityViewModel;
-import com.aurora.main.views.MainMenuActivity;
-
 import androidx.core.content.ContextCompat;
 import androidx.databinding.ObservableField;
+import com.aurora.d20_35_app.helper.ActivityViewModel;
+import com.aurora.main.views.MainMenuActivity;
 
 
 public class MainMenuVM extends ActivityViewModel<MainMenuActivity> {

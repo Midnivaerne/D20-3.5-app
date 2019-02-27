@@ -1,16 +1,15 @@
 package com.aurora.d20_35_app.models.typeHelpers;
 
-import com.aurora.d20_35_app.database.DBColumnNames;
-import com.aurora.d20_35_app.database.DBSettingColumnNames;
-import com.aurora.d20_35_app.models.helpers.Item;
-
-import org.junit.Assert;
-import org.junit.Test;
-
 import static com.aurora.d20_35_app.database.DBSettingColumnNames.COL_ITEM_ID;
 import static com.aurora.d20_35_app.database.DBSettingColumnNames.COL_ITEM_NAME;
 import static com.aurora.d20_35_app.database.DBSettingColumnNames.contains;
 import static com.aurora.d20_35_app.database.DBSettingColumnNames.fromString;
+
+import com.aurora.d20_35_app.database.DBColumnNames;
+import com.aurora.d20_35_app.database.DBSettingColumnNames;
+import com.aurora.d20_35_app.models.helpers.Item;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class DBSettingColumnNamesTest {
 

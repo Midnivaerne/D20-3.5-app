@@ -1,17 +1,16 @@
 package com.aurora.main.views;
 
+import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
+
 import android.view.Menu;
 import android.widget.Button;
-
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.databinding.ActivityMainMenuBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
+import com.aurora.main.viewModels.MainMenuVM;
 import com.aurora.master.views.DMActivity;
 import com.aurora.player.views.PlayerCharactersListActivity;
-import com.aurora.main.viewModels.MainMenuVM;
-
-import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
 
 public class MainMenuActivity extends BindingActivity<ActivityMainMenuBinding, MainMenuVM> {
 

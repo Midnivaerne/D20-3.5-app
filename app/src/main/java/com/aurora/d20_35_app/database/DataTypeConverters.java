@@ -1,12 +1,10 @@
 package com.aurora.d20_35_app.database;
 
+import androidx.room.TypeConverter;
 import com.aurora.d20_35_app.models.helpers.Item;
 import com.aurora.d20_35_app.models.settingSpecific.Races;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.room.TypeConverter;
 
 public class DataTypeConverters {
 

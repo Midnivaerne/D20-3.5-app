@@ -4,11 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import androidx.fragment.app.Fragment;
 import com.aurora.d20_35_app.R;
 import com.aurora.player.viewModels.PlayerCharacterVM;
-
-import androidx.fragment.app.Fragment;
 
 /**
  * A placeholder fragment containing a simple view.

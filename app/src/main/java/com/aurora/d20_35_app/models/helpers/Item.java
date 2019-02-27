@@ -1,14 +1,12 @@
 package com.aurora.d20_35_app.models.helpers;
 
-import com.aurora.d20_35_app.models.typeHelpers.ItemType;
-import com.aurora.d20_35_app.utils.CustomStringParsers;
-import com.aurora.d20_35_app.database.DBColumnNames;
-
-import java.util.Map;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import com.aurora.d20_35_app.database.DBColumnNames;
+import com.aurora.d20_35_app.models.typeHelpers.ItemType;
+import com.aurora.d20_35_app.utils.CustomStringParsers;
+import java.util.Map;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

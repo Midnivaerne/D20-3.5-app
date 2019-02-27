@@ -1,18 +1,15 @@
 package com.aurora.d20_35_app.ActivitiesInstrumentedTest;
 
+import static org.junit.Assert.assertEquals;
+
 import android.content.Context;
-
+import androidx.test.platform.app.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
 import com.aurora.main.views.MainMenuActivity;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import androidx.test.platform.app.InstrumentationRegistry;
-import androidx.test.rule.ActivityTestRule;
-
-import static org.junit.Assert.assertEquals;
 
 public class d2035AppViewInstrumentedTest {
 

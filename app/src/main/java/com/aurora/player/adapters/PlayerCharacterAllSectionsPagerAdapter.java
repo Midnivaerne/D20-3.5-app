@@ -1,15 +1,14 @@
 package com.aurora.player.adapters;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import com.aurora.player.fragments.PlayerCharacterDescriptionsPlaceholderFragment;
 import com.aurora.player.fragments.PlayerCharacterEquipmentPlaceholderFragment;
 import com.aurora.player.fragments.PlayerCharacterFeaturesPlaceholderFragment;
 import com.aurora.player.fragments.PlayerCharacterSkillsPlaceholderFragment;
 import com.aurora.player.fragments.PlayerCharacterStatisticsPlaceholderFragment;
 import com.aurora.player.viewModels.PlayerCharacterVM;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to

@@ -1,12 +1,12 @@
 package com.aurora.main.views;
 
+import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
+
 import com.aurora.d20_35_app.BR;
 import com.aurora.d20_35_app.R;
 import com.aurora.d20_35_app.databinding.ActivityHelpBinding;
 import com.aurora.d20_35_app.helper.BindingActivity;
 import com.aurora.main.viewModels.HelpVM;
-
-import static com.aurora.d20_35_app.database.TranslationsHolder.translate;
 
 
 public class HelpActivity extends BindingActivity<ActivityHelpBinding, HelpVM> {
