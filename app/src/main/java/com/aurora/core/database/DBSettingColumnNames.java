@@ -128,32 +128,32 @@ public enum DBSettingColumnNames implements DBColumnNamesMethods<DBSettingColumn
   COL_HERO_CLASS_AND_LEVEL(DBColumnNames.HERO_CLASS_AND_LEVEL_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroPlayer) item).getHeroDescription().setHeroClassAndLevel(data);
+      ((HeroPlayer) item).getHeroValues().setHeroClassAndLevel(data);
     }
   },
 
   COL_HERO_RACE(DBColumnNames.HERO_RACE_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroPlayer) item).getHeroDescription().setHeroRace(data);
+      ((HeroPlayer) item).getHeroValues().setHeroRace(data);
     }
   },
   COL_HERO_ALIGNMENT(DBColumnNames.HERO_ALIGNMENT_ID_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroPlayer) item).getHeroDescription().setHeroAlignmentId(Integer.valueOf(data));
+      ((HeroPlayer) item).getHeroValues().setHeroAlignmentId(Integer.valueOf(data));
     }
   },
   COL_HERO_DEITY(DBColumnNames.HERO_DEITY_ID_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroPlayer) item).getHeroDescription().setHeroDeityId(Integer.valueOf(data));
+      ((HeroPlayer) item).getHeroValues().setHeroDeityId(Integer.valueOf(data));
     }
   },
   COL_HERO_SIZE(DBColumnNames.HERO_SIZE_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroPlayer) item).getHeroDescription().setHeroSizeId(Integer.valueOf(data));
+      ((HeroPlayer) item).getHeroValues().setHeroSizeId(Integer.valueOf(data));
     }
   },
   COL_HERO_AGE(DBColumnNames.HERO_AGE_COLUMN_NAME, false) {
@@ -165,7 +165,7 @@ public enum DBSettingColumnNames implements DBColumnNamesMethods<DBSettingColumn
   COL_HERO_GENDER(DBColumnNames.HERO_GENDER_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroPlayer) item).getHeroDescription().setHeroGender(data);
+      ((HeroPlayer) item).getHeroValues().setHeroGender(data);
     }
   },
   COL_HERO_HEIGHT(DBColumnNames.HERO_HEIGHT_COLUMN_NAME, false) {
@@ -201,43 +201,43 @@ public enum DBSettingColumnNames implements DBColumnNamesMethods<DBSettingColumn
   COL_HERO_HP(DBColumnNames.HERO_HIT_POINTS_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroPlayer) item).getHeroStatistics().setHeroHitPoints(data);
+      ((HeroPlayer) item).getHeroValues().setHeroHitPoints(data);
     }
   },
   COL_HERO_STR(DBColumnNames.HERO_ABILITY_SCORE_STR_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroPlayer) item).getHeroStatistics().setHeroAbilityScoreStr(Integer.valueOf(data));
+      ((HeroPlayer) item).getHeroValues().setHeroAbilityScoreStr(Integer.valueOf(data));
     }
   },
   COL_HERO_DEX(DBColumnNames.HERO_ABILITY_SCORE_DEX_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroPlayer) item).getHeroStatistics().setHeroAbilityScoreDex(Integer.valueOf(data));
+      ((HeroPlayer) item).getHeroValues().setHeroAbilityScoreDex(Integer.valueOf(data));
     }
   },
   COL_HERO_CON(DBColumnNames.HERO_ABILITY_SCORE_CON_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroPlayer) item).getHeroStatistics().setHeroAbilityScoreCon(Integer.valueOf(data));
+      ((HeroPlayer) item).getHeroValues().setHeroAbilityScoreCon(Integer.valueOf(data));
     }
   },
   COL_HERO_INT(DBColumnNames.HERO_ABILITY_SCORE_INT_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroPlayer) item).getHeroStatistics().setHeroAbilityScoreInt(Integer.valueOf(data));
+      ((HeroPlayer) item).getHeroValues().setHeroAbilityScoreInt(Integer.valueOf(data));
     }
   },
   COL_HERO_WIS(DBColumnNames.HERO_ABILITY_SCORE_WIS_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroPlayer) item).getHeroStatistics().setHeroAbilityScoreWis(Integer.valueOf(data));
+      ((HeroPlayer) item).getHeroValues().setHeroAbilityScoreWis(Integer.valueOf(data));
     }
   },
   COL_HERO_CHA(DBColumnNames.HERO_ABILITY_SCORE_CHA_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroPlayer) item).getHeroStatistics().setHeroAbilityScoreCha(Integer.valueOf(data));
+      ((HeroPlayer) item).getHeroValues().setHeroAbilityScoreCha(Integer.valueOf(data));
     }
   },
 

@@ -9,6 +9,7 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import com.aurora.core.models.Databases;
 import com.aurora.core.models.userData.Hero;
+import com.aurora.core.models.userData.HeroValues;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -27,15 +28,21 @@ public class HeroNPC extends Hero {
   public HeroNPC(String name,
       String source,
       String idAsNameBackup) {
-    super(name,
-        source,
-        idAsNameBackup);
+    new HeroNPC(name, source, idAsNameBackup, null);
+  }
+
+  public HeroNPC(String name,
+      String source,
+      String idAsNameBackup,
+      HeroValues heroValues) {
+    super(name, source, idAsNameBackup, heroValues);
   }
 
   public HeroNPC clone() {
     return new HeroNPC(
         getName(),
         getSource(),
-        getIdAsNameBackup());
+        getIdAsNameBackup(),
+        this.getHeroValues());
   }
 }

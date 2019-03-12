@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import com.aurora.core.R;
-import com.aurora.core.models.userData.HeroStatistics;
+import com.aurora.core.models.userData.HeroValues;
 import com.aurora.player.viewModels.PlayerCharacterVM;
 
 /**
@@ -162,13 +162,13 @@ public class PlayerCharacterStatisticsPlaceholderFragment extends Fragment {
       ((TextView) rootView.findViewById(ID_ABILITY_SCORES_VALUES[i]).findViewById(ID_ABILITY_SCORES_VALUES_SPECIFIC[1]))
           .setText(playerCharacterVM.getHeroAbilityScoresTextValues()[i]);
       ((TextView) rootView.findViewById(ID_ABILITY_SCORES_VALUES[i]).findViewById(ID_ABILITY_SCORES_VALUES_SPECIFIC[2])).setText(
-          String.valueOf(HeroStatistics.getStatisticModifier(Integer.parseInt(playerCharacterVM.getHeroAbilityScoresTextValues()[i]))));
+          String.valueOf(HeroValues.getStatisticModifier(Integer.parseInt(playerCharacterVM.getHeroAbilityScoresTextValues()[i]))));
 
       //todo add modifiers, don't show if the same as base values
       ((TextView) rootView.findViewById(ID_ABILITY_SCORES_VALUES[i]).findViewById(ID_ABILITY_SCORES_VALUES_SPECIFIC[3]))
           .setText(playerCharacterVM.getHeroAbilityScoresTextValues()[i]);
       ((TextView) rootView.findViewById(ID_ABILITY_SCORES_VALUES[i]).findViewById(ID_ABILITY_SCORES_VALUES_SPECIFIC[4])).setText(
-          String.valueOf(HeroStatistics.getStatisticModifier(Integer.parseInt(playerCharacterVM.getHeroAbilityScoresTextValues()[i]))));
+          String.valueOf(HeroValues.getStatisticModifier(Integer.parseInt(playerCharacterVM.getHeroAbilityScoresTextValues()[i]))));
     }
     for (int i = 0; i < ID_SAVING_THROWS_VALUES.length; i++) {
       ((TextView) rootView.findViewById(ID_SAVING_THROWS_VALUES[i]).findViewById(ID_SAVING_THROWS_VALUES_SPECIFIC[0]))

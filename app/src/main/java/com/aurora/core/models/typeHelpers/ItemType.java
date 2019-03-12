@@ -20,7 +20,7 @@ import com.aurora.core.models.usables.Equipment;
 import com.aurora.core.models.usables.Weapons;
 import com.aurora.core.models.userData.HeroDescription;
 import com.aurora.core.models.userData.HeroPlayer;
-import com.aurora.core.models.userData.HeroStatistics;
+import com.aurora.core.models.userData.HeroValues;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -536,14 +536,14 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
       List<Long> baseHeroIds = databaseHolder.heroPlayerDAO().insertAll(databaseHolder.HEROES_PLAYER_LIST);
       List<HeroDescription> descriptions = new ArrayList<>();
-      List<HeroStatistics> statistics = new ArrayList<>();
+      List<HeroValues> statistics = new ArrayList<>();
       for (int i = 0; i < baseHeroIds.size(); i++) {
         Integer heroId = baseHeroIds.get(i) != null ? baseHeroIds.get(i).intValue() : null;
         databaseHolder.HEROES_PLAYER_LIST.get(i).setItemID(heroId);
         HeroDescription description = databaseHolder.HEROES_PLAYER_LIST.get(i).getHeroDescription();
         description.setHeroParentItemID(heroId);
         descriptions.add(description);
-        HeroStatistics statistic = databaseHolder.HEROES_PLAYER_LIST.get(i).getHeroStatistics();
+        HeroValues statistic = databaseHolder.HEROES_PLAYER_LIST.get(i).getHeroValues();
         statistic.setHeroParentItemID(heroId);
         statistics.add(statistic);
       }
@@ -562,20 +562,20 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
         heroPlayer.backupNamesFromIdCreator();
       }
       List<HeroDescription> descriptions = databaseHolder.heroDescriptionDAO().getHeroDescriptionsWithSuperFieldsWithParentIdIn(heroesIds);
-      List<HeroStatistics> statistics = databaseHolder.heroStatisticsAbilityScoresDAO()
+      List<HeroValues> statistics = databaseHolder.heroStatisticsAbilityScoresDAO()
           .getHeroStatisticsWithSuperFieldsWithParentIdIn(heroesIds);
       for (int i = 0; i < heroes.size(); i++) {
         descriptions.get(i).backupNamesFromIdCreator();
         databaseHolder.HEROES_PLAYER_LIST.get(i).setHeroDescription(descriptions.get(i));
-        databaseHolder.HEROES_PLAYER_LIST.get(i).setHeroStatistics(statistics.get(i));
+        databaseHolder.HEROES_PLAYER_LIST.get(i).setHeroValues(statistics.get(i));
         for (HeroDescription desc : descriptions) {
           if (desc.getHeroParentItemID().equals(heroesIds.get(i))) {
             databaseHolder.HEROES_PLAYER_MAP.get(heroesIds.get(i)).setHeroDescription(desc);
           }
         }
-        for (HeroStatistics stat : statistics) {
+        for (HeroValues stat : statistics) {
           if (stat.getHeroParentItemID().equals(heroesIds.get(i))) {
-            databaseHolder.HEROES_PLAYER_MAP.get(heroesIds.get(i)).setHeroStatistics(stat);
+            databaseHolder.HEROES_PLAYER_MAP.get(heroesIds.get(i)).setHeroValues(stat);
           }
         }
       }

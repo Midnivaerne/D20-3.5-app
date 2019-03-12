@@ -28,7 +28,7 @@ import com.aurora.core.dao.usables.EquipmentDAO;
 import com.aurora.core.dao.usables.WeaponsDAO;
 import com.aurora.core.dao.userData.HeroDescriptionDAO;
 import com.aurora.core.dao.userData.HeroPlayerDAO;
-import com.aurora.core.dao.userData.HeroStatisticsDAO;
+import com.aurora.core.dao.userData.HeroValuesDAO;
 import com.aurora.core.models.Databases;
 import com.aurora.core.models.Translations;
 import com.aurora.core.models.constants.RulesAlignments;
@@ -51,7 +51,7 @@ import com.aurora.core.models.usables.Equipment;
 import com.aurora.core.models.usables.Weapons;
 import com.aurora.core.models.userData.HeroDescription;
 import com.aurora.core.models.userData.HeroPlayer;
-import com.aurora.core.models.userData.HeroStatistics;
+import com.aurora.core.models.userData.HeroValues;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,7 +67,7 @@ import lombok.Setter;
     RulesCombat.class, RulesSkills.class, RulesAlignments.class, RulesSizes.class,
     Armour.class, Equipment.class, Feats.class, Skills.class, Spells.class, Weapons.class,
     Classes.class, Monsters.class, Races.class, RaceTemplates.class, Deities.class,
-    HeroNPC.class, HeroPlayer.class, HeroDescription.class, HeroStatistics.class,
+    HeroNPC.class, HeroPlayer.class, HeroDescription.class, HeroValues.class,
     Translations.class
 }, version = 1, exportSchema = false)
 @TypeConverters(DataTypeConverters.class)
@@ -99,7 +99,7 @@ public abstract class DatabaseHolder extends RoomDatabase {
 
   public abstract HeroDescriptionDAO heroDescriptionDAO();
 
-  public abstract HeroStatisticsDAO heroStatisticsAbilityScoresDAO();
+  public abstract HeroValuesDAO heroStatisticsAbilityScoresDAO();
 
   public abstract HeroNPCDAO heroNPCDAO();
 

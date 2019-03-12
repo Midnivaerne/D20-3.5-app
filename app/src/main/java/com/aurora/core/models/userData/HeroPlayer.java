@@ -9,7 +9,6 @@ import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
 import com.aurora.core.models.Databases;
-import com.aurora.core.models.helpers.DataConverter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -20,7 +19,7 @@ import lombok.Setter;
 @Entity(tableName = HERO_PLAYER, inheritSuperIndices = true,
     indices = {@Index(value = SOURCE_COLUMN_NAME)},
     foreignKeys = @ForeignKey(entity = Databases.class, parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
-public class HeroPlayer extends Hero implements DataConverter<HeroPlayer> {
+public class HeroPlayer extends Hero {
 
   @Ignore
   public HeroPlayer() {
@@ -37,9 +36,9 @@ public class HeroPlayer extends Hero implements DataConverter<HeroPlayer> {
   public HeroPlayer(String name,
       String source,
       String idAsNameBackup,
-      HeroStatistics heroStatistics,
+      HeroValues heroValues,
       HeroDescription heroDescription) {
-    super(name, source, idAsNameBackup, heroStatistics);
+    super(name, source, idAsNameBackup, heroValues);
     this.heroDescription = heroDescription == null ? new HeroDescription() : heroDescription.clone();
   }
 
@@ -54,7 +53,7 @@ public class HeroPlayer extends Hero implements DataConverter<HeroPlayer> {
         getName(),
         getSource(),
         getIdAsNameBackup(),
-        getHeroStatistics(),
+        this.getHeroValues(),
         getHeroDescription());
   }
 }

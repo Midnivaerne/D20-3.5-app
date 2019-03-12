@@ -6,7 +6,7 @@ public class DBTableNames {
   public static final String TRANSLATIONS = "Translations";
 
   public static final String HERO_PLAYER = "HeroPlayer";
-  public static final String HERO_STATISTICS = "HeroStatistics";
+  public static final String HERO_STATISTICS = "HeroValues";
   public static final String HERO_DESCRIPTION = "HeroDescription";
   public static final String SKILLS = "Skills";
   public static final String FEATS = "Feats";

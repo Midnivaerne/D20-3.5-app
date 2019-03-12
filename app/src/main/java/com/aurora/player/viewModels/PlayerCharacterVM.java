@@ -48,42 +48,42 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
         .get(Integer.parseInt(activity.getIntent().getStringExtra(PlayerCharacterActivity.HERO_PLAYER_ID))));
     getHero().getHeroDescription().setBackupNames(getHero().getBackupNames());
     heroCombatTextValues = new String[]{
-        getHero().getHeroStatistics().getHeroHitPointsStringFromList(),
-        getHero().getDamageReduction(getHero()),
-        getHero().getArmourClass(getHero()),
-        getHero().getArmourClassTouch(getHero()),
-        getHero().getArmourClassFlatfooted(getHero()),
-        getHero().getSpeed(getHero()),
-        getHero().getInitiative(getHero()),
-        getHero().getAttack(getHero()),
-        getHero().getAttackMelee(getHero()),
-        getHero().getAttackRanged(getHero()),
-        getHero().getGrapple(getHero()),
-        getHero().getSpellResistance(getHero())
+        getHero().getHeroValues().getHeroHitPointsStringFromList(),
+        getHero().getDamageReduction(),
+        getHero().getArmourClass(),
+        getHero().getArmourClassTouch(),
+        getHero().getArmourClassFlatfooted(),
+        getHero().getSpeed(),
+        getHero().getInitiative(),
+        getHero().getAttack(),
+        getHero().getAttackMelee(),
+        getHero().getAttackRanged(),
+        getHero().getGrapple(),
+        getHero().getSpellResistance()
     };
     heroAbilityScoresTextValues = new String[]{
-        getHero().getHeroStatistics().getHeroAbilityScoreStr().toString(),
-        getHero().getHeroStatistics().getHeroAbilityScoreDex().toString(),
-        getHero().getHeroStatistics().getHeroAbilityScoreCon().toString(),
-        getHero().getHeroStatistics().getHeroAbilityScoreInt().toString(),
-        getHero().getHeroStatistics().getHeroAbilityScoreWis().toString(),
-        getHero().getHeroStatistics().getHeroAbilityScoreCha().toString()
+        getHero().getHeroValues().getHeroAbilityScoreStr().toString(),
+        getHero().getHeroValues().getHeroAbilityScoreDex().toString(),
+        getHero().getHeroValues().getHeroAbilityScoreCon().toString(),
+        getHero().getHeroValues().getHeroAbilityScoreInt().toString(),
+        getHero().getHeroValues().getHeroAbilityScoreWis().toString(),
+        getHero().getHeroValues().getHeroAbilityScoreCha().toString()
     };
     heroSavingThrowsTextValues = new String[]{
-        getHero().getFortitude(getHero()),
-        getHero().getReflex(getHero()),
-        getHero().getWill(getHero())
+        getHero().getFortitude(),
+        getHero().getReflex(),
+        getHero().getWill()
     };
     heroDescriptionsTextValues = new String[]{
         getHero().getName(),
         getHero().getHeroDescription().getHeroPlayer(),
-        getHero().getHeroDescription().getHeroClassAndLevelStringFromId(databaseHolder),
-        getHero().getHeroDescription().getRaceStringFromId(databaseHolder),
-        getHero().getHeroDescription().getAlignmentStringFromId(databaseHolder),
-        getHero().getHeroDescription().getDeityStringFromId(databaseHolder),
-        getHero().getHeroDescription().getSizeStringFromId(databaseHolder),
+        getHero().getHeroValues().getHeroClassAndLevelStringFromId(databaseHolder),
+        getHero().getHeroValues().getRaceStringFromId(databaseHolder),
+        getHero().getHeroValues().getAlignmentStringFromId(databaseHolder),
+        getHero().getHeroValues().getDeityStringFromId(databaseHolder),
+        getHero().getHeroValues().getSizeStringFromId(databaseHolder),
         String.valueOf(getHero().getHeroDescription().getHeroAge()),
-        getHero().getHeroDescription().getHeroGender(),
+        getHero().getHeroValues().getHeroGender(),
         getHero().getHeroDescription().getHeroHeight(),
         getHero().getHeroDescription().getHeroWeight(),
         getHero().getHeroDescription().getHeroEyes(),
