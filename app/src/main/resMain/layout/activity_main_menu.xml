@@ -16,7 +16,7 @@
         android:id="@+id/coordinator"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.aurora.d20_35_app.com.aurora.main.views.MainMenuActivity">
+      tools:context="com.aurora.core.com.aurora.main.views.MainMenuActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context="com.aurora.d20_35_app.fragments.D2035appContentFragment"
+          tools:context="com.aurora.core.fragments.D2035appContentFragment"
             tools:showIn="@layout/activity_main_menu">
 
             <Button

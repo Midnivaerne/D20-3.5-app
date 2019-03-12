@@ -9,34 +9,33 @@ import com.aurora.player.fragments.PlayerCharacterDescriptionQuestsPlaceholderFr
 import com.aurora.player.viewModels.PlayerCharacterVM;
 
 /**
- * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
- * one of the sections/tabs/pages.
+ * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the sections/tabs/pages.
  */
 public class PlayerCharacterAllDescriptionsSectionsPagerAdapter extends FragmentPagerAdapter {
 
-    private PlayerCharacterVM playerCharacterVM;
+  private PlayerCharacterVM playerCharacterVM;
 
-    public PlayerCharacterAllDescriptionsSectionsPagerAdapter(FragmentManager fragmentManager, PlayerCharacterVM playerCharacterVM) {
-        super(fragmentManager);
-        this.playerCharacterVM = playerCharacterVM;
-    }
+  public PlayerCharacterAllDescriptionsSectionsPagerAdapter(FragmentManager fragmentManager, PlayerCharacterVM playerCharacterVM) {
+    super(fragmentManager);
+    this.playerCharacterVM = playerCharacterVM;
+  }
 
-    @Override
-    public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return PlayerCharacterDescriptionAppearancePlaceholderFragment.newInstance(position, playerCharacterVM);
-            case 1:
-                return PlayerCharacterDescriptionQuestsPlaceholderFragment.newInstance(position, playerCharacterVM);
-            case 2:
-                return PlayerCharacterDescriptionJournalPlaceholderFragment.newInstance(position, playerCharacterVM);
-            default:
-                return null;
-        }
+  @Override
+  public Fragment getItem(int position) {
+    switch (position) {
+      case 0:
+        return PlayerCharacterDescriptionAppearancePlaceholderFragment.newInstance(position, playerCharacterVM);
+      case 1:
+        return PlayerCharacterDescriptionQuestsPlaceholderFragment.newInstance(position, playerCharacterVM);
+      case 2:
+        return PlayerCharacterDescriptionJournalPlaceholderFragment.newInstance(position, playerCharacterVM);
+      default:
+        return null;
     }
+  }
 
-    @Override
-    public int getCount() {
-        return 3;
-    }
+  @Override
+  public int getCount() {
+    return 3;
+  }
 }

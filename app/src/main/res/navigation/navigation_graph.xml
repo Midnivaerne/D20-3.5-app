@@ -6,7 +6,7 @@
     app:startDestination="@id/D2035appActivity">
     <activity
         android:id="@+id/D2035appActivity"
-        android:name="com.aurora.d20_35_app.views.D2035appActivity"
+      android:name="com.aurora.core.views.D2035appActivity"
         android:label="D2035appActivity"
         tools:layout="@layout/activity_d2035app">
         <action

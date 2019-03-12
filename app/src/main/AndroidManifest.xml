@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.aurora.d20_35_app">
+  package="com.aurora.core">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".views.D2035appActivity"
+          android:name="com.aurora.core.views.D2035appActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,7 @@
         <activity android:name="com.aurora.main.views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.views.D2035appActivity" />
+              android:value="com.aurora.core.views.D2035appActivity"/>
         </activity>
         <activity
             android:name="com.aurora.master.views.DMActivity"

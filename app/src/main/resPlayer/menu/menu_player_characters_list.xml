@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.aurora.d20_35_app.com.aurora.player.views.PlayerCharactersListActivity"
+  tools:context="com.aurora.core.com.aurora.player.views.PlayerCharactersListActivity"
     tools:ignore="MenuTitle">
     <item
         android:id="@+id/characters_list_settings_action"

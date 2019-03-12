@@ -15,7 +15,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.aurora.d20_35_app.com.aurora.player.views.PlayerCharactersListActivity">
+      tools:context="com.aurora.core.com.aurora.player.views.PlayerCharactersListActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"

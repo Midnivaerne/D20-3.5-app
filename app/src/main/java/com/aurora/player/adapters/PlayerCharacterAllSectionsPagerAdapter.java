@@ -11,38 +11,37 @@ import com.aurora.player.fragments.PlayerCharacterStatisticsPlaceholderFragment;
 import com.aurora.player.viewModels.PlayerCharacterVM;
 
 /**
- * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
- * one of the sections/tabs/pages.
+ * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the sections/tabs/pages.
  */
 public class PlayerCharacterAllSectionsPagerAdapter extends FragmentPagerAdapter {
 
-    private PlayerCharacterVM playerCharacterVM;
+  private PlayerCharacterVM playerCharacterVM;
 
-    public PlayerCharacterAllSectionsPagerAdapter(FragmentManager fragmentManager, PlayerCharacterVM playerCharacterVM) {
-        super(fragmentManager);
-        this.playerCharacterVM = playerCharacterVM;
-    }
+  public PlayerCharacterAllSectionsPagerAdapter(FragmentManager fragmentManager, PlayerCharacterVM playerCharacterVM) {
+    super(fragmentManager);
+    this.playerCharacterVM = playerCharacterVM;
+  }
 
-    @Override
-    public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return PlayerCharacterStatisticsPlaceholderFragment.newInstance(position, playerCharacterVM);
-            case 1:
-                return PlayerCharacterSkillsPlaceholderFragment.newInstance(position, playerCharacterVM);
-            case 2:
-                return PlayerCharacterEquipmentPlaceholderFragment.newInstance(position, playerCharacterVM);
-            case 3:
-                return PlayerCharacterFeaturesPlaceholderFragment.newInstance(position, playerCharacterVM);
-            case 4:
-                return PlayerCharacterDescriptionsPlaceholderFragment.newInstance(position, playerCharacterVM);
-            default:
-                return null;
-        }
+  @Override
+  public Fragment getItem(int position) {
+    switch (position) {
+      case 0:
+        return PlayerCharacterStatisticsPlaceholderFragment.newInstance(position, playerCharacterVM);
+      case 1:
+        return PlayerCharacterSkillsPlaceholderFragment.newInstance(position, playerCharacterVM);
+      case 2:
+        return PlayerCharacterEquipmentPlaceholderFragment.newInstance(position, playerCharacterVM);
+      case 3:
+        return PlayerCharacterFeaturesPlaceholderFragment.newInstance(position, playerCharacterVM);
+      case 4:
+        return PlayerCharacterDescriptionsPlaceholderFragment.newInstance(position, playerCharacterVM);
+      default:
+        return null;
     }
+  }
 
-    @Override
-    public int getCount() {
-        return 5;
-    }
+  @Override
+  public int getCount() {
+    return 5;
+  }
 }
