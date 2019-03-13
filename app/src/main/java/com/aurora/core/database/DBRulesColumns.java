@@ -3,7 +3,7 @@ package com.aurora.core.database;
 import com.aurora.core.models.helpers.Rules;
 import lombok.Getter;
 
-public enum DBRulesColumnNames implements DBColumnNamesMethods<DBRulesColumnNames, Rules> {
+public enum DBRulesColumns implements DBColumnNamesMethods<DBRulesColumns, Rules> {
 
   /**
    * Core rules data
@@ -35,7 +35,7 @@ public enum DBRulesColumnNames implements DBColumnNamesMethods<DBRulesColumnName
     this.columnIsUsed = columnIsUsed;
   }
 
-  DBRulesColumnNames(String columnName, boolean colBool) {
+  DBRulesColumns(String columnName, boolean colBool) {
     this.columnName = columnName;
     this.columnIsUsed = colBool;
   }

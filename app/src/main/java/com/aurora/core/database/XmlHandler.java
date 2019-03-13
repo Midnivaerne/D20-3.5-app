@@ -30,8 +30,8 @@ public class XmlHandler extends DefaultHandler {
     } else if (qName.contains("_Item") && (CoreTypeHelper.contains(qName.split("_")[0], RulesType.class) || CoreTypeHelper
         .contains(qName.split("_")[0], ItemType.class))) {
       setupItem(qName);
-    } else if (DBColumnNamesMethods.contains(qName, DBRulesColumnNames.class) || DBColumnNamesMethods
-        .contains(qName, DBSettingColumnNames.class)) {
+    } else if (DBColumnNamesMethods.contains(qName, DBRulesColumns.class) || DBColumnNamesMethods
+        .contains(qName, DBSettingColumns.class)) {
       setupObject(qName);
     }
     data = new StringBuilder();
@@ -41,11 +41,11 @@ public class XmlHandler extends DefaultHandler {
     if (CoreTypeHelper.contains(qName, RulesType.class)) {
       itemList = CoreTypeHelper.fromString(qName, RulesType.class).getDatabaseList(databaseHolder);
       itemMap = CoreTypeHelper.fromString(qName, RulesType.class).getDatabaseMap(databaseHolder);
-      dbPart = DBRulesColumnNames.class;
+      dbPart = DBRulesColumns.class;
     } else if (CoreTypeHelper.contains(qName, ItemType.class)) {
       itemList = CoreTypeHelper.fromString(qName, ItemType.class).getDatabaseList(databaseHolder);
       itemMap = CoreTypeHelper.fromString(qName, ItemType.class).getDatabaseMap(databaseHolder);
-      dbPart = DBSettingColumnNames.class;
+      dbPart = DBSettingColumns.class;
     }
   }
 
@@ -59,11 +59,11 @@ public class XmlHandler extends DefaultHandler {
   }
 
   private void setupObject(String qName) {
-    if (DBColumnNamesMethods.contains(qName, DBRulesColumnNames.class)) {
-      Objects.requireNonNull(DBColumnNamesMethods.fromString(qName, DBRulesColumnNames.class)).setColumnIsUsed(true);
+    if (DBColumnNamesMethods.contains(qName, DBRulesColumns.class)) {
+      Objects.requireNonNull(DBColumnNamesMethods.fromString(qName, DBRulesColumns.class)).setColumnIsUsed(true);
     }
-    if (DBColumnNamesMethods.contains(qName, DBSettingColumnNames.class)) {
-      Objects.requireNonNull(DBColumnNamesMethods.fromString(qName, DBSettingColumnNames.class)).setColumnIsUsed(true);
+    if (DBColumnNamesMethods.contains(qName, DBSettingColumns.class)) {
+      Objects.requireNonNull(DBColumnNamesMethods.fromString(qName, DBSettingColumns.class)).setColumnIsUsed(true);
     }
   }
 

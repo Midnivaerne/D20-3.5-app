@@ -7,17 +7,19 @@ import static com.aurora.core.database.DBColumnNames.HERO_ABILITY_SCORE_INT_COLU
 import static com.aurora.core.database.DBColumnNames.HERO_ABILITY_SCORE_STR_COLUMN_NAME;
 import static com.aurora.core.database.DBColumnNames.HERO_ABILITY_SCORE_WIS_COLUMN_NAME;
 import static com.aurora.core.database.DBColumnNames.HERO_ALIGNMENT_ID_COLUMN_NAME;
-import static com.aurora.core.database.DBColumnNames.HERO_CLASS_AND_LEVEL_COLUMN_NAME;
+import static com.aurora.core.database.DBColumnNames.HERO_CLASS_ID_LIST_COLUMN_NAME;
 import static com.aurora.core.database.DBColumnNames.HERO_DEITY_ID_COLUMN_NAME;
 import static com.aurora.core.database.DBColumnNames.HERO_GENDER_COLUMN_NAME;
 import static com.aurora.core.database.DBColumnNames.HERO_HIT_POINTS_COLUMN_NAME;
 import static com.aurora.core.database.DBColumnNames.HERO_PARENT_ITEM_ID_COLUMN_NAME;
-import static com.aurora.core.database.DBColumnNames.HERO_RACE_COLUMN_NAME;
+import static com.aurora.core.database.DBColumnNames.HERO_RACE_ID_COLUMN_NAME;
 import static com.aurora.core.database.DBColumnNames.HERO_SIZE_COLUMN_NAME;
 import static com.aurora.core.database.DBColumnNames.ITEM_ID_COLUMN_NAME;
 import static com.aurora.core.database.DBColumnNames.SOURCE_COLUMN_NAME;
 import static com.aurora.core.database.DBTableNames.HERO_STATISTICS;
+import static com.aurora.core.database.TranslationsHolder.translate;
 
+import android.util.Log;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
@@ -29,11 +31,14 @@ import com.aurora.core.models.Databases;
 import com.aurora.core.models.constants.RulesAlignments;
 import com.aurora.core.models.constants.RulesSizes;
 import com.aurora.core.models.helpers.Item;
+import com.aurora.core.models.settingSpecific.Classes;
 import com.aurora.core.models.settingSpecific.Deities;
+import com.aurora.core.models.settingSpecific.RaceTemplates;
+import com.aurora.core.models.settingSpecific.Races;
 import com.aurora.core.models.typeHelpers.ItemType;
 import com.aurora.core.utils.CustomStringParsers;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -95,13 +100,25 @@ public class HeroValues extends Item {
 
   @Getter
   @Setter
-  @ColumnInfo(name = HERO_CLASS_AND_LEVEL_COLUMN_NAME)
-  private String heroClassAndLevel;
+  @ColumnInfo(name = HERO_CLASS_ID_LIST_COLUMN_NAME)
+  private String heroClassIdList;
+
+  @Getter
+  @Ignore
+  private HashMap<Classes, Integer> classes;
 
   @Getter
   @Setter
-  @ColumnInfo(name = HERO_RACE_COLUMN_NAME)
-  private String heroRace;
+  @ColumnInfo(name = HERO_RACE_ID_COLUMN_NAME)
+  private String heroRaceId;
+
+  @Getter
+  @Ignore
+  private Races race;
+
+  @Getter
+  @Ignore
+  private RaceTemplates raceTemplate;
 
   @Getter
   @Setter
@@ -139,8 +156,8 @@ public class HeroValues extends Item {
       Integer heroAbilityScoreInt,
       Integer heroAbilityScoreWis,
       Integer heroAbilityScoreCha,
-      String heroClassAndLevel,
-      String heroRace,
+      String heroClassIdList,
+      String heroRaceId,
       Integer heroAlignmentId,
       Integer heroDeityId,
       Integer heroSizeId,
@@ -154,62 +171,83 @@ public class HeroValues extends Item {
     this.heroAbilityScoreInt = heroAbilityScoreInt;
     this.heroAbilityScoreWis = heroAbilityScoreWis;
     this.heroAbilityScoreCha = heroAbilityScoreCha;
-    this.heroClassAndLevel = heroClassAndLevel;
-    this.heroRace = heroRace;
+    this.heroClassIdList = heroClassIdList;
+    this.heroRaceId = heroRaceId;
     this.heroAlignmentId = heroAlignmentId;
     this.heroDeityId = heroDeityId;
     this.heroSizeId = heroSizeId;
     this.heroGender = heroGender;
   }
 
+  @Ignore
   public static int getStatisticModifier(int stat) {
     return ((stat / 2) - 5);
   }
 
   @Ignore
-  public String getHeroClassAndLevelStringFromId(DatabaseHolder databaseHolder) {
-    StringBuilder heroClassesOut = new StringBuilder();
-    String[] heroClasses = CustomStringParsers.StringWithCommaToTable(heroClassAndLevel);
-    Map<String, Integer> classAndLevels = new HashMap<>();
-    for (String classes : heroClasses) {
-      String className;
-      String classNameFromBackup = getBackupNames().get(ItemType.CLASSES).get(Integer.getInteger(classes));
-      Item aHeroClass = databaseHolder.CLASSES_MAP.get(Integer.getInteger(classes));
-      if (aHeroClass != null) {
-        className = aHeroClass.getName();
-        if (!className.equals(classNameFromBackup)) {
-          DatabaseManager.dbCheckup();
+  public void generateRaceFromId(DatabaseHolder databaseHolder) {
+    race = databaseHolder.RACES_MAP.get(Integer.parseInt(heroRaceId.split("\\+")[0]));
+    if (heroRaceId.split("\\+").length == 2) {
+      raceTemplate = databaseHolder.RACE_TEMPLATES_MAP.get(Integer.parseInt(heroRaceId.split("\\+")[1]));
+    }
+  }
+
+  @Ignore
+  public String getRaceAndTemplateFromObjects() {
+    return translate(getRace().getName()) + (getRaceTemplate() == null ? "" : " " + translate(getRaceTemplate().getName()));
+  }
+
+  @Ignore
+  public void generateClassListFromId(DatabaseHolder databaseHolder) {
+    setClasses(new HashMap<Classes, Integer>());
+    String[] heroClasses = CustomStringParsers.StringWithCommaToTable(heroClassIdList);
+    for (String clas : heroClasses) {
+      String classNameFromBackup = getBackupNames().get(ItemType.CLASSES).get(Integer.parseInt(clas));
+      Classes aHeroClass = databaseHolder.CLASSES_MAP.get(Integer.parseInt(clas));
+      if (aHeroClass == null && classNameFromBackup == null) {
+        Log.e("Database contents:", "missing class: " + clas + " and backup names");
+      } else if (aHeroClass == null) {
+        aHeroClass = databaseHolder.CLASSES_MAP.get(Integer.parseInt(classNameFromBackup));
+        if (aHeroClass == null) {
+          Log.e("Database contents:", "missing class: " + clas);
         }
-      } else {
-        className = classNameFromBackup;
         DatabaseManager.dbCheckup();
       }
-      if (classAndLevels.containsKey(className)) {
-        classAndLevels.put(className, classAndLevels.get(className) + 1);
-      } else {
-        classAndLevels.put(className, 1);
+      if (!Objects.requireNonNull(aHeroClass).getName().equals(classNameFromBackup)) {
+        DatabaseManager.dbCheckup();
       }
-      heroClassesOut.append(className).append(" ").append(classAndLevels.get(className)).append(" ");
+
+      if (getClasses().containsKey(aHeroClass) && getClasses().get(aHeroClass) != null) {
+        getClasses().put((Classes) aHeroClass, getClasses().get(aHeroClass) + 1);
+      } else {
+        Objects.requireNonNull(getClasses()).put((Classes) aHeroClass, 1);
+      }
     }
-    return heroClassesOut.toString();
   }
 
-  public String getRaceStringFromId(DatabaseHolder databaseHolder) {
-    return heroRace; //todo get race (and template) from this id('s)
+  @Ignore
+  public String getClassListFromMap() {
+    StringBuilder sb = new StringBuilder();
+    getClasses().forEach((cls, lvl) -> sb.append(translate(cls.getName())).append(" ").append(lvl).append(" "));
+    return String.valueOf(sb);
   }
 
+  @Ignore
   public String getAlignmentStringFromId(DatabaseHolder databaseHolder) {
     return databaseHolder.RULES_ALIGNMENTS_MAP.get(heroAlignmentId).getName();//todo translate
   }
 
+  @Ignore
   public String getDeityStringFromId(DatabaseHolder databaseHolder) {
     return databaseHolder.DEITIES_MAP.get(heroDeityId).getName();//todo translate
   }
 
+  @Ignore
   public String getSizeStringFromId(DatabaseHolder databaseHolder) {
     return databaseHolder.RULES_SIZES_MAP.get(heroSizeId).getName();//todo translate
   }
 
+  @Ignore
   public String getHeroHitPointsStringFromList() {
     return CustomStringParsers.StringWithCommaToSum(heroHitPoints);
   }
@@ -227,8 +265,8 @@ public class HeroValues extends Item {
         getHeroAbilityScoreInt(),
         getHeroAbilityScoreWis(),
         getHeroAbilityScoreCha(),
-        getHeroClassAndLevel(),
-        getHeroRace(),
+        getHeroClassIdList(),
+        getHeroRaceId(),
         getHeroAlignmentId(),
         getHeroDeityId(),
         getHeroSizeId(),

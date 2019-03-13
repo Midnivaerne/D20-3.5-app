@@ -7,7 +7,7 @@ import com.aurora.core.models.usables.Armour;
 import com.aurora.core.models.userData.HeroPlayer;
 import lombok.Getter;
 
-public enum DBSettingColumnNames implements DBColumnNamesMethods<DBSettingColumnNames, Item> {
+public enum DBSettingColumns implements DBColumnNamesMethods<DBSettingColumns, Item> {
 
   ////////////////////////////////////////////////////////////////
   //////////////////////////  Databases  ////////////////////////
@@ -125,17 +125,17 @@ public enum DBSettingColumnNames implements DBColumnNamesMethods<DBSettingColumn
     }
   },
 
-  COL_HERO_CLASS_AND_LEVEL(DBColumnNames.HERO_CLASS_AND_LEVEL_COLUMN_NAME, false) {
+  COL_HERO_CLASS_AND_LEVEL(DBColumnNames.HERO_CLASS_ID_LIST_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroPlayer) item).getHeroValues().setHeroClassAndLevel(data);
+      ((HeroPlayer) item).getHeroValues().setHeroClassIdList(data);
     }
   },
 
-  COL_HERO_RACE(DBColumnNames.HERO_RACE_COLUMN_NAME, false) {
+  COL_HERO_RACE(DBColumnNames.HERO_RACE_ID_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroPlayer) item).getHeroValues().setHeroRace(data);
+      ((HeroPlayer) item).getHeroValues().setHeroRaceId(data);
     }
   },
   COL_HERO_ALIGNMENT(DBColumnNames.HERO_ALIGNMENT_ID_COLUMN_NAME, false) {
@@ -341,7 +341,7 @@ public enum DBSettingColumnNames implements DBColumnNamesMethods<DBSettingColumn
     this.columnIsUsed = columnIsUsed;
   }
 
-  DBSettingColumnNames(String columnName, boolean colBool) {
+  DBSettingColumns(String columnName, boolean colBool) {
     this.columnName = columnName;
     this.columnIsUsed = colBool;
   }

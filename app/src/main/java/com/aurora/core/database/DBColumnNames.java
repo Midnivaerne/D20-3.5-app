@@ -8,8 +8,8 @@ public class DBColumnNames {
   public static final String ID_AS_NAME_BACKUP_COLUMN_NAME = "Id_As_Name_Backup";
   public static final String HERO_PARENT_ITEM_ID_COLUMN_NAME = "Parent_Item_ID";
   public static final String HERO_PLAYER_COLUMN_NAME = "Player";
-  public static final String HERO_CLASS_AND_LEVEL_COLUMN_NAME = "Class_And_Level";
-  public static final String HERO_RACE_COLUMN_NAME = "Race";
+  public static final String HERO_CLASS_ID_LIST_COLUMN_NAME = "Class_And_Level";
+  public static final String HERO_RACE_ID_COLUMN_NAME = "Race";
   public static final String HERO_ALIGNMENT_ID_COLUMN_NAME = "Alignment_Id";
   public static final String HERO_DEITY_ID_COLUMN_NAME = "Deity_Id";
   public static final String HERO_SIZE_COLUMN_NAME = "Size_Id";

@@ -1,17 +1,17 @@
 package com.aurora.core.models.typeHelpers;
 
-import static com.aurora.core.database.DBSettingColumnNames.COL_ITEM_ID;
-import static com.aurora.core.database.DBSettingColumnNames.COL_ITEM_NAME;
-import static com.aurora.core.database.DBSettingColumnNames.contains;
-import static com.aurora.core.database.DBSettingColumnNames.fromString;
+import static com.aurora.core.database.DBSettingColumns.COL_ITEM_ID;
+import static com.aurora.core.database.DBSettingColumns.COL_ITEM_NAME;
+import static com.aurora.core.database.DBSettingColumns.contains;
+import static com.aurora.core.database.DBSettingColumns.fromString;
 
 import com.aurora.core.database.DBColumnNames;
-import com.aurora.core.database.DBSettingColumnNames;
+import com.aurora.core.database.DBSettingColumns;
 import com.aurora.core.models.helpers.Item;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class DBSettingColumnNamesTest {
+public class DBSettingColumnsTest {
 
     @Test
     public void toStringTest() {
@@ -22,15 +22,15 @@ public class DBSettingColumnNamesTest {
 
     @Test
     public void fromStringTest() {
-        Assert.assertEquals(COL_ITEM_ID, fromString(DBColumnNames.ITEM_ID_COLUMN_NAME, DBSettingColumnNames.class));
-        Assert.assertNotEquals(COL_ITEM_NAME, fromString(DBColumnNames.ITEM_ID_COLUMN_NAME,DBSettingColumnNames.class));
-        Assert.assertNotEquals(COL_ITEM_ID, fromString(DBColumnNames.ITEM_NAME_COLUMN_NAME,DBSettingColumnNames.class));
+      Assert.assertEquals(COL_ITEM_ID, fromString(DBColumnNames.ITEM_ID_COLUMN_NAME, DBSettingColumns.class));
+      Assert.assertNotEquals(COL_ITEM_NAME, fromString(DBColumnNames.ITEM_ID_COLUMN_NAME, DBSettingColumns.class));
+      Assert.assertNotEquals(COL_ITEM_ID, fromString(DBColumnNames.ITEM_NAME_COLUMN_NAME, DBSettingColumns.class));
     }
 
     @Test
     public void containsTest() {
-        Assert.assertTrue(contains(DBColumnNames.ITEM_ID_COLUMN_NAME,DBSettingColumnNames.class));
-        Assert.assertFalse(contains("RandomText",DBSettingColumnNames.class));
+      Assert.assertTrue(contains(DBColumnNames.ITEM_ID_COLUMN_NAME, DBSettingColumns.class));
+      Assert.assertFalse(contains("RandomText", DBSettingColumns.class));
     }
 
     @Test

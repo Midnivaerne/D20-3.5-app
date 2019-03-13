@@ -47,6 +47,9 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
     this.setHero(databaseHolder.HEROES_PLAYER_MAP
         .get(Integer.parseInt(activity.getIntent().getStringExtra(PlayerCharacterActivity.HERO_PLAYER_ID))));
     getHero().getHeroDescription().setBackupNames(getHero().getBackupNames());
+    getHero().getHeroValues().setBackupNames(getHero().getBackupNames());
+    getHero().getHeroValues().generateRaceFromId(databaseHolder);
+    getHero().getHeroValues().generateClassListFromId(databaseHolder);
     heroCombatTextValues = new String[]{
         getHero().getHeroValues().getHeroHitPointsStringFromList(),
         getHero().getDamageReduction(),
@@ -77,8 +80,8 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
     heroDescriptionsTextValues = new String[]{
         getHero().getName(),
         getHero().getHeroDescription().getHeroPlayer(),
-        getHero().getHeroValues().getHeroClassAndLevelStringFromId(databaseHolder),
-        getHero().getHeroValues().getRaceStringFromId(databaseHolder),
+        getHero().getHeroValues().getClassListFromMap(),
+        getHero().getHeroValues().getRaceAndTemplateFromObjects(),
         getHero().getHeroValues().getAlignmentStringFromId(databaseHolder),
         getHero().getHeroValues().getDeityStringFromId(databaseHolder),
         getHero().getHeroValues().getSizeStringFromId(databaseHolder),
