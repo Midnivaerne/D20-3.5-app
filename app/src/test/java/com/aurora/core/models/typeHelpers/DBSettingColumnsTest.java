@@ -1,9 +1,9 @@
 package com.aurora.core.models.typeHelpers;
 
+import static com.aurora.core.database.DBColumnNamesMethods.contains;
+import static com.aurora.core.database.DBColumnNamesMethods.fromString;
 import static com.aurora.core.database.DBSettingColumns.COL_ITEM_ID;
 import static com.aurora.core.database.DBSettingColumns.COL_ITEM_NAME;
-import static com.aurora.core.database.DBSettingColumns.contains;
-import static com.aurora.core.database.DBSettingColumns.fromString;
 
 import com.aurora.core.database.DBColumnNames;
 import com.aurora.core.database.DBSettingColumns;

@@ -6,7 +6,7 @@
     <import type="android.view.View"/>
     <variable
       name="viewModel"
-      type="com.aurora.main.viewModels.RulesVM"/>
+      type="com.aurora.main.viewmodels.RulesVM"/>
   </data>
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout

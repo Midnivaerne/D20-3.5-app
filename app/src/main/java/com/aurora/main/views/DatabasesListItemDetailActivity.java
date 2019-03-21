@@ -8,7 +8,7 @@ import com.aurora.core.R;
 import com.aurora.core.databinding.ActivityDatabasesListItemDetailBinding;
 import com.aurora.core.helper.BindingActivity;
 import com.aurora.main.fragments.DatabasesListDetailFragment;
-import com.aurora.main.viewModels.DatabasesListItemDetailVM;
+import com.aurora.main.viewmodels.DatabasesListItemDetailVM;
 
 /**
  * An activity representing a single Rules set detail screen. This activity is only used on narrow width devices. On tablet-size devices,

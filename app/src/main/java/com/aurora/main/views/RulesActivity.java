@@ -7,7 +7,7 @@ import com.aurora.core.BR;
 import com.aurora.core.R;
 import com.aurora.core.databinding.ActivityRulesBinding;
 import com.aurora.core.helper.BindingActivity;
-import com.aurora.main.viewModels.RulesVM;
+import com.aurora.main.viewmodels.RulesVM;
 
 public class RulesActivity extends BindingActivity<ActivityRulesBinding, RulesVM> {
 

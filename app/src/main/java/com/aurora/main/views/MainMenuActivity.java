@@ -8,7 +8,7 @@ import com.aurora.core.BR;
 import com.aurora.core.R;
 import com.aurora.core.databinding.ActivityMainMenuBinding;
 import com.aurora.core.helper.BindingActivity;
-import com.aurora.main.viewModels.MainMenuVM;
+import com.aurora.main.viewmodels.MainMenuVM;
 import com.aurora.master.views.DMActivity;
 import com.aurora.player.views.PlayerCharactersListActivity;
 

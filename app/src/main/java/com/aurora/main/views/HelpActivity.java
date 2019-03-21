@@ -6,7 +6,7 @@ import com.aurora.core.BR;
 import com.aurora.core.R;
 import com.aurora.core.databinding.ActivityHelpBinding;
 import com.aurora.core.helper.BindingActivity;
-import com.aurora.main.viewModels.HelpVM;
+import com.aurora.main.viewmodels.HelpVM;
 
 
 public class HelpActivity extends BindingActivity<ActivityHelpBinding, HelpVM> {

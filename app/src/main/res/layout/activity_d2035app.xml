@@ -8,7 +8,7 @@
 
     <variable
       name="viewModel"
-      type="com.aurora.core.viewModels.D2035appVM"/>
+      type="com.aurora.core.viewmodels.D2035appVM"/>
   </data>
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout

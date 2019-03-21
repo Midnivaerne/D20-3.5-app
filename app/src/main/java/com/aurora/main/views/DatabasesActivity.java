@@ -6,7 +6,7 @@ import com.aurora.core.BR;
 import com.aurora.core.R;
 import com.aurora.core.databinding.ActivityDatabasesBinding;
 import com.aurora.core.helper.BindingActivity;
-import com.aurora.main.viewModels.DatabasesVM;
+import com.aurora.main.viewmodels.DatabasesVM;
 
 /**
  * An activity representing a list of Rules Sets. This activity has different presentations for handset and tablet-size devices. On

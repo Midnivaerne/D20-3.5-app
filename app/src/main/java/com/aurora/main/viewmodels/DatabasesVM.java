@@ -1,7 +1,9 @@
-package com.aurora.main.viewModels;
+package com.aurora.main.viewmodels;
 
 import static com.aurora.core.database.DatabaseHolder.getDatabaseHolder;
 import static com.aurora.core.database.TranslationsHolder.translate;
+
+import lombok.NonNull;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,7 +22,6 @@ import com.aurora.main.views.DatabasesActivity;
 import com.aurora.main.views.DatabasesListItemDetailActivity;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.List;
-import lombok.NonNull;
 
 public class DatabasesVM extends ActivityViewModel<DatabasesActivity> {
 

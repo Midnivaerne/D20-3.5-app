@@ -1,18 +1,19 @@
 package com.aurora.core.models.helpers;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
-import com.aurora.core.database.DBColumnNames;
-import com.aurora.core.models.constants.RulesAlignments;
-import com.aurora.core.models.constants.RulesCombat;
-import com.aurora.core.models.constants.RulesSizes;
-import com.aurora.core.models.constants.RulesSkills;
-import com.aurora.core.models.typeHelpers.RulesType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+import com.aurora.core.database.DBColumnNames;
+import com.aurora.core.models.constants.Alignments;
+import com.aurora.core.models.constants.RulesCombat;
+import com.aurora.core.models.constants.RulesSkills;
+import com.aurora.core.models.constants.Sizes;
+import com.aurora.core.models.typeHelpers.RulesType;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
@@ -43,10 +44,10 @@ public class Rules implements CoreHelper {
 
   public Rules createRulesGroup(RulesType rulesType) {
     switch (rulesType) {
-      case RULES_ALIGNMENTS:
-        return new RulesAlignments();
-      case RULES_SIZES:
-        return new RulesSizes();
+      case ALIGNMENTS:
+        return new Alignments();
+      case SIZES:
+        return new Sizes();
       case RULES_COMBAT:
         return new RulesCombat();
       case RULES_SKILLS:

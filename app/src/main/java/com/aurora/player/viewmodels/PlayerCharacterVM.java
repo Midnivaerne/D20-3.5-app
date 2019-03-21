@@ -1,6 +1,9 @@
-package com.aurora.player.viewModels;
+package com.aurora.player.viewmodels;
 
 import static com.aurora.core.database.DatabaseHolder.getDatabaseHolder;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import android.app.Activity;
 import androidx.viewpager.widget.ViewPager;
@@ -13,8 +16,7 @@ import com.aurora.player.adapters.CustomTabSelectionListener;
 import com.aurora.player.adapters.PlayerCharacterAllSectionsPagerAdapter;
 import com.aurora.player.views.PlayerCharacterActivity;
 import com.google.android.material.tabs.TabLayout;
-import lombok.Getter;
-import lombok.Setter;
+
 
 public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity> {
 
@@ -48,8 +50,7 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
         .get(Integer.parseInt(activity.getIntent().getStringExtra(PlayerCharacterActivity.HERO_PLAYER_ID))));
     getHero().getHeroDescription().setBackupNames(getHero().getBackupNames());
     getHero().getHeroValues().setBackupNames(getHero().getBackupNames());
-    getHero().getHeroValues().generateRaceFromId(databaseHolder);
-    getHero().getHeroValues().generateClassListFromId(databaseHolder);
+    getHero().getHeroValues().generateRaceFromId(databaseHolder).generateClassListFromId(databaseHolder);
     heroCombatTextValues = new String[]{
         getHero().getHeroValues().getHeroHitPointsStringFromList(),
         getHero().getDamageReduction(),
@@ -81,7 +82,7 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
         getHero().getName(),
         getHero().getHeroDescription().getHeroPlayer(),
         getHero().getHeroValues().getClassListFromMap(),
-        getHero().getHeroValues().getRaceAndTemplateFromObjects(),
+        getHero().getHeroValues().getRaceAndTemplateNamesFromObjects(),
         getHero().getHeroValues().getAlignmentStringFromId(databaseHolder),
         getHero().getHeroValues().getDeityStringFromId(databaseHolder),
         getHero().getHeroValues().getSizeStringFromId(databaseHolder),

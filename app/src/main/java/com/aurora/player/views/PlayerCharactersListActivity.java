@@ -7,7 +7,7 @@ import com.aurora.core.BR;
 import com.aurora.core.R;
 import com.aurora.core.databinding.ActivityPlayerCharactersListBinding;
 import com.aurora.core.helper.BindingActivity;
-import com.aurora.player.viewModels.PlayerCharactersListVM;
+import com.aurora.player.viewmodels.PlayerCharactersListVM;
 
 public class PlayerCharactersListActivity extends BindingActivity<ActivityPlayerCharactersListBinding, PlayerCharactersListVM> {
 

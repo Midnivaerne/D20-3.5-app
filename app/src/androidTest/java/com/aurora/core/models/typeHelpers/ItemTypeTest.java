@@ -1,8 +1,8 @@
 package com.aurora.core.models.typeHelpers;
 
+import static com.aurora.core.models.typeHelpers.CoreTypeHelper.contains;
 import static com.aurora.core.models.typeHelpers.ItemType.ARMOUR;
 import static com.aurora.core.models.typeHelpers.ItemType.CLASSES;
-import static com.aurora.core.models.typeHelpers.ItemType.contains;
 
 import androidx.room.Room;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -78,9 +78,9 @@ public class ItemTypeTest {
     public void getAllFromDatabaseTest() {
         ARMOUR1.setItemID(1);
         mDatabaseHolder.armourDAO().insert(ARMOUR1);
-        Assert.assertEquals(ARMOUR.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.armourDAO().getItems());
-        Assert.assertNotEquals(CLASSES.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.armourDAO().getItems());
-        Assert.assertNotEquals(ARMOUR.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.classesDAO().getItems());
+      Assert.assertEquals(ARMOUR.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.armourDAO().getAllObjectsAsObject());
+      Assert.assertNotEquals(CLASSES.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.armourDAO().getAllObjectsAsObject());
+      Assert.assertNotEquals(ARMOUR.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.classesDAO().getAllObjectsAsObject());
     }
 
     @Test
@@ -101,8 +101,8 @@ public class ItemTypeTest {
         mDatabaseHolder.ARMOUR_LIST.add(ARMOUR1);
         mDatabaseHolder.ARMOUR_MAP.put(1, ARMOUR1);
         ARMOUR.fromHolderToDatabase(mDatabaseHolder);
-        Assert.assertEquals(mDatabaseHolder.ARMOUR_LIST.get(0), mDatabaseHolder.armourDAO().getItemWithId(1));
-        Assert.assertEquals(mDatabaseHolder.ARMOUR_MAP.get(1), mDatabaseHolder.armourDAO().getItemWithId(1));
+      Assert.assertEquals(mDatabaseHolder.ARMOUR_LIST.get(0), mDatabaseHolder.armourDAO().getObjectWithId(1));
+      Assert.assertEquals(mDatabaseHolder.ARMOUR_MAP.get(1), mDatabaseHolder.armourDAO().getObjectWithId(1));
     }
 
     @Test
@@ -110,8 +110,8 @@ public class ItemTypeTest {
         ARMOUR1.setItemID(1);
         mDatabaseHolder.armourDAO().insert(ARMOUR1);
         ARMOUR.fromDatabaseToHolder(mDatabaseHolder);
-        Assert.assertEquals(mDatabaseHolder.armourDAO().getItemWithId(1), mDatabaseHolder.ARMOUR_LIST.get(0));
-        Assert.assertEquals(mDatabaseHolder.armourDAO().getItemWithId(1), mDatabaseHolder.ARMOUR_MAP.get(1));
+      Assert.assertEquals(mDatabaseHolder.armourDAO().getObjectWithId(1), mDatabaseHolder.ARMOUR_LIST.get(0));
+      Assert.assertEquals(mDatabaseHolder.armourDAO().getObjectWithId(1), mDatabaseHolder.ARMOUR_MAP.get(1));
     }
 
     @Test
@@ -120,11 +120,11 @@ public class ItemTypeTest {
         mDatabaseHolder.armourDAO().insert(ARMOUR1);
         mDatabaseHolder.ARMOUR_LIST.add(ARMOUR1);
         mDatabaseHolder.ARMOUR_MAP.put(1, ARMOUR1);
-        Assert.assertFalse(mDatabaseHolder.armourDAO().getItems().isEmpty());
+      Assert.assertFalse(mDatabaseHolder.armourDAO().getAllObjectsAsObject().isEmpty());
         Assert.assertFalse(mDatabaseHolder.ARMOUR_LIST.isEmpty());
         Assert.assertFalse(mDatabaseHolder.ARMOUR_MAP.isEmpty());
         ARMOUR.deleteAll(mDatabaseHolder);
-        Assert.assertTrue(mDatabaseHolder.armourDAO().getItems().isEmpty());
+      Assert.assertTrue(mDatabaseHolder.armourDAO().getAllObjectsAsObject().isEmpty());
         Assert.assertTrue(mDatabaseHolder.ARMOUR_LIST.isEmpty());
         Assert.assertTrue(mDatabaseHolder.ARMOUR_MAP.isEmpty());
     }
@@ -145,8 +145,8 @@ public class ItemTypeTest {
     public void deleteAllFromDatabaseTest() {
         ARMOUR1.setItemID(1);
         mDatabaseHolder.armourDAO().insert(ARMOUR1);
-        Assert.assertFalse(mDatabaseHolder.armourDAO().getItems().isEmpty());
+      Assert.assertFalse(mDatabaseHolder.armourDAO().getAllObjectsAsObject().isEmpty());
         ARMOUR.deleteAllFromDatabase(mDatabaseHolder);
-        Assert.assertTrue(mDatabaseHolder.armourDAO().getItems().isEmpty());
+      Assert.assertTrue(mDatabaseHolder.armourDAO().getAllObjectsAsObject().isEmpty());
     }
 }

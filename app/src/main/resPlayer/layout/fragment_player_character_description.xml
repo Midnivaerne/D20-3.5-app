@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.aurora.player.viewModels.PlayerCharacterVM" />
+          type="com.aurora.player.viewmodels.PlayerCharacterVM"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

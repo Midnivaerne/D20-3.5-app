@@ -3,14 +3,22 @@ package com.aurora.core.models.settingSpecific;
 import static com.aurora.core.database.DBColumnNames.SOURCE_COLUMN_NAME;
 import static com.aurora.core.database.DBTableNames.RACE_TEMPLATES;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
+import com.aurora.core.database.DBColumnNames;
+import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.models.Databases;
 import com.aurora.core.models.helpers.Item;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import java.util.ArrayList;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -19,6 +27,59 @@ import lombok.EqualsAndHashCode;
     foreignKeys = @ForeignKey(entity = Databases.class, parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
 public class RaceTemplates extends Item {
 
+  @Getter
+  @Setter
+  @ColumnInfo(name = DBColumnNames.RACE_TEMPLATE_DESCRIPTION_COLUMN_NAME)
+  private String raceTemplateDescription;
+
+  @Getter
+  @Setter
+  @ColumnInfo(name = DBColumnNames.RACE_TEMPLATE_ATTRIBUTE_MODIFIERS_COLUMN_NAME)
+  private String raceTemplateAttributeModifiers;
+
+  @Getter
+  @Setter
+  @ColumnInfo(name = DBColumnNames.RACE_TEMPLATE_SIZE_COLUMN_NAME)
+  private String raceTemplateSize;
+
+  @Getter
+  @Setter
+  @ColumnInfo(name = DBColumnNames.RACE_TEMPLATE_SPEED_COLUMN_NAME)
+  private String raceTemplateSpeed;
+
+  @Getter
+  @Setter
+  @ColumnInfo(name = DBColumnNames.RACE_TEMPLATE_SPECIAL_ATTACKS_COLUMN_NAME)
+  private String raceTemplateSpecialAttacksIds;
+
+  @Getter
+  @Ignore
+  private List<SpecialAttacks> specialAttacks;
+
+  @Getter
+  @Setter
+  @ColumnInfo(name = DBColumnNames.RACE_TEMPLATE_SPECIAL_QUALITIES_COLUMN_NAME)
+  private String raceTemplateSpecialQualitiesIds;
+
+  @Getter
+  @Ignore
+  private List<SpecialQualities> specialQualities;
+
+  @Getter
+  @Setter
+  @ColumnInfo(name = DBColumnNames.RACE_TEMPLATE_FEATS_COLUMN_NAME)
+  private String raceTemplateFeats;
+
+  @Getter
+  @Setter
+  @ColumnInfo(name = DBColumnNames.RACE_TEMPLATE_SKILLS_COLUMN_NAME)
+  private String raceTemplateSkills;
+
+  @Getter
+  @Setter
+  @ColumnInfo(name = DBColumnNames.RACE_TEMPLATE_LANGUAGES_COLUMN_NAME)
+  private String raceTemplateLanguages;
+
   @Ignore
   public RaceTemplates() {
     super();
@@ -26,14 +87,70 @@ public class RaceTemplates extends Item {
 
   public RaceTemplates(String name,
       String source,
-      String idAsNameBackup) {
+      String idAsNameBackup,
+      String raceTemplateDescription,
+      String raceTemplateAttributeModifiers,
+      String raceTemplateSize,
+      String raceTemplateSpeed,
+      String raceTemplateSpecialAttacksIds,
+      String raceTemplateSpecialQualitiesIds,
+      String raceTemplateFeats,
+      String raceTemplateSkills,
+      String raceTemplateLanguages) {
     super(name, source, idAsNameBackup);
+    this.raceTemplateDescription = raceTemplateDescription;
+    this.raceTemplateAttributeModifiers = raceTemplateAttributeModifiers;
+    this.raceTemplateSize = raceTemplateSize;
+    this.raceTemplateSpeed = raceTemplateSpeed;
+    this.raceTemplateSpecialAttacksIds = raceTemplateSpecialAttacksIds;
+    this.raceTemplateSpecialQualitiesIds = raceTemplateSpecialQualitiesIds;
+    this.raceTemplateFeats = raceTemplateFeats;
+    this.raceTemplateSkills = raceTemplateSkills;
+    this.raceTemplateLanguages = raceTemplateLanguages;
+  }
+
+  @Ignore
+  public RaceTemplates generateSpecials(DatabaseHolder databaseHolder) {
+    return this.generateSpecialAttacksFromIds(databaseHolder).generateSpecialQualitiesFromIds(databaseHolder);
+  }
+
+  @Ignore
+  private RaceTemplates generateSpecialAttacksFromIds(DatabaseHolder databaseHolder) {
+    List<Integer> lst = new ArrayList<>();
+    if (raceTemplateSpecialAttacksIds != null) {
+      for (String pair : raceTemplateSpecialAttacksIds.split(",")) {
+        lst.add(Integer.valueOf(pair.split("=")[0]));
+      }
+      specialAttacks = databaseHolder.specialAttacksDAO().getObjectsWithIdsAsMergedObjectItem(lst);
+    }
+    return this;
+  }
+
+  @Ignore
+  private RaceTemplates generateSpecialQualitiesFromIds(DatabaseHolder databaseHolder) {
+    List<Integer> lst = new ArrayList<>();
+    if (raceTemplateSpecialQualitiesIds != null) {
+      for (String pair : raceTemplateSpecialQualitiesIds.split(",")) {
+        lst.add(Integer.valueOf(pair.split("=")[0]));
+      }
+      specialQualities = databaseHolder.specialQualitiesDAO().getObjectsWithIdsAsMergedObjectItem(lst);
+    }
+    return this;
   }
 
   public RaceTemplates clone() {
     return new RaceTemplates(
         getName(),
         getSource(),
-        getIdAsNameBackup());
+        getIdAsNameBackup(),
+        getRaceTemplateDescription(),
+        getRaceTemplateAttributeModifiers(),
+        getRaceTemplateSize(),
+        getRaceTemplateSpeed(),
+        getRaceTemplateSpecialAttacksIds(),
+        getRaceTemplateSpecialQualitiesIds(),
+        getRaceTemplateFeats(),
+        getRaceTemplateSkills(),
+        getRaceTemplateLanguages());
   }
 }

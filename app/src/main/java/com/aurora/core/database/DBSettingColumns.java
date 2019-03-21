@@ -1,11 +1,14 @@
 package com.aurora.core.database;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import com.aurora.core.models.Translations;
 import com.aurora.core.models.helpers.Item;
+import com.aurora.core.models.settingSpecific.RaceTemplates;
 import com.aurora.core.models.settingSpecific.Races;
 import com.aurora.core.models.usables.Armour;
 import com.aurora.core.models.userData.HeroPlayer;
-import lombok.Getter;
 
 public enum DBSettingColumns implements DBColumnNamesMethods<DBSettingColumns, Item> {
 
@@ -41,6 +44,18 @@ public enum DBSettingColumns implements DBColumnNamesMethods<DBSettingColumns, I
       item.setIdAsNameBackup(data);
     }
   },
+
+  //////////////////////////////////////////////////////////////////
+  ///////////////////////  MATERIAL_TYPES  ////////////////////////
+
+  //////////////////////////////////////////////////////////////////
+  ////////////////////////  ENERGY_TYPES  /////////////////////////
+
+  //////////////////////////////////////////////////////////////////
+  ///////////////////////  SPECIAL_ATTACKS  ///////////////////////
+
+  //////////////////////////////////////////////////////////////////
+  //////////////////////  SPECIAL_QUALITIES  //////////////////////
 
   //////////////////////////////////////////////////////////////
   //////////////////////////  ARMOUR  //////////////////////////
@@ -296,7 +311,48 @@ public enum DBSettingColumns implements DBColumnNamesMethods<DBSettingColumns, I
   },
   ///////////////////////////////////////////////////////////////////////
   //////////////////////////  RACE TEMPLATES  //////////////////////////
-
+  COL_RACE_TEMPALTE_DESCRIPTION(DBColumnNames.RACE_TEMPLATE_DESCRIPTION_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((RaceTemplates) item).setRaceTemplateDescription(data);
+    }
+  },
+  COL_RACE_TEMPALTE_ATTRIBUTE_MODIFIERS(DBColumnNames.RACE_TEMPLATE_ATTRIBUTE_MODIFIERS_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((RaceTemplates) item).setRaceTemplateAttributeModifiers(data);
+    }
+  },
+  COL_RACE_TEMPALTE_SIZE(DBColumnNames.RACE_TEMPLATE_SIZE_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((RaceTemplates) item).setRaceTemplateSize(data);
+    }
+  },
+  COL_RACE_TEMPALTE_SPEED(DBColumnNames.RACE_TEMPLATE_SPEED_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((RaceTemplates) item).setRaceTemplateSpeed(data);
+    }
+  },
+  COL_RACEv_TEMPALTE_FEATS(DBColumnNames.RACE_TEMPLATE_FEATS_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((RaceTemplates) item).setRaceTemplateFeats(data);
+    }
+  },
+  COL_RACE_TEMPALTE_SKILLS(DBColumnNames.RACE_TEMPLATE_SKILLS_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((RaceTemplates) item).setRaceTemplateSkills(data);
+    }
+  },
+  COL_RACE_TEMPALTE_LANGUAGES(DBColumnNames.RACE_TEMPLATE_LANGUAGES_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((RaceTemplates) item).setRaceTemplateLanguages(data);
+    }
+  },
   ///////////////////////////////////////////////////////////////
   //////////////////////////  SKILLS  //////////////////////////
 
@@ -334,12 +390,8 @@ public enum DBSettingColumns implements DBColumnNamesMethods<DBSettingColumns, I
   private String columnName;
 
   @Getter
+  @Setter
   private Boolean columnIsUsed;
-
-  @Override
-  public void setColumnIsUsed(Boolean columnIsUsed) {
-    this.columnIsUsed = columnIsUsed;
-  }
 
   DBSettingColumns(String columnName, boolean colBool) {
     this.columnName = columnName;

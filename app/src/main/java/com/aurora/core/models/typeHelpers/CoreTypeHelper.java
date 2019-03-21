@@ -35,7 +35,7 @@ public interface CoreTypeHelper<E extends Enum<E>, CH extends CoreHelper> {
   Map<Integer, ? extends CH> getDatabaseMap(DatabaseHolder databaseHolder);
 
   default List<CH> getAllFromDatabase(DatabaseHolder databaseHolder) {
-    return getDAO(databaseHolder).getItems();
+    return getDAO(databaseHolder).getAllObjectsAsObject();
   }
 
   CoreHelper getNewObject();

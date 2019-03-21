@@ -6,7 +6,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.aurora.player.fragments.PlayerCharacterDescriptionAppearancePlaceholderFragment;
 import com.aurora.player.fragments.PlayerCharacterDescriptionJournalPlaceholderFragment;
 import com.aurora.player.fragments.PlayerCharacterDescriptionQuestsPlaceholderFragment;
-import com.aurora.player.viewModels.PlayerCharacterVM;
+import com.aurora.player.viewmodels.PlayerCharacterVM;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the sections/tabs/pages.

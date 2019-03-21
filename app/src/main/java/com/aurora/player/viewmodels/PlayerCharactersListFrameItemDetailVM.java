@@ -1,4 +1,4 @@
-package com.aurora.player.viewModels;
+package com.aurora.player.viewmodels;
 
 import android.content.Context;
 import android.content.Intent;

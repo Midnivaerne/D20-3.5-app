@@ -38,12 +38,22 @@
       <Race_Description>gdsfgdfgdfgffgdf</Race_Description>
     </Races_Item>
   </Races>
+  <RaceTemplates>
+    <RaceTemplates_Item>
+      <Name>raceTemplateNameTagwithId1</Name>
+      <Source>Test_race_source</Source>
+      <Race_Template_Description>bdfgfgt11oneonone</Race_Template_Description>
+    </RaceTemplates_Item>
+  </RaceTemplates>
   <Classes>
     <Classes_Item>
       <Name>classNameTagWithId1</Name>
       <Source>Test_classes_Source</Source>
     </Classes_Item>
-    >
+    <Classes_Item>
+      <Name>classNameTagWithId2</Name>
+      <Source>Test_classes_Source</Source>
+    </Classes_Item>
   </Classes>
   <Deities>
     <Deities_Item>
@@ -121,6 +131,13 @@
       <Category>Races_Names</Category>
       <Language>en</Language>
       <Translation>Eng name of test race</Translation>
+    </Translations_Item>
+    <Translations_Item>
+      <Name>raceTemplateNameTagwithId1</Name>
+      <Source>Test_race_source</Source>
+      <Category>RaceTemplates_Names</Category>
+      <Language>en</Language>
+      <Translation>Eng name of test raceTemplate</Translation>
     </Translations_Item>
   </Translations>
 </Database>

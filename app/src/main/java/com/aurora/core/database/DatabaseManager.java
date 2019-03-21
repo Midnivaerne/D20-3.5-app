@@ -2,6 +2,8 @@ package com.aurora.core.database;
 
 import static com.aurora.core.utils.ExternalStorageHandler.getPublicExternalStorageBaseDir;
 
+import lombok.NonNull;
+
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -22,14 +24,13 @@ import java.nio.file.Path;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import lombok.NonNull;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlSerializer;
 
 public class DatabaseManager {
 
   private static String externalPathSeparator = "/Android/data/com.aurora.d20_3.5_app/";
-  public static String path = getPublicExternalStorageBaseDir() + externalPathSeparator + "Data/";
+  public static final String path = getPublicExternalStorageBaseDir() + externalPathSeparator + "Data/";
 
   private static final String[] FILENAMES = {"translations_for_app.xml", "baseRules.xml", "test.xml"}; //todo refactor
 
@@ -309,12 +310,12 @@ public class DatabaseManager {
   private static void chooseDatabaseActions(DatabaseHolder databaseHolder) {
     ItemType itemType = ItemType.HERO_PLAYER; //todo delete
     System.out.println("AllFromDb " + itemType.getAllFromDatabase(databaseHolder)); //todo delete
-    System.out.println("DaoRaceFromName " + (itemType.getDAO(databaseHolder)).getItemWithName("Test_race_name1")); //todo delete
+    System.out.println("DaoRaceFromName " + (itemType.getDAO(databaseHolder)).getObjectWithName("Test_race_name1")); //todo delete
 
     System.out.println("FirstFromList " + (itemType.getDatabaseList(databaseHolder).get(0))); //todo delete
     System.out.println("Id\"1\" FromMap " + (itemType.getDatabaseMap(databaseHolder).get(1))); //todo delete
 
-    System.out.println("DaoNames " + itemType.getDAO(databaseHolder).getNames()); //todo delete
+    System.out.println("DaoNames " + itemType.getDAO(databaseHolder).getAllNames()); //todo delete
     System.out.println("FirstNameFromList " + itemType.getDatabaseList(databaseHolder).get(0).getName()); //todo delete
     System.out.println("Id\"1\" NameFromMap " + itemType.getDatabaseMap(databaseHolder).get(1).getName()); //todo delete
 
@@ -325,8 +326,8 @@ public class DatabaseManager {
 
     // todo delete
     System.out.println("why?");
-    System.out.println("Hero " + (itemType.getDAO(databaseHolder)).getItems());
-    System.out.println("ItemHero " + (itemType.getDAO(databaseHolder)).getItemsAsItem());
+    System.out.println("Hero " + (itemType.getDAO(databaseHolder)).getAllObjectsAsObject());
+    System.out.println("ItemHero " + (itemType.getDAO(databaseHolder)).getAllObjectsAsItem());
     //*/
 
     //closeDatabase(databaseHolder); //todo need to close(?)

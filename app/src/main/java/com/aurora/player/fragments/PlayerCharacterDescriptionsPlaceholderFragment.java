@@ -1,5 +1,8 @@
 package com.aurora.player.fragments;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +13,8 @@ import com.aurora.core.R;
 import com.aurora.player.adapters.CustomTabChangeListener;
 import com.aurora.player.adapters.CustomTabSelectionListener;
 import com.aurora.player.adapters.PlayerCharacterAllDescriptionsSectionsPagerAdapter;
-import com.aurora.player.viewModels.PlayerCharacterVM;
+import com.aurora.player.viewmodels.PlayerCharacterVM;
 import com.google.android.material.tabs.TabLayout;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * A placeholder fragment containing a simple view.

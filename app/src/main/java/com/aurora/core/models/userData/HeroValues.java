@@ -19,6 +19,11 @@ import static com.aurora.core.database.DBColumnNames.SOURCE_COLUMN_NAME;
 import static com.aurora.core.database.DBTableNames.HERO_STATISTICS;
 import static com.aurora.core.database.TranslationsHolder.translate;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import android.util.Log;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -28,8 +33,8 @@ import androidx.room.Index;
 import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.database.DatabaseManager;
 import com.aurora.core.models.Databases;
-import com.aurora.core.models.constants.RulesAlignments;
-import com.aurora.core.models.constants.RulesSizes;
+import com.aurora.core.models.constants.Alignments;
+import com.aurora.core.models.constants.Sizes;
 import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.settingSpecific.Classes;
 import com.aurora.core.models.settingSpecific.Deities;
@@ -39,10 +44,6 @@ import com.aurora.core.models.typeHelpers.ItemType;
 import com.aurora.core.utils.CustomStringParsers;
 import java.util.HashMap;
 import java.util.Objects;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -52,8 +53,8 @@ import lombok.Setter;
     foreignKeys = {
         @ForeignKey(entity = Databases.class, parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
         @ForeignKey(entity = HeroPlayer.class, parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_ITEM_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
-        @ForeignKey(entity = RulesAlignments.class, parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_ALIGNMENT_ID_COLUMN_NAME),
-        @ForeignKey(entity = RulesSizes.class, parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_SIZE_COLUMN_NAME),
+        @ForeignKey(entity = Alignments.class, parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_ALIGNMENT_ID_COLUMN_NAME),
+        @ForeignKey(entity = Sizes.class, parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_SIZE_COLUMN_NAME),
         @ForeignKey(entity = Deities.class, parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_DEITY_ID_COLUMN_NAME)}
 )
 public class HeroValues extends Item {
@@ -185,21 +186,22 @@ public class HeroValues extends Item {
   }
 
   @Ignore
-  public void generateRaceFromId(DatabaseHolder databaseHolder) {
-    race = databaseHolder.RACES_MAP.get(Integer.parseInt(heroRaceId.split("\\+")[0]));
+  public HeroValues generateRaceFromId(DatabaseHolder databaseHolder) {
+    race = databaseHolder.RACES_MAP.get(Integer.parseInt(heroRaceId.split("\\+")[0])).generateSpecials(databaseHolder);
     if (heroRaceId.split("\\+").length == 2) {
-      raceTemplate = databaseHolder.RACE_TEMPLATES_MAP.get(Integer.parseInt(heroRaceId.split("\\+")[1]));
+      raceTemplate = databaseHolder.RACE_TEMPLATES_MAP.get(Integer.parseInt(heroRaceId.split("\\+")[1])).generateSpecials(databaseHolder);
     }
+    return this;
   }
 
   @Ignore
-  public String getRaceAndTemplateFromObjects() {
+  public String getRaceAndTemplateNamesFromObjects() {
     return translate(getRace().getName()) + (getRaceTemplate() == null ? "" : " " + translate(getRaceTemplate().getName()));
   }
 
   @Ignore
-  public void generateClassListFromId(DatabaseHolder databaseHolder) {
-    setClasses(new HashMap<Classes, Integer>());
+  public HeroValues generateClassListFromId(DatabaseHolder databaseHolder) {
+    setClasses(new HashMap<>());
     String[] heroClasses = CustomStringParsers.StringWithCommaToTable(heroClassIdList);
     for (String clas : heroClasses) {
       String classNameFromBackup = getBackupNames().get(ItemType.CLASSES).get(Integer.parseInt(clas));
@@ -207,7 +209,16 @@ public class HeroValues extends Item {
       if (aHeroClass == null && classNameFromBackup == null) {
         Log.e("Database contents:", "missing class: " + clas + " and backup names");
       } else if (aHeroClass == null) {
-        aHeroClass = databaseHolder.CLASSES_MAP.get(Integer.parseInt(classNameFromBackup));
+        int count = 0;
+        for (Classes cl : databaseHolder.CLASSES_MAP.values()) {
+          if (cl.getName().equals(classNameFromBackup)) {
+            aHeroClass = cl;
+            count++;
+          }
+        }
+        if (count > 1) {
+          Log.e("Database contents:", "more than one class with name: " + classNameFromBackup);
+        }
         if (aHeroClass == null) {
           Log.e("Database contents:", "missing class: " + clas);
         }
@@ -218,11 +229,12 @@ public class HeroValues extends Item {
       }
 
       if (getClasses().containsKey(aHeroClass) && getClasses().get(aHeroClass) != null) {
-        getClasses().put((Classes) aHeroClass, getClasses().get(aHeroClass) + 1);
+        getClasses().put(aHeroClass, getClasses().get(aHeroClass) + 1);
       } else {
-        Objects.requireNonNull(getClasses()).put((Classes) aHeroClass, 1);
+        Objects.requireNonNull(getClasses()).put(aHeroClass, 1);
       }
     }
+    return this;
   }
 
   @Ignore
@@ -234,17 +246,17 @@ public class HeroValues extends Item {
 
   @Ignore
   public String getAlignmentStringFromId(DatabaseHolder databaseHolder) {
-    return databaseHolder.RULES_ALIGNMENTS_MAP.get(heroAlignmentId).getName();//todo translate
+    return translate(databaseHolder.ALIGNMENTS_MAP.get(heroAlignmentId).getName());
   }
 
   @Ignore
   public String getDeityStringFromId(DatabaseHolder databaseHolder) {
-    return databaseHolder.DEITIES_MAP.get(heroDeityId).getName();//todo translate
+    return translate(databaseHolder.DEITIES_MAP.get(heroDeityId).getName());
   }
 
   @Ignore
   public String getSizeStringFromId(DatabaseHolder databaseHolder) {
-    return databaseHolder.RULES_SIZES_MAP.get(heroSizeId).getName();//todo translate
+    return translate(databaseHolder.SIZES_MAP.get(heroSizeId).getName());
   }
 
   @Ignore

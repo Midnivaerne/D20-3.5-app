@@ -1,14 +1,14 @@
 <Database>
-    <RulesSizes>
-        <RulesSizes_Item>
+  <Sizes>
+    <Sizes_Item>
             <Name>medium_name</Name>
-        </RulesSizes_Item>
-    </RulesSizes>
-    <RulesAlignments>
-        <RulesAlignments_Item>
+    </Sizes_Item>
+  </Sizes>
+  <Alignments>
+    <Alignments_Item>
             <Name>neutral_name</Name>
-        </RulesAlignments_Item>
-    </RulesAlignments>
+    </Alignments_Item>
+  </Alignments>
     <Databases>
         <Databases_Item>
             <Name>base_rules_name</Name>

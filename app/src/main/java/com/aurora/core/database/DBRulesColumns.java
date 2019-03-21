@@ -1,7 +1,9 @@
 package com.aurora.core.database;
 
-import com.aurora.core.models.helpers.Rules;
 import lombok.Getter;
+import lombok.Setter;
+
+import com.aurora.core.models.helpers.Rules;
 
 public enum DBRulesColumns implements DBColumnNamesMethods<DBRulesColumns, Rules> {
 
@@ -28,12 +30,8 @@ public enum DBRulesColumns implements DBColumnNamesMethods<DBRulesColumns, Rules
   private String columnName;
 
   @Getter
+  @Setter
   private Boolean columnIsUsed;
-
-  @Override
-  public void setColumnIsUsed(Boolean columnIsUsed) {
-    this.columnIsUsed = columnIsUsed;
-  }
 
   DBRulesColumns(String columnName, boolean colBool) {
     this.columnName = columnName;

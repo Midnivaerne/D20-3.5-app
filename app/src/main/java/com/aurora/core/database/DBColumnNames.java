@@ -37,10 +37,21 @@ public class DBColumnNames {
   public static final String RACE_ATTRIBUTE_MODIFIERS_COLUMN_NAME = "Race_Attribute_Modifiers";
   public static final String RACE_SIZE_COLUMN_NAME = "Race_Size";
   public static final String RACE_SPEED_COLUMN_NAME = "Race_Speed";
+  public static final String RACE_SPECIAL_ATTACKS_COLUMN_NAME = "Race_Special_Attacks";
+  public static final String RACE_SPECIAL_QUALITIES_COLUMN_NAME = "Race_Special_Qualities";
   public static final String RACE_FEATS_COLUMN_NAME = "Race_Feats";
   public static final String RACE_SKILLS_COLUMN_NAME = "Race_Skill_Modifiers";
   public static final String RACE_LANGUAGES_COLUMN_NAME = "Race_Languages";
   public static final String RACE_FAVOURITE_CLASS_COLUMN_NAME = "Favourite_Class";
+  public static final String RACE_TEMPLATE_DESCRIPTION_COLUMN_NAME = "Race_Template_Description";
+  public static final String RACE_TEMPLATE_ATTRIBUTE_MODIFIERS_COLUMN_NAME = "Race_Template_Attribute_Modifiers";
+  public static final String RACE_TEMPLATE_SIZE_COLUMN_NAME = "Race_Template_Size";
+  public static final String RACE_TEMPLATE_SPEED_COLUMN_NAME = "Race_Template_Speed";
+  public static final String RACE_TEMPLATE_SPECIAL_ATTACKS_COLUMN_NAME = "Race_Template_Special_Attacks";
+  public static final String RACE_TEMPLATE_SPECIAL_QUALITIES_COLUMN_NAME = "Race_Template_Special_Qualities";
+  public static final String RACE_TEMPLATE_FEATS_COLUMN_NAME = "Race_Template_Feats";
+  public static final String RACE_TEMPLATE_SKILLS_COLUMN_NAME = "Race_Template_Skill_Modifiers";
+  public static final String RACE_TEMPLATE_LANGUAGES_COLUMN_NAME = "Race_Template_Languages";
   public static final String RULE_ID_COLUMN_NAME = "Item_ID";
   public static final String RULE_NAME_COLUMN_NAME = "Name";
   public static final String HERO_HIT_POINTS_COLUMN_NAME = "Hero_Hit_Points";
@@ -50,5 +61,6 @@ public class DBColumnNames {
   public static final String HERO_ABILITY_SCORE_INT_COLUMN_NAME = "Hero_Int";
   public static final String HERO_ABILITY_SCORE_WIS_COLUMN_NAME = "Hero_Wis";
   public static final String HERO_ABILITY_SCORE_CHA_COLUMN_NAME = "Hero_Cha";
+
 
 }

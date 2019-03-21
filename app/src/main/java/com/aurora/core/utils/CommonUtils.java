@@ -40,14 +40,12 @@ public final class CommonUtils {
 
   public static String loadJSONFromAsset(Context context, String jsonFileName) throws IOException {
     AssetManager manager = context.getAssets();
-    InputStream is = manager.open(jsonFileName);
-
-    int size = is.available();
-    byte[] buffer = new byte[size];
-    is.read(buffer);
-    is.close();
-
-    return new String(buffer, StandardCharsets.UTF_8);
+    try (InputStream is = manager.open(jsonFileName)) {
+      int size = is.available();
+      byte[] buffer = new byte[size];
+      int readBytes = is.read(buffer);
+      return new String(buffer, StandardCharsets.UTF_8);
+    }
   }
 
   public static int randomWithRange(int min, int max) {

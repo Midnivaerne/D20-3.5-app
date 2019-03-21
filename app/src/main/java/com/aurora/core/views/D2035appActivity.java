@@ -1,5 +1,7 @@
 package com.aurora.core.views;
 
+import lombok.Getter;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,12 +15,11 @@ import com.aurora.core.R;
 import com.aurora.core.database.CustomCallback;
 import com.aurora.core.databinding.ActivityD2035appBinding;
 import com.aurora.core.helper.BindingActivity;
-import com.aurora.core.viewModels.D2035appVM;
+import com.aurora.core.viewmodels.D2035appVM;
 import com.aurora.main.views.MainMenuActivity;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import lombok.Getter;
 
 
 public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D2035appVM> implements CustomCallback {

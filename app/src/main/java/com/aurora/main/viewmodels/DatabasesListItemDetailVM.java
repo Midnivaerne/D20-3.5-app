@@ -1,4 +1,4 @@
-package com.aurora.main.viewModels;
+package com.aurora.main.viewmodels;
 
 import android.view.View;
 import com.aurora.core.helper.ActivityViewModel;

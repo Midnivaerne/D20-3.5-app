@@ -1,4 +1,4 @@
-package com.aurora.core.viewModels;
+package com.aurora.core.viewmodels;
 
 import static com.aurora.core.utils.CommonUtils.randomWithRange;
 import static com.aurora.core.utils.CommonUtils.resizeInputStreamToBitmap;
@@ -64,6 +64,7 @@ public class D2035appVM extends ActivityViewModel<D2035appActivity> {
       initializeDbAsync.execute().get();
     } catch (ExecutionException | InterruptedException e) {
       e.printStackTrace();
+      Thread.currentThread().interrupt();
     }
   }
 
@@ -95,6 +96,7 @@ public class D2035appVM extends ActivityViewModel<D2035appActivity> {
         Thread.sleep(1);
       } catch (InterruptedException e) {
         e.printStackTrace();
+        Thread.currentThread().interrupt();
       }
       customCallback.onDatabaseInitialised();
     }

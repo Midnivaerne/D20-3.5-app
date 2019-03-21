@@ -6,7 +6,7 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="com.aurora.player.viewModels.PlayerCharactersListFrameItemDetailVM" />
+          type="com.aurora.player.viewmodels.PlayerCharactersListFrameItemDetailVM"/>
     </data>
 
     <TextView

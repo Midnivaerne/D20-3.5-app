@@ -8,6 +8,7 @@ public class DBTableNames {
   public static final String HERO_PLAYER = "HeroPlayer";
   public static final String HERO_STATISTICS = "HeroValues";
   public static final String HERO_DESCRIPTION = "HeroDescription";
+  public static final String HERO_NPC = "HeroNPC";
   public static final String SKILLS = "Skills";
   public static final String FEATS = "Feats";
   public static final String RACES = "Races";
@@ -19,10 +20,15 @@ public class DBTableNames {
   public static final String MONSTERS = "Monsters";
   public static final String RACE_TEMPLATES = "RaceTemplates";
   public static final String DEITIES = "Deities";
-  public static final String HERO_NPC = "HeroNPC";
+  public static final String MATERIAL_TYPES = "MaterialTypes";
+  public static final String ENERGY_TYPES = "EnergyTypes";
+  public static final String SPECIAL_ATTACKS = "SpecialAttacks";
+  public static final String SPECIAL_QUALITIES = "SpecialQualities";
 
-  public static final String RULES_SIZES = "RulesSizes";
-  public static final String RULES_ALIGNMENTS = "RulesAlignments";
+  public static final String SIZES = "Sizes";
+  public static final String ALIGNMENTS = "Alignments";
   public static final String RULES_COMBAT = "RulesCombat";
   public static final String RULES_SKILLS = "RulesSkills";
+  public static final String CORE_STATES = "CoreStates";
+  public static final String BASE_QUALITIES = "BaseQualities";
 }

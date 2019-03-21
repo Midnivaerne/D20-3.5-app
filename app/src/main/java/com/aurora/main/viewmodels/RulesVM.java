@@ -1,7 +1,9 @@
-package com.aurora.main.viewModels;
+package com.aurora.main.viewmodels;
 
 
 import static com.aurora.core.database.DatabaseHolder.getDatabaseHolder;
+
+import lombok.NonNull;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +21,6 @@ import com.aurora.main.views.RulesActivity;
 import com.aurora.main.views.RulesDetailActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
-import lombok.NonNull;
 
 public class RulesVM extends ActivityViewModel<RulesActivity> {
 

@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import com.aurora.core.R;
 import com.aurora.core.models.userData.HeroValues;
-import com.aurora.player.viewModels.PlayerCharacterVM;
+import com.aurora.player.viewmodels.PlayerCharacterVM;
 
 /**
  * A placeholder fragment containing a simple view.

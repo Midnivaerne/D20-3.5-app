@@ -1,7 +1,9 @@
-package com.aurora.player.viewModels;
+package com.aurora.player.viewmodels;
 
 import static com.aurora.core.database.DatabaseHolder.getDatabaseHolder;
 import static com.aurora.core.database.TranslationsHolder.translate;
+
+import lombok.NonNull;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +25,6 @@ import com.aurora.player.views.PlayerCharactersListFrameItemDetailActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.Map;
-import lombok.NonNull;
 
 public class PlayerCharactersListVM extends ActivityViewModel<PlayerCharactersListActivity> {
 

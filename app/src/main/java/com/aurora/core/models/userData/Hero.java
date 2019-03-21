@@ -1,13 +1,14 @@
 package com.aurora.core.models.userData;
 
-import androidx.room.Embedded;
-import androidx.room.Ignore;
-import com.aurora.core.models.helpers.Item;
-import com.aurora.core.models.helpers.ValuesConverter;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+
+import androidx.room.Embedded;
+import androidx.room.Ignore;
+import com.aurora.core.models.helpers.Item;
+import com.aurora.core.models.helpers.ValuesConverter;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -49,7 +50,12 @@ public class Hero extends Item implements ValuesConverter {
   }
 
   public String getDamageReduction() {
-    int out = 0; //getRacialDamageReduction() + getItemDamageReduction() + getEffectDamageReduction();//todo proper value, multiple DR possible
+    StringBuilder out = new StringBuilder();
+    //getHeroValues().getRace().getSpecialQualities().iterator()
+    //    .forEachRemaining((SpecQ) -> (SpecQ.getName().equals(SpecialQualities.DamageReduction)) ? out.append("") : out.append(SpecQ));
+    //getHeroValues().getRaceTemplate() == null ? "" : getHeroValues().getRaceTemplate().getSpecialQualities().getDamageReduction());
+    // + getItemDamageReduction()
+    // + getEffectDamageReduction();//todo proper value, multiple DR possible
     return String.valueOf(out);
   }
 

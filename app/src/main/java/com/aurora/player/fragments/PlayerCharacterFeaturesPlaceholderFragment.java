@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import com.aurora.core.R;
-import com.aurora.player.viewModels.PlayerCharacterVM;
+import com.aurora.player.viewmodels.PlayerCharacterVM;
 
 /**
  * A placeholder fragment containing a simple view.

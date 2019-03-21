@@ -2,6 +2,8 @@ package com.aurora.player.views;
 
 import static com.aurora.core.database.TranslationsHolder.translate;
 
+import lombok.NonNull;
+
 import android.annotation.SuppressLint;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,9 +14,8 @@ import com.aurora.core.BR;
 import com.aurora.core.R;
 import com.aurora.core.databinding.ActivityPlayerCharacterBinding;
 import com.aurora.core.helper.BindingActivity;
-import com.aurora.player.viewModels.PlayerCharacterVM;
+import com.aurora.player.viewmodels.PlayerCharacterVM;
 import com.google.android.material.navigation.NavigationView;
-import lombok.NonNull;
 
 
 public class PlayerCharacterActivity extends BindingActivity<ActivityPlayerCharacterBinding, PlayerCharacterVM>

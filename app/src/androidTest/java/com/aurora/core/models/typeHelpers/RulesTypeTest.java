@@ -1,8 +1,8 @@
 package com.aurora.core.models.typeHelpers;
 
+import static com.aurora.core.models.typeHelpers.CoreTypeHelper.contains;
 import static com.aurora.core.models.typeHelpers.RulesType.RULES_COMBAT;
 import static com.aurora.core.models.typeHelpers.RulesType.RULES_SKILLS;
-import static com.aurora.core.models.typeHelpers.RulesType.contains;
 
 import androidx.room.Room;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -91,8 +91,8 @@ public class RulesTypeTest {
     public void getAllFromDatabaseTest() {
         RULECOMBAT1.setItemID(1);
         mDatabaseHolder.rulesCombatDAO().insert(RULECOMBAT1);
-        Assert.assertEquals(RULES_COMBAT.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.rulesCombatDAO().getItems());
-        Assert.assertNotEquals(RULES_SKILLS.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.rulesCombatDAO().getItems());
-        Assert.assertNotEquals(RULES_COMBAT.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.rulesSkillsDAO().getItems());
+      Assert.assertEquals(RULES_COMBAT.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.rulesCombatDAO().getAllObjectsAsObject());
+      Assert.assertNotEquals(RULES_SKILLS.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.rulesCombatDAO().getAllObjectsAsObject());
+      Assert.assertNotEquals(RULES_COMBAT.getAllFromDatabase(mDatabaseHolder), mDatabaseHolder.rulesSkillsDAO().getAllObjectsAsObject());
     }
 }

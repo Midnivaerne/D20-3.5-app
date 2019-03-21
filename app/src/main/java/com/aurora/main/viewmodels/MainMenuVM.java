@@ -1,4 +1,4 @@
-package com.aurora.main.viewModels;
+package com.aurora.main.viewmodels;
 
 import android.Manifest;
 import android.content.pm.PackageManager;

@@ -6,7 +6,7 @@
         <import type="android.view.View" />
         <variable
             name="viewModel"
-            type="com.aurora.main.viewModels.DatabasesListItemDetailVM" />
+          type="com.aurora.main.viewmodels.DatabasesListItemDetailVM"/>
     </data>
 
     <TextView

@@ -6,7 +6,7 @@ import com.aurora.core.BR;
 import com.aurora.core.R;
 import com.aurora.core.databinding.ActivityDmBinding;
 import com.aurora.core.helper.BindingActivity;
-import com.aurora.master.viewModels.DMVM;
+import com.aurora.master.viewmodels.DMVM;
 
 public class DMActivity extends BindingActivity<ActivityDmBinding, DMVM> {
 

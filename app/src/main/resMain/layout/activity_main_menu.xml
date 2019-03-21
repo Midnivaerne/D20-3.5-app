@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.aurora.main.viewModels.MainMenuVM" />
+          type="com.aurora.main.viewmodels.MainMenuVM"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

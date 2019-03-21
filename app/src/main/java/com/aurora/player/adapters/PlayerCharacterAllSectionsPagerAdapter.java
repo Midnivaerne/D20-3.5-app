@@ -8,7 +8,7 @@ import com.aurora.player.fragments.PlayerCharacterEquipmentPlaceholderFragment;
 import com.aurora.player.fragments.PlayerCharacterFeaturesPlaceholderFragment;
 import com.aurora.player.fragments.PlayerCharacterSkillsPlaceholderFragment;
 import com.aurora.player.fragments.PlayerCharacterStatisticsPlaceholderFragment;
-import com.aurora.player.viewModels.PlayerCharacterVM;
+import com.aurora.player.viewmodels.PlayerCharacterVM;
 
 /**
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to one of the sections/tabs/pages.

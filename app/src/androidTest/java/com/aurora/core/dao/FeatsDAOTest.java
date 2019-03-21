@@ -41,7 +41,7 @@ public class FeatsDAOTest {
 
     @Test
     public void getItemWhenNoItemInserted() {
-        Assert.assertTrue(mDatabaseHolder.featsDAO().getItems().isEmpty());
+      Assert.assertTrue(mDatabaseHolder.featsDAO().getAllObjectsAsObject().isEmpty());
     }
 
     @Test
@@ -50,7 +50,7 @@ public class FeatsDAOTest {
         FEATS1.setItemID(toIntExact(id1));
 
         Assert.assertEquals(1, toIntExact(id1));
-        Assert.assertEquals(mDatabaseHolder.featsDAO().getItemWithId(toIntExact(id1)), FEATS1);
+      Assert.assertEquals(FEATS1, mDatabaseHolder.featsDAO().getObjectWithId(toIntExact(id1)));
     }
 
     @Test
@@ -62,9 +62,9 @@ public class FeatsDAOTest {
         FEATS2.setItemID(toIntExact((long) idList.get(0)));
         FEATS3.setItemID(toIntExact((long) idList.get(1)));
 
-        Assert.assertEquals(FEATS1, mDatabaseHolder.featsDAO().getItemWithId(toIntExact(id1)));
-        Assert.assertEquals(FEATS2, mDatabaseHolder.featsDAO().getItemWithId(toIntExact((long) idList.get(0))));
-        Assert.assertEquals(FEATS3, mDatabaseHolder.featsDAO().getItemWithId(toIntExact((long) idList.get(1))));
+      Assert.assertEquals(FEATS1, mDatabaseHolder.featsDAO().getObjectWithId(toIntExact(id1)));
+      Assert.assertEquals(FEATS2, mDatabaseHolder.featsDAO().getObjectWithId(toIntExact((long) idList.get(0))));
+      Assert.assertEquals(FEATS3, mDatabaseHolder.featsDAO().getObjectWithId(toIntExact((long) idList.get(1))));
     }
 
     @Test
@@ -74,20 +74,20 @@ public class FeatsDAOTest {
         updatedFeats.setName("updatedName");
         updatedFeats.setItemID(toIntExact(id1));
         mDatabaseHolder.featsDAO().update(updatedFeats);
-        Assert.assertEquals(updatedFeats, mDatabaseHolder.featsDAO().getItemWithId(toIntExact(id1)));
+      Assert.assertEquals(updatedFeats, mDatabaseHolder.featsDAO().getObjectWithId(toIntExact(id1)));
     }
 
     @Test
     public void deleteAllAndGetItem() {
         mDatabaseHolder.featsDAO().insert(FEATS1);
         mDatabaseHolder.featsDAO().deleteAll();
-        Assert.assertTrue(mDatabaseHolder.featsDAO().getItems().isEmpty());
+      Assert.assertTrue(mDatabaseHolder.featsDAO().getAllObjectsAsObject().isEmpty());
     }
 
     @Test
     public void countItems() {
         mDatabaseHolder.featsDAO().insertAll(Arrays.asList(FEATS1, FEATS2, FEATS3));
-        Assert.assertEquals(3, mDatabaseHolder.featsDAO().countItems());
+      Assert.assertEquals(3, mDatabaseHolder.featsDAO().countAllItems());
     }
 
     @Test

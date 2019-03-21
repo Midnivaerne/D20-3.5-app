@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.aurora.player.viewModels.PlayerCharactersListVM" />
+          type="com.aurora.player.viewmodels.PlayerCharactersListVM"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
