@@ -4,30 +4,29 @@ public enum DataLocation {
   INTERNAL("Internal"),
   EXTERNAL("External");
 
-  private String DataLocationValue;
+  private String dataLocationValue;
 
   /**
-   * @param dataLocationValue
+   * DataLocation constructor, sets dataLocationValue.
    */
   DataLocation(String dataLocationValue) {
-    this.DataLocationValue = dataLocationValue;
-  }
-
-  @Override
-  public String toString() {
-    return this.DataLocationValue;
+    this.dataLocationValue = dataLocationValue;
   }
 
   /**
-   * @param dataLocationValue
-   * @return
+   * returns Enum value from String.
    */
   public static DataLocation getEnum(String dataLocationValue) {
     for (DataLocation b : DataLocation.values()) {
-      if (b.DataLocationValue.equalsIgnoreCase(dataLocationValue)) {
+      if (b.dataLocationValue.equalsIgnoreCase(dataLocationValue)) {
         return b;
       }
     }
     return null;
+  }
+
+  @Override
+  public String toString() {
+    return this.dataLocationValue;
   }
 }

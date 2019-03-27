@@ -1,12 +1,13 @@
 package com.aurora.core.models.constants;
 
-import static com.aurora.core.database.DBTableNames.SIZES;
+import static com.aurora.core.database.DbTableNames.SIZES;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
+
 import com.aurora.core.models.helpers.Rules;
 
 @EqualsAndHashCode(callSuper = true)

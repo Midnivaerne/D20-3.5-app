@@ -32,7 +32,7 @@
               android:value="com.aurora.core.views.D2035appActivity"/>
         </activity>
         <activity
-            android:name="com.aurora.master.views.DMActivity"
+          android:name="com.aurora.master.views.DmActivity"
             android:parentActivityName="com.aurora.main.views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

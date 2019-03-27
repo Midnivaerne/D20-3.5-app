@@ -2,6 +2,9 @@ package com.aurora.main.views;
 
 import static com.aurora.core.database.TranslationsHolder.translate;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.core.app.NavUtils;
+
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
@@ -19,16 +22,17 @@ import android.preference.PreferenceManager;
 import android.preference.RingtonePreference;
 import android.text.TextUtils;
 import android.view.MenuItem;
-import androidx.appcompat.app.ActionBar;
-import androidx.core.app.NavUtils;
-import com.aurora.core.R;
+
 import java.util.List;
+
+import com.aurora.core.R;
 
 /**
  * A {@link PreferenceActivity} that presents a set of application settings. On handset devices, settings are presented as a single list. On
  * tablets, settings are split by category, with category headers shown to the left of the list of settings.
- * <p>
- * See <a href="http://developer.android.com/design/patterns/settings.html"> Android Design: Settings</a> for design guidelines and the <a
+ *
+ * <p>See <a href="http://developer.android.com/design/patterns/settings.html"> Android Design: Settings</a> for design guidelines and the
+ * <a
  * href="http://developer.android.com/guide/topics/ui/settings.html">Settings API Guide</a> for more information on developing a Settings
  * UI.
  */
@@ -212,8 +216,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
       bindPreferenceSummaryToValue(findPreference("example_text"));
       bindPreferenceSummaryToValue(findPreference("example_list"));
 
-      //this.getApplicationContext().getSharedPreferences("AppPref", 0).edit().putInt("AppThemeId", R.style.AppTheme_Dark).apply(); //todo implement themes
-      //this.getApplicationContext().getSharedPreferences("AppPref", 0).edit().putInt("AppThemeId", R.style.AppTheme).apply(); //todo implement themes
+      //this.getApplicationContext().getSharedPreferences(
+      // "AppPref", 0).edit().putInt("AppThemeId", R.style.AppTheme_Dark).apply(); //todo implement themes
+      //this.getApplicationContext().getSharedPreferences(
+      // "AppPref", 0).edit().putInt("AppThemeId", R.style.AppTheme).apply(); //todo implement themes
     }
 
     @Override

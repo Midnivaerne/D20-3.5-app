@@ -8,12 +8,13 @@ import lombok.Setter;
 import androidx.room.ColumnInfo;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-import com.aurora.core.database.DBColumnNames;
+
+import com.aurora.core.database.DbColumnNames;
 import com.aurora.core.models.constants.Alignments;
 import com.aurora.core.models.constants.RulesCombat;
 import com.aurora.core.models.constants.RulesSkills;
 import com.aurora.core.models.constants.Sizes;
-import com.aurora.core.models.typeHelpers.RulesType;
+import com.aurora.core.models.typehelpers.RulesType;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
@@ -22,12 +23,12 @@ public class Rules implements CoreHelper {
   @Getter
   @Setter
   @PrimaryKey(autoGenerate = true)
-  @ColumnInfo(name = DBColumnNames.RULE_ID_COLUMN_NAME)
+  @ColumnInfo(name = DbColumnNames.RULE_ID_COLUMN_NAME)
   private int itemID;
 
   @Getter
   @Setter
-  @ColumnInfo(name = DBColumnNames.RULE_NAME_COLUMN_NAME)
+  @ColumnInfo(name = DbColumnNames.RULE_NAME_COLUMN_NAME)
   private String name;
 
   @Getter
@@ -52,7 +53,8 @@ public class Rules implements CoreHelper {
         return new RulesCombat();
       case RULES_SKILLS:
         return new RulesSkills();
+      default:
+        throw new IllegalArgumentException("ItemType" + rulesType + " is not recognized.");
     }
-    throw new IllegalArgumentException("ItemType" + rulesType + " is not recognized.");
   }
 }

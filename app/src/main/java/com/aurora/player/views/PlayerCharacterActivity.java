@@ -4,16 +4,17 @@ import static com.aurora.core.database.TranslationsHolder.translate;
 
 import lombok.NonNull;
 
-import android.annotation.SuppressLint;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.annotation.SuppressLint;
+import android.view.MenuItem;
+
 import com.aurora.core.BR;
 import com.aurora.core.R;
 import com.aurora.core.databinding.ActivityPlayerCharacterBinding;
 import com.aurora.core.helper.BindingActivity;
+import com.aurora.player.adapters.CustomDrawerListener;
 import com.aurora.player.viewmodels.PlayerCharacterVM;
 import com.google.android.material.navigation.NavigationView;
 
@@ -25,14 +26,14 @@ public class PlayerCharacterActivity extends BindingActivity<ActivityPlayerChara
 
   @Override
   public PlayerCharacterVM onCreate() {
-    setSupportActionBar(getMViewDataBinding().toolbar);
+    setSupportActionBar(getExViewDataBinding().toolbar);
     drawerSetup();
     return new PlayerCharacterVM(this);
   }
 
   private void drawerSetup() {
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.player_character_drawer_layout);  //TODO investigate if needs to be moved
-    drawer.addDrawerListener(new customDrawerListener());
+    drawer.addDrawerListener(new CustomDrawerListener());
 
     NavigationView navigationView = (NavigationView) findViewById(R.id.player_character_actions_drawer);
     navigationView.setNavigationItemSelectedListener(this);
@@ -51,7 +52,7 @@ public class PlayerCharacterActivity extends BindingActivity<ActivityPlayerChara
   @SuppressLint("NewApi")
   @Override
   protected void setTranslatedTexts() {
-    getSupportActionBar().setTitle(translate(getMActivityViewModel().getHero().getName()));
+    getSupportActionBar().setTitle(translate(getExActivityViewModel().getHero().getName()));
   }
 
   public void drawerActions() {
@@ -78,43 +79,22 @@ public class PlayerCharacterActivity extends BindingActivity<ActivityPlayerChara
     int id = item.getItemId();
 
     if (id == R.id.nav_camera) {
-      // Handle the camera action
+      //todo Handle the "nav_camera" action
     } else if (id == R.id.nav_gallery) {
-
+      //todo Handle the "nav_gallery" action
     } else if (id == R.id.nav_slideshow) {
-
+      //todo Handle the "nav_slideshow" action
     } else if (id == R.id.nav_manage) {
-
+      //todo Handle the "nav_manage" action
     } else if (id == R.id.nav_share) {
-
+      //todo Handle the "nav_share" action
     } else if (id == R.id.nav_send) {
-
+      //todo Handle the "nav_send" action
     }
 
     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.player_character_drawer_layout);
     drawer.closeDrawer(GravityCompat.START);
     return true;
-  }
-}
-
-class customDrawerListener implements DrawerLayout.DrawerListener {
-
-  @Override
-  public void onDrawerSlide(@androidx.annotation.NonNull View drawerView, float slideOffset) {
-  }
-
-  @Override
-  public void onDrawerOpened(@androidx.annotation.NonNull View drawerView) {
-    ((TextView) drawerView.findViewById(R.id.nav_header_title)).setText(translate("race")); //todo decide what here and change
-    ((TextView) drawerView.findViewById(R.id.nav_header_subtitle)).setText(translate("class")); //todo decide what here and change
-  }
-
-  @Override
-  public void onDrawerClosed(@androidx.annotation.NonNull View drawerView) {
-  }
-
-  @Override
-  public void onDrawerStateChanged(int newState) {
   }
 }
 

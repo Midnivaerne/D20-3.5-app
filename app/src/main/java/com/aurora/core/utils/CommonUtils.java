@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.provider.Settings;
 import android.util.Patterns;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -38,7 +39,7 @@ public final class CommonUtils {
     return Patterns.EMAIL_ADDRESS.matcher(email).matches();
   }
 
-  public static String loadJSONFromAsset(Context context, String jsonFileName) throws IOException {
+  public static String loadJsonFromAsset(Context context, String jsonFileName) throws IOException {
     AssetManager manager = context.getAssets();
     try (InputStream is = manager.open(jsonFileName)) {
       int size = is.available();

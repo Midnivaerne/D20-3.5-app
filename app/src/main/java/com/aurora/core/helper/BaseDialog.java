@@ -1,5 +1,12 @@
 package com.aurora.core.helper;
 
+import lombok.Getter;
+import lombok.NonNull;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -8,16 +15,11 @@ import android.os.Bundle;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import lombok.Getter;
-import lombok.NonNull;
 
 public class BaseDialog extends BindingFragment {
 
   @Getter
-  private BindingActivity mActivity;
+  private BindingActivity fragmentBindingActivity;
 
   @Override
   public int getBindingVariable() {
@@ -33,9 +35,9 @@ public class BaseDialog extends BindingFragment {
   public void onAttach(Context context) {
     super.onAttach(context);
     if (context instanceof BindingActivity) {
-      BindingActivity mActivity = (BindingActivity) context;
-      this.mActivity = mActivity;
-      mActivity.onFragmentAttached();
+      BindingActivity bindingActivity = (BindingActivity) context;
+      this.fragmentBindingActivity = bindingActivity;
+      bindingActivity.onFragmentAttached();
     }
   }
 
@@ -69,7 +71,7 @@ public class BaseDialog extends BindingFragment {
 
   @Override
   public void onDetach() {
-    mActivity = null;
+    fragmentBindingActivity = null;
     super.onDetach();
   }
 
@@ -84,25 +86,25 @@ public class BaseDialog extends BindingFragment {
   }
 
   public void hideKeyboard() {
-    if (mActivity != null) {
-      mActivity.hideKeyboard();
+    if (fragmentBindingActivity != null) {
+      fragmentBindingActivity.hideKeyboard();
     }
   }
 
   public void hideLoading() {
-    if (mActivity != null) {
-      mActivity.hideLoading();
+    if (fragmentBindingActivity != null) {
+      fragmentBindingActivity.hideLoading();
     }
   }
 
   public boolean isNetworkConnected() {
-    return mActivity != null && mActivity.isNetworkConnected();
+    return fragmentBindingActivity != null && fragmentBindingActivity.isNetworkConnected();
   }
 
 
   public void showLoading() {
-    if (mActivity != null) {
-      mActivity.showLoading();
+    if (fragmentBindingActivity != null) {
+      fragmentBindingActivity.showLoading();
     }
   }
 

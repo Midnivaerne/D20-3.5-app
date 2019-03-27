@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-          type="com.aurora.master.viewmodels.DMVM"/>
+          type="com.aurora.master.viewmodels.DmViewModel"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

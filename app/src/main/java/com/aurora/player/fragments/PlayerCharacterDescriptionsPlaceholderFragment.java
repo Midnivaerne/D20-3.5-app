@@ -3,12 +3,14 @@ package com.aurora.player.fragments;
 import lombok.Getter;
 import lombok.Setter;
 
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
+
 import com.aurora.core.R;
 import com.aurora.player.adapters.CustomTabChangeListener;
 import com.aurora.player.adapters.CustomTabSelectionListener;
@@ -21,17 +23,16 @@ import com.google.android.material.tabs.TabLayout;
  */
 public class PlayerCharacterDescriptionsPlaceholderFragment extends Fragment {
 
-  @Setter
-  @Getter
-  private PlayerCharacterVM playerCharacterVM;
   /**
    * The fragment argument representing the section number for this fragment.
    */
   private static final String ARG_SECTION_NUMBER = "section_number";
-
-  private ViewPager mInnerViewPager;
-  private TabLayout mInnerTabLayout;
-  private PlayerCharacterAllDescriptionsSectionsPagerAdapter mDescriptionsSectionsPagerAdapter;
+  @Setter
+  @Getter
+  private PlayerCharacterVM playerCharacterVM;
+  private ViewPager innerViewPager;
+  private TabLayout innerTabLayout;
+  private PlayerCharacterAllDescriptionsSectionsPagerAdapter descriptionsSectionsPagerAdapter;
 
   public PlayerCharacterDescriptionsPlaceholderFragment() {
   }
@@ -64,13 +65,13 @@ public class PlayerCharacterDescriptionsPlaceholderFragment extends Fragment {
   }
 
   private void setInnerTabs() {
-    mDescriptionsSectionsPagerAdapter = new PlayerCharacterAllDescriptionsSectionsPagerAdapter(getChildFragmentManager(),
+    descriptionsSectionsPagerAdapter = new PlayerCharacterAllDescriptionsSectionsPagerAdapter(getChildFragmentManager(),
         playerCharacterVM);
-    mInnerTabLayout = (TabLayout) playerCharacterVM.getActivity().findViewById(R.id.player_character_description_tabs);
-    mInnerViewPager = (ViewPager) playerCharacterVM.getActivity().findViewById(R.id.player_character_description_container);
-    mInnerViewPager.setAdapter(mDescriptionsSectionsPagerAdapter);
-    mInnerViewPager.addOnPageChangeListener(new CustomTabChangeListener(mInnerTabLayout));
-    mInnerTabLayout.addOnTabSelectedListener(new CustomTabSelectionListener(mInnerViewPager));
+    innerTabLayout = (TabLayout) playerCharacterVM.getActivity().findViewById(R.id.player_character_description_tabs);
+    innerViewPager = (ViewPager) playerCharacterVM.getActivity().findViewById(R.id.player_character_description_container);
+    innerViewPager.setAdapter(descriptionsSectionsPagerAdapter);
+    innerViewPager.addOnPageChangeListener(new CustomTabChangeListener(innerTabLayout));
+    innerTabLayout.addOnTabSelectedListener(new CustomTabSelectionListener(innerViewPager));
   }
 
 

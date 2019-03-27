@@ -1,9 +1,10 @@
 package com.aurora.main.viewmodels;
 
-
 import static com.aurora.core.database.DatabaseHolder.getDatabaseHolder;
 
 import lombok.NonNull;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
 import com.aurora.core.R;
 import com.aurora.core.helper.ActivityViewModel;
 import com.aurora.core.models.helpers.Rules;
@@ -20,7 +23,6 @@ import com.aurora.main.fragments.RulesDetailFragment;
 import com.aurora.main.views.RulesActivity;
 import com.aurora.main.views.RulesDetailActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import java.util.List;
 
 public class RulesVM extends ActivityViewModel<RulesActivity> {
 
@@ -46,25 +48,26 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
 
   private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
     recyclerView
-        .setAdapter(new SimpleItemRecyclerViewAdapter(this.getActivity(), getDatabaseHolder(super.getActivity()).getRulesList(), mTwoPane));
+        .setAdapter(
+            new SimpleItemRecyclerViewAdapter(this.getActivity(), getDatabaseHolder(super.getActivity()).getRulesList(), vmTwoPane));
   }
 
   public static class SimpleItemRecyclerViewAdapter
       extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-    private final RulesActivity mParentActivity;
-    private final List<Rules> mValues;
-    private final boolean mTwoPane;
-    private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+    private final RulesActivity rulesActivity;
+    private final List<Rules> rulesList;
+    private final boolean twoPaneMode;
+    private final View.OnClickListener onClickListener = new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         Rules item = (Rules) view.getTag();
-        if (mTwoPane) {
+        if (twoPaneMode) {
           Bundle arguments = new Bundle();
           arguments.putString(RulesDetailFragment.ARG_ITEM_ID, String.valueOf(item.getItemID()));
           RulesDetailFragment fragment = new RulesDetailFragment();
           fragment.setArguments(arguments);
-          mParentActivity.getSupportFragmentManager().beginTransaction()
+          rulesActivity.getSupportFragmentManager().beginTransaction()
               .replace(R.id.activity_rules_explanation_container, fragment)
               .commit();
         } else {
@@ -80,9 +83,9 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
     SimpleItemRecyclerViewAdapter(RulesActivity parent,
         List<Rules> items,
         boolean twoPane) {
-      mValues = items;
-      mParentActivity = parent;
-      mTwoPane = twoPane;
+      rulesList = items;
+      rulesActivity = parent;
+      twoPaneMode = twoPane;
     }
 
     @Override
@@ -95,27 +98,27 @@ public class RulesVM extends ActivityViewModel<RulesActivity> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-      holder.mIdView.setText(mValues.get(position).getName());
-      holder.mContentView.setText(mValues.get(position).getContent());
+      holder.idView.setText(rulesList.get(position).getName());
+      holder.contentView.setText(rulesList.get(position).getContent());
 
-      holder.itemView.setTag(mValues.get(position));
-      holder.itemView.setOnClickListener(mOnClickListener);
+      holder.itemView.setTag(rulesList.get(position));
+      holder.itemView.setOnClickListener(onClickListener);
     }
 
     @Override
     public int getItemCount() {
-      return mValues.size();
+      return rulesList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-      final TextView mIdView;
-      final TextView mContentView;
+      final TextView idView;
+      final TextView contentView;
 
       ViewHolder(View view) {
         super(view);
-        mIdView = (TextView) view.findViewById(R.id.id_explanation_text);
-        mContentView = (TextView) view.findViewById(R.id.id_explanation_content);
+        idView = (TextView) view.findViewById(R.id.id_explanation_text);
+        contentView = (TextView) view.findViewById(R.id.id_explanation_content);
       }
     }
   }

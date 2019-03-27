@@ -21,7 +21,7 @@
         tools:layout="@layout/activity_main_menu" />
     <activity
         android:id="@+id/DMActivity"
-        android:name="com.aurora.master.views.DMActivity"
+      android:name="com.aurora.master.views.DmActivity"
         android:label="DMActivity"
         tools:layout="@layout/activity_dm" />
     <activity

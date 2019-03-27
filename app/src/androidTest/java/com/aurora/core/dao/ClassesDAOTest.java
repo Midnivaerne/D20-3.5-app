@@ -5,11 +5,13 @@ import static java.lang.Math.toIntExact;
 import androidx.room.Room;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
-import com.aurora.core.database.DatabaseHolder;
-import com.aurora.core.database.DatabaseManager;
-import com.aurora.core.models.settingSpecific.Classes;
+
 import java.util.Arrays;
 import java.util.List;
+
+import com.aurora.core.database.DatabaseHolder;
+import com.aurora.core.database.DatabaseManager;
+import com.aurora.core.models.settingspecific.Classes;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -42,59 +44,59 @@ public class ClassesDAOTest {
 
   @Test
   public void getItemWhenNoItemInserted() {
-    Assert.assertTrue(mDatabaseHolder.classesDAO().getAllObjectsAsObject().isEmpty());
+    Assert.assertTrue(mDatabaseHolder.classesDaO().getAllObjectsAsObject().isEmpty());
   }
 
   @Test
   public void insertAndGetItem() {
-    long id1 = mDatabaseHolder.classesDAO().insert(CLASSES1);
+    long id1 = mDatabaseHolder.classesDaO().insert(CLASSES1);
     CLASSES1.setItemID(toIntExact(id1));
 
     Assert.assertEquals(1, toIntExact(id1));
-    Assert.assertEquals(CLASSES1, mDatabaseHolder.classesDAO().getObjectWithId(toIntExact(id1)));
+    Assert.assertEquals(CLASSES1, mDatabaseHolder.classesDaO().getObjectWithId(toIntExact(id1)));
   }
 
   @Test
   public void insertAndGetItems() {
-    long id1 = mDatabaseHolder.classesDAO().insert(CLASSES1);
+    long id1 = mDatabaseHolder.classesDaO().insert(CLASSES1);
     CLASSES1.setItemID(toIntExact(id1));
 
-    List idList = mDatabaseHolder.classesDAO().insertAll(Arrays.asList(CLASSES2, CLASSES3));
+    List idList = mDatabaseHolder.classesDaO().insertAll(Arrays.asList(CLASSES2, CLASSES3));
     CLASSES2.setItemID(toIntExact((long) idList.get(0)));
     CLASSES3.setItemID(toIntExact((long) idList.get(1)));
 
-    Assert.assertEquals(CLASSES1, mDatabaseHolder.classesDAO().getObjectWithId(toIntExact(id1)));
-    Assert.assertEquals(CLASSES2, mDatabaseHolder.classesDAO().getObjectWithId(toIntExact((long) idList.get(0))));
-    Assert.assertEquals(CLASSES3, mDatabaseHolder.classesDAO().getObjectWithId(toIntExact((long) idList.get(1))));
+    Assert.assertEquals(CLASSES1, mDatabaseHolder.classesDaO().getObjectWithId(toIntExact(id1)));
+    Assert.assertEquals(CLASSES2, mDatabaseHolder.classesDaO().getObjectWithId(toIntExact((long) idList.get(0))));
+    Assert.assertEquals(CLASSES3, mDatabaseHolder.classesDaO().getObjectWithId(toIntExact((long) idList.get(1))));
   }
 
   @Test
   public void updateAndGetItem() {
-    long id1 = mDatabaseHolder.classesDAO().insert(CLASSES1);
+    long id1 = mDatabaseHolder.classesDaO().insert(CLASSES1);
     Classes updatedClasses = CLASSES1.clone();
     updatedClasses.setName("updatedName");
     updatedClasses.setItemID(toIntExact(id1));
-    mDatabaseHolder.classesDAO().update(updatedClasses);
-    Assert.assertEquals(updatedClasses, mDatabaseHolder.classesDAO().getObjectWithId(toIntExact(id1)));
+    mDatabaseHolder.classesDaO().update(updatedClasses);
+    Assert.assertEquals(updatedClasses, mDatabaseHolder.classesDaO().getObjectWithId(toIntExact(id1)));
   }
 
   @Test
   public void deleteAllAndGetItem() {
-    mDatabaseHolder.classesDAO().insert(CLASSES1);
-    mDatabaseHolder.classesDAO().deleteAll();
-    Assert.assertTrue(mDatabaseHolder.classesDAO().getAllObjectsAsObject().isEmpty());
+    mDatabaseHolder.classesDaO().insert(CLASSES1);
+    mDatabaseHolder.classesDaO().deleteAll();
+    Assert.assertTrue(mDatabaseHolder.classesDaO().getAllObjectsAsObject().isEmpty());
   }
 
   @Test
   public void countItems() {
-    mDatabaseHolder.classesDAO().insertAll(Arrays.asList(CLASSES1, CLASSES2, CLASSES3));
-    Assert.assertEquals(3, mDatabaseHolder.classesDAO().countAllItems());
+    mDatabaseHolder.classesDaO().insertAll(Arrays.asList(CLASSES1, CLASSES2, CLASSES3));
+    Assert.assertEquals(3, mDatabaseHolder.classesDaO().countAllItems());
   }
 
   @Test
   public void getIds() {
-    long id1 = mDatabaseHolder.classesDAO().insert(CLASSES1);
-    List idList = mDatabaseHolder.classesDAO().insertAll(Arrays.asList(CLASSES2, CLASSES3));
+    long id1 = mDatabaseHolder.classesDaO().insert(CLASSES1);
+    List idList = mDatabaseHolder.classesDaO().insertAll(Arrays.asList(CLASSES2, CLASSES3));
     Assert.assertEquals(1, toIntExact(id1));
     Assert.assertEquals(2, toIntExact((long) idList.get(0)));
     Assert.assertEquals(3, toIntExact((long) idList.get(1)));

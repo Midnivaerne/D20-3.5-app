@@ -1,9 +1,10 @@
 package com.aurora.core.database;
 
-import com.aurora.core.models.Translations;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.aurora.core.models.Translations;
 
 public class TranslationsHolder {
 
@@ -18,7 +19,7 @@ public class TranslationsHolder {
       usedLanguage = "en";
     }
 
-    List translations = databaseHolder.translationsDAO().getItemsForLanguage(usedLanguage);
+    List translations = databaseHolder.translationsDaO().getItemsForLanguage(usedLanguage);
     for (Object translation : translations) {
       TRANSLATIONS_NAMES_MAP.put(((Translations) translation).getName(), ((Translations) translation).getTrans());
     }

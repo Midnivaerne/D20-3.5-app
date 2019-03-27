@@ -10,23 +10,25 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.view.Display;
 import android.view.Gravity;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.concurrent.ExecutionException;
+
 import com.aurora.core.database.CustomCallback;
 import com.aurora.core.database.DatabaseManager;
 import com.aurora.core.helper.ActivityViewModel;
 import com.aurora.core.views.D2035appActivity;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.concurrent.ExecutionException;
 
 public class D2035appVM extends ActivityViewModel<D2035appActivity> {
 
   private static final int MIN_LEVEL_DRAWABLE = 1;
   private static final int MAX_LEVEL_DRAWABLE = 6;
-  private int appDimensionWidth;
-  private int appDimensionHeight;
   private static final String ASSETS_LAUNCH_IMAGES_DIR = "launchImages/";
   private static final String ASSETS_LAUNCH_IMAGES_PREFIX = "launch_image_";
   private static final String ASSETS_LAUNCH_IMAGES_EXTENSION = ".png";
+  private int appDimensionWidth;
+  private int appDimensionHeight;
 
   public D2035appVM(D2035appActivity activity) {
     super(activity);

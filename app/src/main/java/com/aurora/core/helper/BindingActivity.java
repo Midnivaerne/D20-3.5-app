@@ -1,5 +1,15 @@
 package com.aurora.core.helper;
 
+import lombok.Getter;
+import lombok.NonNull;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -11,24 +21,17 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ProgressBar;
-import androidx.annotation.IdRes;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-import androidx.databinding.ViewDataBinding;
+
 import com.aurora.core.R;
 import com.aurora.core.utils.NetworkUtils;
-import lombok.Getter;
-import lombok.NonNull;
 
-public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends ActivityViewModel> extends AppCompatActivity implements
+public abstract class BindingActivity<T extends ViewDataBinding, V extends ActivityViewModel> extends AppCompatActivity implements
     BindingFragment.Callback {
 
   @Getter
-  private VDB mViewDataBinding;
+  private T exViewDataBinding;
   @Getter
-  private AVM mActivityViewModel;
+  private V exActivityViewModel;
   @Getter
   private Boolean isSavedInstanceStateNull;
 
@@ -40,6 +43,8 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
     bind();
   }
 
+  public abstract V onCreate();
+
   protected void setApplicationTheme() {
     int themeId = this.getApplicationContext().getSharedPreferences("AppPref", 0).getInt("AppThemeId", R.style.AppTheme);
     setTheme(themeId);
@@ -48,114 +53,114 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
   protected abstract void setTranslatedTexts();
 
   public void bind() {
-    mViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
-    this.mActivityViewModel = mActivityViewModel == null ? onCreate() : mActivityViewModel;
-    mViewDataBinding.setVariable(getBindingVariable(), mActivityViewModel);
-    mViewDataBinding.executePendingBindings();
+    exViewDataBinding = DataBindingUtil.setContentView(this, getLayoutId());
+    this.exActivityViewModel = exActivityViewModel == null ? onCreate() : exActivityViewModel;
+    exViewDataBinding.setVariable(getBindingVariable(), exActivityViewModel);
+    exViewDataBinding.executePendingBindings();
   }
 
   public void resetViewModel() {
-    mActivityViewModel = null;
-    mActivityViewModel = onCreate();
-    getMViewDataBinding().setVariable(getBindingVariable(), mActivityViewModel);
+    exActivityViewModel = null;
+    exActivityViewModel = onCreate();
+    getExViewDataBinding().setVariable(getBindingVariable(), exActivityViewModel);
   }
 
   @Override
   protected void onStart() {
     super.onStart();
-    mActivityViewModel.onStart();
+    exActivityViewModel.onStart();
     setTranslatedTexts();
   }
 
   @Override
   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    mActivityViewModel.onActivityResult(requestCode, resultCode, data);
+    exActivityViewModel.onActivityResult(requestCode, resultCode, data);
   }
 
   @Override
   protected void onResume() {
     super.onResume();
-    mActivityViewModel.onResume();
+    exActivityViewModel.onResume();
   }
 
   @Override
   public void onBackPressed() {
-    if (!mActivityViewModel.onBackPressed()) {
+    if (!exActivityViewModel.onBackPressed()) {
       super.onBackPressed();
     }
   }
 
   @Override
   protected void onStop() {
-    mActivityViewModel.onStop();
+    exActivityViewModel.onStop();
     super.onStop();
   }
 
   @Override
   protected void onPause() {
-    mActivityViewModel.onPause();
+    exActivityViewModel.onPause();
     super.onPause();
   }
 
   @Override
   protected void onDestroy() {
     super.onDestroy();
-    mActivityViewModel.onDestroy();
+    exActivityViewModel.onDestroy();
   }
 
   @Override
   public void onPostCreate(Bundle savedInstanceState) {
     super.onPostCreate(savedInstanceState);
-    mActivityViewModel.onPostCreate(savedInstanceState);
+    exActivityViewModel.onPostCreate(savedInstanceState);
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    mActivityViewModel.onOptionsItemSelected(item);
+    exActivityViewModel.onOptionsItemSelected(item);
     return super.onOptionsItemSelected(item);
   }
 
   @Override
   public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    mActivityViewModel.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    exActivityViewModel.onRequestPermissionsResult(requestCode, permissions, grantResults);
   }
 
   @Override
   public void onConfigurationChanged(Configuration newConfig) {
     super.onConfigurationChanged(newConfig);
-    mActivityViewModel.onConfigurationChanged(newConfig);
+    exActivityViewModel.onConfigurationChanged(newConfig);
   }
 
   @Override
   protected void onRestoreInstanceState(Bundle savedInstanceState) {
     super.onRestoreInstanceState(savedInstanceState);
-    mActivityViewModel.onRestoreInstanceState(savedInstanceState);
+    exActivityViewModel.onRestoreInstanceState(savedInstanceState);
   }
 
   @Override
   protected void onSaveInstanceState(Bundle outState) {
     super.onSaveInstanceState(outState);
-    mActivityViewModel.onSaveInstanceState(outState);
+    exActivityViewModel.onSaveInstanceState(outState);
   }
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    mActivityViewModel.onCreateOptionsMenu(menu);
+    exActivityViewModel.onCreateOptionsMenu(menu);
     return super.onCreateOptionsMenu(menu);
   }
 
   @Override
   public boolean onPrepareOptionsMenu(Menu menu) {
-    mActivityViewModel.onPrepareOptionsMenu(menu);
+    exActivityViewModel.onPrepareOptionsMenu(menu);
     return super.onPrepareOptionsMenu(menu);
   }
 
   @Override
   public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    mActivityViewModel.onWindowFocusChanged(hasFocus);
+    exActivityViewModel.onWindowFocusChanged(hasFocus);
   }
 
   public void hideKeyboard() {
@@ -173,17 +178,17 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
   }
 
   public void hideLoading() {
-    if (mActivityViewModel != null) {
-      mActivityViewModel.hideLoading();
+    if (exActivityViewModel != null) {
+      exActivityViewModel.hideLoading();
       getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
   }
 
   public ProgressBar showLoading() {
-    if (mActivityViewModel != null) {
+    if (exActivityViewModel != null) {
       getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
           WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-      return mActivityViewModel.showLoading();
+      return exActivityViewModel.showLoading();
     }
     return null;
   }
@@ -196,8 +201,8 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
     } else {
       Class<?> destination = chooseNewActivity(destinationID);
       if (destination != null) {
-        Intent intent_rules = new Intent(this, destination);
-        this.startActivity(intent_rules);
+        Intent intentRules = new Intent(this, destination);
+        this.startActivity(intentRules);
       } else {
         Log.i("Content ", " Empty destination");
       }
@@ -208,23 +213,16 @@ public abstract class BindingActivity<VDB extends ViewDataBinding, AVM extends A
     return null;
   }
 
-  public abstract AVM onCreate();
-
-  /**
-   * Override for set mViewDataBinding variable
-   *
+  /** Override for set exViewDataBinding variable.
    * @return variable id
    */
-  public abstract
-  @IdRes
+  public abstract @IdRes
   int getBindingVariable();
 
-  /**
-   * Override for set layout resource
+  /** Override for set layout resource.
    *
    * @return layout resource id
    */
-  public abstract
-  @LayoutRes
+  public abstract @LayoutRes
   int getLayoutId();
 }

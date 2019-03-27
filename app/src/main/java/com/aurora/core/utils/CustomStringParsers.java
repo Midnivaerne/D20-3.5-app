@@ -2,35 +2,37 @@ package com.aurora.core.utils;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
-import com.aurora.core.models.typeHelpers.CoreTypeHelper;
-import com.aurora.core.models.typeHelpers.ItemType;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.aurora.core.models.typehelpers.CoreTypeHelper;
+import com.aurora.core.models.typehelpers.ItemType;
+
 public class CustomStringParsers {
 
-  public static String[] StringWithCommaToTable(String stringToSplit) {
+  public static String[] stringWithCommaToTable(String stringToSplit) {
     if (stringToSplit != null) {
       return stringToSplit.split(",");
     }
-    Log.e("CustomStringParsers ", " StringWithCommaToTable > stringToSplit is empty");
+    Log.e("CustomStringParsers ", " stringWithCommaToTable > stringToSplit is empty");
     return null;
   }
 
-  public static String StringWithCommaToSum(String stringToSum) {
+  public static String stringWithCommaToSum(String stringToSum) {
     if (stringToSum != null) {
       return Integer.toString(Arrays.stream(stringToSum.split(",")).mapToInt(Integer::parseInt).sum());
     }
-    Log.e("CustomStringParsers ", " StringWithCommaToSum > stringToSum is empty");
+    Log.e("CustomStringParsers ", " stringWithCommaToSum > stringToSum is empty");
     return null;
   }
 
-  public static Map<ItemType, Map<Integer, String>> StringWithCommaAndBracketsToMap(String stringToSplit) {
+  public static Map<ItemType, Map<Integer, String>> stringWithCommaAndBracketsToMap(String stringToSplit) {
     if (stringToSplit != null) {
       Map<ItemType, Map<Integer, String>> out = new HashMap<>();
       if (stringToSplit.contains("{") && stringToSplit.contains("}") && stringToSplit.contains("=")) {
-        String[] stringWithoutBracketsTable = StringWithCommaToTable(deBracket(stringToSplit));
+        String[] stringWithoutBracketsTable = stringWithCommaToTable(deBracket(stringToSplit));
         for (String tableObject : stringWithoutBracketsTable) {
           if (CoreTypeHelper.contains(tableObject.trim(), ItemType.class)) {
             out.put(CoreTypeHelper.fromString(tableObject.trim(), ItemType.class), bracketContents(tableObject.trim(), stringToSplit));
@@ -44,7 +46,7 @@ public class CustomStringParsers {
       }
       return out;
     }
-    Log.e("CustomStringParsers ", "StringWithCommaAndBracketsToMap > stringToSplit is empty");
+    Log.e("CustomStringParsers ", "stringWithCommaAndBracketsToMap > stringToSplit is empty");
     return null;
   }
 
@@ -67,7 +69,7 @@ public class CustomStringParsers {
     if (stringToSplit != null && tableObject != null) {
       @SuppressLint("UseSparseArrays") Map<Integer, String> out = new HashMap<>();
       String bracketContentMerged = stringToSplit.split(tableObject + "\\{")[1].split("\\}")[0];
-      String[] values = StringWithCommaToTable(bracketContentMerged);
+      String[] values = stringWithCommaToTable(bracketContentMerged);
       for (String value : values) {
         int id = Integer.parseInt(value.split("=")[0]);
         String name = value.split("=")[1];

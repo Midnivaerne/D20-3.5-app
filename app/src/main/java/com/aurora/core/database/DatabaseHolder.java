@@ -4,41 +4,50 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-import com.aurora.core.dao.DatabasesDAO;
-import com.aurora.core.dao.TranslationsDAO;
-import com.aurora.core.dao.constants.AlignmentsDAO;
-import com.aurora.core.dao.constants.BaseQualitiesDAO;
-import com.aurora.core.dao.constants.CoreStatesDAO;
-import com.aurora.core.dao.constants.RulesCombatDAO;
-import com.aurora.core.dao.constants.RulesSkillsDAO;
-import com.aurora.core.dao.constants.SizesDAO;
-import com.aurora.core.dao.settingSpecific.ClassesDAO;
-import com.aurora.core.dao.settingSpecific.DeitiesDAO;
-import com.aurora.core.dao.settingSpecific.EnergyTypesDAO;
-import com.aurora.core.dao.settingSpecific.FeatsDAO;
-import com.aurora.core.dao.settingSpecific.HeroNPCDAO;
-import com.aurora.core.dao.settingSpecific.MaterialTypesDAO;
-import com.aurora.core.dao.settingSpecific.MonstersDAO;
-import com.aurora.core.dao.settingSpecific.RaceTemplatesDAO;
-import com.aurora.core.dao.settingSpecific.RacesDAO;
-import com.aurora.core.dao.settingSpecific.SkillsDAO;
-import com.aurora.core.dao.settingSpecific.SpecialAttacksDAO;
-import com.aurora.core.dao.settingSpecific.SpecialQualitiesDAO;
-import com.aurora.core.dao.settingSpecific.SpellsDAO;
-import com.aurora.core.dao.usables.ArmourDAO;
-import com.aurora.core.dao.usables.EquipmentDAO;
-import com.aurora.core.dao.usables.WeaponsDAO;
-import com.aurora.core.dao.userData.HeroDescriptionDAO;
-import com.aurora.core.dao.userData.HeroPlayerDAO;
-import com.aurora.core.dao.userData.HeroValuesDAO;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+
+import javax.inject.Singleton;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.aurora.core.dao.DatabasesDaO;
+import com.aurora.core.dao.TranslationsDaO;
+import com.aurora.core.dao.constants.AlignmentsDaO;
+import com.aurora.core.dao.constants.BaseQualitiesDaO;
+import com.aurora.core.dao.constants.CoreStatesDaO;
+import com.aurora.core.dao.constants.RulesCombatDaO;
+import com.aurora.core.dao.constants.RulesSkillsDaO;
+import com.aurora.core.dao.constants.SizesDaO;
+import com.aurora.core.dao.settingspecific.ClassesDaO;
+import com.aurora.core.dao.settingspecific.DeitiesDaO;
+import com.aurora.core.dao.settingspecific.EnergyTypesDaO;
+import com.aurora.core.dao.settingspecific.FeatsDaO;
+import com.aurora.core.dao.settingspecific.HeroNpcDaO;
+import com.aurora.core.dao.settingspecific.MaterialTypesDaO;
+import com.aurora.core.dao.settingspecific.MonstersDaO;
+import com.aurora.core.dao.settingspecific.RaceTemplatesDaO;
+import com.aurora.core.dao.settingspecific.RacesDaO;
+import com.aurora.core.dao.settingspecific.SkillsDaO;
+import com.aurora.core.dao.settingspecific.SpecialAttacksDaO;
+import com.aurora.core.dao.settingspecific.SpecialQualitiesDaO;
+import com.aurora.core.dao.settingspecific.SpellsDaO;
+import com.aurora.core.dao.usables.ArmourDaO;
+import com.aurora.core.dao.usables.EquipmentDaO;
+import com.aurora.core.dao.usables.WeaponsDaO;
+import com.aurora.core.dao.userdata.HeroDescriptionDaO;
+import com.aurora.core.dao.userdata.HeroPlayerDaO;
+import com.aurora.core.dao.userdata.HeroValuesDaO;
 import com.aurora.core.models.Databases;
 import com.aurora.core.models.Translations;
 import com.aurora.core.models.constants.Alignments;
@@ -48,31 +57,26 @@ import com.aurora.core.models.constants.RulesCombat;
 import com.aurora.core.models.constants.RulesSkills;
 import com.aurora.core.models.constants.Sizes;
 import com.aurora.core.models.helpers.Rules;
-import com.aurora.core.models.settingSpecific.Classes;
-import com.aurora.core.models.settingSpecific.Deities;
-import com.aurora.core.models.settingSpecific.EnergyTypes;
-import com.aurora.core.models.settingSpecific.Feats;
-import com.aurora.core.models.settingSpecific.HeroNPC;
-import com.aurora.core.models.settingSpecific.MaterialTypes;
-import com.aurora.core.models.settingSpecific.Monsters;
-import com.aurora.core.models.settingSpecific.RaceTemplates;
-import com.aurora.core.models.settingSpecific.Races;
-import com.aurora.core.models.settingSpecific.Skills;
-import com.aurora.core.models.settingSpecific.SpecialAttacks;
-import com.aurora.core.models.settingSpecific.SpecialQualities;
-import com.aurora.core.models.settingSpecific.Spells;
-import com.aurora.core.models.typeHelpers.RulesType;
+import com.aurora.core.models.settingspecific.Classes;
+import com.aurora.core.models.settingspecific.Deities;
+import com.aurora.core.models.settingspecific.EnergyTypes;
+import com.aurora.core.models.settingspecific.Feats;
+import com.aurora.core.models.settingspecific.HeroNpc;
+import com.aurora.core.models.settingspecific.MaterialTypes;
+import com.aurora.core.models.settingspecific.Monsters;
+import com.aurora.core.models.settingspecific.RaceTemplates;
+import com.aurora.core.models.settingspecific.Races;
+import com.aurora.core.models.settingspecific.Skills;
+import com.aurora.core.models.settingspecific.SpecialAttacks;
+import com.aurora.core.models.settingspecific.SpecialQualities;
+import com.aurora.core.models.settingspecific.Spells;
+import com.aurora.core.models.typehelpers.RulesType;
 import com.aurora.core.models.usables.Armour;
 import com.aurora.core.models.usables.Equipment;
 import com.aurora.core.models.usables.Weapons;
-import com.aurora.core.models.userData.HeroDescription;
-import com.aurora.core.models.userData.HeroPlayer;
-import com.aurora.core.models.userData.HeroValues;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.inject.Singleton;
+import com.aurora.core.models.userdata.HeroDescription;
+import com.aurora.core.models.userdata.HeroPlayer;
+import com.aurora.core.models.userdata.HeroValues;
 
 @Singleton
 @Database(entities = {
@@ -83,9 +87,9 @@ import javax.inject.Singleton;
     SpecialAttacks.class, SpecialQualities.class,
     Armour.class, Equipment.class, Feats.class, Skills.class, Spells.class, Weapons.class,
     Classes.class, Monsters.class, Races.class, RaceTemplates.class, Deities.class,
-    HeroNPC.class, HeroPlayer.class, HeroDescription.class, HeroValues.class,
-    Translations.class
-}, version = 1, exportSchema = false)
+    HeroNpc.class, HeroPlayer.class, HeroDescription.class, HeroValues.class,
+    Translations.class},
+    version = 1, exportSchema = false)
 @TypeConverters(DataTypeConverters.class)
 @SuppressLint("UseSparseArrays")
 public abstract class DatabaseHolder extends RoomDatabase {
@@ -98,70 +102,70 @@ public abstract class DatabaseHolder extends RoomDatabase {
   private static final String DATABASE_NAME = "database.db";
   private static DatabaseHolder INSTANCE;
   /**
-   * Lists to hold database items
+   * Lists to hold database items.
    */
-  public final List<Databases> DATABASES_LIST = new ArrayList<>();
-  public final List<Sizes> SIZES_LIST = new ArrayList<>();
-  public final List<Alignments> ALIGNMENTS_LIST = new ArrayList<>();
-  public final List<RulesCombat> RULES_COMBAT_LIST = new ArrayList<>();
-  public final List<RulesSkills> RULES_SKILLS_LIST = new ArrayList<>();
-  public final List<BaseQualities> BASE_QUALITIES_LIST = new ArrayList<>();
-  public final List<CoreStates> CORE_STATES_LIST = new ArrayList<>();
-  public final List<EnergyTypes> ENERGY_TYPES_LIST = new ArrayList<>();
-  public final List<MaterialTypes> MATERIAL_TYPES_LIST = new ArrayList<>();
-  public final List<SpecialAttacks> SPECIAL_ATTACKS_LIST = new ArrayList<>();
-  public final List<SpecialQualities> SPECIAL_QUALITIES_LIST = new ArrayList<>();
+  public final List<Databases> databasesList = new ArrayList<>();
+  public final List<Sizes> sizesList = new ArrayList<>();
+  public final List<Alignments> alignmentsList = new ArrayList<>();
+  public final List<RulesCombat> rulesCombatList = new ArrayList<>();
+  public final List<RulesSkills> rulesSkillsList = new ArrayList<>();
+  public final List<BaseQualities> baseQualitiesList = new ArrayList<>();
+  public final List<CoreStates> coreStatesList = new ArrayList<>();
+  public final List<EnergyTypes> energyTypesList = new ArrayList<>();
+  public final List<MaterialTypes> materialTypesList = new ArrayList<>();
+  public final List<SpecialAttacks> specialAttacksList = new ArrayList<>();
+  public final List<SpecialQualities> specialQualitiesList = new ArrayList<>();
   /**
    * An array of races available for heroPlayer.
    */
-  public final List<Races> RACES_LIST = new ArrayList<>();
-  public final List<Classes> CLASSES_LIST = new ArrayList<>();
-  public final List<Skills> SKILLS_LIST = new ArrayList<>();
-  public final List<Feats> FEATS_LIST = new ArrayList<>();
-  public final List<Weapons> WEAPONS_LIST = new ArrayList<>();
-  public final List<Armour> ARMOUR_LIST = new ArrayList<>();
-  public final List<Equipment> EQUIPMENT_LIST = new ArrayList<>();
-  public final List<Spells> SPELLS_LIST = new ArrayList<>();
-  public final List<Monsters> MONSTERS_LIST = new ArrayList<>();
-  public final List<RaceTemplates> RACE_TEMPLATES_LIST = new ArrayList<>();
-  public final List<HeroPlayer> HEROES_PLAYER_LIST = new ArrayList<>();
-  public final List<HeroNPC> HEROES_NPC_LIST = new ArrayList<>();
-  public final List<Deities> DEITIES_LIST = new ArrayList<>();
-  public final List<Translations> TRANSLATIONS_LIST = new ArrayList<>();
+  public final List<Races> racesList = new ArrayList<>();
+  public final List<Classes> classesList = new ArrayList<>();
+  public final List<Skills> skillsList = new ArrayList<>();
+  public final List<Feats> featsList = new ArrayList<>();
+  public final List<Weapons> weaponsList = new ArrayList<>();
+  public final List<Armour> armourList = new ArrayList<>();
+  public final List<Equipment> equipmentList = new ArrayList<>();
+  public final List<Spells> spellsList = new ArrayList<>();
+  public final List<Monsters> monstersList = new ArrayList<>();
+  public final List<RaceTemplates> raceTemplatesList = new ArrayList<>();
+  public final List<HeroPlayer> heroesPlayerList = new ArrayList<>();
+  public final List<HeroNpc> heroesNpcList = new ArrayList<>();
+  public final List<Deities> deitiesList = new ArrayList<>();
+  public final List<Translations> translationsList = new ArrayList<>();
   /**
-   * Maps to hold database items with ids
+   * Maps to hold database items with ids.
    */
-  public final Map<Integer, Databases> DATABASES_MAP = new HashMap<>();
+  public final Map<Integer, Databases> databasesMap = new HashMap<>();
   ///////////////////////MAPS FOR RULES///////////////////////////
-  public final Map<Integer, Sizes> SIZES_MAP = new HashMap<>();
-  public final Map<Integer, Alignments> ALIGNMENTS_MAP = new HashMap<>();
-  public final Map<Integer, RulesCombat> RULES_COMBAT_MAP = new HashMap<>();
-  public final Map<Integer, RulesSkills> RULES_SKILLS_MAP = new HashMap<>();
-  public final Map<Integer, BaseQualities> BASE_QUALITIES_MAP = new HashMap<>();
-  public final Map<Integer, CoreStates> CORE_STATES_MAP = new HashMap<>();
-  public final Map<Integer, EnergyTypes> ENERGY_TYPES_MAP = new HashMap<>();
-  public final Map<Integer, MaterialTypes> MATERIAL_TYPES_MAP = new HashMap<>();
-  public final Map<Integer, SpecialAttacks> SPECIAL_ATTACKS_MAP = new HashMap<>();
-  public final Map<Integer, SpecialQualities> SPECIAL_QUALITIES_MAP = new HashMap<>();
+  public final Map<Integer, Sizes> sizesMap = new HashMap<>();
+  public final Map<Integer, Alignments> alignmentsMap = new HashMap<>();
+  public final Map<Integer, RulesCombat> rulesCombatMap = new HashMap<>();
+  public final Map<Integer, RulesSkills> rulesSkillsMap = new HashMap<>();
+  public final Map<Integer, BaseQualities> baseQualitiesMap = new HashMap<>();
+  public final Map<Integer, CoreStates> coreStatesMap = new HashMap<>();
+  public final Map<Integer, EnergyTypes> energyTypesMap = new HashMap<>();
+  public final Map<Integer, MaterialTypes> materialTypesMap = new HashMap<>();
+  public final Map<Integer, SpecialAttacks> specialAttacksMap = new HashMap<>();
+  public final Map<Integer, SpecialQualities> specialQualitiesMap = new HashMap<>();
   /**
    * A map of races, by ID.
    */
-  public final Map<Integer, Races> RACES_MAP = new HashMap<>();
-  public final Map<Integer, Classes> CLASSES_MAP = new HashMap<>();
-  public final Map<Integer, Skills> SKILLS_MAP = new HashMap<>();
-  public final Map<Integer, Feats> FEATS_MAP = new HashMap<>();
-  public final Map<Integer, Weapons> WEAPONS_MAP = new HashMap<>();
-  public final Map<Integer, Armour> ARMOUR_MAP = new HashMap<>();
+  public final Map<Integer, Races> racesMap = new HashMap<>();
+  public final Map<Integer, Classes> classesMap = new HashMap<>();
+  public final Map<Integer, Skills> skillsMap = new HashMap<>();
+  public final Map<Integer, Feats> featsMap = new HashMap<>();
+  public final Map<Integer, Weapons> weaponsMap = new HashMap<>();
+  public final Map<Integer, Armour> armourMap = new HashMap<>();
 
   ///////////////////////LISTS FOR SETTING///////////////////////////
-  public final Map<Integer, Equipment> EQUIPMENT_MAP = new HashMap<>();
-  public final Map<Integer, Spells> SPELLS_MAP = new HashMap<>();
-  public final Map<Integer, Monsters> MONSTERS_MAP = new HashMap<>();
-  public final Map<Integer, RaceTemplates> RACE_TEMPLATES_MAP = new HashMap<>();
-  public final Map<Integer, HeroPlayer> HEROES_PLAYER_MAP = new HashMap<>();
-  public final Map<Integer, HeroNPC> HEROES_NPC_MAP = new HashMap<>();
-  public final Map<Integer, Deities> DEITIES_MAP = new HashMap<>();
-  public final Map<Integer, Translations> TRANSLATIONS_MAP = new HashMap<>();
+  public final Map<Integer, Equipment> equipmentMap = new HashMap<>();
+  public final Map<Integer, Spells> spellsMap = new HashMap<>();
+  public final Map<Integer, Monsters> monstersMap = new HashMap<>();
+  public final Map<Integer, RaceTemplates> raceTemplatesMap = new HashMap<>();
+  public final Map<Integer, HeroPlayer> heroesPlayerMap = new HashMap<>();
+  public final Map<Integer, HeroNpc> heroesNpcMap = new HashMap<>();
+  public final Map<Integer, Deities> deitiesMap = new HashMap<>();
+  public final Map<Integer, Translations> translationsMap = new HashMap<>();
   ///////////////////////LISTS FOR RULES///////////////////////////
   @Getter
   @Setter
@@ -185,64 +189,64 @@ public abstract class DatabaseHolder extends RoomDatabase {
     INSTANCE = null;
   }
 
-  public abstract DatabasesDAO databasesDAO();
+  public abstract DatabasesDaO databasesDaO();
 
   ////////////////////////////////////////////////////////////////////////////
-  public abstract SizesDAO rulesSizesDAO();
+  public abstract SizesDaO rulesSizesDaO();
 
-  public abstract AlignmentsDAO rulesAlignmentsDAO();
+  public abstract AlignmentsDaO rulesAlignmentsDaO();
 
-  public abstract RulesSkillsDAO rulesSkillsDAO();
+  public abstract RulesSkillsDaO rulesSkillsDaO();
 
-  public abstract RulesCombatDAO rulesCombatDAO();
+  public abstract RulesCombatDaO rulesCombatDaO();
 
-  public abstract BaseQualitiesDAO baseQualitiesDAO();
+  public abstract BaseQualitiesDaO baseQualitiesDaO();
 
-  public abstract CoreStatesDAO coreStatesDAO();
+  public abstract CoreStatesDaO coreStatesDaO();
 
   ////////////////////////////////////////////////////////////////////////////
   ///////////////////////MAPS FOR SETTING///////////////////////////
-  public abstract EnergyTypesDAO energyTypesDAO();
+  public abstract EnergyTypesDaO energyTypesDaO();
 
-  public abstract MaterialTypesDAO materialTypesDAO();
+  public abstract MaterialTypesDaO materialTypesDaO();
 
-  public abstract SpecialAttacksDAO specialAttacksDAO();
+  public abstract SpecialAttacksDaO specialAttacksDaO();
 
-  public abstract SpecialQualitiesDAO specialQualitiesDAO();
+  public abstract SpecialQualitiesDaO specialQualitiesDaO();
 
-  public abstract ClassesDAO classesDAO();
+  public abstract ClassesDaO classesDaO();
 
-  public abstract FeatsDAO featsDAO();
+  public abstract FeatsDaO featsDaO();
 
-  public abstract HeroPlayerDAO heroPlayerDAO();
+  public abstract HeroPlayerDaO heroPlayerDaO();
 
-  public abstract HeroDescriptionDAO heroDescriptionDAO();
+  public abstract HeroDescriptionDaO heroDescriptionDaO();
 
-  public abstract HeroValuesDAO heroStatisticsAbilityScoresDAO();
+  public abstract HeroValuesDaO heroStatisticsAbilityScoresDaO();
 
-  public abstract HeroNPCDAO heroNPCDAO();
+  public abstract HeroNpcDaO heroNpcDaO();
 
-  public abstract MonstersDAO monstersDAO();
+  public abstract MonstersDaO monstersDaO();
 
-  public abstract RacesDAO racesDAO();
+  public abstract RacesDaO racesDaO();
 
-  public abstract RaceTemplatesDAO raceTemplatesDAO();
+  public abstract RaceTemplatesDaO raceTemplatesDaO();
 
-  public abstract SkillsDAO skillsDAO();
+  public abstract SkillsDaO skillsDaO();
 
-  public abstract SpellsDAO spellsDAO();
+  public abstract SpellsDaO spellsDaO();
 
-  public abstract DeitiesDAO deitiesDAO();
+  public abstract DeitiesDaO deitiesDaO();
 
   ///////////////////////MAPS FOR USABLES///////////////////////////
-  public abstract EquipmentDAO equipmentDAO();
+  public abstract EquipmentDaO equipmentDaO();
 
-  public abstract WeaponsDAO weaponsDAO();
+  public abstract WeaponsDaO weaponsDaO();
 
-  public abstract ArmourDAO armourDAO();
+  public abstract ArmourDaO armourDaO();
 
   ////////////////////////////////////////////////////////////////////////////
-  public abstract TranslationsDAO translationsDAO();
+  public abstract TranslationsDaO translationsDaO();
 
   private void onCreateRulesList() {
     rulesList.clear();

@@ -4,12 +4,13 @@ import static com.aurora.core.database.TranslationsHolder.translate;
 
 import android.view.Menu;
 import android.widget.Button;
+
 import com.aurora.core.BR;
 import com.aurora.core.R;
 import com.aurora.core.databinding.ActivityMainMenuBinding;
 import com.aurora.core.helper.BindingActivity;
 import com.aurora.main.viewmodels.MainMenuVM;
-import com.aurora.master.views.DMActivity;
+import com.aurora.master.views.DmActivity;
 import com.aurora.player.views.PlayerCharactersListActivity;
 
 public class MainMenuActivity extends BindingActivity<ActivityMainMenuBinding, MainMenuVM> {
@@ -18,7 +19,7 @@ public class MainMenuActivity extends BindingActivity<ActivityMainMenuBinding, M
 
   @Override
   public MainMenuVM onCreate() {
-    setSupportActionBar(getMViewDataBinding().toolbar);
+    setSupportActionBar(getExViewDataBinding().toolbar);
     return new MainMenuVM(this, getIntent().getStringExtra(KEY_STATUS));
   }
 
@@ -58,7 +59,7 @@ public class MainMenuActivity extends BindingActivity<ActivityMainMenuBinding, M
       case R.id.PC_button:
         return PlayerCharactersListActivity.class;
       case R.id.DM_button:
-        return DMActivity.class;
+        return DmActivity.class;
       case R.id.action_rules:
         return RulesActivity.class;
       case R.id.action_content:
@@ -69,8 +70,9 @@ public class MainMenuActivity extends BindingActivity<ActivityMainMenuBinding, M
         return SettingsActivity.class;
       case R.id.action_help:
         return HelpActivity.class;
+      default:
+        return null;
     }
-    return null;
   }
 
   @Override

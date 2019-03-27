@@ -5,12 +5,14 @@ import static com.aurora.core.database.DatabaseHolder.getDatabaseHolder;
 import lombok.Getter;
 import lombok.Setter;
 
-import android.app.Activity;
 import androidx.viewpager.widget.ViewPager;
+
+import android.app.Activity;
+
 import com.aurora.core.R;
 import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.helper.ActivityViewModel;
-import com.aurora.core.models.userData.HeroPlayer;
+import com.aurora.core.models.userdata.HeroPlayer;
 import com.aurora.player.adapters.CustomTabChangeListener;
 import com.aurora.player.adapters.CustomTabSelectionListener;
 import com.aurora.player.adapters.PlayerCharacterAllSectionsPagerAdapter;
@@ -20,22 +22,22 @@ import com.google.android.material.tabs.TabLayout;
 
 public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity> {
 
-  private TabLayout mTabLayout;
-  private ViewPager mViewPager;
-  private PlayerCharacterAllSectionsPagerAdapter mSectionsPagerAdapter;
+  private TabLayout pcTabLayout;
+  private ViewPager pcViewPager;
+  private PlayerCharacterAllSectionsPagerAdapter pcSectionsPagerAdapter;
 
   @Getter
   @Setter
   private HeroPlayer hero;
 
   @Getter
-  private String heroCombatTextValues[];
+  private String[] heroCombatTextValues;
   @Getter
-  private String heroAbilityScoresTextValues[];
+  private String[] heroAbilityScoresTextValues;
   @Getter
-  private String heroSavingThrowsTextValues[];
+  private String[] heroSavingThrowsTextValues;
   @Getter
-  private String heroDescriptionsTextValues[];
+  private String[] heroDescriptionsTextValues;
 
   public PlayerCharacterVM(PlayerCharacterActivity activity) {
     super(activity);
@@ -46,7 +48,7 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
 
   private void loadHeroData(Activity activity) {
     DatabaseHolder databaseHolder = getDatabaseHolder(activity);
-    this.setHero(databaseHolder.HEROES_PLAYER_MAP
+    this.setHero(databaseHolder.heroesPlayerMap
         .get(Integer.parseInt(activity.getIntent().getStringExtra(PlayerCharacterActivity.HERO_PLAYER_ID))));
     getHero().getHeroDescription().setBackupNames(getHero().getBackupNames());
     getHero().getHeroValues().setBackupNames(getHero().getBackupNames());
@@ -96,12 +98,12 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
   }
 
   private void setTabs() {
-    mSectionsPagerAdapter = new PlayerCharacterAllSectionsPagerAdapter(getActivity().getSupportFragmentManager(), this);
-    mTabLayout = (TabLayout) getActivity().findViewById(R.id.player_character_tabs);
-    mViewPager = (ViewPager) getActivity().findViewById(R.id.player_character_container);
-    mViewPager.setAdapter(mSectionsPagerAdapter);
-    mViewPager.addOnPageChangeListener(new CustomTabChangeListener(mTabLayout));
-    mTabLayout.addOnTabSelectedListener(new CustomTabSelectionListener(mViewPager));
+    pcSectionsPagerAdapter = new PlayerCharacterAllSectionsPagerAdapter(getActivity().getSupportFragmentManager(), this);
+    pcTabLayout = (TabLayout) getActivity().findViewById(R.id.player_character_tabs);
+    pcViewPager = (ViewPager) getActivity().findViewById(R.id.player_character_container);
+    pcViewPager.setAdapter(pcSectionsPagerAdapter);
+    pcViewPager.addOnPageChangeListener(new CustomTabChangeListener(pcTabLayout));
+    pcTabLayout.addOnTabSelectedListener(new CustomTabSelectionListener(pcViewPager));
   }
 
   public void menuOnClick() {

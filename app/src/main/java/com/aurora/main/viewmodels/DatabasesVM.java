@@ -5,6 +5,8 @@ import static com.aurora.core.database.TranslationsHolder.translate;
 
 import lombok.NonNull;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
 import com.aurora.core.R;
 import com.aurora.core.helper.ActivityViewModel;
 import com.aurora.core.models.Databases;
@@ -21,7 +25,6 @@ import com.aurora.main.fragments.DatabasesListDetailFragment;
 import com.aurora.main.views.DatabasesActivity;
 import com.aurora.main.views.DatabasesListItemDetailActivity;
 import com.google.android.material.snackbar.Snackbar;
-import java.util.List;
 
 public class DatabasesVM extends ActivityViewModel<DatabasesActivity> {
 
@@ -43,24 +46,24 @@ public class DatabasesVM extends ActivityViewModel<DatabasesActivity> {
 
   private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
     recyclerView
-        .setAdapter(new DatabasesRecyclerViewAdapter(this.getActivity(), getDatabaseHolder(super.getActivity()).DATABASES_LIST, mTwoPane));
+        .setAdapter(new DatabasesRecyclerViewAdapter(this.getActivity(), getDatabaseHolder(super.getActivity()).databasesList, vmTwoPane));
   }
 
   public static class DatabasesRecyclerViewAdapter extends RecyclerView.Adapter<DatabasesRecyclerViewAdapter.ViewHolder> {
 
-    private final DatabasesActivity mParentActivity;
-    private final List<Databases> mValues;
-    private final boolean mTwoPane;
-    private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+    private final DatabasesActivity parentDatabaseActivity;
+    private final List<Databases> databasesList;
+    private final boolean twoPaneMode;
+    private final View.OnClickListener onClickListener = new View.OnClickListener() {
       @Override
       public void onClick(View view) {
         Databases databases = (Databases) view.getTag();
-        if (mTwoPane) {
+        if (twoPaneMode) {
           Bundle arguments = new Bundle();
           arguments.putString(DatabasesListDetailFragment.ARG_ITEM_ID, String.valueOf(databases.getItemID()));
           DatabasesListDetailFragment fragment = new DatabasesListDetailFragment();
           fragment.setArguments(arguments);
-          mParentActivity.getSupportFragmentManager().beginTransaction()
+          parentDatabaseActivity.getSupportFragmentManager().beginTransaction()
               .replace(R.id.activity_databases_detail_container, fragment)
               .commit();
         } else {
@@ -76,9 +79,9 @@ public class DatabasesVM extends ActivityViewModel<DatabasesActivity> {
     DatabasesRecyclerViewAdapter(DatabasesActivity parent,
         List<Databases> items,
         boolean twoPane) {
-      mValues = items;
-      mParentActivity = parent;
-      mTwoPane = twoPane;
+      databasesList = items;
+      parentDatabaseActivity = parent;
+      twoPaneMode = twoPane;
     }
 
     @Override
@@ -90,27 +93,27 @@ public class DatabasesVM extends ActivityViewModel<DatabasesActivity> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-      holder.mIdView.setText(translate(mValues.get(position).getName()));
-      holder.mContentView.setText(translate(mValues.get(position).getContent()));
+      holder.idView.setText(translate(databasesList.get(position).getName()));
+      holder.contentView.setText(translate(databasesList.get(position).getContent()));
 
-      holder.itemView.setTag(mValues.get(position));
-      holder.itemView.setOnClickListener(mOnClickListener);
+      holder.itemView.setTag(databasesList.get(position));
+      holder.itemView.setOnClickListener(onClickListener);
     }
 
     @Override
     public int getItemCount() {
-      return mValues.size();
+      return databasesList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-      final TextView mIdView;
-      final TextView mContentView;
+      final TextView idView;
+      final TextView contentView;
 
       ViewHolder(View view) {
         super(view);
-        mIdView = (TextView) view.findViewById(R.id.id_database_text);
-        mContentView = (TextView) view.findViewById(R.id.database_content);
+        idView = (TextView) view.findViewById(R.id.id_database_text);
+        contentView = (TextView) view.findViewById(R.id.database_content);
       }
     }
   }

@@ -2,13 +2,15 @@ package com.aurora.player.fragments;
 
 import static com.aurora.core.database.TranslationsHolder.translate;
 
+import androidx.fragment.app.Fragment;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import androidx.fragment.app.Fragment;
+
 import com.aurora.core.R;
 import com.aurora.player.viewmodels.PlayerCharacterVM;
 
@@ -34,7 +36,7 @@ public class PlayerCharacterDescriptionAppearancePlaceholderFragment extends Fra
   private static final String HERO_HAIR_DESCRIPTION = "hero_hair_description";
   private static final String HERO_SKIN_DESCRIPTION = "hero_skin_description";
 
-  private static final String DESCRIPTIONS[] = {
+  private static final String[] DESCRIPTIONS = {
       HERO_NAME_DESCRIPTION,
       HERO_PLAYER_DESCRIPTION,
       HERO_CLASS_AND_LEVEL_DESCRIPTION,
@@ -50,7 +52,7 @@ public class PlayerCharacterDescriptionAppearancePlaceholderFragment extends Fra
       HERO_HAIR_DESCRIPTION,
       HERO_SKIN_DESCRIPTION};
 
-  private static final int ID_VALUES[] = {
+  private static final int[] ID_VALUES = {
       R.id.fragment_player_character_description_appearance_entry_name,
       R.id.fragment_player_character_description_appearance_entry_player,
       R.id.fragment_player_character_description_appearance_entry_class_and_level,

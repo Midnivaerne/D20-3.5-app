@@ -11,33 +11,33 @@ import android.util.Log;
 import android.util.Xml;
 import android.view.View;
 import android.widget.ProgressBar;
-import com.aurora.core.helper.BindingActivity;
-import com.aurora.core.models.typeHelpers.CoreTypeHelper;
-import com.aurora.core.models.typeHelpers.ItemType;
-import com.aurora.core.models.userData.HeroPlayer;
-import com.aurora.core.utils.CommonUtils;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
+
+import com.aurora.core.helper.BindingActivity;
+import com.aurora.core.models.typehelpers.CoreTypeHelper;
+import com.aurora.core.models.typehelpers.ItemType;
+import com.aurora.core.models.userdata.HeroPlayer;
+import com.aurora.core.utils.CommonUtils;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlSerializer;
 
 public class DatabaseManager {
 
-  private static String externalPathSeparator = "/Android/data/com.aurora.d20_3.5_app/";
-  public static final String path = getPublicExternalStorageBaseDir() + externalPathSeparator + "Data/";
-
   private static final String[] FILENAMES = {"translations_for_app.xml", "baseRules.xml", "test.xml"}; //todo refactor
-
-  private static ProgressBar progressBar;
   private static final int MAX_PROGRESS = 100;
   private static final int NUMBER_OF_PROGRESS_INCREASES = 10;
-
+  private static String externalPathSeparator = "/Android/data/com.aurora.d20_3.5_app/";
+  public static final String path = getPublicExternalStorageBaseDir() + externalPathSeparator + "Data/";
+  private static ProgressBar progressBar;
 
   public static void initialDatabasesResolver(BindingActivity activity) {
     initialPathSetup();
@@ -269,6 +269,8 @@ public class DatabaseManager {
         break;
       case ANOTHER:
         break;
+      default:
+        break;
     }
     TranslationsHolder.loadAllTranslationsForLanguage(databaseHolder, language);
   }
@@ -280,6 +282,32 @@ public class DatabaseManager {
 
   public static void dbCheckup() {
     System.out.println("db data errors, need fix");   //todo implement db checkup and fix
+  }
+
+  private static void chooseDatabaseActions(DatabaseHolder databaseHolder) {
+    ItemType itemType = ItemType.HERO_PLAYER; //todo delete
+    System.out.println("AllFromDb " + itemType.getAllFromDatabase(databaseHolder)); //todo delete
+    System.out.println("DaoRaceFromName " + (itemType.getDaO(databaseHolder)).getObjectWithName("Test_race_name1")); //todo delete
+
+    System.out.println("FirstFromList " + (itemType.getDatabaseList(databaseHolder).get(0))); //todo delete
+    System.out.println("Id\"1\" FromMap " + (itemType.getDatabaseMap(databaseHolder).get(1))); //todo delete
+
+    System.out.println("DaoNames " + itemType.getDaO(databaseHolder).getAllNames()); //todo delete
+    System.out.println("FirstNameFromList " + itemType.getDatabaseList(databaseHolder).get(0).getName()); //todo delete
+    System.out.println("Id\"1\" NameFromMap " + itemType.getDatabaseMap(databaseHolder).get(1).getName()); //todo delete
+
+    System.out.println("FirstDescrFromList(ToHero) " + ((HeroPlayer) itemType.getDatabaseList(databaseHolder).get(0)).getHeroDescription()
+        .getHeroPlayer()); //todo delete
+    System.out.println("Id\"1\" DescrFromMap(ToHero) " + ((HeroPlayer) itemType.getDatabaseMap(databaseHolder).get(1)).getHeroDescription()
+        .getHeroPlayer()); //todo delete
+
+    // todo delete
+    System.out.println("why?");
+    System.out.println("Hero " + (itemType.getDaO(databaseHolder)).getAllObjectsAsObject());
+    System.out.println("ItemHero " + (itemType.getDaO(databaseHolder)).getAllObjectsAsItem());
+    //*/
+
+    //closeDatabase(databaseHolder); //todo need to close(?)
   }
 
   private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
@@ -305,32 +333,6 @@ public class DatabaseManager {
       super.onPostExecute(vo);
       increaseProgressBar();
     }
-  }
-
-  private static void chooseDatabaseActions(DatabaseHolder databaseHolder) {
-    ItemType itemType = ItemType.HERO_PLAYER; //todo delete
-    System.out.println("AllFromDb " + itemType.getAllFromDatabase(databaseHolder)); //todo delete
-    System.out.println("DaoRaceFromName " + (itemType.getDAO(databaseHolder)).getObjectWithName("Test_race_name1")); //todo delete
-
-    System.out.println("FirstFromList " + (itemType.getDatabaseList(databaseHolder).get(0))); //todo delete
-    System.out.println("Id\"1\" FromMap " + (itemType.getDatabaseMap(databaseHolder).get(1))); //todo delete
-
-    System.out.println("DaoNames " + itemType.getDAO(databaseHolder).getAllNames()); //todo delete
-    System.out.println("FirstNameFromList " + itemType.getDatabaseList(databaseHolder).get(0).getName()); //todo delete
-    System.out.println("Id\"1\" NameFromMap " + itemType.getDatabaseMap(databaseHolder).get(1).getName()); //todo delete
-
-    System.out.println("FirstDescrFromList(ToHero) " + ((HeroPlayer) itemType.getDatabaseList(databaseHolder).get(0)).getHeroDescription()
-        .getHeroPlayer()); //todo delete
-    System.out.println("Id\"1\" DescrFromMap(ToHero) " + ((HeroPlayer) itemType.getDatabaseMap(databaseHolder).get(1)).getHeroDescription()
-        .getHeroPlayer()); //todo delete
-
-    // todo delete
-    System.out.println("why?");
-    System.out.println("Hero " + (itemType.getDAO(databaseHolder)).getAllObjectsAsObject());
-    System.out.println("ItemHero " + (itemType.getDAO(databaseHolder)).getAllObjectsAsItem());
-    //*/
-
-    //closeDatabase(databaseHolder); //todo need to close(?)
   }
 
   public static class ConnectDbAsync extends AsyncTask<Void, Void, Void> {

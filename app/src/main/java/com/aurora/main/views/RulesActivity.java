@@ -3,6 +3,7 @@ package com.aurora.main.views;
 import static com.aurora.core.database.TranslationsHolder.translate;
 
 import android.view.MenuItem;
+
 import com.aurora.core.BR;
 import com.aurora.core.R;
 import com.aurora.core.databinding.ActivityRulesBinding;
@@ -13,7 +14,7 @@ public class RulesActivity extends BindingActivity<ActivityRulesBinding, RulesVM
 
   @Override
   public RulesVM onCreate() {
-    setSupportActionBar(getMViewDataBinding().toolbar);
+    setSupportActionBar(getExViewDataBinding().toolbar);
     return new RulesVM(this);
   }
 

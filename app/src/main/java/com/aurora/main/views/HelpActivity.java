@@ -13,7 +13,7 @@ public class HelpActivity extends BindingActivity<ActivityHelpBinding, HelpVM> {
 
   @Override
   public HelpVM onCreate() {
-    setSupportActionBar(getMViewDataBinding().toolbar);
+    setSupportActionBar(getExViewDataBinding().toolbar);
     return new HelpVM(this);
   }
 

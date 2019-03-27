@@ -6,6 +6,7 @@ import static com.aurora.core.database.TranslationsHolder.translate;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
+
 import com.aurora.core.BR;
 import com.aurora.core.R;
 import com.aurora.core.helper.BindingFragment;
@@ -41,7 +42,7 @@ public class DatabasesListDetailFragment extends BindingFragment {
     super.onCreate(savedInstanceState);
 
     if (getArguments().containsKey(ARG_ITEM_ID)) {
-      item = getDatabaseHolder(super.getContext()).DATABASES_LIST.get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID)) - 1);
+      item = getDatabaseHolder(super.getContext()).databasesList.get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID)) - 1);
     }
   }
 
@@ -53,7 +54,7 @@ public class DatabasesListDetailFragment extends BindingFragment {
       if (appBarLayout != null) {
         appBarLayout.setTitle(translate(item.getName()));
       }
-      ((TextView) getMRootView().findViewById(R.id.database_detail)).setText(translate(item.getName()));
+      ((TextView) getRootView().findViewById(R.id.database_detail)).setText(translate(item.getName()));
     }
   }
 }

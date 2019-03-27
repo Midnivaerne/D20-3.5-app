@@ -1,23 +1,24 @@
 package com.aurora.main.views;
 
-import android.content.res.Configuration;
-import android.os.Bundle;
-import android.preference.PreferenceActivity;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.preference.PreferenceActivity;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 /**
  * A {@link android.preference.PreferenceActivity} which implements and proxies the necessary calls to be used with AppCompat.
  */
 public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
 
-  private AppCompatDelegate mDelegate;
+  private AppCompatDelegate acDelegate;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -100,9 +101,9 @@ public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
   }
 
   private AppCompatDelegate getDelegate() {
-    if (mDelegate == null) {
-      mDelegate = AppCompatDelegate.create(this, null);
+    if (acDelegate == null) {
+      acDelegate = AppCompatDelegate.create(this, null);
     }
-    return mDelegate;
+    return acDelegate;
   }
 }

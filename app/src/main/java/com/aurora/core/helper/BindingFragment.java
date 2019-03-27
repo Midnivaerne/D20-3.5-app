@@ -1,41 +1,43 @@
 package com.aurora.core.helper;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import lombok.Getter;
+import lombok.NonNull;
+
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
-import lombok.Getter;
-import lombok.NonNull;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 public abstract class BindingFragment<T extends ViewDataBinding, V extends ActivityViewModel> extends Fragment {
 
   @Getter
-  private BindingActivity mActivity;
+  private BindingActivity bindingActivity;
   @Getter
-  private View mRootView;
+  private View rootView;
   @Getter
-  private T mViewDataBinding;
+  private T viewDataBinding;
   @Getter
-  private V mActivityViewModel;
+  private V activityViewModel;
 
   /**
-   * Override for set binding variable
+   * Override for set binding variable.
    *
    * @return variable id
    */
   public abstract int getBindingVariable();
 
   /**
+   * Abstract method for getting LayoutId.
    * @return layout resource id
    */
-  public abstract
-  @LayoutRes
+  public abstract @LayoutRes
   int getLayoutId();
 
 
@@ -44,8 +46,8 @@ public abstract class BindingFragment<T extends ViewDataBinding, V extends Activ
     super.onAttach(context);
     if (context instanceof BindingActivity) {
       BindingActivity activity = (BindingActivity) context;
-      this.mActivity = activity;
-      mActivityViewModel = (V) getMActivity().getMActivityViewModel();
+      this.bindingActivity = activity;
+      activityViewModel = (V) getBindingActivity().getExActivityViewModel();
       activity.onFragmentAttached();
     }
   }
@@ -59,35 +61,35 @@ public abstract class BindingFragment<T extends ViewDataBinding, V extends Activ
 
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    mViewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
-    mRootView = mViewDataBinding.getRoot();
+    viewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false);
+    rootView = viewDataBinding.getRoot();
     setTranslatedTexts();
-    return mRootView;
+    return rootView;
   }
 
   protected abstract void setTranslatedTexts();
 
   @Override
   public void onDetach() {
-    mActivity = null;
+    bindingActivity = null;
     super.onDetach();
   }
 
   @Override
   public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
-    mViewDataBinding.setVariable(getBindingVariable(), mActivityViewModel);
-    mViewDataBinding.executePendingBindings();
+    viewDataBinding.setVariable(getBindingVariable(), activityViewModel);
+    viewDataBinding.executePendingBindings();
   }
 
   public void hideKeyboard() {
-    if (mActivity != null) {
-      mActivity.hideKeyboard();
+    if (bindingActivity != null) {
+      bindingActivity.hideKeyboard();
     }
   }
 
   public boolean isNetworkConnected() {
-    return mActivity != null && mActivity.isNetworkConnected();
+    return bindingActivity != null && bindingActivity.isNetworkConnected();
   }
 
   private void performDependencyInjection() {

@@ -1,49 +1,47 @@
 package com.aurora.core.models.helpers;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
-import com.aurora.core.database.DBColumnNames;
-import com.aurora.core.models.typeHelpers.ItemType;
-import com.aurora.core.utils.CustomStringParsers;
-import java.util.Map;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+import java.util.Map;
+
+import com.aurora.core.database.DbColumnNames;
+import com.aurora.core.models.typehelpers.ItemType;
+import com.aurora.core.utils.CustomStringParsers;
+
 @EqualsAndHashCode(callSuper = false)
 @Data
 public class Item implements CoreHelper {
 
+  @Ignore
+  public String details;
   @Getter
   @Setter
   @PrimaryKey(autoGenerate = true)
-  @ColumnInfo(name = DBColumnNames.ITEM_ID_COLUMN_NAME)
+  @ColumnInfo(name = DbColumnNames.ITEM_ID_COLUMN_NAME)
   private Integer itemID;
-
   @Getter
   @Setter
-  @ColumnInfo(name = DBColumnNames.ITEM_NAME_COLUMN_NAME)
+  @ColumnInfo(name = DbColumnNames.ITEM_NAME_COLUMN_NAME)
   private String name;
-
   @Getter
   @Setter
-  @ColumnInfo(name = DBColumnNames.SOURCE_COLUMN_NAME)
+  @ColumnInfo(name = DbColumnNames.SOURCE_COLUMN_NAME)
   private String source;
-
   @Getter
   @Setter
-  @ColumnInfo(name = DBColumnNames.ID_AS_NAME_BACKUP_COLUMN_NAME)
+  @ColumnInfo(name = DbColumnNames.ID_AS_NAME_BACKUP_COLUMN_NAME)
   private String idAsNameBackup;
-
   @Getter
   @Setter
   @Ignore
   private String content;
-  @Ignore
-  public String details;
-
   @Getter
   @Setter
   @Ignore
@@ -63,7 +61,7 @@ public class Item implements CoreHelper {
   @Ignore
   public void backupNamesFromIdCreator() {
     if (idAsNameBackup != null && !"".equals(idAsNameBackup)) {
-      backupNames = CustomStringParsers.StringWithCommaAndBracketsToMap(idAsNameBackup);
+      backupNames = CustomStringParsers.stringWithCommaAndBracketsToMap(idAsNameBackup);
     }
   }
 
@@ -76,8 +74,7 @@ public class Item implements CoreHelper {
   }
 
   /**
-   * @param itemType
-   * @return
+   * Method that creates new item of selected type.
    */
   public Item createAnItem(ItemType itemType) {
     itemType.getNewObject();

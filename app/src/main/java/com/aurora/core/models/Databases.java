@@ -1,14 +1,16 @@
 package com.aurora.core.models;
 
-import static com.aurora.core.database.DBColumnNames.SOURCE_COLUMN_NAME;
-import static com.aurora.core.database.DBTableNames.DATABASES;
+import static com.aurora.core.database.DbColumnNames.SOURCE_COLUMN_NAME;
+import static com.aurora.core.database.DbTableNames.DATABASES;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.Index;
+
 import com.aurora.core.models.helpers.Item;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

@@ -1,5 +1,12 @@
 package com.aurora.core.helper;
 
+import lombok.Getter;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModel;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,12 +20,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-import androidx.appcompat.app.ActionBar;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModel;
+
 import com.aurora.core.R;
-import lombok.Getter;
 
 public class ActivityViewModel<A extends BindingActivity> extends ViewModel {
 
@@ -27,9 +30,9 @@ public class ActivityViewModel<A extends BindingActivity> extends ViewModel {
   /**
    * Whether or not the activity is in two-pane mode, i.e. running on a tablet device.
    */
-  protected boolean mTwoPane;
-  private ConstraintLayout mConstraintLayout;
-  private ProgressBar mProgressBar;
+  protected boolean vmTwoPane;
+  private ConstraintLayout vmConstraintLayout;
+  private ProgressBar vmProgressBar;
 
   public ActivityViewModel(A activity) {
     this.activity = activity;
@@ -39,7 +42,7 @@ public class ActivityViewModel<A extends BindingActivity> extends ViewModel {
     activity.finish();
   }
 
-  /**
+  /*
    * Activity lifecycle
    */
 
@@ -109,32 +112,32 @@ public class ActivityViewModel<A extends BindingActivity> extends ViewModel {
   }
 
   public void hideLoading() {
-    if (mProgressBar != null && mProgressBar.isShown()) {
-      mProgressBar.setVisibility(View.INVISIBLE);
+    if (vmProgressBar != null && vmProgressBar.isShown()) {
+      vmProgressBar.setVisibility(View.INVISIBLE);
     }
-    if (mConstraintLayout != null && mConstraintLayout.isShown()) {
-      mConstraintLayout.setVisibility(View.INVISIBLE);
+    if (vmConstraintLayout != null && vmConstraintLayout.isShown()) {
+      vmConstraintLayout.setVisibility(View.INVISIBLE);
     }
   }
 
   public ProgressBar showLoading() {
     hideLoading();
-    //mProgressBar.setContentView(R.layout.progress_bar); ?
-    mConstraintLayout = (ConstraintLayout) getActivity().findViewById(R.id.loading_layout);
-    if (mConstraintLayout != null) {
-      mConstraintLayout.setBackground(new ColorDrawable(Color.TRANSPARENT));
-      mConstraintLayout.setVisibility(View.VISIBLE);
+    //vmProgressBar.setContentView(R.layout.progress_bar); ?
+    vmConstraintLayout = (ConstraintLayout) getActivity().findViewById(R.id.loading_layout);
+    if (vmConstraintLayout != null) {
+      vmConstraintLayout.setBackground(new ColorDrawable(Color.TRANSPARENT));
+      vmConstraintLayout.setVisibility(View.VISIBLE);
     }
-    mProgressBar = getActivity().findViewById(R.id.pb_loading);
-    if (mProgressBar != null) {
-      mProgressBar.setVisibility(View.VISIBLE);
-      mProgressBar.setIndeterminate(true);
-      //mProgressBar.setCancelable(false);
-      //mProgressBar.setCanceledOnTouchOutside(false);
-      //mProgressBar.setTitle("Loading Database");
-      //mProgressBar.setMessage("Loading...");
+    vmProgressBar = getActivity().findViewById(R.id.pb_loading);
+    if (vmProgressBar != null) {
+      vmProgressBar.setVisibility(View.VISIBLE);
+      vmProgressBar.setIndeterminate(true);
+      //vmProgressBar.setCancelable(false);
+      //vmProgressBar.setCanceledOnTouchOutside(false);
+      //vmProgressBar.setTitle("Loading Database");
+      //vmProgressBar.setMessage("Loading...");
     }
-    return mProgressBar;
+    return vmProgressBar;
   }
 
   public void showBackButton() {
@@ -151,7 +154,7 @@ public class ActivityViewModel<A extends BindingActivity> extends ViewModel {
       // large-screen layouts (res/values-w900dp).
       // If this view is present, then the
       // activity should be in two-pane mode.
-      mTwoPane = true;
+      vmTwoPane = true;
     }
   }
 

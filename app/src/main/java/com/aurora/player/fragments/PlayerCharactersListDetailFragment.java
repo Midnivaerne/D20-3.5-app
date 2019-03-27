@@ -6,10 +6,11 @@ import static com.aurora.core.database.TranslationsHolder.translate;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
+
 import com.aurora.core.BR;
 import com.aurora.core.R;
 import com.aurora.core.helper.BindingFragment;
-import com.aurora.core.models.userData.Hero;
+import com.aurora.core.models.userdata.Hero;
 import com.aurora.player.views.PlayerCharactersListActivity;
 import com.aurora.player.views.PlayerCharactersListFrameItemDetailActivity;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -41,7 +42,7 @@ public class PlayerCharactersListDetailFragment extends BindingFragment {
     super.onCreate(savedInstanceState);
 
     if (getArguments().containsKey(ARG_ITEM_ID)) {
-      item = getDatabaseHolder(super.getContext()).HEROES_PLAYER_LIST.get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID)) - 1);
+      item = getDatabaseHolder(super.getContext()).heroesPlayerList.get(Integer.parseInt(getArguments().getString(ARG_ITEM_ID)) - 1);
     }
   }
 
@@ -54,7 +55,7 @@ public class PlayerCharactersListDetailFragment extends BindingFragment {
       if (appBarLayout != null) {
         appBarLayout.setTitle(translate(item.getName()));
       }
-      ((TextView) getMRootView().findViewById(R.id.activity_player_characters_list_frame_item_detail_container))
+      ((TextView) getRootView().findViewById(R.id.activity_player_characters_list_frame_item_detail_container))
           .setText(translate(item.getName()));
     }
   }
