@@ -35,10 +35,11 @@ public abstract class BindingFragment<T extends ViewDataBinding, V extends Activ
 
   /**
    * Abstract method for getting LayoutId.
+   *
    * @return layout resource id
    */
-  public abstract @LayoutRes
-  int getLayoutId();
+  @LayoutRes
+  public abstract int getLayoutId();
 
 
   @Override

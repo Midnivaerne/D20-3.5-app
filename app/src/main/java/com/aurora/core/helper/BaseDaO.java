@@ -13,12 +13,10 @@ import com.aurora.core.models.helpers.Item;
 public interface BaseDaO<T> {
 
   @Insert(onConflict = OnConflictStrategy.IGNORE)
-//todo or replace?
-  long insert(T object);
+  long insert(T object);//todo or replace OnConflictStrategy?
 
   @Insert(onConflict = OnConflictStrategy.IGNORE)
-//todo or replace?
-  List<Long> insertAll(List<T> objects);
+  List<Long> insertAll(List<T> objects);//todo or replace OnConflictStrategy?
 
   @Update
   void update(T object);

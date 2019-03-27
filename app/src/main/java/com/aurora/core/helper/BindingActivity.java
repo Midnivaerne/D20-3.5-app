@@ -213,16 +213,19 @@ public abstract class BindingActivity<T extends ViewDataBinding, V extends Activ
     return null;
   }
 
-  /** Override for set exViewDataBinding variable.
+  /**
+   * Override for set exViewDataBinding variable.
+   *
    * @return variable id
    */
-  public abstract @IdRes
-  int getBindingVariable();
+  @IdRes
+  public abstract int getBindingVariable();
 
-  /** Override for set layout resource.
+  /**
+   * Override for set layout resource.
    *
    * @return layout resource id
    */
-  public abstract @LayoutRes
-  int getLayoutId();
+  @LayoutRes
+  public abstract int getLayoutId();
 }
