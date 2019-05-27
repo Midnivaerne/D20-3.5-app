@@ -13,6 +13,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
+import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,67 +26,46 @@ import com.aurora.core.models.helpers.Item;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@SuperBuilder
 @Entity(tableName = RACES, inheritSuperIndices = true,
     indices = {@Index(value = {SOURCE_COLUMN_NAME})},
     foreignKeys = @ForeignKey(entity = Databases.class,
         parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
 public class Races extends Item {
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_DESCRIPTION_COLUMN_NAME)
   private String raceDescription;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_ATTRIBUTE_MODIFIERS_COLUMN_NAME)
   private String raceAttributeModifiers;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_SIZE_COLUMN_NAME)
   private String raceSize;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_SPEED_COLUMN_NAME)
   private String raceSpeed;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_SPECIAL_ATTACKS_COLUMN_NAME)
   private String raceSpecialAttacksIds;
 
-  @Getter
   @Ignore
   private List<SpecialAttacks> specialAttacks;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_SPECIAL_QUALITIES_COLUMN_NAME)
   private String raceSpecialQualitiesIds;
 
-  @Getter
   @Ignore
   private List<SpecialQualities> specialQualities;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_FEATS_COLUMN_NAME)
   private String raceFeats;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_SKILLS_COLUMN_NAME)
   private String raceSkills;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_LANGUAGES_COLUMN_NAME)
   private String raceLanguages;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_FAVOURITE_CLASS_COLUMN_NAME)
   private String favouriteClass;
 

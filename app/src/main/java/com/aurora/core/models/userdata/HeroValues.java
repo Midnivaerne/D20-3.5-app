@@ -31,6 +31,7 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 
 import android.util.Log;
+import lombok.experimental.SuperBuilder;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -50,6 +51,7 @@ import com.aurora.core.utils.CustomStringParsers;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@SuperBuilder
 @Entity(tableName = HERO_STATISTICS, inheritSuperIndices = true,
     indices = {@Index(SOURCE_COLUMN_NAME), @Index(HERO_PARENT_ITEM_ID_COLUMN_NAME), @Index(HERO_ALIGNMENT_ID_COLUMN_NAME),
         @Index(HERO_DEITY_ID_COLUMN_NAME), @Index(HERO_SIZE_COLUMN_NAME)},
@@ -67,85 +69,54 @@ import com.aurora.core.utils.CustomStringParsers;
 )
 public class HeroValues extends Item {
 
-  @Getter
-  @Setter
   @ColumnInfo(name = HERO_PARENT_ITEM_ID_COLUMN_NAME)
   private Integer heroParentItemID;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = HERO_HIT_POINTS_COLUMN_NAME)
   private String heroHitPoints;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = HERO_ABILITY_SCORE_STR_COLUMN_NAME)
   private Integer heroAbilityScoreStr;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = HERO_ABILITY_SCORE_DEX_COLUMN_NAME)
   private Integer heroAbilityScoreDex;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = HERO_ABILITY_SCORE_CON_COLUMN_NAME)
   private Integer heroAbilityScoreCon;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = HERO_ABILITY_SCORE_INT_COLUMN_NAME)
   private Integer heroAbilityScoreInt;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = HERO_ABILITY_SCORE_WIS_COLUMN_NAME)
   private Integer heroAbilityScoreWis;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = HERO_ABILITY_SCORE_CHA_COLUMN_NAME)
   private Integer heroAbilityScoreCha;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = HERO_CLASS_ID_LIST_COLUMN_NAME)
   private String heroClassIdList;
 
-  @Getter
   @Ignore
   private HashMap<Classes, Integer> classes;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = HERO_RACE_ID_COLUMN_NAME)
   private String heroRaceId;
 
-  @Getter
   @Ignore
   private Races race;
 
-  @Getter
   @Ignore
   private RaceTemplates raceTemplate;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = HERO_ALIGNMENT_ID_COLUMN_NAME)
   private Integer heroAlignmentId;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = HERO_DEITY_ID_COLUMN_NAME)
   private Integer heroDeityId;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = HERO_SIZE_COLUMN_NAME)
   private Integer heroSizeId;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = HERO_GENDER_COLUMN_NAME)
   private String heroGender;
 

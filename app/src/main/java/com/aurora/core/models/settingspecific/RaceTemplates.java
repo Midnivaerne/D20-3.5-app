@@ -13,6 +13,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
+import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,62 +25,43 @@ import com.aurora.core.models.helpers.Item;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@SuperBuilder
 @Entity(tableName = RACE_TEMPLATES, inheritSuperIndices = true,
     indices = {@Index(value = {SOURCE_COLUMN_NAME})},
     foreignKeys = @ForeignKey(entity = Databases.class,
         parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
 public class RaceTemplates extends Item {
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_TEMPLATE_DESCRIPTION_COLUMN_NAME)
   private String raceTemplateDescription;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_TEMPLATE_ATTRIBUTE_MODIFIERS_COLUMN_NAME)
   private String raceTemplateAttributeModifiers;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_TEMPLATE_SIZE_COLUMN_NAME)
   private String raceTemplateSize;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_TEMPLATE_SPEED_COLUMN_NAME)
   private String raceTemplateSpeed;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_TEMPLATE_SPECIAL_ATTACKS_COLUMN_NAME)
   private String raceTemplateSpecialAttacksIds;
 
-  @Getter
   @Ignore
   private List<SpecialAttacks> specialAttacks;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_TEMPLATE_SPECIAL_QUALITIES_COLUMN_NAME)
   private String raceTemplateSpecialQualitiesIds;
 
-  @Getter
   @Ignore
   private List<SpecialQualities> specialQualities;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_TEMPLATE_FEATS_COLUMN_NAME)
   private String raceTemplateFeats;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_TEMPLATE_SKILLS_COLUMN_NAME)
   private String raceTemplateSkills;
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.RACE_TEMPLATE_LANGUAGES_COLUMN_NAME)
   private String raceTemplateLanguages;
 

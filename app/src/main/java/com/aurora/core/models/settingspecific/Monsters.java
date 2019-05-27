@@ -10,6 +10,7 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
+import lombok.experimental.SuperBuilder;
 
 import com.aurora.core.models.Databases;
 import com.aurora.core.models.helpers.Item;
@@ -17,6 +18,7 @@ import com.aurora.core.models.helpers.ValuesConverter;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@SuperBuilder
 @Entity(tableName = MONSTERS, inheritSuperIndices = true,
     indices = {@Index(value = {SOURCE_COLUMN_NAME})},
     foreignKeys = @ForeignKey(entity = Databases.class,

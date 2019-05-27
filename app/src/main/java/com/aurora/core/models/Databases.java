@@ -9,11 +9,13 @@ import lombok.EqualsAndHashCode;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.Index;
+import lombok.experimental.SuperBuilder;
 
 import com.aurora.core.models.helpers.Item;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@SuperBuilder(toBuilder = true)
 @Entity(tableName = DATABASES, inheritSuperIndices = true,
     indices = {@Index(value = {SOURCE_COLUMN_NAME}, unique = true)})
 public class Databases extends Item {
@@ -30,6 +32,7 @@ public class Databases extends Item {
   }
 
   public Databases clone() {
+    //return Databases.builder().name(getName()).source(getSource()).idAsNameBackup(getIdAsNameBackup()).build(); //todo wait for lombok plugin update that will support @SuperBuilder
     return new Databases(
         getName(),
         getSource(),

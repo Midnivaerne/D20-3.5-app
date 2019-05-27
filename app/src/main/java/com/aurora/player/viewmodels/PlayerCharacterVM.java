@@ -9,6 +9,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.app.Activity;
 
+import java.util.Map;
+
 import com.aurora.core.R;
 import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.helper.ActivityViewModel;
@@ -38,6 +40,8 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
   private String[] heroSavingThrowsTextValues;
   @Getter
   private String[] heroDescriptionsTextValues;
+  @Getter
+  private Map<Integer, Map<Integer,Integer>> heroSkillsValues;
 
   public PlayerCharacterVM(PlayerCharacterActivity activity) {
     super(activity);
@@ -53,6 +57,7 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
     getHero().getHeroDescription().setBackupNames(getHero().getBackupNames());
     getHero().getHeroValues().setBackupNames(getHero().getBackupNames());
     getHero().getHeroValues().generateRaceFromId(databaseHolder).generateClassListFromId(databaseHolder);
+
     heroCombatTextValues = new String[]{
         getHero().getHeroValues().getHeroHitPointsStringFromList(),
         getHero().getDamageReduction(),
@@ -80,6 +85,7 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
         getHero().getReflex(),
         getHero().getWill()
     };
+    heroSkillsValues = getHero().getHeroValues().getHeroSkillsValues();
     heroDescriptionsTextValues = new String[]{
         getHero().getName(),
         getHero().getHeroDescription().getHeroPlayer(),

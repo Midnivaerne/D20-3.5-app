@@ -13,28 +13,26 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
+import lombok.experimental.SuperBuilder;
 
 import com.aurora.core.database.DbColumnNames;
 import com.aurora.core.models.helpers.Item;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@SuperBuilder
 @Entity(tableName = TRANSLATIONS, inheritSuperIndices = true,
     indices = {@Index(value = {SOURCE_COLUMN_NAME})},
     foreignKeys = @ForeignKey(entity = Databases.class,
         parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
 public class Translations extends Item {
 
-  @Getter
-  @Setter
   @ColumnInfo(name = DbColumnNames.CATEGORY_COLUMN_NAME)
   private String category;
-  @Getter
-  @Setter
+
   @ColumnInfo(name = DbColumnNames.LANGUAGE_COLUMN_NAME)
   private String language;
-  @Getter
-  @Setter
+
   @ColumnInfo(name = DbColumnNames.TRANS_COLUMN_NAME)
   private String trans;
 

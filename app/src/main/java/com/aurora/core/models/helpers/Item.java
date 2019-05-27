@@ -2,12 +2,11 @@ package com.aurora.core.models.helpers;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Map;
 
@@ -17,33 +16,28 @@ import com.aurora.core.utils.CustomStringParsers;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
+@SuperBuilder(toBuilder = true)
 public class Item implements CoreHelper {
 
   @Ignore
   public String details;
-  @Getter
-  @Setter
+
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = DbColumnNames.ITEM_ID_COLUMN_NAME)
   private Integer itemID;
-  @Getter
-  @Setter
+
   @ColumnInfo(name = DbColumnNames.ITEM_NAME_COLUMN_NAME)
   private String name;
-  @Getter
-  @Setter
+
   @ColumnInfo(name = DbColumnNames.SOURCE_COLUMN_NAME)
   private String source;
-  @Getter
-  @Setter
+
   @ColumnInfo(name = DbColumnNames.ID_AS_NAME_BACKUP_COLUMN_NAME)
   private String idAsNameBackup;
-  @Getter
-  @Setter
+
   @Ignore
   private String content;
-  @Getter
-  @Setter
+
   @Ignore
   private Map<ItemType, Map<Integer, String>> backupNames;
 
@@ -81,4 +75,16 @@ public class Item implements CoreHelper {
     throw new IllegalArgumentException("ItemType" + itemType + " is not recognized.");
   }
 
+  @Override
+  public String showAllContentAsString() {
+    return new StringBuilder().append("Item [")
+        .append("details = ").append(details)
+        .append(", itemID = ").append(getItemID())
+        .append(", name = ").append(getName())
+        .append(", source = ").append(source)
+        .append(", idAsNameBackup = ").append(getIdAsNameBackup())
+        .append(", content = ").append(getContent())
+        .append(", backupNames = ").append(getBackupNames())
+        .append("]").toString();
+  }
 }

@@ -2,22 +2,20 @@ package com.aurora.core.models.userdata;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 import androidx.room.Embedded;
 import androidx.room.Ignore;
+import lombok.experimental.SuperBuilder;
 
 import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.helpers.ValuesConverter;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@SuperBuilder
 public class Hero extends Item implements ValuesConverter {
 
   @Ignore
-  @Getter
-  @Setter
   @Embedded
   private HeroValues heroValues;
 

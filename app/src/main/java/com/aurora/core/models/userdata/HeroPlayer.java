@@ -5,19 +5,19 @@ import static com.aurora.core.database.DbTableNames.HERO_PLAYER;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
+import lombok.experimental.SuperBuilder;
 
 import com.aurora.core.models.Databases;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@SuperBuilder
 @Entity(tableName = HERO_PLAYER, inheritSuperIndices = true,
     indices = {@Index(value = SOURCE_COLUMN_NAME)},
     foreignKeys = @ForeignKey(entity = Databases.class,
@@ -25,8 +25,6 @@ import com.aurora.core.models.Databases;
 public class HeroPlayer extends Hero {
 
   @Ignore
-  @Getter
-  @Setter
   @Embedded
   private HeroDescription heroDescription;
 

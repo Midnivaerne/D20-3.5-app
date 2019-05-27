@@ -22,12 +22,14 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
+import lombok.experimental.SuperBuilder;
 
 import com.aurora.core.models.Databases;
 import com.aurora.core.models.helpers.Item;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@SuperBuilder
 @Entity(tableName = HERO_DESCRIPTION, inheritSuperIndices = true,
     indices = {@Index(SOURCE_COLUMN_NAME), @Index(HERO_PARENT_ITEM_ID_COLUMN_NAME)},
     foreignKeys = {
@@ -38,36 +40,27 @@ import com.aurora.core.models.helpers.Item;
 )
 public class HeroDescription extends Item {
 
-  @Getter
-  @Setter
   @ColumnInfo(name = HERO_PARENT_ITEM_ID_COLUMN_NAME)
   private Integer heroParentItemID;
-  @Getter
-  @Setter
+
   @ColumnInfo(name = HERO_PLAYER_COLUMN_NAME)
   private String heroPlayer;
-  @Getter
-  @Setter
+
   @ColumnInfo(name = HERO_AGE_COLUMN_NAME)
   private Integer heroAge;
-  @Getter
-  @Setter
+
   @ColumnInfo(name = HERO_HEIGHT_COLUMN_NAME)
   private String heroHeight;
-  @Getter
-  @Setter
+
   @ColumnInfo(name = HERO_WEIGHT_COLUMN_NAME)
   private String heroWeight;
-  @Getter
-  @Setter
+
   @ColumnInfo(name = HERO_EYES_COLUMN_NAME)
   private String heroEyes;
-  @Getter
-  @Setter
+
   @ColumnInfo(name = HERO_HAIR_COLUMN_NAME)
   private String heroHair;
-  @Getter
-  @Setter
+
   @ColumnInfo(name = HERO_SKIN_COLUMN_NAME)
   private String heroSkin;
 
