@@ -698,25 +698,29 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
       List<HeroPlayer> heroes = new ArrayList<>(
           (Collection<? extends HeroPlayer>) databaseHolder.heroPlayerDaO().getAllObjectsAsMergedObjectItem().values());
-      Map<Integer, HeroDescription> descriptions = (Map<Integer, HeroDescription>) databaseHolder.heroDescriptionDaO().getAllObjectsAsMergedObjectItem();
+      Map<Integer, HeroDescription> descriptions = (Map<Integer, HeroDescription>) databaseHolder.heroDescriptionDaO()
+          .getAllObjectsAsMergedObjectItem();
       Map<Integer, Integer> parentToDescriptionId = new HashMap<>();
       for (Integer descrId : descriptions.keySet()) {
         parentToDescriptionId.put(descriptions.get(descrId) != null ? descrId : descriptions.get(descrId).getHeroParentItemID(), descrId);
       }
-      Map<Integer, HeroValues> statistics = (Map<Integer, HeroValues>) databaseHolder.heroStatisticsAbilityScoresDaO().getAllObjectsAsMergedObjectItem();
+      Map<Integer, HeroValues> statistics = (Map<Integer, HeroValues>) databaseHolder.heroStatisticsAbilityScoresDaO()
+          .getAllObjectsAsMergedObjectItem();
       Map<Integer, Integer> parentToStatisticsId = new HashMap<>();
       for (Integer statsId : statistics.keySet()) {
         parentToStatisticsId.put(statistics.get(statsId) != null ? statsId : statistics.get(statsId).getHeroParentItemID(), statsId);
       }
       heroes.forEach((h) -> h.setHeroDescription(descriptions.get(parentToDescriptionId.get(h.getItemID()))));
       heroes.forEach((h) -> h.setHeroValues(statistics.get(parentToStatisticsId.get(h.getItemID()))));
-      databaseHolder.heroesPlayerList.addAll(heroes);
       for (HeroPlayer heroPlayer : heroes) {
         heroPlayer.backupNamesFromIdCreator();
+        heroPlayer.getHeroValues().setIdAsNameBackup(heroPlayer.getIdAsNameBackup());
         heroPlayer.getHeroValues().backupNamesFromIdCreator();
+        heroPlayer.getHeroDescription().setIdAsNameBackup(heroPlayer.getIdAsNameBackup());
         heroPlayer.getHeroDescription().backupNamesFromIdCreator();
         databaseHolder.heroesPlayerMap.put(heroPlayer.getItemID(), heroPlayer);
       }
+      databaseHolder.heroesPlayerList.addAll(heroes);
     }
   },
   /**

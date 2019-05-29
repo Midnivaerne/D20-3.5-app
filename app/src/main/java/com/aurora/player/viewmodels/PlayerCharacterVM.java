@@ -52,8 +52,6 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
     DatabaseHolder databaseHolder = getDatabaseHolder(activity);
     this.setHero(databaseHolder.heroesPlayerMap
         .get(Integer.parseInt(activity.getIntent().getStringExtra(PlayerCharacterActivity.HERO_PLAYER_ID))));
-    System.out.println("H bn-------------" + getHero().getBackupNames());//todo delete
-    System.out.println("H V bn-------------" + getHero().getHeroValues().getBackupNames());//todo delete
     getHero().getHeroValues().generateRaceFromId(databaseHolder).generateClassListFromId(databaseHolder);
 
     heroAbilityScoresTextValues = new String[]{
