@@ -12,20 +12,20 @@ import static com.aurora.core.database.DbColumnNames.ITEM_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.SOURCE_COLUMN_NAME;
 import static com.aurora.core.database.DbTableNames.HERO_DESCRIPTION;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
+
+import java.util.Map;
 
 import com.aurora.core.models.Databases;
 import com.aurora.core.models.helpers.Item;
+import com.aurora.core.models.typehelpers.ItemType;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -67,6 +67,12 @@ public class HeroDescription extends Item {
   @Ignore
   public HeroDescription() {
     super();
+  }
+
+  @Ignore
+  public HeroDescription(Map<ItemType, Map<Integer, String>> backupNames) {
+    super();
+    this.setBackupNames(backupNames);
   }
 
   public HeroDescription(String name,

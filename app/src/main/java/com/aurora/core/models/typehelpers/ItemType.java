@@ -1,6 +1,8 @@
 package com.aurora.core.models.typehelpers;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -694,31 +696,26 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
 
     @Override
     public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
-      List<HeroPlayer> heroes = databaseHolder.heroPlayerDaO().getAllObjectsAsMergedObjectItem();
-      List<Integer> heroesIds = new ArrayList<>();
-      databaseHolder.heroesPlayerList.addAll(heroes);
-      for (HeroPlayer heroPlayer : databaseHolder.heroesPlayerList) {
-        databaseHolder.heroesPlayerMap.put(heroPlayer.getItemID(), heroPlayer);
-        heroesIds.add(heroPlayer.getItemID());
-        heroPlayer.backupNamesFromIdCreator();
+      List<HeroPlayer> heroes = new ArrayList<>(
+          (Collection<? extends HeroPlayer>) databaseHolder.heroPlayerDaO().getAllObjectsAsMergedObjectItem().values());
+      Map<Integer, HeroDescription> descriptions = (Map<Integer, HeroDescription>) databaseHolder.heroDescriptionDaO().getAllObjectsAsMergedObjectItem();
+      Map<Integer, Integer> parentToDescriptionId = new HashMap<>();
+      for (Integer descrId : descriptions.keySet()) {
+        parentToDescriptionId.put(descriptions.get(descrId) != null ? descrId : descriptions.get(descrId).getHeroParentItemID(), descrId);
       }
-      List<HeroDescription> descriptions = databaseHolder.heroDescriptionDaO().getObjectsWithIdsAsMergedObjectItem(heroesIds);
-      List<HeroValues> statistics = databaseHolder.heroStatisticsAbilityScoresDaO()
-          .getObjectsWithIdsAsMergedObjectItem(heroesIds);
-      for (int i = 0; i < heroes.size(); i++) {
-        descriptions.get(i).backupNamesFromIdCreator();
-        databaseHolder.heroesPlayerList.get(i).setHeroDescription(descriptions.get(i));
-        databaseHolder.heroesPlayerList.get(i).setHeroValues(statistics.get(i));
-        for (HeroDescription desc : descriptions) {
-          if (desc.getHeroParentItemID().equals(heroesIds.get(i))) {
-            databaseHolder.heroesPlayerMap.get(heroesIds.get(i)).setHeroDescription(desc);
-          }
-        }
-        for (HeroValues stat : statistics) {
-          if (stat.getHeroParentItemID().equals(heroesIds.get(i))) {
-            databaseHolder.heroesPlayerMap.get(heroesIds.get(i)).setHeroValues(stat);
-          }
-        }
+      Map<Integer, HeroValues> statistics = (Map<Integer, HeroValues>) databaseHolder.heroStatisticsAbilityScoresDaO().getAllObjectsAsMergedObjectItem();
+      Map<Integer, Integer> parentToStatisticsId = new HashMap<>();
+      for (Integer statsId : statistics.keySet()) {
+        parentToStatisticsId.put(statistics.get(statsId) != null ? statsId : statistics.get(statsId).getHeroParentItemID(), statsId);
+      }
+      heroes.forEach((h) -> h.setHeroDescription(descriptions.get(parentToDescriptionId.get(h.getItemID()))));
+      heroes.forEach((h) -> h.setHeroValues(statistics.get(parentToStatisticsId.get(h.getItemID()))));
+      databaseHolder.heroesPlayerList.addAll(heroes);
+      for (HeroPlayer heroPlayer : heroes) {
+        heroPlayer.backupNamesFromIdCreator();
+        heroPlayer.getHeroValues().backupNamesFromIdCreator();
+        heroPlayer.getHeroDescription().backupNamesFromIdCreator();
+        databaseHolder.heroesPlayerMap.put(heroPlayer.getItemID(), heroPlayer);
       }
     }
   },

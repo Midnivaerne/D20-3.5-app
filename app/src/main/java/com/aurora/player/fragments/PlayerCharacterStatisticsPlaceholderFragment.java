@@ -3,11 +3,8 @@ package com.aurora.player.fragments;
 import static com.aurora.core.database.TranslationsHolder.translate;
 import static com.aurora.player.playerCharacterUtils.PlayerCharacterStatisticsUtils.ABILITY_SCORES_DESCRIPTIONS;
 import static com.aurora.player.playerCharacterUtils.PlayerCharacterStatisticsUtils.ARG_SECTION_NUMBER;
-import static com.aurora.player.playerCharacterUtils.PlayerCharacterStatisticsUtils.COMBAT_DESCRIPTIONS;
 import static com.aurora.player.playerCharacterUtils.PlayerCharacterStatisticsUtils.ID_ABILITY_SCORES_VALUES;
 import static com.aurora.player.playerCharacterUtils.PlayerCharacterStatisticsUtils.ID_ABILITY_SCORES_VALUES_SPECIFIC;
-import static com.aurora.player.playerCharacterUtils.PlayerCharacterStatisticsUtils.ID_COMBAT_VALUES;
-import static com.aurora.player.playerCharacterUtils.PlayerCharacterStatisticsUtils.ID_COMBAT_VALUES_SPECIFIC;
 import static com.aurora.player.playerCharacterUtils.PlayerCharacterStatisticsUtils.ID_SAVING_THROWS_VALUES;
 import static com.aurora.player.playerCharacterUtils.PlayerCharacterStatisticsUtils.ID_SAVING_THROWS_VALUES_SPECIFIC;
 import static com.aurora.player.playerCharacterUtils.PlayerCharacterStatisticsUtils.SAVING_THROWS_DESCRIPTIONS;
@@ -52,12 +49,12 @@ public class PlayerCharacterStatisticsPlaceholderFragment extends Fragment {
   }
 
   private void loadHeroDataFromVMtoView(View rootView) {
-    for(PlayerCharacterCombatEnum ){}
-    for (int i = 0; i < PlayerCharacterCombatEnum.values().length; i++) {
-      ((TextView) rootView.findViewById(PlayerCharacterCombatEnum.values().ID_COMBAT_VALUES[i]).findViewById(ID_COMBAT_VALUES_SPECIFIC[i][0]))
-          .setText(translate(COMBAT_DESCRIPTIONS[i]));
-      ((TextView) rootView.findViewById(ID_COMBAT_VALUES[i]).findViewById(ID_COMBAT_VALUES_SPECIFIC[i][1]))
-          .setText(playerCharacterVM.getHeroCombatTextValues()[i]);
+    for (PlayerCharacterCombatEnum combatField : PlayerCharacterCombatEnum.values()) {
+      ((TextView) rootView.findViewById(combatField.getFieldId())
+          .findViewById(combatField.getDescriptionId()))
+          .setText(translate(combatField.toString()));
+      ((TextView) rootView.findViewById(combatField.getFieldId()).findViewById(combatField.getValueId()))
+          .setText(playerCharacterVM.getHero().getHeroValues().getCombatTextValues().get(combatField));
     }
     for (int i = 0; i < ID_ABILITY_SCORES_VALUES.length; i++) {
       ((TextView) rootView.findViewById(ID_ABILITY_SCORES_VALUES[i]).findViewById(ID_ABILITY_SCORES_VALUES_SPECIFIC[0]))

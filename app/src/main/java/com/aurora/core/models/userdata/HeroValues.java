@@ -19,21 +19,19 @@ import static com.aurora.core.database.DbColumnNames.SOURCE_COLUMN_NAME;
 import static com.aurora.core.database.DbTableNames.HERO_STATISTICS;
 import static com.aurora.core.database.TranslationsHolder.translate;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
+import android.util.Log;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
-
-import android.util.Log;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import com.aurora.core.database.DatabaseHolder;
@@ -42,12 +40,14 @@ import com.aurora.core.models.Databases;
 import com.aurora.core.models.constants.Alignments;
 import com.aurora.core.models.constants.Sizes;
 import com.aurora.core.models.helpers.Item;
+import com.aurora.core.models.helpers.ValuesConverter;
 import com.aurora.core.models.settingspecific.Classes;
 import com.aurora.core.models.settingspecific.Deities;
 import com.aurora.core.models.settingspecific.RaceTemplates;
 import com.aurora.core.models.settingspecific.Races;
 import com.aurora.core.models.typehelpers.ItemType;
 import com.aurora.core.utils.CustomStringParsers;
+import com.aurora.player.playerCharacterUtils.PlayerCharacterCombatEnum;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -67,7 +67,7 @@ import com.aurora.core.utils.CustomStringParsers;
         @ForeignKey(entity = Deities.class,
             parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_DEITY_ID_COLUMN_NAME)}
 )
-public class HeroValues extends Item {
+public class HeroValues extends Item implements ValuesConverter {
 
   @ColumnInfo(name = HERO_PARENT_ITEM_ID_COLUMN_NAME)
   private Integer heroParentItemID;
@@ -121,8 +121,18 @@ public class HeroValues extends Item {
   private String heroGender;
 
   @Ignore
+  @Getter
+  private Map<PlayerCharacterCombatEnum, String> combatTextValues = new HashMap<>();
+
+  @Ignore
   public HeroValues() {
     super();
+  }
+
+  @Ignore
+  public HeroValues(Map<ItemType, Map<Integer, String>> backupNames) {
+    super();
+    this.setBackupNames(backupNames);
   }
 
   public HeroValues(String name,
@@ -157,6 +167,22 @@ public class HeroValues extends Item {
     this.heroDeityId = heroDeityId;
     this.heroSizeId = heroSizeId;
     this.heroGender = heroGender;
+    populateCombatTextValues();
+  }
+
+  private void populateCombatTextValues() {
+    combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_HIT_POINTS, getHeroHitPointsStringFromList());
+    combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_DAMAGE_REDUCTION, getDamageReduction());
+    combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_ARMOUR_CLASS, getArmourClass());
+    combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_ARMOUR_CLASS_TOUCH, getArmourClassTouch());
+    combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_ARMOUR_CLASS_FLATFOOTED, getArmourClassFlatfooted());
+    combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_SPEED, getSpeed());
+    combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_INITIATIVE, getInitiative());
+    combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_ATTACK, getAttack());
+    combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_ATTACK_MELEE, getAttackMelee());
+    combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_ATTACK_RANGED, getAttackRanged());
+    combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_GRAPPLE, getGrapple());
+    combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_SPELL_RESISTANCE, getSpellResistance());
   }
 
   @Ignore
@@ -263,4 +289,80 @@ public class HeroValues extends Item {
         getHeroSizeId(),
         getHeroGender());
   }
+
+  public String getDamageReduction() {
+    StringBuilder out = new StringBuilder();
+    //getHeroValues().getRace().getSpecialQualities().iterator()
+    //    .forEachRemaining((SpecQ) -> (SpecQ.getName().equals(SpecialQualities.DamageReduction)) ? out.append("") : out.append(SpecQ));
+    //getHeroValues().getRaceTemplate() == null ? "" : getHeroValues().getRaceTemplate().getSpecialQualities().getDamageReduction());
+    // + getItemDamageReduction()
+    // + getEffectDamageReduction();//todo proper value, multiple DR possible
+    return String.valueOf(out);
+  }
+
+  public String getArmourClass() {
+    int out = 10; //todo proper value
+    return String.valueOf(out);
+  }
+
+  public String getArmourClassTouch() {
+    int out = 10;//todo proper value
+    return String.valueOf(out);
+  }
+
+  public String getArmourClassFlatfooted() {
+    int out = 10;//todo proper value
+    return String.valueOf(out);
+  }
+
+  public String getSpeed() {
+    int out = 0;//todo proper value
+    return String.valueOf(out);
+  }
+
+  public String getInitiative() {
+    int out = 0;//todo proper value
+    return String.valueOf(out);
+  }
+
+  public String getAttack() {
+    int out = 0;//todo proper value
+    return String.valueOf(out);
+  }
+
+  public String getAttackMelee() {
+    int out = 0;//todo proper value
+    return String.valueOf(out);
+  }
+
+  public String getAttackRanged() {
+    int out = 0;//todo proper value
+    return String.valueOf(out);
+  }
+
+  public String getGrapple() {
+    int out = 0;//todo proper value
+    return String.valueOf(out);
+  }
+
+  public String getSpellResistance() {
+    int out = 0;//todo proper value
+    return String.valueOf(out);
+  }
+
+  public String getFortitude() {
+    int out = 0;//todo proper value
+    return String.valueOf(out);
+  }
+
+  public String getReflex() {
+    int out = 0;//todo proper value
+    return String.valueOf(out);
+  }
+
+  public String getWill() {
+    int out = 0;//todo proper value
+    return String.valueOf(out);
+  }
+
 }

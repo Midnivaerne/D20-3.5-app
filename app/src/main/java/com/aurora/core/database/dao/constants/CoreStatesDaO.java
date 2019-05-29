@@ -3,9 +3,7 @@ package com.aurora.core.database.dao.constants;
 import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.RoomWarnings;
-import androidx.room.Transaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.aurora.core.helper.BaseDaO;
@@ -14,7 +12,7 @@ import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.helpers.Rules;
 
 @Dao
-public abstract class CoreStatesDaO implements BaseDaO<CoreStates> {
+public abstract class CoreStatesDaO extends BaseDaO<CoreStates> {
 
   @Query("SELECT COUNT(*) from CoreStates")
   public abstract int countAllItems();
@@ -30,17 +28,6 @@ public abstract class CoreStatesDaO implements BaseDaO<CoreStates> {
     return null;
   }
 
-  @Transaction
-  public List<CoreStates> getAllObjectsAsMergedObjectItem() {
-    ArrayList<CoreStates> result = new ArrayList<>(getAllObjectsAsObject());
-    ArrayList<Rules> resultItem = new ArrayList<>(getItemsAsRules());
-    for (int i = 0; i < result.size(); i++) {
-      result.get(i).setItemID(resultItem.get(i).getItemID());
-      result.get(i).setName(resultItem.get(i).getName());
-    }
-    return result;
-  }
-
   @Query("SELECT * FROM CoreStates")
   public abstract List<CoreStates> getAllObjectsAsObject();
 
@@ -51,17 +38,6 @@ public abstract class CoreStatesDaO implements BaseDaO<CoreStates> {
   @Override
   public List<Item> getAllObjectsAsItem() {
     return null;
-  }
-
-  @Transaction
-  public List<CoreStates> getObjectsWithIdsAsMergedObjectItem(List<Integer> ids) {
-    ArrayList<CoreStates> result = new ArrayList<>(getObjectsWithIdsAsObject(ids));
-    ArrayList<Rules> resultItem = new ArrayList<>(getObjectsWithIdsAsRules(ids));
-    for (int i = 0; i < result.size(); i++) {
-      result.get(i).setItemID(resultItem.get(i).getItemID());
-      result.get(i).setName(resultItem.get(i).getName());
-    }
-    return result;
   }
 
   @Query("SELECT * FROM CoreStates WHERE Item_ID IN (:ids)")

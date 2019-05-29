@@ -1,200 +1,197 @@
 package com.aurora.player.playerCharacterUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.aurora.core.R;
 
 public enum PlayerCharacterCombatEnum {
-  HERO_COMBAT_HIT_POINTS_NAME_DESCRIPTION("hero_combat_hp_name_description") {
+  HERO_COMBAT_HIT_POINTS("hero_combat_hp_name_description") {
     @Override
-    int getFieldId() {
+    public int getFieldId() {
       return R.id.fragment_player_character_statistics_combat_hit_points;
     }
 
     @Override
-    int getValueId() {
+    public int getValueId() {
       return R.id.fragment_player_character_statistics_combat_hit_points_value;
     }
 
     @Override
-    int getDescriptionId() {
+    public int getDescriptionId() {
       return R.id.fragment_player_character_statistics_combat_hit_points_description;
     }
   },
-  HERO_COMBAT_DAMAGE_REDUCTION_NAME_DESCRIPTION("hero_combat_damage_reduction_name_description") {
+  HERO_COMBAT_DAMAGE_REDUCTION("hero_combat_damage_reduction_name_description") {
     @Override
-    int getFieldId() {
+    public int getFieldId() {
       return R.id.fragment_player_character_statistics_combat_damage_reduction;
     }
 
     @Override
-    int getValueId() {
+    public int getValueId() {
       return R.id.fragment_number_value_with_description_box_value;
     }
 
     @Override
-    int getDescriptionId() {
+    public int getDescriptionId() {
       return R.id.fragment_number_value_with_description_box_description;
     }
   },
-  HERO_COMBAT_ARMOUR_CLASS_NAME_DESCRIPTION("hero_combat_armour_class_name_description") {
+  HERO_COMBAT_ARMOUR_CLASS("hero_combat_armour_class_name_description") {
     @Override
-    int getFieldId() {
+    public int getFieldId() {
       return R.id.fragment_player_character_statistics_combat_armour_class;
     }
 
     @Override
-    int getValueId() {
+    public int getValueId() {
       return R.id.fragment_number_value_with_description_box_value;
     }
 
     @Override
-    int getDescriptionId() {
+    public int getDescriptionId() {
       return R.id.fragment_number_value_with_description_box_description;
     }
   },
-  HERO_COMBAT_ARMOUR_CLASS_TOUCH_NAME_DESCRIPTION("hero_combat_armour_class_touch_name_description") {
+  HERO_COMBAT_ARMOUR_CLASS_TOUCH("hero_combat_armour_class_touch_name_description") {
     @Override
-    int getFieldId() {
+    public int getFieldId() {
       return R.id.fragment_player_character_statistics_combat_armour_class_touch;
     }
 
     @Override
-    int getValueId() {
+    public int getValueId() {
       return R.id.fragment_number_value_with_description_box_value;
     }
 
     @Override
-    int getDescriptionId() {
+    public int getDescriptionId() {
       return R.id.fragment_number_value_with_description_box_description;
     }
   },
-  HERO_COMBAT_ARMOUR_CLASS_FLATFOOTED_NAME_DESCRIPTION("hero_combat_armour_class_flatfooted_name_description") {
+  HERO_COMBAT_ARMOUR_CLASS_FLATFOOTED("hero_combat_armour_class_flatfooted_name_description") {
     @Override
-    int getFieldId() {
+    public int getFieldId() {
       return R.id.fragment_player_character_statistics_combat_armour_class_flatfooted;
     }
 
     @Override
-    int getValueId() {
+    public int getValueId() {
       return R.id.fragment_number_value_with_description_box_value;
     }
 
     @Override
-    int getDescriptionId() {
+    public int getDescriptionId() {
       return R.id.fragment_number_value_with_description_box_description;
     }
   },
-  HERO_COMBAT_SPEED_NAME_DESCRIPTION("hero_combat_speed_name_description") {
+  HERO_COMBAT_SPEED("hero_combat_speed_name_description") {
     @Override
-    int getFieldId() {
+    public int getFieldId() {
       return R.id.fragment_player_character_statistics_combat_speed;
     }
 
     @Override
-    int getValueId() {
+    public int getValueId() {
       return R.id.fragment_number_value_with_description_box_value;
     }
 
     @Override
-    int getDescriptionId() {
+    public int getDescriptionId() {
       return R.id.fragment_number_value_with_description_box_description;
     }
   },
-  HERO_COMBAT_INITIATIVE_NAME_DESCRIPTION("hero_combat_initiative_name_description") {
+  HERO_COMBAT_INITIATIVE("hero_combat_initiative_name_description") {
     @Override
-    int getFieldId() {
+    public int getFieldId() {
       return R.id.fragment_player_character_statistics_combat_initiative;
     }
 
     @Override
-    int getValueId() {
+    public int getValueId() {
       return R.id.fragment_number_value_with_description_rollable_box_value;
     }
 
     @Override
-    int getDescriptionId() {
+    public int getDescriptionId() {
       return R.id.fragment_number_value_with_description_rollable_box_description;
     }
   },
-  HERO_COMBAT_ATTACK_NAME_DESCRIPTION("hero_combat_attack_name_description") {
+  HERO_COMBAT_ATTACK("hero_combat_attack_name_description") {
     @Override
-    int getFieldId() {
+    public int getFieldId() {
       return R.id.fragment_player_character_statistics_combat_attack;
     }
 
     @Override
-    int getValueId() {
+    public int getValueId() {
       return R.id.fragment_number_value_with_description_rollable_box_value;
     }
 
     @Override
-    int getDescriptionId() {
+    public int getDescriptionId() {
       return R.id.fragment_number_value_with_description_rollable_box_description;
     }
   },
-  HERO_COMBAT_ATTACK_MELEE_NAME_DESCRIPTION("hero_combat_attack_melee_name_description") {
+  HERO_COMBAT_ATTACK_MELEE("hero_combat_attack_melee_name_description") {
     @Override
-    int getFieldId() {
+    public int getFieldId() {
       return R.id.fragment_player_character_statistics_combat_attack_melee;
     }
 
     @Override
-    int getValueId() {
+    public int getValueId() {
       return R.id.fragment_number_value_with_description_rollable_box_value;
     }
 
     @Override
-    int getDescriptionId() {
+    public int getDescriptionId() {
       return R.id.fragment_number_value_with_description_rollable_box_description;
     }
   },
-  HERO_COMBAT_ATTACK_RANGED_NAME_DESCRIPTION("hero_combat_attack_ranged_name_description") {
+  HERO_COMBAT_ATTACK_RANGED("hero_combat_attack_ranged_name_description") {
     @Override
-    int getFieldId() {
+    public int getFieldId() {
       return R.id.fragment_player_character_statistics_combat_attack_ranged;
     }
 
     @Override
-    int getValueId() {
+    public int getValueId() {
       return R.id.fragment_number_value_with_description_rollable_box_value;
     }
 
     @Override
-    int getDescriptionId() {
+    public int getDescriptionId() {
       return R.id.fragment_number_value_with_description_rollable_box_description;
     }
   },
-  HERO_COMBAT_GRAPPLE_NAME_DESCRIPTION("hero_combat_grapple_name_description") {
+  HERO_COMBAT_GRAPPLE("hero_combat_grapple_name_description") {
     @Override
-    int getFieldId() {
+    public int getFieldId() {
       return R.id.fragment_player_character_statistics_combat_grapple;
     }
 
     @Override
-    int getValueId() {
+    public int getValueId() {
       return R.id.fragment_number_value_with_description_rollable_box_value;
     }
 
     @Override
-    int getDescriptionId() {
+    public int getDescriptionId() {
       return R.id.fragment_number_value_with_description_rollable_box_description;
     }
   },
-  HERO_COMBAT_SPELL_RESISTANCE_NAME_DESCRIPTION("hero_combat_spell_resistance_name_description") {
+  HERO_COMBAT_SPELL_RESISTANCE("hero_combat_spell_resistance_name_description") {
     @Override
-    int getFieldId() {
+    public int getFieldId() {
       return R.id.fragment_player_character_statistics_combat_spell_resistance;
     }
 
     @Override
-    int getValueId() {
+    public int getValueId() {
       return R.id.fragment_number_value_with_description_box_value;
     }
 
     @Override
-    int getDescriptionId() {
+    public int getDescriptionId() {
       return R.id.fragment_number_value_with_description_box_description;
     }
   };
@@ -210,10 +207,10 @@ public enum PlayerCharacterCombatEnum {
     return this.description;
   }
 
-  abstract int getFieldId();
+  public abstract int getFieldId();
 
-  abstract int getValueId();
+  public abstract int getValueId();
 
-  abstract int getDescriptionId();
+  public abstract int getDescriptionId();
 
 }

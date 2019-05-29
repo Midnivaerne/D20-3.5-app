@@ -3,9 +3,7 @@ package com.aurora.core.database.dao;
 import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.RoomWarnings;
-import androidx.room.Transaction;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.aurora.core.helper.BaseDaO;
@@ -13,7 +11,7 @@ import com.aurora.core.models.Translations;
 import com.aurora.core.models.helpers.Item;
 
 @Dao
-public abstract class TranslationsDaO implements BaseDaO<Translations> {
+public abstract class TranslationsDaO extends BaseDaO<Translations> {
 
   @Query("SELECT COUNT(*) from Translations")
   public abstract int countAllItems();
@@ -27,19 +25,6 @@ public abstract class TranslationsDaO implements BaseDaO<Translations> {
   @Query("SELECT DISTINCT Source FROM Translations")
   public abstract List<String> getAllSources();
 
-  @Transaction
-  public List<Translations> getAllObjectsAsMergedObjectItem() {
-    ArrayList<Translations> result = new ArrayList<>(getAllObjectsAsObject());
-    ArrayList<Item> resultItem = new ArrayList<>(getAllObjectsAsItem());
-    for (int i = 0; i < result.size(); i++) {
-      result.get(i).setItemID(resultItem.get(i).getItemID());
-      result.get(i).setName(resultItem.get(i).getName());
-      result.get(i).setSource(resultItem.get(i).getSource());
-      result.get(i).setIdAsNameBackup(resultItem.get(i).getIdAsNameBackup());
-    }
-    return result;
-  }
-
   @Query("SELECT * FROM Translations")
   public abstract List<Translations> getAllObjectsAsObject();
 
@@ -49,19 +34,6 @@ public abstract class TranslationsDaO implements BaseDaO<Translations> {
   @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
   @Query("SELECT * FROM Translations")
   public abstract List<Item> getAllObjectsAsItem(); // above doesn't show Item fields (but they are created/loaded)
-
-  @Transaction
-  public List<Translations> getObjectsWithIdsAsMergedObjectItem(List<Integer> ids) {
-    ArrayList<Translations> result = new ArrayList<>(getObjectsWithIdsAsObject(ids));
-    ArrayList<Item> resultItem = new ArrayList<>(getObjectsWithIdsAsItem(ids));
-    for (int i = 0; i < result.size(); i++) {
-      result.get(i).setItemID(resultItem.get(i).getItemID());
-      result.get(i).setName(resultItem.get(i).getName());
-      result.get(i).setSource(resultItem.get(i).getSource());
-      result.get(i).setIdAsNameBackup(resultItem.get(i).getIdAsNameBackup());
-    }
-    return result;
-  }
 
   @Query("SELECT * FROM Translations WHERE Item_ID IN (:ids)")
   public abstract List<Translations> getObjectsWithIdsAsObject(List<Integer> ids);

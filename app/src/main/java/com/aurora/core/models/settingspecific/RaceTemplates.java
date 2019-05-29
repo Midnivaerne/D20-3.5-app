@@ -3,19 +3,17 @@ package com.aurora.core.models.settingspecific;
 import static com.aurora.core.database.DbColumnNames.SOURCE_COLUMN_NAME;
 import static com.aurora.core.database.DbTableNames.RACE_TEMPLATES;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.aurora.core.database.DatabaseHolder;
@@ -106,7 +104,8 @@ public class RaceTemplates extends Item {
       for (String pair : raceTemplateSpecialAttacksIds.split(",")) {
         lst.add(Integer.valueOf(pair.split("=")[0]));
       }
-      specialAttacks = databaseHolder.specialAttacksDaO().getObjectsWithIdsAsMergedObjectItem(lst);
+      specialAttacks = new ArrayList<>(
+          (Collection<? extends SpecialAttacks>) databaseHolder.specialAttacksDaO().getObjectsWithIdsAsMergedObjectItem(lst).values());
     }
     return this;
   }
@@ -118,7 +117,8 @@ public class RaceTemplates extends Item {
       for (String pair : raceTemplateSpecialQualitiesIds.split(",")) {
         lst.add(Integer.valueOf(pair.split("=")[0]));
       }
-      specialQualities = databaseHolder.specialQualitiesDaO().getObjectsWithIdsAsMergedObjectItem(lst);
+      specialQualities = new ArrayList<>(
+          (Collection<? extends SpecialQualities>) databaseHolder.specialQualitiesDaO().getObjectsWithIdsAsMergedObjectItem(lst).values());
     }
     return this;
   }

@@ -31,7 +31,7 @@ public class HeroPlayer extends Hero {
   @Ignore
   public HeroPlayer() {
     super();
-    this.heroDescription = new HeroDescription();
+    this.heroDescription = new HeroDescription(this.getBackupNames());
   }
 
   public HeroPlayer(String name,
@@ -46,7 +46,7 @@ public class HeroPlayer extends Hero {
       HeroValues heroValues,
       HeroDescription heroDescription) {
     super(name, source, idAsNameBackup, heroValues);
-    this.heroDescription = heroDescription == null ? new HeroDescription() : heroDescription.clone();
+    this.heroDescription = heroDescription == null ? new HeroDescription(this.getBackupNames()) : heroDescription.clone();
   }
 
   public HeroPlayer clone() {

@@ -33,15 +33,13 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
   private HeroPlayer hero;
 
   @Getter
-  private String[] heroCombatTextValues;
-  @Getter
   private String[] heroAbilityScoresTextValues;
   @Getter
   private String[] heroSavingThrowsTextValues;
   @Getter
   private String[] heroDescriptionsTextValues;
   @Getter
-  private Map<Integer, Map<Integer,Integer>> heroSkillsValues;
+  private Map<Integer, Map<Integer, Integer>> heroSkillsValues;
 
   public PlayerCharacterVM(PlayerCharacterActivity activity) {
     super(activity);
@@ -54,24 +52,10 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
     DatabaseHolder databaseHolder = getDatabaseHolder(activity);
     this.setHero(databaseHolder.heroesPlayerMap
         .get(Integer.parseInt(activity.getIntent().getStringExtra(PlayerCharacterActivity.HERO_PLAYER_ID))));
-    getHero().getHeroDescription().setBackupNames(getHero().getBackupNames());
-    getHero().getHeroValues().setBackupNames(getHero().getBackupNames());
+    System.out.println("H bn-------------" + getHero().getBackupNames());//todo delete
+    System.out.println("H V bn-------------" + getHero().getHeroValues().getBackupNames());//todo delete
     getHero().getHeroValues().generateRaceFromId(databaseHolder).generateClassListFromId(databaseHolder);
 
-    heroCombatTextValues = new String[]{
-        getHero().getHeroValues().getHeroHitPointsStringFromList(),
-        getHero().getDamageReduction(),
-        getHero().getArmourClass(),
-        getHero().getArmourClassTouch(),
-        getHero().getArmourClassFlatfooted(),
-        getHero().getSpeed(),
-        getHero().getInitiative(),
-        getHero().getAttack(),
-        getHero().getAttackMelee(),
-        getHero().getAttackRanged(),
-        getHero().getGrapple(),
-        getHero().getSpellResistance()
-    };
     heroAbilityScoresTextValues = new String[]{
         getHero().getHeroValues().getHeroAbilityScoreStr().toString(),
         getHero().getHeroValues().getHeroAbilityScoreDex().toString(),
@@ -81,11 +65,11 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
         getHero().getHeroValues().getHeroAbilityScoreCha().toString()
     };
     heroSavingThrowsTextValues = new String[]{
-        getHero().getFortitude(),
-        getHero().getReflex(),
-        getHero().getWill()
+        getHero().getHeroValues().getFortitude(),
+        getHero().getHeroValues().getReflex(),
+        getHero().getHeroValues().getWill()
     };
-    heroSkillsValues = getHero().getHeroValues().getHeroSkillsValues();
+    //heroSkillsValues = getHero().getHeroValues().getHeroSkillsValues();
     heroDescriptionsTextValues = new String[]{
         getHero().getName(),
         getHero().getHeroDescription().getHeroPlayer(),
