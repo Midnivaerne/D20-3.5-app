@@ -2,14 +2,10 @@ package com.aurora.player.viewmodels;
 
 import static com.aurora.core.database.DatabaseHolder.getDatabaseHolder;
 
+import android.app.Activity;
+import androidx.viewpager.widget.ViewPager;
 import lombok.Getter;
 import lombok.Setter;
-
-import androidx.viewpager.widget.ViewPager;
-
-import android.app.Activity;
-
-import java.util.Map;
 
 import com.aurora.core.R;
 import com.aurora.core.database.DatabaseHolder;
@@ -32,15 +28,6 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
   @Setter
   private HeroPlayer hero;
 
-  @Getter
-  private String[] heroAbilityScoresTextValues;
-  @Getter
-  private String[] heroSavingThrowsTextValues;
-  @Getter
-  private String[] heroDescriptionsTextValues;
-  @Getter
-  private Map<Integer, Map<Integer, Integer>> heroSkillsValues;
-
   public PlayerCharacterVM(PlayerCharacterActivity activity) {
     super(activity);
     showBackButton();
@@ -52,37 +39,7 @@ public class PlayerCharacterVM extends ActivityViewModel<PlayerCharacterActivity
     DatabaseHolder databaseHolder = getDatabaseHolder(activity);
     this.setHero(databaseHolder.heroesPlayerMap
         .get(Integer.parseInt(activity.getIntent().getStringExtra(PlayerCharacterActivity.HERO_PLAYER_ID))));
-    getHero().getHeroValues().generateRaceFromId(databaseHolder).generateClassListFromId(databaseHolder);
-
-    heroAbilityScoresTextValues = new String[]{
-        getHero().getHeroValues().getHeroAbilityScoreStr().toString(),
-        getHero().getHeroValues().getHeroAbilityScoreDex().toString(),
-        getHero().getHeroValues().getHeroAbilityScoreCon().toString(),
-        getHero().getHeroValues().getHeroAbilityScoreInt().toString(),
-        getHero().getHeroValues().getHeroAbilityScoreWis().toString(),
-        getHero().getHeroValues().getHeroAbilityScoreCha().toString()
-    };
-    heroSavingThrowsTextValues = new String[]{
-        getHero().getHeroValues().getFortitude(),
-        getHero().getHeroValues().getReflex(),
-        getHero().getHeroValues().getWill()
-    };
-    //heroSkillsValues = getHero().getHeroValues().getHeroSkillsValues();
-    heroDescriptionsTextValues = new String[]{
-        getHero().getName(),
-        getHero().getHeroDescription().getHeroPlayer(),
-        getHero().getHeroValues().getClassListFromMap(),
-        getHero().getHeroValues().getRaceAndTemplateNamesFromObjects(),
-        getHero().getHeroValues().getAlignmentStringFromId(databaseHolder),
-        getHero().getHeroValues().getDeityStringFromId(databaseHolder),
-        getHero().getHeroValues().getSizeStringFromId(databaseHolder),
-        String.valueOf(getHero().getHeroDescription().getHeroAge()),
-        getHero().getHeroValues().getHeroGender(),
-        getHero().getHeroDescription().getHeroHeight(),
-        getHero().getHeroDescription().getHeroWeight(),
-        getHero().getHeroDescription().getHeroEyes(),
-        getHero().getHeroDescription().getHeroHair(),
-        getHero().getHeroDescription().getHeroSkin()};
+    getHero().generateAll(databaseHolder);
   }
 
   private void setTabs() {

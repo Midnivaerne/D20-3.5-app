@@ -3,17 +3,21 @@ package com.aurora.core.models.userdata;
 import static com.aurora.core.database.DbColumnNames.SOURCE_COLUMN_NAME;
 import static com.aurora.core.database.DbTableNames.HERO_PLAYER;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.models.Databases;
+import com.aurora.player.playerCharacterUtils.PlayerCharacterDescriptionsEnum;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -27,6 +31,9 @@ public class HeroPlayer extends Hero {
   @Ignore
   @Embedded
   private HeroDescription heroDescription;
+
+  @Ignore
+  private Map<PlayerCharacterDescriptionsEnum, String> textDescriptions = new HashMap<>();
 
   @Ignore
   public HeroPlayer() {
@@ -47,6 +54,29 @@ public class HeroPlayer extends Hero {
       HeroDescription heroDescription) {
     super(name, source, idAsNameBackup, heroValues);
     this.heroDescription = heroDescription == null ? new HeroDescription(this.getBackupNames()) : heroDescription.clone();
+  }
+
+  @Override
+  public void generateAll(DatabaseHolder databaseHolder) {
+    super.generateAll(databaseHolder);
+    populateTextDescriptions();
+  }
+
+  private void populateTextDescriptions() {
+    textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_NAME, getName());
+    textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_PLAYER, getHeroDescription().getHeroPlayer());
+    textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_CLASS_AND_LEVEL, getHeroValues().getClassListFromMap());
+    textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_RACE, getHeroValues().getRaceAndTemplateNamesFromObjects());
+    textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_ALIGNMENT, getHeroValues().getAlignmentString());
+    textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_DEITY, getHeroValues().getDeityString());
+    textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_SIZE, getHeroValues().getSizeString());
+    textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_AGE, String.valueOf(getHeroDescription().getHeroAge()));
+    textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_GENDER, getHeroValues().getHeroGender());
+    textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_HEIGHT, getHeroDescription().getHeroHeight());
+    textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_WEIGHT, getHeroDescription().getHeroWeight());
+    textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_EYES, getHeroDescription().getHeroEyes());
+    textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_HAIR, getHeroDescription().getHeroHair());
+    textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_SKIN, getHeroDescription().getHeroSkin());
   }
 
   public HeroPlayer clone() {

@@ -99,17 +99,17 @@ public class Monsters extends Item implements ValuesConverter {
   }
 
   @Override
-  public String getFortitude() {
+  public Integer getFortitude() {
     return null;
   }
 
   @Override
-  public String getReflex() {
+  public Integer getReflex() {
     return null;
   }
 
   @Override
-  public String getWill() {
+  public Integer getWill() {
     return null;
   }
 }

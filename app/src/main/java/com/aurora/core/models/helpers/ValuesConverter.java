@@ -24,9 +24,9 @@ public interface ValuesConverter {
 
   String getSpellResistance();
 
-  String getFortitude();
+  Integer getFortitude();
 
-  String getReflex();
+  Integer getReflex();
 
-  String getWill();
+  Integer getWill();
 }

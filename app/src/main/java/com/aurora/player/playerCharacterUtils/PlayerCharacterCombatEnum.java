@@ -2,7 +2,7 @@ package com.aurora.player.playerCharacterUtils;
 
 import com.aurora.core.R;
 
-public enum PlayerCharacterCombatEnum {
+public enum PlayerCharacterCombatEnum implements PlayerCharacterEnumBase {
   HERO_COMBAT_HIT_POINTS("hero_combat_hp_name_description") {
     @Override
     public int getFieldId() {
@@ -206,8 +206,6 @@ public enum PlayerCharacterCombatEnum {
   public String toString() {
     return this.description;
   }
-
-  public abstract int getFieldId();
 
   public abstract int getValueId();
 

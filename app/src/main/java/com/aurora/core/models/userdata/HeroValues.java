@@ -27,7 +27,6 @@ import androidx.room.Ignore;
 import androidx.room.Index;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.HashMap;
@@ -47,7 +46,9 @@ import com.aurora.core.models.settingspecific.RaceTemplates;
 import com.aurora.core.models.settingspecific.Races;
 import com.aurora.core.models.typehelpers.ItemType;
 import com.aurora.core.utils.CustomStringParsers;
+import com.aurora.player.playerCharacterUtils.PlayerCharacterAbilityScoresEnum;
 import com.aurora.player.playerCharacterUtils.PlayerCharacterCombatEnum;
+import com.aurora.player.playerCharacterUtils.PlayerCharacterSavingThrowsEnum;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -97,7 +98,7 @@ public class HeroValues extends Item implements ValuesConverter {
   private String heroClassIdList;
 
   @Ignore
-  private HashMap<Classes, Integer> classes;
+  private HashMap<Classes, Integer> classes = new HashMap<>();
 
   @ColumnInfo(name = HERO_RACE_ID_COLUMN_NAME)
   private String heroRaceId;
@@ -111,18 +112,32 @@ public class HeroValues extends Item implements ValuesConverter {
   @ColumnInfo(name = HERO_ALIGNMENT_ID_COLUMN_NAME)
   private Integer heroAlignmentId;
 
+  @Ignore
+  private String alignmentString;
+
   @ColumnInfo(name = HERO_DEITY_ID_COLUMN_NAME)
   private Integer heroDeityId;
 
+  @Ignore
+  private String deityString;
+
   @ColumnInfo(name = HERO_SIZE_COLUMN_NAME)
   private Integer heroSizeId;
+
+  @Ignore
+  private String sizeString;
 
   @ColumnInfo(name = HERO_GENDER_COLUMN_NAME)
   private String heroGender;
 
   @Ignore
-  @Getter
   private Map<PlayerCharacterCombatEnum, String> combatTextValues = new HashMap<>();
+
+  @Ignore
+  private Map<PlayerCharacterAbilityScoresEnum, Integer> abilityScoreValues = new HashMap<>();
+
+  @Ignore
+  private Map<PlayerCharacterSavingThrowsEnum, Integer> savingThrowsValues = new HashMap<>();
 
   @Ignore
   public HeroValues() {
@@ -167,7 +182,18 @@ public class HeroValues extends Item implements ValuesConverter {
     this.heroDeityId = heroDeityId;
     this.heroSizeId = heroSizeId;
     this.heroGender = heroGender;
+
+  }
+
+  public void generateAll(DatabaseHolder databaseHolder) {
+    this.generateRaceFromId(databaseHolder)
+        .generateClassListFromId(databaseHolder)
+        .generateAlignmentStringFromId(databaseHolder)
+        .generateDeityStringFromId(databaseHolder)
+        .generateSizeStringFromId(databaseHolder);
     populateCombatTextValues();
+    populateAbilityScoreValues();
+    populateSavingThrowsValues();
   }
 
   private void populateCombatTextValues() {
@@ -183,6 +209,21 @@ public class HeroValues extends Item implements ValuesConverter {
     combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_ATTACK_RANGED, getAttackRanged());
     combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_GRAPPLE, getGrapple());
     combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_SPELL_RESISTANCE, getSpellResistance());
+  }
+
+  private void populateAbilityScoreValues() {
+    abilityScoreValues.put(PlayerCharacterAbilityScoresEnum.HERO_ABILITY_SCORES_STR, getHeroAbilityScoreStr());
+    abilityScoreValues.put(PlayerCharacterAbilityScoresEnum.HERO_ABILITY_SCORES_DEX, getHeroAbilityScoreDex());
+    abilityScoreValues.put(PlayerCharacterAbilityScoresEnum.HERO_ABILITY_SCORES_CON, getHeroAbilityScoreCon());
+    abilityScoreValues.put(PlayerCharacterAbilityScoresEnum.HERO_ABILITY_SCORES_INT, getHeroAbilityScoreInt());
+    abilityScoreValues.put(PlayerCharacterAbilityScoresEnum.HERO_ABILITY_SCORES_WIS, getHeroAbilityScoreInt());
+    abilityScoreValues.put(PlayerCharacterAbilityScoresEnum.HERO_ABILITY_SCORES_CHA, getHeroAbilityScoreCha());
+  }
+
+  private void populateSavingThrowsValues() {
+    savingThrowsValues.put(PlayerCharacterSavingThrowsEnum.HERO_SAVING_THROWS_FORTITUDE, getFortitude());
+    savingThrowsValues.put(PlayerCharacterSavingThrowsEnum.HERO_SAVING_THROWS_REFLEX, getReflex());
+    savingThrowsValues.put(PlayerCharacterSavingThrowsEnum.HERO_SAVING_THROWS_WILL, getWill());
   }
 
   @Ignore
@@ -206,7 +247,6 @@ public class HeroValues extends Item implements ValuesConverter {
 
   @Ignore
   public HeroValues generateClassListFromId(DatabaseHolder databaseHolder) {
-    setClasses(new HashMap<>());
     String[] heroClasses = CustomStringParsers.stringWithCommaToTable(heroClassIdList);
     for (String clasId : heroClasses) {
       String classNameFromBackup = getBackupNames().get(ItemType.CLASSES).get(Integer.parseInt(clasId));
@@ -250,19 +290,23 @@ public class HeroValues extends Item implements ValuesConverter {
   }
 
   @Ignore
-  public String getAlignmentStringFromId(DatabaseHolder databaseHolder) {
-    return translate(databaseHolder.alignmentsMap.get(heroAlignmentId).getName());
+  public HeroValues generateAlignmentStringFromId(DatabaseHolder databaseHolder) {
+    setAlignmentString(translate(databaseHolder.alignmentsMap.get(heroAlignmentId).getName()));
+    return this;
   }
 
   @Ignore
-  public String getDeityStringFromId(DatabaseHolder databaseHolder) {
-    return translate(databaseHolder.deitiesMap.get(heroDeityId).getName());
+  public HeroValues generateDeityStringFromId(DatabaseHolder databaseHolder) {
+    setDeityString(translate(databaseHolder.deitiesMap.get(heroDeityId).getName()));
+    return this;
   }
 
   @Ignore
-  public String getSizeStringFromId(DatabaseHolder databaseHolder) {
-    return translate(databaseHolder.sizesMap.get(heroSizeId).getName());
+  public HeroValues generateSizeStringFromId(DatabaseHolder databaseHolder) {
+    setSizeString(translate(databaseHolder.sizesMap.get(heroSizeId).getName()));
+    return this;
   }
+
 
   @Ignore
   public String getHeroHitPointsStringFromList() {
@@ -350,19 +394,18 @@ public class HeroValues extends Item implements ValuesConverter {
     return String.valueOf(out);
   }
 
-  public String getFortitude() {
+  public Integer getFortitude() {
     int out = 0;//todo proper value
-    return String.valueOf(out);
+    return out;
   }
 
-  public String getReflex() {
+  public Integer getReflex() {
     int out = 0;//todo proper value
-    return String.valueOf(out);
+    return out;
   }
 
-  public String getWill() {
+  public Integer getWill() {
     int out = 0;//todo proper value
-    return String.valueOf(out);
+    return out;
   }
-
 }

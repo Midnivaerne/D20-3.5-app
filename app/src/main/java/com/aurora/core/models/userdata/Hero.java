@@ -7,6 +7,7 @@ import androidx.room.Embedded;
 import androidx.room.Ignore;
 import lombok.experimental.SuperBuilder;
 
+import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.models.helpers.Item;
 
 @EqualsAndHashCode(callSuper = true)
@@ -45,5 +46,9 @@ public class Hero extends Item {
         getSource(),
         getIdAsNameBackup(),
         getHeroValues());
+  }
+
+  public void generateAll(DatabaseHolder databaseHolder) {
+    getHeroValues().generateAll(databaseHolder);
   }
 }
