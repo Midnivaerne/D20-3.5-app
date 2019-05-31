@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.aurora.core.R;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterDescriptionsEnum;
+import com.aurora.player.playercharacterutils.PlayerCharacterDescriptionsEnum;
 import com.aurora.player.viewmodels.PlayerCharacterVM;
 
 /**

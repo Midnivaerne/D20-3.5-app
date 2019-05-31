@@ -17,7 +17,7 @@ import java.util.Map;
 
 import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.models.Databases;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterDescriptionsEnum;
+import com.aurora.player.playercharacterutils.PlayerCharacterDescriptionsEnum;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -44,15 +44,16 @@ public class HeroPlayer extends Hero {
   public HeroPlayer(String name,
       String source,
       String idAsNameBackup) {
-    new HeroPlayer(name, source, idAsNameBackup, null, null);
+    new HeroPlayer(name, source, idAsNameBackup, null, null, null);
   }
 
   public HeroPlayer(String name,
       String source,
       String idAsNameBackup,
       HeroValues heroValues,
+      HeroSkills heroSkills,
       HeroDescription heroDescription) {
-    super(name, source, idAsNameBackup, heroValues);
+    super(name, source, idAsNameBackup, heroValues, heroSkills);
     this.heroDescription = heroDescription == null ? new HeroDescription(this.getBackupNames()) : heroDescription.clone();
   }
 
@@ -84,7 +85,8 @@ public class HeroPlayer extends Hero {
         getName(),
         getSource(),
         getIdAsNameBackup(),
-        this.getHeroValues(),
+        getHeroValues(),
+        getHeroSkills(),
         getHeroDescription());
   }
 }

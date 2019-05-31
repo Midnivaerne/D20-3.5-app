@@ -1,4 +1,4 @@
-package com.aurora.player.playerCharacterUtils;
+package com.aurora.player.playercharacterutils;
 
 import static com.aurora.core.database.TranslationsHolder.translate;
 

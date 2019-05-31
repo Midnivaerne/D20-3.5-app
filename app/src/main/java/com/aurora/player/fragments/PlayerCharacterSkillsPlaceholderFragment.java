@@ -10,7 +10,7 @@ import java.util.Map;
 
 import com.aurora.core.R;
 import com.aurora.core.models.settingspecific.Skills;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterSkillsValues;
+import com.aurora.player.playercharacterutils.PlayerCharacterSkillsValues;
 import com.aurora.player.viewmodels.PlayerCharacterVM;
 
 /**

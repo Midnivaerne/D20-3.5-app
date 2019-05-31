@@ -8,15 +8,15 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.aurora.core.R;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterAbilityScoresEnum;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterAbilityScoresSpecificEnum;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterCombatEnum;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterCombatSpecificEnum;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterEnumBase;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterSavingThrowsEnum;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterSavingThrowsSpecificEnum;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterSpecificEnumBase;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterSuperBase;
+import com.aurora.player.playercharacterutils.PlayerCharacterAbilityScoresEnum;
+import com.aurora.player.playercharacterutils.PlayerCharacterAbilityScoresSpecificEnum;
+import com.aurora.player.playercharacterutils.PlayerCharacterCombatEnum;
+import com.aurora.player.playercharacterutils.PlayerCharacterCombatSpecificEnum;
+import com.aurora.player.playercharacterutils.PlayerCharacterEnumBase;
+import com.aurora.player.playercharacterutils.PlayerCharacterSavingThrowsEnum;
+import com.aurora.player.playercharacterutils.PlayerCharacterSavingThrowsSpecificEnum;
+import com.aurora.player.playercharacterutils.PlayerCharacterSpecificEnumBase;
+import com.aurora.player.playercharacterutils.PlayerCharacterSuperBase;
 import com.aurora.player.viewmodels.PlayerCharacterVM;
 
 /**

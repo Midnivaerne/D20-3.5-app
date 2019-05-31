@@ -46,9 +46,9 @@ import com.aurora.core.models.settingspecific.RaceTemplates;
 import com.aurora.core.models.settingspecific.Races;
 import com.aurora.core.models.typehelpers.ItemType;
 import com.aurora.core.utils.CustomStringParsers;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterAbilityScoresEnum;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterCombatEnum;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterSavingThrowsEnum;
+import com.aurora.player.playercharacterutils.PlayerCharacterAbilityScoresEnum;
+import com.aurora.player.playercharacterutils.PlayerCharacterCombatEnum;
+import com.aurora.player.playercharacterutils.PlayerCharacterSavingThrowsEnum;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

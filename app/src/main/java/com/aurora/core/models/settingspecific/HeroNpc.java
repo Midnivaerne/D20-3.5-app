@@ -14,6 +14,7 @@ import lombok.experimental.SuperBuilder;
 
 import com.aurora.core.models.Databases;
 import com.aurora.core.models.userdata.Hero;
+import com.aurora.core.models.userdata.HeroSkills;
 import com.aurora.core.models.userdata.HeroValues;
 
 @EqualsAndHashCode(callSuper = true)
@@ -33,14 +34,15 @@ public class HeroNpc extends Hero {
   public HeroNpc(String name,
       String source,
       String idAsNameBackup) {
-    new HeroNpc(name, source, idAsNameBackup, null);
+    new HeroNpc(name, source, idAsNameBackup, null, null);
   }
 
   public HeroNpc(String name,
       String source,
       String idAsNameBackup,
-      HeroValues heroValues) {
-    super(name, source, idAsNameBackup, heroValues);
+      HeroValues heroValues,
+      HeroSkills heroSkills) {
+    super(name, source, idAsNameBackup, heroValues, heroSkills);
   }
 
   public HeroNpc clone() {
@@ -48,6 +50,7 @@ public class HeroNpc extends Hero {
         getName(),
         getSource(),
         getIdAsNameBackup(),
-        this.getHeroValues());
+        getHeroValues(),
+        getHeroSkills());
   }
 }

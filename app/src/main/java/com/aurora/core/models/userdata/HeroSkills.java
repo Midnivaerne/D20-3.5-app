@@ -22,7 +22,7 @@ import com.aurora.core.models.Databases;
 import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.settingspecific.Skills;
 import com.aurora.core.models.typehelpers.ItemType;
-import com.aurora.player.playerCharacterUtils.PlayerCharacterSkillsValues;
+import com.aurora.player.playercharacterutils.PlayerCharacterSkillsValues;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -44,7 +44,7 @@ public class HeroSkills extends Item {
   private String heroSkills;
 
   @Ignore
-  private Map<Skills, PlayerCharacterSkillsValues> SkillListAsSkillAndValue = new HashMap<>();
+  private Map<Skills, PlayerCharacterSkillsValues> skillListAsSkillAndValue = new HashMap<>();
 
   @Ignore
   public HeroSkills() {
