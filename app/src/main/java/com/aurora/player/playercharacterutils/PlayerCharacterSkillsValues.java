@@ -3,5 +3,8 @@ package com.aurora.player.playercharacterutils;
 public enum PlayerCharacterSkillsValues {
   RANK,
   ATTRIBUTE_VALUE,
-  OTHER
+  RACIAL,
+  CLASS,
+  OTHER,
+  TEMPORARY
 }
