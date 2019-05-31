@@ -1,0 +1,41 @@
+<Database>
+  <Sizes>
+    <Sizes_Item>
+            <Name>medium_name</Name>
+    </Sizes_Item>
+  </Sizes>
+  <Alignments>
+    <Alignments_Item>
+            <Name>neutral_name</Name>
+    </Alignments_Item>
+  </Alignments>
+    <Databases>
+        <Databases_Item>
+            <Name>base_rules_name</Name>
+            <Source>base_rules</Source>
+        </Databases_Item>
+    </Databases>
+    <Translations>
+        <Translations_Item>
+            <Name>base_rules_name</Name>
+            <Source>base_rules</Source>
+            <Category>sources_names</Category>
+            <Language>en</Language>
+            <Translation>Base Rules</Translation>
+        </Translations_Item>
+        <Translations_Item>
+            <Name>medium_name</Name>
+            <Source>base_rules</Source>
+            <Category>sizes_names</Category>
+            <Language>en</Language>
+            <Translation>Medium</Translation>
+        </Translations_Item>
+        <Translations_Item>
+            <Name>neutral_name</Name>
+            <Source>base_rules</Source>
+            <Category>alignments_names</Category>
+            <Language>en</Language>
+            <Translation>Neutral</Translation>
+        </Translations_Item>
+    </Translations>
+</Database>
