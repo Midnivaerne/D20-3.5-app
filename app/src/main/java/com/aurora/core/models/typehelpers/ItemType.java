@@ -30,6 +30,7 @@ import com.aurora.core.models.usables.Equipment;
 import com.aurora.core.models.usables.Weapons;
 import com.aurora.core.models.userdata.HeroDescription;
 import com.aurora.core.models.userdata.HeroPlayer;
+import com.aurora.core.models.userdata.HeroSkills;
 import com.aurora.core.models.userdata.HeroValues;
 
 public enum ItemType implements CoreTypeHelper<ItemType, Item> {
@@ -678,46 +679,67 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     @Override
     public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
       List<Long> baseHeroIds = databaseHolder.heroPlayerDaO().insertAll(databaseHolder.heroesPlayerList);
-      List<HeroDescription> descriptions = new ArrayList<>();
-      List<HeroValues> statistics = new ArrayList<>();
+      List<HeroDescription> descriptionsSet = new ArrayList<>();
+      List<HeroValues> statisticsSet = new ArrayList<>();
+      List<HeroSkills> skillsSet = new ArrayList<>();
       for (int i = 0; i < baseHeroIds.size(); i++) {
         Integer heroId = baseHeroIds.get(i) != null ? baseHeroIds.get(i).intValue() : null;
         databaseHolder.heroesPlayerList.get(i).setItemID(heroId);
+
         HeroDescription description = databaseHolder.heroesPlayerList.get(i).getHeroDescription();
         description.setHeroParentItemID(heroId);
-        descriptions.add(description);
+        descriptionsSet.add(description);
+
         HeroValues statistic = databaseHolder.heroesPlayerList.get(i).getHeroValues();
         statistic.setHeroParentItemID(heroId);
-        statistics.add(statistic);
+        statisticsSet.add(statistic);
+
+        HeroSkills skills = databaseHolder.heroesPlayerList.get(i).getHeroSkills();
+        skills.setHeroParentItemID(heroId);
+        skillsSet.add(skills);
       }
-      databaseHolder.heroDescriptionDaO().insertAll(descriptions);
-      databaseHolder.heroStatisticsAbilityScoresDaO().insertAll(statistics);
+      databaseHolder.heroDescriptionDaO().insertAll(descriptionsSet);
+      databaseHolder.heroStatisticsAbilityScoresDaO().insertAll(statisticsSet);
+      databaseHolder.heroSkillsDaO().insertAll(skillsSet);
     }
 
     @Override
     public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
       List<HeroPlayer> heroes = new ArrayList<>(
           (Collection<? extends HeroPlayer>) databaseHolder.heroPlayerDaO().getAllObjectsAsMergedObjectItem().values());
+
       Map<Integer, HeroDescription> descriptions = (Map<Integer, HeroDescription>) databaseHolder.heroDescriptionDaO()
           .getAllObjectsAsMergedObjectItem();
       Map<Integer, Integer> parentToDescriptionId = new HashMap<>();
       for (Integer descrId : descriptions.keySet()) {
         parentToDescriptionId.put(descriptions.get(descrId) != null ? descrId : descriptions.get(descrId).getHeroParentItemID(), descrId);
       }
+
       Map<Integer, HeroValues> statistics = (Map<Integer, HeroValues>) databaseHolder.heroStatisticsAbilityScoresDaO()
           .getAllObjectsAsMergedObjectItem();
       Map<Integer, Integer> parentToStatisticsId = new HashMap<>();
       for (Integer statsId : statistics.keySet()) {
         parentToStatisticsId.put(statistics.get(statsId) != null ? statsId : statistics.get(statsId).getHeroParentItemID(), statsId);
       }
+
+      Map<Integer, HeroSkills> skills = (Map<Integer, HeroSkills>) databaseHolder.heroSkillsDaO().getAllObjectsAsMergedObjectItem();
+      Map<Integer, Integer> parentToSkillsId = new HashMap<>();
+      for (Integer skillsId : skills.keySet()) {
+        parentToSkillsId.put(skills.get(skillsId) != null ? skillsId : skills.get(skillsId).getHeroParentItemID(), skillsId);
+      }
+
       heroes.forEach((h) -> h.setHeroDescription(descriptions.get(parentToDescriptionId.get(h.getItemID()))));
       heroes.forEach((h) -> h.setHeroValues(statistics.get(parentToStatisticsId.get(h.getItemID()))));
+      heroes.forEach((h) -> h.setHeroSkills(skills.get(parentToSkillsId.get(h.getItemID()))));
+
       for (HeroPlayer heroPlayer : heroes) {
         heroPlayer.backupNamesFromIdCreator();
         heroPlayer.getHeroValues().setIdAsNameBackup(heroPlayer.getIdAsNameBackup());
         heroPlayer.getHeroValues().backupNamesFromIdCreator();
         heroPlayer.getHeroDescription().setIdAsNameBackup(heroPlayer.getIdAsNameBackup());
         heroPlayer.getHeroDescription().backupNamesFromIdCreator();
+        heroPlayer.getHeroSkills().setIdAsNameBackup(heroPlayer.getIdAsNameBackup());
+        heroPlayer.getHeroSkills().backupNamesFromIdCreator();
         databaseHolder.heroesPlayerMap.put(heroPlayer.getItemID(), heroPlayer);
       }
       databaseHolder.heroesPlayerList.addAll(heroes);

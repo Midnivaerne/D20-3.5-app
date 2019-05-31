@@ -182,7 +182,6 @@ public class HeroValues extends Item implements ValuesConverter {
     this.heroDeityId = heroDeityId;
     this.heroSizeId = heroSizeId;
     this.heroGender = heroGender;
-
   }
 
   public void generateAll(DatabaseHolder databaseHolder) {

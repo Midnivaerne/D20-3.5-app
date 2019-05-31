@@ -5,7 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
+
+import java.util.Map;
+
 import com.aurora.core.R;
+import com.aurora.core.models.settingspecific.Skills;
+import com.aurora.player.playerCharacterUtils.PlayerCharacterSkillsValues;
 import com.aurora.player.viewmodels.PlayerCharacterVM;
 
 /**
@@ -31,6 +36,7 @@ public class PlayerCharacterSkillsPlaceholderFragment extends Fragment {
     Bundle args = new Bundle();
     args.putInt(ARG_SECTION_NUMBER, sectionNumber);
     fragment.setArguments(args);
+    fragment.playerCharacterVM = playerCharacterVM;
     return fragment;
   }
 
@@ -42,5 +48,8 @@ public class PlayerCharacterSkillsPlaceholderFragment extends Fragment {
   }
 
   private void loadHeroDataFromVMtoView(View rootView) {
+    Map<Skills, PlayerCharacterSkillsValues> skillsList = playerCharacterVM.getHero().getHeroSkills().getSkillListAsSkillAndValue();
+    for (Skills skill : skillsList.keySet()) {
+    }
   }
 }

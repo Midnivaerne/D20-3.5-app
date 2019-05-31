@@ -1,25 +1,23 @@
 package com.aurora.core.database;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
-
+import android.annotation.SuppressLint;
+import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-
-import javax.inject.Singleton;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.inject.Singleton;
 
 import com.aurora.core.database.dao.DatabasesDaO;
 import com.aurora.core.database.dao.TranslationsDaO;
@@ -47,6 +45,7 @@ import com.aurora.core.database.dao.usables.EquipmentDaO;
 import com.aurora.core.database.dao.usables.WeaponsDaO;
 import com.aurora.core.database.dao.userdata.HeroDescriptionDaO;
 import com.aurora.core.database.dao.userdata.HeroPlayerDaO;
+import com.aurora.core.database.dao.userdata.HeroSkillsDaO;
 import com.aurora.core.database.dao.userdata.HeroValuesDaO;
 import com.aurora.core.models.Databases;
 import com.aurora.core.models.Translations;
@@ -76,6 +75,7 @@ import com.aurora.core.models.usables.Equipment;
 import com.aurora.core.models.usables.Weapons;
 import com.aurora.core.models.userdata.HeroDescription;
 import com.aurora.core.models.userdata.HeroPlayer;
+import com.aurora.core.models.userdata.HeroSkills;
 import com.aurora.core.models.userdata.HeroValues;
 
 @Singleton
@@ -87,7 +87,8 @@ import com.aurora.core.models.userdata.HeroValues;
     SpecialAttacks.class, SpecialQualities.class,
     Armour.class, Equipment.class, Feats.class, Skills.class, Spells.class, Weapons.class,
     Classes.class, Monsters.class, Races.class, RaceTemplates.class, Deities.class,
-    HeroNpc.class, HeroPlayer.class, HeroDescription.class, HeroValues.class,
+    HeroNpc.class, HeroPlayer.class,
+    HeroDescription.class, HeroValues.class, HeroSkills.class,
     Translations.class},
     version = 1, exportSchema = false)
 @TypeConverters(DataTypeConverters.class)
@@ -223,6 +224,8 @@ public abstract class DatabaseHolder extends RoomDatabase {
   public abstract HeroDescriptionDaO heroDescriptionDaO();
 
   public abstract HeroValuesDaO heroStatisticsAbilityScoresDaO();
+
+  public abstract HeroSkillsDaO heroSkillsDaO();
 
   public abstract HeroNpcDaO heroNpcDaO();
 

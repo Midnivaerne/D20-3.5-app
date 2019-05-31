@@ -7,6 +7,7 @@ import com.aurora.core.models.Translations;
 import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.settingspecific.RaceTemplates;
 import com.aurora.core.models.settingspecific.Races;
+import com.aurora.core.models.settingspecific.Skills;
 import com.aurora.core.models.usables.Armour;
 import com.aurora.core.models.userdata.HeroPlayer;
 
@@ -255,6 +256,12 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
       ((HeroPlayer) item).getHeroValues().setHeroAbilityScoreCha(Integer.valueOf(data));
     }
   },
+  COL_HERO_SKILLS(DbColumnNames.HERO_SKILLS_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((HeroPlayer) item).getHeroSkills().setHeroSkills(data);
+    }
+  },
 
   /////////////////////////////////////////////////////////////////
   //////////////////////////  MONSTERS  //////////////////////////
@@ -353,8 +360,51 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
       ((RaceTemplates) item).setRaceTemplateLanguages(data);
     }
   },
+
   ///////////////////////////////////////////////////////////////
   //////////////////////////  SKILLS  //////////////////////////
+  COL_SKILLS_ATTRIBUTE(DbColumnNames.SKILL_ATTRIBUTE_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Skills) item).setSkillAttribute(data);
+    }
+  },
+  COL_SKILLS_EXCLUSIVE(DbColumnNames.SKILL_EXCLUSIVE_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Skills) item).setSkillExclusive(data);
+    }
+  },
+  COL_SKILLS_ARMOUR_PENALTY(DbColumnNames.SKILL_ARMOUR_PENALTY_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Skills) item).setSkillArmourPenalty(data);
+    }
+  },
+  COL_SKILLS_CAN_HAVE_SUBSKILL(DbColumnNames.SKILL_CAN_HAVE_SUBSKILL_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Skills) item).setSkillCanHaveSubskills(data);
+    }
+  },
+  COL_SKILLS_SUBSKILL(DbColumnNames.SKILL_SUBSKILL_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Skills) item).setSkillSubskill(data);
+    }
+  },
+  COL_SKILLS_IMPROVES_OTHER(DbColumnNames.SKILL_IMPROVES_OTHER_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Skills) item).setSkillImprovesOther(data);
+    }
+  },
+  COL_SKILLS_OTHER_TO_IMPROVE(DbColumnNames.SKILL_OTHER_TO_IMPROVE_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Skills) item).setSkillOtherToImprove(data);
+    }
+  },
 
   ///////////////////////////////////////////////////////////////
   //////////////////////////  SPELLS  //////////////////////////
