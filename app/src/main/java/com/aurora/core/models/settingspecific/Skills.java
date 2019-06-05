@@ -1,6 +1,6 @@
 package com.aurora.core.models.settingspecific;
 
-import static com.aurora.core.database.DbColumnNames.SKILL_ARMOUR_PENALTY_COLUMN_NAME;
+import static com.aurora.core.database.DbColumnNames.SKILL_USE_ARMOUR_PENALTY_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.SKILL_ATTRIBUTE_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.SKILL_CAN_HAVE_SUBSKILL_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.SKILL_EXCLUSIVE_COLUMN_NAME;
@@ -40,8 +40,8 @@ public class Skills extends Item {
   @ColumnInfo(name = SKILL_EXCLUSIVE_COLUMN_NAME)
   private String skillExclusive;
 
-  @ColumnInfo(name = SKILL_ARMOUR_PENALTY_COLUMN_NAME)
-  private String skillArmourPenalty;
+  @ColumnInfo(name = SKILL_USE_ARMOUR_PENALTY_COLUMN_NAME)
+  private String skillUseArmourPenalty;
 
   @ColumnInfo(name = SKILL_CAN_HAVE_SUBSKILL_COLUMN_NAME)
   private String skillCanHaveSubskills;
@@ -78,7 +78,7 @@ public class Skills extends Item {
       String idAsNameBackup,
       String skillAttribute,
       String skillExclusive,
-      String skillArmourPenalty,
+      String skillUseArmourPenalty,
       String skillCanHaveSubskills,
       String skillSubskill,
       String skillImprovesOther,
@@ -86,7 +86,7 @@ public class Skills extends Item {
     super(name, source, idAsNameBackup);
     this.skillAttribute = skillAttribute;
     this.skillExclusive = skillExclusive;
-    this.skillArmourPenalty = skillArmourPenalty;
+    this.skillUseArmourPenalty = skillUseArmourPenalty;
     this.skillCanHaveSubskills = skillCanHaveSubskills;
     this.skillSubskill = skillSubskill;
     this.skillImprovesOther = skillImprovesOther;
@@ -100,7 +100,7 @@ public class Skills extends Item {
         getIdAsNameBackup(),
         getSkillAttribute(),
         getSkillExclusive(),
-        getSkillArmourPenalty(),
+        getSkillUseArmourPenalty(),
         getSkillCanHaveSubskills(),
         getSkillSubskill(),
         getSkillImprovesOther(),

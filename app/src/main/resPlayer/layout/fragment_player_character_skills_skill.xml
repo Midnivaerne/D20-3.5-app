@@ -24,7 +24,6 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/text_margin"
             android:layout_marginEnd="@dimen/spacing_small"
-            android:contentDescription="TODO"
             app:srcCompat="@android:drawable/checkbox_off_background" />
 
         <TextView
@@ -43,29 +42,26 @@
             android:layout_height="@dimen/box_small"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/spacing_small"
-            android:layout_toStartOf="@+id/fragment_player_character_skills_skill_ability"
-            android:contentDescription="TODO"
+            android:layout_toStartOf="@+id/fragment_player_character_skills_skill_attribute"
             app:srcCompat="@android:drawable/alert_dark_frame" />
 
         <TextView
-            android:id="@+id/fragment_player_character_skills_skill_ability"
+            android:id="@+id/fragment_player_character_skills_skill_attribute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_gravity="center_vertical|end"
             android:layout_marginStart="@dimen/spacing_small"
-            android:layout_toStartOf="@+id/fragment_player_character_skills_skill_penalty"
-            android:text="XXX"
+            android:layout_toStartOf="@+id/fragment_player_character_skills_skill_armour_penalty"
             android:textAppearance="?attr/textAppearanceListItem" />
 
         <ImageView
-            android:id="@+id/fragment_player_character_skills_skill_penalty"
+            android:id="@+id/fragment_player_character_skills_skill_armour_penalty"
             android:layout_width="@dimen/box_small"
             android:layout_height="@dimen/box_small"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/spacing_small"
             android:layout_toStartOf="@+id/fragment_player_character_skills_skill_value"
-            android:contentDescription="TODO"
             app:srcCompat="@android:drawable/star_off" />
 
         <TextView
@@ -76,7 +72,6 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/spacing_small"
             android:layout_marginEnd="@dimen/text_margin"
-            android:text="00"
             android:textAppearance="?attr/textAppearanceListItem" />
     </RelativeLayout>
 </layout>

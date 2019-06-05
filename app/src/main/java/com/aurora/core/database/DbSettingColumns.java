@@ -375,10 +375,10 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
       ((Skills) item).setSkillExclusive(data);
     }
   },
-  COL_SKILLS_ARMOUR_PENALTY(DbColumnNames.SKILL_ARMOUR_PENALTY_COLUMN_NAME, false) {
+  COL_SKILLS_ARMOUR_PENALTY(DbColumnNames.SKILL_USE_ARMOUR_PENALTY_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((Skills) item).setSkillArmourPenalty(data);
+      ((Skills) item).setSkillUseArmourPenalty(data);
     }
   },
   COL_SKILLS_CAN_HAVE_SUBSKILL(DbColumnNames.SKILL_CAN_HAVE_SUBSKILL_COLUMN_NAME, false) {

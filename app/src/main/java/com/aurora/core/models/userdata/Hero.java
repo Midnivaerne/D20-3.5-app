@@ -58,5 +58,6 @@ public class Hero extends Item {
 
   public void generateAll(DatabaseHolder databaseHolder) {
     getHeroValues().generateAll(databaseHolder);
+    getHeroSkills().generateSkillListAsSkillAndRank(databaseHolder);
   }
 }

@@ -18,11 +18,11 @@ import lombok.experimental.SuperBuilder;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.models.Databases;
 import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.settingspecific.Skills;
 import com.aurora.core.models.typehelpers.ItemType;
-import com.aurora.player.playercharacterutils.PlayerCharacterSkillsValues;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -44,7 +44,7 @@ public class HeroSkills extends Item {
   private String heroSkills;
 
   @Ignore
-  private Map<Skills, PlayerCharacterSkillsValues> skillListAsSkillAndValue = new HashMap<>();
+  private Map<Skills, Integer> skillListAsSkillAndRank = new HashMap<>();
 
   @Ignore
   public HeroSkills() {
@@ -72,6 +72,13 @@ public class HeroSkills extends Item {
     super(name, source, idAsNameBackup);
     this.heroParentItemID = heroParentItemID;
     this.heroSkills = heroSkills;
+  }
+
+  void generateSkillListAsSkillAndRank(DatabaseHolder databaseHolder) {
+    for (String skillRankPair : heroSkills.split(",")) {
+      skillListAsSkillAndRank
+          .put(databaseHolder.skillsMap.get(Integer.valueOf(skillRankPair.split("=")[0])), Integer.valueOf(skillRankPair.split("=")[1]));
+    }
   }
 
   public HeroSkills clone() {

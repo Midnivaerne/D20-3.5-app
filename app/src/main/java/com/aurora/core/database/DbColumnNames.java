@@ -20,7 +20,6 @@ public class DbColumnNames {
   public static final String HERO_EYES_COLUMN_NAME = "Eyes";
   public static final String HERO_HAIR_COLUMN_NAME = "Hair";
   public static final String HERO_SKIN_COLUMN_NAME = "Skin";
-  public static final String HERO_SKILLS_COLUMN_NAME = "Skills";
   public static final String CATEGORY_COLUMN_NAME = "Category";
   public static final String LANGUAGE_COLUMN_NAME = "Language";
   public static final String TRANS_COLUMN_NAME = "Translation";
@@ -62,13 +61,14 @@ public class DbColumnNames {
   public static final String HERO_ABILITY_SCORE_INT_COLUMN_NAME = "Hero_Int";
   public static final String HERO_ABILITY_SCORE_WIS_COLUMN_NAME = "Hero_Wis";
   public static final String HERO_ABILITY_SCORE_CHA_COLUMN_NAME = "Hero_Cha";
-  public static final String SKILL_ATTRIBUTE_COLUMN_NAME = "Attribute";
-  public static final String SKILL_EXCLUSIVE_COLUMN_NAME = "Exclusive";
-  public static final String SKILL_ARMOUR_PENALTY_COLUMN_NAME = "Armour_Penalty";
-  public static final String SKILL_CAN_HAVE_SUBSKILL_COLUMN_NAME = "Can_Have_Subskill";
-  public static final String SKILL_SUBSKILL_COLUMN_NAME = "Subskill_Name";
-  public static final String SKILL_IMPROVES_OTHER_COLUMN_NAME = "Improves_Other";
-  public static final String SKILL_OTHER_TO_IMPROVE_COLUMN_NAME = "Other_To_Improve";
+  public static final String HERO_SKILLS_COLUMN_NAME = "Hero_Skill_List";
+  public static final String SKILL_ATTRIBUTE_COLUMN_NAME = "Skill_Attribute";
+  public static final String SKILL_EXCLUSIVE_COLUMN_NAME = "Skill_Exclusive";
+  public static final String SKILL_USE_ARMOUR_PENALTY_COLUMN_NAME = "Skill_Use_Armour_Penalty";
+  public static final String SKILL_CAN_HAVE_SUBSKILL_COLUMN_NAME = "Skill_Can_Have_Subskill";
+  public static final String SKILL_SUBSKILL_COLUMN_NAME = "Skill_Subskill_Name";
+  public static final String SKILL_IMPROVES_OTHER_COLUMN_NAME = "Skill_Improves_Other";
+  public static final String SKILL_OTHER_TO_IMPROVE_COLUMN_NAME = "Skill_Other_To_Improve";
 
 
 }

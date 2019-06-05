@@ -118,7 +118,7 @@ public class PlayerCharactersListVM extends ActivityViewModel<PlayerCharactersLi
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-      Hero hero = heroPlayerMap.get(position + 1);
+      Hero hero = heroPlayerMap.get(position + 1); //todo check for id conflicts after several in-app hero player adding and deleting
 
       holder.idView.setText(translate(hero.getName()));
       holder.idView.setTag(hero);

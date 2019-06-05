@@ -17,8 +17,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/fragment_player_character_layout"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/fragment_player_character_skills_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -26,6 +26,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/fragment_player_character_skills_skill">
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.recyclerview.widget.RecyclerView>
     </ScrollView>
 </layout>

@@ -1,41 +1,63 @@
 <Database>
   <Sizes>
     <Sizes_Item>
-            <Name>medium_name</Name>
+      <Name>medium_name</Name>
     </Sizes_Item>
   </Sizes>
   <Alignments>
     <Alignments_Item>
-            <Name>neutral_name</Name>
+      <Name>neutral_name</Name>
     </Alignments_Item>
   </Alignments>
-    <Databases>
-        <Databases_Item>
-            <Name>base_rules_name</Name>
-            <Source>base_rules</Source>
-        </Databases_Item>
-    </Databases>
-    <Translations>
-        <Translations_Item>
-            <Name>base_rules_name</Name>
-            <Source>base_rules</Source>
-            <Category>sources_names</Category>
-            <Language>en</Language>
-            <Translation>Base Rules</Translation>
-        </Translations_Item>
-        <Translations_Item>
-            <Name>medium_name</Name>
-            <Source>base_rules</Source>
-            <Category>sizes_names</Category>
-            <Language>en</Language>
-            <Translation>Medium</Translation>
-        </Translations_Item>
-        <Translations_Item>
-            <Name>neutral_name</Name>
-            <Source>base_rules</Source>
-            <Category>alignments_names</Category>
-            <Language>en</Language>
-            <Translation>Neutral</Translation>
-        </Translations_Item>
-    </Translations>
+  <Databases>
+    <Databases_Item>
+      <Name>base_rules_name</Name>
+      <Source>base_rules</Source>
+    </Databases_Item>
+  </Databases>
+  <Skills>
+    <Skills_Item>
+      <Name>skill_one_name</Name>
+      <Source>base_rules</Source>
+      <Skill_Attribute>STR</Skill_Attribute>
+      <Skill_Exclusive>false</Skill_Exclusive>
+      <Skill_Armour_Penalty>false</Skill_Armour_Penalty>
+      <Skill_Can_Have_Subskill>false</Skill_Can_Have_Subskill>
+      <Skill_Improves_Other>false</Skill_Improves_Other>
+    </Skills_Item>
+    <Skills_Item>
+      <Name>skill_two_name</Name>
+      <Source>base_rules</Source>
+      <Skill_Attribute>INT</Skill_Attribute>
+      <Skill_Exclusive>true</Skill_Exclusive>
+      <Skill_Armour_Penalty>true</Skill_Armour_Penalty>
+      <Skill_Can_Have_Subskill>true</Skill_Can_Have_Subskill>
+      <Skill_Subskill_Name>subskill_name</Skill_Subskill_Name>
+      <Skill_Improves_Other>true</Skill_Improves_Other>
+      <Skill_Other_To_Improve>skill_one_name</Skill_Other_To_Improve>
+    </Skills_Item>
+  </Skills>
+  <Translations>
+    <Translations_Item>
+      <Name>base_rules_name</Name>
+      <Source>base_rules</Source>
+      <Category>sources_names</Category>
+      <Language>en</Language>
+      <Translation>Base Rules</Translation>
+    </Translations_Item>
+    <Translations_Item>
+      <Name>medium_name</Name>
+      <Source>base_rules</Source>
+      <Category>sizes_names</Category>
+      <Language>en</Language>
+      <Translation>Medium</Translation>
+    </Translations_Item>
+    <Translations_Item>
+      <Name>neutral_name</Name>
+      <Source>base_rules</Source>
+      <Category>alignments_names</Category>
+      <Language>en</Language>
+      <Translation>Neutral</Translation>
+    </Translations_Item>
+  </Translations>
 </Database>
