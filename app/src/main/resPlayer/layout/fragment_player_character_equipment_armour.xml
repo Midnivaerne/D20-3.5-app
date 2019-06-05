@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_player_character_equipment_armour"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/fragment_player_character_equipment_armour_name"
+            layout="@layout/fragment_number_value_with_description_box" />
+
+        <include
+            android:id="@+id/fragment_player_character_equipment_armour_ac"
+            layout="@layout/fragment_number_value_with_description_box" />
+
+        <include
+            android:id="@+id/fragment_player_character_equipment_armour_dex"
+            layout="@layout/fragment_number_value_with_description_box" />
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/fragment_player_character_equipment_armour_properties"
+        layout="@layout/fragment_number_value_with_description_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

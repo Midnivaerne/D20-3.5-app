@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">D20 3.5 app</string>
-    <string name="action_settings">Ustawienia</string>
-    <string name="DM_button">Narzędzia mistrza Gry</string>
-    <string name="PC_button">Narzędzia Gracza</string>
-    <string name="title_activity_dm_">Narzędzia mistrza Gry</string>
-    <string name="title_activity_pc_">Bohaterowie Gracza</string>
-    <string name="action_help">Pomoc</string>
-</resources>

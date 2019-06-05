@@ -3,5 +3,15 @@
     <color name="colorPrimary">#007e00</color>
     <color name="colorPrimaryDark">#006400</color>
     <color name="colorAccent">#646400</color>
+
+    <color name="colorDarkPrimary">#7e000b</color>
+    <color name="colorDarkPrimaryDark">#3d0001</color>
+
     <color name="black_effective">#000000</color>
+    <color name="black_overlay">#66000000</color>
+
+
+    <color name="grey_light">#A9A9A9</color>
+    <color name="grey_medium">#808080</color>
+    <color name="grey_dark">#696969</color>
 </resources>
