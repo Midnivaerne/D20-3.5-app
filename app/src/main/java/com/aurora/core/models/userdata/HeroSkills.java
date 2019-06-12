@@ -116,7 +116,6 @@ public class HeroSkills extends Item {
         for (String entry : skill.getSkillOtherToImprove().split(SPLITTER_COMA)) {
           Skills skillToImprove = ((Skills) getObjectWithNameFromList(entry.split(SPLITTER_EQUALITY)[0],
               new ArrayList<>(allSettingSkillsWithOtherModifiers.keySet())));
-          System.out.println("---------" + entry);//todo delete
           Integer rankNeeded = Integer.valueOf(entry.split(SPLITTER_EQUALITY)[1].split(SPLITTER_SLASH)[0]);
           Integer actualRank = skillListAsSkillAndRank.containsKey(skill) ? skillListAsSkillAndRank.get(skill) : 0;
           if (rankNeeded.compareTo(actualRank) <= 0) {
