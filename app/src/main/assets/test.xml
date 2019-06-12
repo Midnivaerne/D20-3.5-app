@@ -94,7 +94,7 @@
       <Name>Another_Hero_Name</Name>
       <Source>Player_Hero_Source</Source>
       <Id_As_Name_Backup>
-        Classes{1=classNameTagWithId1,2=classNameTagWithId2},Races{1=Test_race_name1,1=raceTemplateNameTagwithId1},Deities{1=NameTagWithId1},Skills{1=skill_one_name,2=skill_one_name}
+        Classes{1=classNameTagWithId1,2=classNameTagWithId2},Races{1=Test_race_name1,1=raceTemplateNameTagwithId1},Deities{1=NameTagWithId1},Skills{1=skill_one_name,2=skill_one_name,3=skill_three_name}
       </Id_As_Name_Backup>
       <Player>Player</Player>
       <Class_And_Level>1,2</Class_And_Level>
@@ -116,7 +116,7 @@
       <Hero_Int>9</Hero_Int>
       <Hero_Wis>15</Hero_Wis>
       <Hero_Cha>16</Hero_Cha>
-      <Hero_Skill_List>1=5,2=5</Hero_Skill_List>
+      <Hero_Skill_List>1=5,2=5,3=5</Hero_Skill_List>
     </HeroPlayer_Item>
   </HeroPlayer>
   <Translations>

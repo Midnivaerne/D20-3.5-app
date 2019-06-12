@@ -21,6 +21,9 @@ import java.util.Locale;
 public final class CommonUtils {
 
   public static final String TIMESTAMP_FORMAT = "yyyyMMdd_HHmmss";
+  public static final String SPLITTER_EQUALITY = "=";
+  public static final String SPLITTER_COMA = ",";
+  public static final String SPLITTER_SLASH = "/";
 
   private CommonUtils() {
     // This utility class is not publicly instantiable

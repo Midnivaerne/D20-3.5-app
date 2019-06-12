@@ -1,27 +1,34 @@
 package com.aurora.player.fragments;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 import static com.aurora.core.database.TranslationsHolder.translate;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.aurora.core.R;
-import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.settingspecific.Skills;
+import com.aurora.core.models.userdata.HeroPlayer;
+import com.aurora.player.playercharacterutils.PlayerCharacterSkillsValues;
 import com.aurora.player.viewmodels.PlayerCharacterVM;
-import com.aurora.player.views.PlayerCharacterActivity;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -58,61 +65,64 @@ public class PlayerCharacterSkillsPlaceholderFragment extends Fragment {
   }
 
   private void loadHeroDataFromVMtoView(View rootView) {
-    Map<Skills, Integer> skillsList = playerCharacterVM.getHero().getHeroSkills().getSkillListAsSkillAndRank(); //todo include also skills without ranks
-    for (Skills skill : skillsList.keySet()) {
-      //((TextView) rootView.findViewById(fieldBase.getFieldId()).findViewById(specificBase.getSpecificFieldId(fieldBase)))
-      //    .setText(skillsList.get(skill));
-    }
-
     View recyclerView = rootView.findViewById(R.id.fragment_player_character_skills_layout);
     assert recyclerView != null;
     ((RecyclerView) recyclerView)
-        .setAdapter(new SkillsRecyclerViewAdapter(skillsList));
+        .setAdapter(new SkillsRecyclerViewAdapter(playerCharacterVM.getHero()));
   }
 
   public static class SkillsRecyclerViewAdapter extends RecyclerView.Adapter<SkillsRecyclerViewAdapter.ViewHolder> {
 
-    private final Map<Skills, Integer> heroSkillsMap;
-    private final Map<Integer, Skills> skillsMapOnView = new HashMap<>();
-    private final View.OnClickListener onClickListener = new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Context context = view.getContext();
-        //Intent intent = new Intent(context, PlayerCharacterSkillDetailActivity.class);
-        //intent.putExtra(PlayerCharacterSkillDetailFragment.ARG_ITEM_ID, getListId(view));
-        //intent.putExtra(PlayerCharacterActivity.HERO_PLAYER_ID, getSkillId(view));
-        //context.startActivity(intent);
-        //todo popup window with skill values and description
-      }
+    private HeroPlayer playerHero;
+    private final Map<Integer, Skills> allSkillsMapOnView = new HashMap<>();
+    private final Map<Integer, Skills> heroSkillsMapOnView = new HashMap<>();
+
+    private final View.OnClickListener onClickListener = view -> {
+      LayoutInflater inflater = (LayoutInflater) view.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+      View popupView = inflater.inflate(R.layout.popup_window_skills_detail, null);
+      Skills skill = (Skills) view.getTag();
+      ((TextView) popupView.findViewById(R.id.skill_detail_name)).setText(translate(skill.getName()));
+      ((TextView) popupView.findViewById(R.id.skill_detail_value)).setText(String.valueOf(
+          playerHero.getHeroSkills().getValuesHolder().get(skill).get(PlayerCharacterSkillsValues.RANK) + playerHero.getHeroSkills()
+              .getValuesHolder().get(skill).get(PlayerCharacterSkillsValues.ATTRIBUTE_MODIFIER) + playerHero.getHeroSkills()
+              .getValuesHolder().get(skill).get(PlayerCharacterSkillsValues.OTHER)));
+      ((TextView) popupView.findViewById(R.id.skill_detail_rank))
+          .setText(String.valueOf(playerHero.getHeroSkills().getValuesHolder().get(skill).get(PlayerCharacterSkillsValues.RANK)));
+      ((TextView) popupView.findViewById(R.id.skill_detail_attribute_modifier)).setText(
+          String.valueOf(playerHero.getHeroSkills().getValuesHolder().get(skill).get(PlayerCharacterSkillsValues.ATTRIBUTE_MODIFIER)));
+      ((TextView) popupView.findViewById(R.id.skill_detail_other_modifier))
+          .setText(String.valueOf(playerHero.getHeroSkills().getValuesHolder().get(skill).get(PlayerCharacterSkillsValues.OTHER)));
+      int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+      int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+      boolean focusable = true;
+      final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+      popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+      popupWindow.setElevation(20);
+      popupView.setOnTouchListener(new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+          popupWindow.dismiss();
+          return true;
+        }
+      });
     };
 
-    private final View.OnClickListener playerCharactersListItemButtonOnClickListener = new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Context context = view.getContext();
-        Intent intent = new Intent(context, PlayerCharacterActivity.class);
-        intent.putExtra(PlayerCharacterActivity.HERO_PLAYER_ID, getSkillId(view));
-        context.startActivity(intent);
-      }
-    };
+    SkillsRecyclerViewAdapter(HeroPlayer playerHero) {
+      this.playerHero = playerHero;
+      generateIds();
+    }
 
-    SkillsRecyclerViewAdapter(Map<Skills, Integer> heroSkillsMap) {
-      this.heroSkillsMap = heroSkillsMap;
+    void generateIds() {
+      List<Skills> sortedList = new ArrayList<>(playerHero.getHeroSkills().getAllSettingSkillsWithOtherModifiers().keySet());
+      Collections.sort(sortedList, new SkillsComparator());
       int i = 1;
-      for (Skills skill : heroSkillsMap.keySet()) {
-        skillsMapOnView.put(i, skill);
+      for (Skills skill : sortedList) {
+        allSkillsMapOnView.put(i, skill);
+        if (playerHero.getHeroSkills().getSkillListAsSkillAndRank().keySet().contains(skill)) {
+          heroSkillsMapOnView.put(i, skill);
+        }
         i++;
       }
-    }
-
-    private String getListId(View view) {
-      Item skill = (Skills) view.getTag();
-      int listId = skill.getItemID();
-      return String.valueOf(listId);
-    }
-
-    private String getSkillId(View view) {
-      return String.valueOf(((Skills) view.getTag()).getItemID());
     }
 
     @Override
@@ -124,8 +134,7 @@ public class PlayerCharacterSkillsPlaceholderFragment extends Fragment {
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
-      Skills skill = skillsMapOnView.get(position + 1);
-      String rank = String.valueOf(heroSkillsMap.get(skill));
+      Skills skill = allSkillsMapOnView.get(position + 1);
 
       //holder.skillProficiency.setImageDrawable(); //todo set/hide image
       holder.skillProficiency.setTag(skill);
@@ -147,7 +156,11 @@ public class PlayerCharacterSkillsPlaceholderFragment extends Fragment {
       holder.skillArmourPenalty.setTag(skill);
       holder.skillArmourPenalty.setOnClickListener(onClickListener);
 
-      holder.skillValue.setText(rank); //todo add modifiers
+      holder.skillValue.setText(String.valueOf(
+          playerHero.getHeroSkills().getValuesHolder().get(skill).get(PlayerCharacterSkillsValues.RANK) + playerHero.getHeroSkills()
+              .getValuesHolder().get(skill)
+              .get(PlayerCharacterSkillsValues.ATTRIBUTE_MODIFIER) + playerHero.getHeroSkills().getValuesHolder().get(skill)
+              .get(PlayerCharacterSkillsValues.OTHER)));
       holder.skillValue.setTag(skill);
       holder.skillValue.setOnClickListener(onClickListener);
 
@@ -155,7 +168,7 @@ public class PlayerCharacterSkillsPlaceholderFragment extends Fragment {
 
     @Override
     public int getItemCount() {
-      return heroSkillsMap.size();
+      return playerHero.getHeroSkills().getAllSettingSkillsWithOtherModifiers().size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -175,6 +188,19 @@ public class PlayerCharacterSkillsPlaceholderFragment extends Fragment {
         skillAttribute = (TextView) view.findViewById(R.id.fragment_player_character_skills_skill_attribute);
         skillArmourPenalty = (ImageView) view.findViewById(R.id.fragment_player_character_skills_skill_armour_penalty);
         skillValue = (TextView) view.findViewById(R.id.fragment_player_character_skills_skill_value);
+      }
+    }
+
+    private class SkillsComparator implements Comparator {
+
+      @Override
+      public int compare(Object o1, Object o2) {
+        return ((Skills) o1).getName().compareTo(((Skills) o2).getName());
+      }
+
+      @Override
+      public boolean equals(Object obj) {
+        return false;
       }
     }
   }

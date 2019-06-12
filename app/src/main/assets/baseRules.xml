@@ -34,7 +34,17 @@
       <Skill_Can_Have_Subskill>true</Skill_Can_Have_Subskill>
       <Skill_Subskill_Name>subskill_name</Skill_Subskill_Name>
       <Skill_Improves_Other>true</Skill_Improves_Other>
-      <Skill_Other_To_Improve>skill_one_name</Skill_Other_To_Improve>
+      <Skill_Other_To_Improve>skill_one_name=5/2</Skill_Other_To_Improve>
+    </Skills_Item>
+    <Skills_Item>
+      <Name>skill_three_name</Name>
+      <Source>base_rules</Source>
+      <Skill_Attribute>WIS</Skill_Attribute>
+      <Skill_Exclusive>false</Skill_Exclusive>
+      <Skill_Armour_Penalty>false</Skill_Armour_Penalty>
+      <Skill_Can_Have_Subskill>false</Skill_Can_Have_Subskill>
+      <Skill_Improves_Other>true</Skill_Improves_Other>
+      <Skill_Other_To_Improve>skill_one_name=5/2,skill_two_name=5/2</Skill_Other_To_Improve>
     </Skills_Item>
   </Skills>
   <Translations>

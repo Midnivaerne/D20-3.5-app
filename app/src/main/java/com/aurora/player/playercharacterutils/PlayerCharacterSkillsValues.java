@@ -39,7 +39,7 @@ public enum PlayerCharacterSkillsValues {
       return R.id.fragment_player_character_skills_skill_value;
     }
   },
-  ATTRIBUTE_VALUE {
+  ATTRIBUTE_MODIFIER {
     @Override
     public int getFieldId() {
       return 0;
