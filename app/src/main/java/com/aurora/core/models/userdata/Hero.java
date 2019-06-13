@@ -1,5 +1,7 @@
 package com.aurora.core.models.userdata;
 
+import static com.aurora.core.models.userdata.HeroValues.getStatisticModifier;
+
 import androidx.room.Embedded;
 import androidx.room.Ignore;
 import lombok.Data;
@@ -8,6 +10,7 @@ import lombok.experimental.SuperBuilder;
 
 import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.models.helpers.Item;
+import com.aurora.player.playercharacterutils.PlayerCharacterAbilityScoresEnum;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -33,7 +36,7 @@ public class Hero extends Item {
   public Hero(String name,
       String source,
       String idAsNameBackup) {
-    new Hero(name, source, idAsNameBackup, null,null);
+    new Hero(name, source, idAsNameBackup, null, null);
   }
 
 
@@ -59,5 +62,10 @@ public class Hero extends Item {
   public void generateAll(DatabaseHolder databaseHolder) {
     getHeroValues().generateAll(databaseHolder);
     getHeroSkills().generateSkillListAsSkillAndRank(databaseHolder);
+    for (PlayerCharacterAbilityScoresEnum attr : getHeroValues().getAbilityScoreValues().keySet()) {
+      getHeroSkills().getAttributeModifiers().put(attr, getStatisticModifier(getHeroValues().getAbilityScoreValues().get(attr)));
+    }
+    getHeroSkills().loadAllSettingSkills(databaseHolder, getHeroValues().getRace().getRaceSkills(),
+        getHeroValues().getRaceTemplate() != null ? getHeroValues().getRaceTemplate().getRaceTemplateSkills() : null);
   }
 }

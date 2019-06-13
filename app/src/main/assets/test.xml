@@ -26,16 +26,19 @@
       <Name>Test_race_name1</Name>
       <Source>Test_race_source</Source>
       <Race_Description>bla bla bla descr test11oneonone</Race_Description>
+      <Race_Skill_Modifiers>4=1</Race_Skill_Modifiers>
     </Races_Item>
     <Races_Item>
       <Name>Test_race_name2</Name>
       <Source>Test_race_source</Source>
       <Race_Description>trutututu asdasdffgdf</Race_Description>
+      <Race_Skill_Modifiers>4=2</Race_Skill_Modifiers>
     </Races_Item>
     <Races_Item>
       <Name>Test_race_name3</Name>
       <Source>Test_race_source2</Source>
       <Race_Description>gdsfgdfgdfgffgdf</Race_Description>
+      <Race_Skill_Modifiers>4=3</Race_Skill_Modifiers>
     </Races_Item>
   </Races>
   <RaceTemplates>
@@ -43,6 +46,7 @@
       <Name>raceTemplateNameTagwithId1</Name>
       <Source>Test_race_source</Source>
       <Race_Template_Description>bdfgfgt11oneonone</Race_Template_Description>
+      <Race_Template_Skill_Modifiers>5=1</Race_Template_Skill_Modifiers>
     </RaceTemplates_Item>
   </RaceTemplates>
   <Classes>
@@ -94,7 +98,7 @@
       <Name>Another_Hero_Name</Name>
       <Source>Player_Hero_Source</Source>
       <Id_As_Name_Backup>
-        Classes{1=classNameTagWithId1,2=classNameTagWithId2},Races{1=Test_race_name1,1=raceTemplateNameTagwithId1},Deities{1=NameTagWithId1},Skills{1=skill_one_name,2=skill_one_name}
+        Classes{1=classNameTagWithId1,2=classNameTagWithId2},Races{1=Test_race_name1,1=raceTemplateNameTagwithId1},Deities{1=NameTagWithId1},Skills{1=skill_one_name,2=skill_one_name,3=skill_three_name}
       </Id_As_Name_Backup>
       <Player>Player</Player>
       <Class_And_Level>1,2</Class_And_Level>
@@ -116,7 +120,7 @@
       <Hero_Int>9</Hero_Int>
       <Hero_Wis>15</Hero_Wis>
       <Hero_Cha>16</Hero_Cha>
-      <Hero_Skill_List>1=5,2=5</Hero_Skill_List>
+      <Hero_Skill_List>1=5,2=5,3=5</Hero_Skill_List>
     </HeroPlayer_Item>
   </HeroPlayer>
   <Translations>

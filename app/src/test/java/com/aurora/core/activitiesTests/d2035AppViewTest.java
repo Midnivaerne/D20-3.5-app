@@ -1,4 +1,4 @@
-package com.aurora.core.ActivitiesTests;
+package com.aurora.core.activitiesTests;
 
 import org.junit.Test;
 

@@ -18,7 +18,7 @@ public class PlayerCharacterAllSectionsPagerAdapter extends FragmentPagerAdapter
   private PlayerCharacterVM playerCharacterVM;
 
   public PlayerCharacterAllSectionsPagerAdapter(FragmentManager fragmentManager, PlayerCharacterVM playerCharacterVM) {
-    super(fragmentManager);
+    super(fragmentManager,FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     this.playerCharacterVM = playerCharacterVM;
   }
 

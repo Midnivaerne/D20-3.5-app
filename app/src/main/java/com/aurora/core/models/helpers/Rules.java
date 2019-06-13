@@ -2,8 +2,6 @@ package com.aurora.core.models.helpers;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Ignore;
