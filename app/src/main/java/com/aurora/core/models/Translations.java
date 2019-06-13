@@ -5,8 +5,6 @@ import static com.aurora.core.database.DbTableNames.TRANSLATIONS;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

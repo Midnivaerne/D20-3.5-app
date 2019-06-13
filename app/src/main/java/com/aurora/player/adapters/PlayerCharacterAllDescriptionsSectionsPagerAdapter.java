@@ -3,6 +3,7 @@ package com.aurora.player.adapters;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
 import com.aurora.player.fragments.PlayerCharacterDescriptionAppearancePlaceholderFragment;
 import com.aurora.player.fragments.PlayerCharacterDescriptionJournalPlaceholderFragment;
 import com.aurora.player.fragments.PlayerCharacterDescriptionQuestsPlaceholderFragment;
@@ -16,7 +17,7 @@ public class PlayerCharacterAllDescriptionsSectionsPagerAdapter extends Fragment
   private PlayerCharacterVM playerCharacterVM;
 
   public PlayerCharacterAllDescriptionsSectionsPagerAdapter(FragmentManager fragmentManager, PlayerCharacterVM playerCharacterVM) {
-    super(fragmentManager);
+    super(fragmentManager, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     this.playerCharacterVM = playerCharacterVM;
   }
 

@@ -59,7 +59,7 @@ public class HeroSkills extends Item {
   private Map<Skills, Map<PlayerCharacterSkillsValues, Integer>> valuesHolder = new HashMap<>();
 
   @Ignore
-  private Map<PlayerCharacterAbilityScoresEnum, Integer> attributeModifiers = new HashMap();
+  private Map<PlayerCharacterAbilityScoresEnum, Integer> attributeModifiers = new HashMap<>();
 
   @Ignore
   public HeroSkills() {
@@ -100,14 +100,14 @@ public class HeroSkills extends Item {
 
   HeroSkills loadAllSettingSkills(DatabaseHolder databaseHolder, String raceSkills, String raceTemplateSkills) {
     Map<Skills, Integer> raceSkillsMap = new HashMap<>();
-    if (raceSkills != null && raceSkills != "") {
+    if (raceSkills != null && !raceSkills.equals("")) {
       for (String skillRankPair : raceSkills.split(SPLITTER_COMA)) {
         raceSkillsMap.put(databaseHolder.skillsMap.get(Integer.valueOf(skillRankPair.split(SPLITTER_EQUALITY)[0])),
             Integer.valueOf(skillRankPair.split(SPLITTER_EQUALITY)[1]));
       }
     }
     Map<Skills, Integer> raceTemplateSkillsMap = new HashMap<>();
-    if (raceTemplateSkills != null && raceTemplateSkills != "") {
+    if (raceTemplateSkills != null && !raceTemplateSkills.equals("")) {
       for (String skillRankPair : raceTemplateSkills.split(SPLITTER_COMA)) {
         raceTemplateSkillsMap.put(databaseHolder.skillsMap.get(Integer.valueOf(skillRankPair.split(SPLITTER_EQUALITY)[0])),
             Integer.valueOf(skillRankPair.split(SPLITTER_EQUALITY)[1]));
