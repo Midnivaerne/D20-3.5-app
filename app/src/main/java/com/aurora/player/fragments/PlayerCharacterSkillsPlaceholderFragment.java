@@ -135,16 +135,26 @@ public class PlayerCharacterSkillsPlaceholderFragment extends Fragment {
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
       Skills skill = allSkillsMapOnView.get(position + 1);
-
-      //holder.skillProficiency.setImageDrawable(); //todo set/hide image
+      if (heroSkillsMapOnView.containsValue(skill)) {
+        //holder.skillProficiency.setImageDrawable(); //todo set proficient image
+      } else {
+        //holder.skillProficiency.setImageDrawable(); //todo set not proficient image
+      }
       holder.skillProficiency.setTag(skill);
       holder.skillProficiency.setOnClickListener(onClickListener);
 
-      holder.skillName.setText(translate(skill.getName()));
+      if (skill.getSkillCanHaveSubskills() != null && skill.getSkillCanHaveSubskills().equals("true")) {
+        holder.skillName.setText(
+            new StringBuilder().append(translate(skill.getName())).append(" (").append(skill.getSkillSubskill()).append(")").toString());
+      } else {
+        holder.skillName.setText(translate(skill.getName()));
+      }
       holder.skillName.setTag(skill);
       holder.skillName.setOnClickListener(onClickListener);
 
-      //holder.skillCanUntrained.setImageDrawable(); //todo set/hide image
+      if (skill.getSkillExclusive().equals("false")) {
+        holder.skillCanUntrained.setImageDrawable(null);
+      }
       holder.skillCanUntrained.setTag(skill);
       holder.skillCanUntrained.setOnClickListener(onClickListener);
 
@@ -152,7 +162,9 @@ public class PlayerCharacterSkillsPlaceholderFragment extends Fragment {
       holder.skillAttribute.setTag(skill);
       holder.skillAttribute.setOnClickListener(onClickListener);
 
-      //holder.skillArmourPenalty.setImageDrawable((); //todo set/hide image
+      if (skill.getSkillUseArmourPenalty().equals("false")) {
+        holder.skillArmourPenalty.setImageDrawable(null);
+      }
       holder.skillArmourPenalty.setTag(skill);
       holder.skillArmourPenalty.setOnClickListener(onClickListener);
 

@@ -65,6 +65,7 @@ public class Hero extends Item {
     for (PlayerCharacterAbilityScoresEnum attr : getHeroValues().getAbilityScoreValues().keySet()) {
       getHeroSkills().getAttributeModifiers().put(attr, getStatisticModifier(getHeroValues().getAbilityScoreValues().get(attr)));
     }
-    getHeroSkills().loadAllSettingSkills(databaseHolder,getHeroValues().getRace().getRaceSkills());
+    getHeroSkills().loadAllSettingSkills(databaseHolder, getHeroValues().getRace().getRaceSkills(),
+        getHeroValues().getRaceTemplate() != null ? getHeroValues().getRaceTemplate().getRaceTemplateSkills() : null);
   }
 }

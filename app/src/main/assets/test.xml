@@ -26,16 +26,19 @@
       <Name>Test_race_name1</Name>
       <Source>Test_race_source</Source>
       <Race_Description>bla bla bla descr test11oneonone</Race_Description>
+      <Race_Skill_Modifiers>4=1</Race_Skill_Modifiers>
     </Races_Item>
     <Races_Item>
       <Name>Test_race_name2</Name>
       <Source>Test_race_source</Source>
       <Race_Description>trutututu asdasdffgdf</Race_Description>
+      <Race_Skill_Modifiers>4=2</Race_Skill_Modifiers>
     </Races_Item>
     <Races_Item>
       <Name>Test_race_name3</Name>
       <Source>Test_race_source2</Source>
       <Race_Description>gdsfgdfgdfgffgdf</Race_Description>
+      <Race_Skill_Modifiers>4=3</Race_Skill_Modifiers>
     </Races_Item>
   </Races>
   <RaceTemplates>
@@ -43,6 +46,7 @@
       <Name>raceTemplateNameTagwithId1</Name>
       <Source>Test_race_source</Source>
       <Race_Template_Description>bdfgfgt11oneonone</Race_Template_Description>
+      <Race_Template_Skill_Modifiers>5=1</Race_Template_Skill_Modifiers>
     </RaceTemplates_Item>
   </RaceTemplates>
   <Classes>

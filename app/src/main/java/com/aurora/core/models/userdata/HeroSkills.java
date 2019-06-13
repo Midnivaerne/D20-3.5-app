@@ -98,19 +98,30 @@ public class HeroSkills extends Item {
     return this;
   }
 
-  HeroSkills loadAllSettingSkills(DatabaseHolder databaseHolder, String raceSkills) {
+  HeroSkills loadAllSettingSkills(DatabaseHolder databaseHolder, String raceSkills, String raceTemplateSkills) {
     Map<Skills, Integer> raceSkillsMap = new HashMap<>();
-    for (String skillRankPair : raceSkills.split(SPLITTER_COMA)) {
-      raceSkillsMap.put(databaseHolder.skillsMap.get(Integer.valueOf(skillRankPair.split(SPLITTER_EQUALITY)[0])),
-          Integer.valueOf(skillRankPair.split(SPLITTER_EQUALITY)[1]));
+    if (raceSkills != null && raceSkills != "") {
+      for (String skillRankPair : raceSkills.split(SPLITTER_COMA)) {
+        raceSkillsMap.put(databaseHolder.skillsMap.get(Integer.valueOf(skillRankPair.split(SPLITTER_EQUALITY)[0])),
+            Integer.valueOf(skillRankPair.split(SPLITTER_EQUALITY)[1]));
+      }
+    }
+    Map<Skills, Integer> raceTemplateSkillsMap = new HashMap<>();
+    if (raceTemplateSkills != null && raceTemplateSkills != "") {
+      for (String skillRankPair : raceTemplateSkills.split(SPLITTER_COMA)) {
+        raceTemplateSkillsMap.put(databaseHolder.skillsMap.get(Integer.valueOf(skillRankPair.split(SPLITTER_EQUALITY)[0])),
+            Integer.valueOf(skillRankPair.split(SPLITTER_EQUALITY)[1]));
+      }
     }
     for (Skills skill : databaseHolder.skillsList) {
       if (!allSettingSkillsWithOtherModifiers.containsKey(skill)) {
         allSettingSkillsWithOtherModifiers.put(skill, 0);
       }
       if (raceSkillsMap.containsKey(skill)) {
-        allSettingSkillsWithOtherModifiers
-            .replace(skill, allSettingSkillsWithOtherModifiers.get(skill) + raceSkillsMap.get(skill));
+        allSettingSkillsWithOtherModifiers.replace(skill, allSettingSkillsWithOtherModifiers.get(skill) + raceSkillsMap.get(skill));
+      }
+      if (raceTemplateSkillsMap.containsKey(skill)) {
+        allSettingSkillsWithOtherModifiers.replace(skill, allSettingSkillsWithOtherModifiers.get(skill) + raceTemplateSkillsMap.get(skill));
       }
       if ("true".equals(skill.getSkillImprovesOther())) {
         for (String entry : skill.getSkillOtherToImprove().split(SPLITTER_COMA)) {

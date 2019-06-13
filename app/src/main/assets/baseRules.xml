@@ -21,7 +21,7 @@
       <Source>base_rules</Source>
       <Skill_Attribute>STR</Skill_Attribute>
       <Skill_Exclusive>false</Skill_Exclusive>
-      <Skill_Armour_Penalty>false</Skill_Armour_Penalty>
+      <Skill_Use_Armour_Penalty>false</Skill_Use_Armour_Penalty>
       <Skill_Can_Have_Subskill>false</Skill_Can_Have_Subskill>
       <Skill_Improves_Other>false</Skill_Improves_Other>
     </Skills_Item>
@@ -30,7 +30,7 @@
       <Source>base_rules</Source>
       <Skill_Attribute>INT</Skill_Attribute>
       <Skill_Exclusive>true</Skill_Exclusive>
-      <Skill_Armour_Penalty>true</Skill_Armour_Penalty>
+      <Skill_Use_Armour_Penalty>true</Skill_Use_Armour_Penalty>
       <Skill_Can_Have_Subskill>true</Skill_Can_Have_Subskill>
       <Skill_Subskill_Name>subskill_name</Skill_Subskill_Name>
       <Skill_Improves_Other>true</Skill_Improves_Other>
@@ -41,10 +41,29 @@
       <Source>base_rules</Source>
       <Skill_Attribute>WIS</Skill_Attribute>
       <Skill_Exclusive>false</Skill_Exclusive>
-      <Skill_Armour_Penalty>false</Skill_Armour_Penalty>
-      <Skill_Can_Have_Subskill>false</Skill_Can_Have_Subskill>
+      <Skill_Use_Armour_Penalty>false</Skill_Use_Armour_Penalty>
+      <Skill_Can_Have_Subskill>true</Skill_Can_Have_Subskill>
+      <Skill_Subskill_Name>subskill2_name</Skill_Subskill_Name>
       <Skill_Improves_Other>true</Skill_Improves_Other>
       <Skill_Other_To_Improve>skill_one_name=5/2,skill_two_name=5/2</Skill_Other_To_Improve>
+    </Skills_Item>
+    <Skills_Item>
+      <Name>skill_for_race_test</Name>
+      <Source>base_rules</Source>
+      <Skill_Attribute>DEX</Skill_Attribute>
+      <Skill_Exclusive>false</Skill_Exclusive>
+      <Skill_Use_Armour_Penalty>true</Skill_Use_Armour_Penalty>
+      <Skill_Can_Have_Subskill>false</Skill_Can_Have_Subskill>
+      <Skill_Improves_Other>false</Skill_Improves_Other>
+    </Skills_Item>
+    <Skills_Item>
+      <Name>skill_for_race_template_test</Name>
+      <Source>base_rules</Source>
+      <Skill_Attribute>CHA</Skill_Attribute>
+      <Skill_Exclusive>true</Skill_Exclusive>
+      <Skill_Use_Armour_Penalty>false</Skill_Use_Armour_Penalty>
+      <Skill_Can_Have_Subskill>false</Skill_Can_Have_Subskill>
+      <Skill_Improves_Other>false</Skill_Improves_Other>
     </Skills_Item>
   </Skills>
   <Translations>
