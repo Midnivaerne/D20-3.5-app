@@ -36,11 +36,12 @@ public class Monsters extends Item implements ValuesConverter {
     super(name, source, idAsNameBackup);
   }
 
-  public Monsters clone() {
-    return new Monsters(
-        getName(),
-        getSource(),
-        getIdAsNameBackup());
+  @Ignore
+  public Monsters(Monsters source) {
+    new Monsters(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup());
   }
 
   @Override

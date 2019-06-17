@@ -129,20 +129,22 @@ public class Races extends Item {
     return this;
   }
 
-  public Races clone() {
-    return new Races(getName(),
-        getSource(),
-        getIdAsNameBackup(),
-        getRaceDescription(),
-        getRaceAttributeModifiers(),
-        getRaceSize(),
-        getRaceSpeed(),
-        getRaceSpecialAttacksIds(),
-        getRaceSpecialQualitiesIds(),
-        getRaceFeats(),
-        getRaceSkills(),
-        getRaceLanguages(),
-        getFavouriteClass());
+  @Ignore
+  public Races(Races source) {
+    new Races(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup(),
+        source.getRaceDescription(),
+        source.getRaceAttributeModifiers(),
+        source.getRaceSize(),
+        source.getRaceSpeed(),
+        source.getRaceSpecialAttacksIds(),
+        source.getRaceSpecialQualitiesIds(),
+        source.getRaceFeats(),
+        source.getRaceSkills(),
+        source.getRaceLanguages(),
+        source.getFavouriteClass());
   }
 
 }

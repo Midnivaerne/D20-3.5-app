@@ -37,6 +37,12 @@ public class Rules implements CoreHelper {
     this.name = name;
   }
 
+  @Ignore
+  public Rules(Rules source) {
+    new Rules(
+        source.getName());
+  }
+
   public Rules createRulesGroup(RulesType rulesType) {
     switch (rulesType) {
       case ALIGNMENTS:

@@ -35,11 +35,12 @@ public class EnergyTypes extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  public EnergyTypes clone() {
-    return new EnergyTypes(
-        getName(),
-        getSource(),
-        getIdAsNameBackup());
+  @Ignore
+  public EnergyTypes(EnergyTypes source) {
+    new EnergyTypes(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup());
   }
 
 }

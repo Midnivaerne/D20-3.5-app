@@ -123,19 +123,20 @@ public class RaceTemplates extends Item {
     return this;
   }
 
-  public RaceTemplates clone() {
-    return new RaceTemplates(
-        getName(),
-        getSource(),
-        getIdAsNameBackup(),
-        getRaceTemplateDescription(),
-        getRaceTemplateAttributeModifiers(),
-        getRaceTemplateSize(),
-        getRaceTemplateSpeed(),
-        getRaceTemplateSpecialAttacksIds(),
-        getRaceTemplateSpecialQualitiesIds(),
-        getRaceTemplateFeats(),
-        getRaceTemplateSkills(),
-        getRaceTemplateLanguages());
+  @Ignore
+  public RaceTemplates(RaceTemplates source) {
+    new RaceTemplates(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup(),
+        source.getRaceTemplateDescription(),
+        source.getRaceTemplateAttributeModifiers(),
+        source.getRaceTemplateSize(),
+        source.getRaceTemplateSpeed(),
+        source.getRaceTemplateSpecialAttacksIds(),
+        source.getRaceTemplateSpecialQualitiesIds(),
+        source.getRaceTemplateFeats(),
+        source.getRaceTemplateSkills(),
+        source.getRaceTemplateLanguages());
   }
 }

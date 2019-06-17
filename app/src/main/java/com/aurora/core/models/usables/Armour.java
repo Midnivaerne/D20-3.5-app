@@ -90,20 +90,20 @@ public class Armour extends Item {
     this.armourMagicImprovements = armourMagicImprovements;
   }
 
-  public Armour clone() {
-    return new Armour(
-        getName(),
-        getSource(),
-        getIdAsNameBackup(),
-        getArmourPrice(),
-        getArmourDeflection(),
-        getArmourMaxDexterityBonus(),
-        getArmourPenalty(),
-        getArmourArcaneFailure(),
-        getArmourMaxSpeed(),
-        getArmourWeight(),
-        getArmourSpecialProperties(),
-        getArmourMaterial(),
-        getArmourMagicImprovements());
+  public Armour(Armour source) {
+    new Armour(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup(),
+        source.getArmourPrice(),
+        source.getArmourDeflection(),
+        source.getArmourMaxDexterityBonus(),
+        source.getArmourPenalty(),
+        source.getArmourArcaneFailure(),
+        source.getArmourMaxSpeed(),
+        source.getArmourWeight(),
+        source.getArmourSpecialProperties(),
+        source.getArmourMaterial(),
+        source.getArmourMagicImprovements());
   }
 }

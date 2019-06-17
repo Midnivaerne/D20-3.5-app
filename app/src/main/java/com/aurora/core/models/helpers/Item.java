@@ -59,8 +59,12 @@ public class Item implements CoreHelper {
     }
   }
 
-  public Item clone() {
-    return new Item(name, source, idAsNameBackup);
+  @Ignore
+  public Item(Item sourceItem) {
+    new Item(
+        sourceItem.getName(),
+        sourceItem.getSource(),
+        sourceItem.getIdAsNameBackup());
   }
 
   protected boolean canEqual(Object other) {

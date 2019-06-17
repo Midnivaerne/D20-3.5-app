@@ -51,14 +51,15 @@ public class Translations extends Item {
     this.trans = trans;
   }
 
-  public Translations clone() {
-    return new Translations(
-        getName(),
-        getSource(),
-        getIdAsNameBackup(),
-        getCategory(),
-        getLanguage(),
-        getTrans());
+  @Ignore
+  public Translations (Translations source) {
+    new Translations(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup(),
+        source.getCategory(),
+        source.getLanguage(),
+        source.getTrans());
   }
 
 }

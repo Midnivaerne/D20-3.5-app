@@ -38,10 +38,11 @@ public class SpecialQualities extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  public SpecialQualities clone() {
-    return new SpecialQualities(
-        getName(),
-        getSource(),
-        getIdAsNameBackup());
+  @Ignore
+  public SpecialQualities(SpecialQualities source) {
+    new SpecialQualities(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup());
   }
 }

@@ -35,10 +35,11 @@ public class Feats extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  public Feats clone() {
-    return new Feats(
-        getName(),
-        getSource(),
-        getIdAsNameBackup());
+  @Ignore
+  public Feats(Feats source) {
+    new Feats(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup());
   }
 }

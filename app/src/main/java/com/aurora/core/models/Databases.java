@@ -31,13 +31,14 @@ public class Databases extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  public Databases clone() {
+  @Ignore
+  public Databases(Databases source) {
     //return Databases.builder().name(getName()).source(getSource()).idAsNameBackup(getIdAsNameBackup()).build();
     // todo wait for lombok plugin update that will support @SuperBuilder
-    return new Databases(
-        getName(),
-        getSource(),
-        getIdAsNameBackup());
+    new Databases(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup());
   }
 }
 

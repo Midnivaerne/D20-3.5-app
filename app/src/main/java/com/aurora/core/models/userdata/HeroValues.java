@@ -312,25 +312,26 @@ public class HeroValues extends Item implements ValuesConverter {
     return CustomStringParsers.stringWithCommaToSum(heroHitPoints);
   }
 
-  public HeroValues clone() {
-    return new HeroValues(
-        getName(),
-        getSource(),
-        getIdAsNameBackup(),
-        getHeroParentItemID(),
-        getHeroHitPoints(),
-        getHeroAbilityScoreStr(),
-        getHeroAbilityScoreDex(),
-        getHeroAbilityScoreCon(),
-        getHeroAbilityScoreInt(),
-        getHeroAbilityScoreWis(),
-        getHeroAbilityScoreCha(),
-        getHeroClassIdList(),
-        getHeroRaceId(),
-        getHeroAlignmentId(),
-        getHeroDeityId(),
-        getHeroSizeId(),
-        getHeroGender());
+  @Ignore
+  public HeroValues(HeroValues source) {
+    new HeroValues(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup(),
+        source.getHeroParentItemID(),
+        source.getHeroHitPoints(),
+        source.getHeroAbilityScoreStr(),
+        source.getHeroAbilityScoreDex(),
+        source.getHeroAbilityScoreCon(),
+        source.getHeroAbilityScoreInt(),
+        source.getHeroAbilityScoreWis(),
+        source.getHeroAbilityScoreCha(),
+        source.getHeroClassIdList(),
+        source.getHeroRaceId(),
+        source.getHeroAlignmentId(),
+        source.getHeroDeityId(),
+        source.getHeroSizeId(),
+        source.getHeroGender());
   }
 
   public String getDamageReduction() {

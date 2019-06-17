@@ -35,10 +35,11 @@ public class Weapons extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  public Weapons clone() {
-    return new Weapons(
-        getName(),
-        getSource(),
-        getIdAsNameBackup());
+  @Ignore
+  public Weapons(Weapons source) {
+    new Weapons(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup());
   }
 }

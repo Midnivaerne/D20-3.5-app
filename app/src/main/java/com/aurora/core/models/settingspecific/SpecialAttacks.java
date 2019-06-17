@@ -36,10 +36,11 @@ public class SpecialAttacks extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  public SpecialAttacks clone() {
-    return new SpecialAttacks(
-        getName(),
-        getSource(),
-        getIdAsNameBackup());
+  @Ignore
+  public SpecialAttacks(SpecialAttacks source) {
+    new SpecialAttacks(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup());
   }
 }

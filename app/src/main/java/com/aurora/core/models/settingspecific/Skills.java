@@ -93,17 +93,18 @@ public class Skills extends Item {
     this.skillOtherToImprove = skillOtherToImprove;
   }
 
-  public Skills clone() {
-    return new Skills(
-        getName(),
-        getSource(),
-        getIdAsNameBackup(),
-        getSkillAttribute(),
-        getSkillExclusive(),
-        getSkillUseArmourPenalty(),
-        getSkillCanHaveSubskills(),
-        getSkillSubskill(),
-        getSkillImprovesOther(),
-        getSkillOtherToImprove());
+  @Ignore
+  public Skills(Skills source) {
+    new Skills(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup(),
+        source.getSkillAttribute(),
+        source.getSkillExclusive(),
+        source.getSkillUseArmourPenalty(),
+        source.getSkillCanHaveSubskills(),
+        source.getSkillSubskill(),
+        source.getSkillImprovesOther(),
+        source.getSkillOtherToImprove());
   }
 }

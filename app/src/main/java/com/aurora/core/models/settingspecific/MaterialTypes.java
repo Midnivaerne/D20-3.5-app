@@ -35,11 +35,12 @@ public class MaterialTypes extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  public MaterialTypes clone() {
-    return new MaterialTypes(
-        getName(),
-        getSource(),
-        getIdAsNameBackup());
+  @Ignore
+  public MaterialTypes(MaterialTypes source) {
+    new MaterialTypes(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup());
   }
 
 }

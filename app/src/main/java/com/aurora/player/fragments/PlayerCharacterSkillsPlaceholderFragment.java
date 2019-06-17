@@ -214,6 +214,11 @@ public class PlayerCharacterSkillsPlaceholderFragment extends Fragment {
       public boolean equals(Object obj) {
         return false;
       }
+
+      @Override
+      public int hashCode() {
+        return 0;
+      }
     }
   }
 }

@@ -26,7 +26,9 @@ public class Alignments extends Rules {
     super(name);
   }
 
-  public Alignments clone() {
-    return new Alignments(getName());
+  @Ignore
+  public Alignments(Alignments source) {
+    new Alignments(
+        source.getName());
   }
 }

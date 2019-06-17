@@ -37,10 +37,11 @@ public class Classes extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  public Classes clone() {
-    return new Classes(
-        getName(),
-        getSource(),
-        getIdAsNameBackup());
+  @Ignore
+  public Classes(Classes source) {
+    new Classes(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup());
   }
 }

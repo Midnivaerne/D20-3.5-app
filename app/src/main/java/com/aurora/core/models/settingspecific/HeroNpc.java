@@ -45,12 +45,13 @@ public class HeroNpc extends Hero {
     super(name, source, idAsNameBackup, heroValues, heroSkills);
   }
 
-  public HeroNpc clone() {
-    return new HeroNpc(
-        getName(),
-        getSource(),
-        getIdAsNameBackup(),
-        getHeroValues(),
-        getHeroSkills());
+  @Ignore
+  public HeroNpc(HeroNpc source) {
+    new HeroNpc(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup(),
+        source.getHeroValues(),
+        source.getHeroSkills());
   }
 }

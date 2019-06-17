@@ -46,17 +46,18 @@ public class Hero extends Item {
       HeroValues heroValues,
       HeroSkills heroSkills) {
     super(name, source, idAsNameBackup);
-    this.heroValues = heroValues == null ? new HeroValues(this.getBackupNames()) : heroValues.clone();
-    this.heroSkills = heroSkills == null ? new HeroSkills(this.getBackupNames()) : heroSkills.clone();
+    this.heroValues = heroValues == null ? new HeroValues(this.getBackupNames()) : new HeroValues(heroValues);
+    this.heroSkills = heroSkills == null ? new HeroSkills(this.getBackupNames()) : new HeroSkills(heroSkills);
   }
 
-  public Hero clone() {
-    return new Hero(
-        getName(),
-        getSource(),
-        getIdAsNameBackup(),
-        getHeroValues(),
-        getHeroSkills());
+  @Ignore
+  public Hero(Hero source) {
+    new Hero(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup(),
+        source.getHeroValues(),
+        source.getHeroSkills());
   }
 
   public void generateAll(DatabaseHolder databaseHolder) {

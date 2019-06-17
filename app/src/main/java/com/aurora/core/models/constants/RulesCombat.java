@@ -26,7 +26,9 @@ public class RulesCombat extends Rules {
     super(name);
   }
 
-  public RulesCombat clone() {
-    return new RulesCombat(getName());
+  @Ignore
+  public RulesCombat(RulesCombat source) {
+    new RulesCombat(
+        source.getName());
   }
 }

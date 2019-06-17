@@ -54,7 +54,7 @@ public class HeroPlayer extends Hero {
       HeroSkills heroSkills,
       HeroDescription heroDescription) {
     super(name, source, idAsNameBackup, heroValues, heroSkills);
-    this.heroDescription = heroDescription == null ? new HeroDescription(this.getBackupNames()) : heroDescription.clone();
+    this.heroDescription = heroDescription == null ? new HeroDescription(this.getBackupNames()) : new HeroDescription(heroDescription);
   }
 
   @Override
@@ -80,13 +80,14 @@ public class HeroPlayer extends Hero {
     textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_SKIN, getHeroDescription().getHeroSkin());
   }
 
-  public HeroPlayer clone() {
-    return new HeroPlayer(
-        getName(),
-        getSource(),
-        getIdAsNameBackup(),
-        getHeroValues(),
-        getHeroSkills(),
-        getHeroDescription());
+  @Ignore
+  public HeroPlayer(HeroPlayer source) {
+    new HeroPlayer(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup(),
+        source.getHeroValues(),
+        source.getHeroSkills(),
+        source.getHeroDescription());
   }
 }

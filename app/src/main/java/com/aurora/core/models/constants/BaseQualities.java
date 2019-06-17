@@ -26,7 +26,9 @@ public class BaseQualities extends Rules {
     super(name);
   }
 
-  public BaseQualities clone() {
-    return new BaseQualities(getName());
+  @Ignore
+  public BaseQualities(BaseQualities source) {
+    new BaseQualities(
+        source.getName());
   }
 }

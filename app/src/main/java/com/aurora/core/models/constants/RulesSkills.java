@@ -26,7 +26,9 @@ public class RulesSkills extends Rules {
     super(name);
   }
 
-  public RulesSkills clone() {
-    return new RulesSkills(getName());
+  @Ignore
+  public RulesSkills(RulesSkills source) {
+    new RulesSkills(
+        source.getName());
   }
 }

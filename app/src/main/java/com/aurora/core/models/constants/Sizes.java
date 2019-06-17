@@ -26,7 +26,9 @@ public class Sizes extends Rules {
     super(name);
   }
 
-  public Sizes clone() {
-    return new Sizes(getName());
+  @Ignore
+  public Sizes(Sizes source) {
+    new Sizes(
+        source.getName());
   }
 }

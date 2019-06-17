@@ -152,12 +152,13 @@ public class HeroSkills extends Item {
     return this;
   }
 
-  public HeroSkills clone() {
-    return new HeroSkills(
-        getName(),
-        getSource(),
-        getIdAsNameBackup(),
-        getHeroParentItemID(),
-        getHeroSkills());
+  @Ignore
+  public HeroSkills(HeroSkills source) {
+    new HeroSkills(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup(),
+        source.getHeroParentItemID(),
+        source.getHeroSkills());
   }
 }

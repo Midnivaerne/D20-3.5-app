@@ -26,7 +26,8 @@ public class CoreStates extends Rules {
     super(name);
   }
 
-  public CoreStates clone() {
-    return new CoreStates(getName());
+  @Ignore
+  public CoreStates(CoreStates source) {
+    new CoreStates(source.getName());
   }
 }

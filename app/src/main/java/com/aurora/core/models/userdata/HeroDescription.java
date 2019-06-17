@@ -97,18 +97,19 @@ public class HeroDescription extends Item {
     this.heroSkin = heroSkin;
   }
 
-  public HeroDescription clone() {
-    return new HeroDescription(
-        getName(),
-        getSource(),
-        getIdAsNameBackup(),
-        getHeroParentItemID(),
-        getHeroPlayer(),
-        getHeroAge(),
-        getHeroHeight(),
-        getHeroWeight(),
-        getHeroEyes(),
-        getHeroHair(),
-        getHeroSkin());
+  @Ignore
+  public HeroDescription (HeroDescription source) {
+    new HeroDescription(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup(),
+        source.getHeroParentItemID(),
+        source.getHeroPlayer(),
+        source.getHeroAge(),
+        source.getHeroHeight(),
+        source.getHeroWeight(),
+        source.getHeroEyes(),
+        source.getHeroHair(),
+        source.getHeroSkin());
   }
 }

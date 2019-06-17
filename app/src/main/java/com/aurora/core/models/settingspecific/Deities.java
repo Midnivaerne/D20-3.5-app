@@ -37,10 +37,11 @@ public class Deities extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  public Deities clone() {
-    return new Deities(
-        getName(),
-        getSource(),
-        getIdAsNameBackup());
+  @Ignore
+  public Deities(Deities source) {
+    new Deities(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup());
   }
 }

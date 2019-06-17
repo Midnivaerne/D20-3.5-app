@@ -35,10 +35,11 @@ public class Spells extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  public Spells clone() {
-    return new Spells(
-        getName(),
-        getSource(),
-        getIdAsNameBackup());
+  @Ignore
+  public Spells(Spells source) {
+    new Spells(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup());
   }
 }
