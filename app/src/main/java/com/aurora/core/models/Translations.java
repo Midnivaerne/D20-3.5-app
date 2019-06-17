@@ -52,7 +52,7 @@ public class Translations extends Item {
   }
 
   @Ignore
-  public Translations (Translations source) {
+  public Translations(Translations source) {
     new Translations(
         source.getName(),
         source.getSource(),

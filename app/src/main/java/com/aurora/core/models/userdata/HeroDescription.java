@@ -98,7 +98,7 @@ public class HeroDescription extends Item {
   }
 
   @Ignore
-  public HeroDescription (HeroDescription source) {
+  public HeroDescription(HeroDescription source) {
     new HeroDescription(
         source.getName(),
         source.getSource(),
