@@ -43,10 +43,13 @@ import com.aurora.core.database.dao.settingspecific.SpellsDaO;
 import com.aurora.core.database.dao.usables.ArmourDaO;
 import com.aurora.core.database.dao.usables.EquipmentDaO;
 import com.aurora.core.database.dao.usables.WeaponsDaO;
+import com.aurora.core.database.dao.userdata.HeroArmourDaO;
 import com.aurora.core.database.dao.userdata.HeroDescriptionDaO;
+import com.aurora.core.database.dao.userdata.HeroEquipmentDaO;
 import com.aurora.core.database.dao.userdata.HeroPlayerDaO;
 import com.aurora.core.database.dao.userdata.HeroSkillsDaO;
 import com.aurora.core.database.dao.userdata.HeroValuesDaO;
+import com.aurora.core.database.dao.userdata.HeroWeaponsDaO;
 import com.aurora.core.models.Databases;
 import com.aurora.core.models.Translations;
 import com.aurora.core.models.constants.Alignments;
@@ -73,10 +76,13 @@ import com.aurora.core.models.typehelpers.RulesType;
 import com.aurora.core.models.usables.Armour;
 import com.aurora.core.models.usables.Equipment;
 import com.aurora.core.models.usables.Weapons;
+import com.aurora.core.models.userdata.HeroArmour;
 import com.aurora.core.models.userdata.HeroDescription;
+import com.aurora.core.models.userdata.HeroEquipment;
 import com.aurora.core.models.userdata.HeroPlayer;
 import com.aurora.core.models.userdata.HeroSkills;
 import com.aurora.core.models.userdata.HeroValues;
+import com.aurora.core.models.userdata.HeroWeapons;
 
 @Singleton
 @Database(entities = {
@@ -88,7 +94,7 @@ import com.aurora.core.models.userdata.HeroValues;
     Armour.class, Equipment.class, Feats.class, Skills.class, Spells.class, Weapons.class,
     Classes.class, Monsters.class, Races.class, RaceTemplates.class, Deities.class,
     HeroNpc.class, HeroPlayer.class,
-    HeroDescription.class, HeroValues.class, HeroSkills.class,
+    HeroDescription.class, HeroValues.class, HeroSkills.class, HeroWeapons.class, HeroArmour.class, HeroEquipment.class,
     Translations.class},
     version = 1, exportSchema = false)
 @TypeConverters(DataTypeConverters.class)
@@ -130,6 +136,9 @@ public abstract class DatabaseHolder extends RoomDatabase {
   public final List<Monsters> monstersList = new ArrayList<>();
   public final List<RaceTemplates> raceTemplatesList = new ArrayList<>();
   public final List<HeroPlayer> heroesPlayerList = new ArrayList<>();
+  public final List<HeroWeapons> heroesWeaponsList = new ArrayList<>();
+  public final List<HeroArmour> heroesArmourList = new ArrayList<>();
+  public final List<HeroEquipment> heroesEquipmentList = new ArrayList<>();
   public final List<HeroNpc> heroesNpcList = new ArrayList<>();
   public final List<Deities> deitiesList = new ArrayList<>();
   public final List<Translations> translationsList = new ArrayList<>();
@@ -164,6 +173,9 @@ public abstract class DatabaseHolder extends RoomDatabase {
   public final Map<Integer, Monsters> monstersMap = new HashMap<>();
   public final Map<Integer, RaceTemplates> raceTemplatesMap = new HashMap<>();
   public final Map<Integer, HeroPlayer> heroesPlayerMap = new HashMap<>();
+  public final Map<Integer, HeroWeapons> heroesWeaponsMap = new HashMap<>();
+  public final Map<Integer, HeroArmour> heroesArmourMap = new HashMap<>();
+  public final Map<Integer, HeroEquipment> heroesEquipmentMap = new HashMap<>();
   public final Map<Integer, HeroNpc> heroesNpcMap = new HashMap<>();
   public final Map<Integer, Deities> deitiesMap = new HashMap<>();
   public final Map<Integer, Translations> translationsMap = new HashMap<>();
@@ -226,6 +238,12 @@ public abstract class DatabaseHolder extends RoomDatabase {
   public abstract HeroValuesDaO heroStatisticsAbilityScoresDaO();
 
   public abstract HeroSkillsDaO heroSkillsDaO();
+
+  public abstract HeroWeaponsDaO heroWeaponsDaO();
+
+  public abstract HeroArmourDaO heroArmourDaO();
+
+  public abstract HeroEquipmentDaO heroEquipmentDaO();
 
   public abstract HeroNpcDaO heroNpcDaO();
 

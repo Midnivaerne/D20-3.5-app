@@ -33,6 +33,7 @@ public class DbColumnNames {
   public static final String ARMOUR_SPECIAL_PROPERTIES_COLUMN_NAME = "Armour_Special_Properties";
   public static final String ARMOUR_MATERIAL_COLUMN_NAME = "Armour_Material";
   public static final String ARMOUR_MAGIC_IMPROVEMENTS_COLUMN_NAME = "Armour_Magic_Improvements";
+  public static final String EQUIPMENT_IS_CONTAINER_COLUMN_NAME = "Equipment_Is_Container";
   public static final String RACE_DESCRIPTION_COLUMN_NAME = "Race_Description";
   public static final String RACE_ATTRIBUTE_MODIFIERS_COLUMN_NAME = "Race_Attribute_Modifiers";
   public static final String RACE_SIZE_COLUMN_NAME = "Race_Size";
@@ -62,6 +63,11 @@ public class DbColumnNames {
   public static final String HERO_ABILITY_SCORE_WIS_COLUMN_NAME = "Hero_Wis";
   public static final String HERO_ABILITY_SCORE_CHA_COLUMN_NAME = "Hero_Cha";
   public static final String HERO_SKILLS_COLUMN_NAME = "Hero_Skill_List";
+  public static final String HERO_PARENT_WEAPON_ID_COLUMN_NAME = "Hero_Parent_Weapon_Id";
+  public static final String HERO_PARENT_ARMOUR_ID_COLUMN_NAME = "Hero_Parent_Armour_Id";
+  public static final String HERO_PARENT_EQUIPMENT_ID_COLUMN_NAME = "Hero_Parent_Equipment_Id";
+  public static final String HERO_EQUIPMENT_WORN_PLACE_COLUMN_NAME = "Hero_Equipment_Worn_Place";
+  public static final String HERO_EQUIPMENT_CONTAINER_COLUMN_NAME = "Hero_Equipment_Container";
   public static final String SKILL_ATTRIBUTE_COLUMN_NAME = "Skill_Attribute";
   public static final String SKILL_EXCLUSIVE_COLUMN_NAME = "Skill_Exclusive";
   public static final String SKILL_USE_ARMOUR_PENALTY_COLUMN_NAME = "Skill_Use_Armour_Penalty";

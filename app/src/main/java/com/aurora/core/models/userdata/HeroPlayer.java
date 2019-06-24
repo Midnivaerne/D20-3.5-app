@@ -3,7 +3,6 @@ package com.aurora.core.models.userdata;
 import static com.aurora.core.database.DbColumnNames.SOURCE_COLUMN_NAME;
 import static com.aurora.core.database.DbTableNames.HERO_PLAYER;
 
-import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
@@ -29,7 +28,6 @@ import com.aurora.player.playercharacterutils.PlayerCharacterDescriptionsEnum;
 public class HeroPlayer extends Hero {
 
   @Ignore
-  @Embedded
   private HeroDescription heroDescription;
 
   @Ignore

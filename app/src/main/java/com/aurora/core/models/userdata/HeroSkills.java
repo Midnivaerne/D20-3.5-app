@@ -73,7 +73,8 @@ public class HeroSkills extends Item {
   }
 
   @Ignore
-  public HeroSkills(String name,
+  public HeroSkills(
+      String name,
       String source,
       String idAsNameBackup) {
     new HeroSkills(name, source, idAsNameBackup, null, null);
@@ -85,8 +86,18 @@ public class HeroSkills extends Item {
       Integer heroParentItemID,
       String heroSkills) {
     super(name, source, idAsNameBackup);
-    this.heroParentItemID = heroParentItemID;
-    this.heroSkills = heroSkills;
+    this.setHeroParentItemID(heroParentItemID);
+    this.setHeroSkills(heroSkills);
+  }
+
+  @Ignore
+  public HeroSkills(HeroSkills source) {
+    new HeroSkills(
+        source.getName(),
+        source.getSource(),
+        source.getIdAsNameBackup(),
+        source.getHeroParentItemID(),
+        source.getHeroSkills());
   }
 
   HeroSkills generateSkillListAsSkillAndRank(DatabaseHolder databaseHolder) {
@@ -150,15 +161,5 @@ public class HeroSkills extends Item {
       valuesHolder.put(skill, values);
     }
     return this;
-  }
-
-  @Ignore
-  public HeroSkills(HeroSkills source) {
-    new HeroSkills(
-        source.getName(),
-        source.getSource(),
-        source.getIdAsNameBackup(),
-        source.getHeroParentItemID(),
-        source.getHeroSkills());
   }
 }

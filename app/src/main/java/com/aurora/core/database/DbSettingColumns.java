@@ -9,7 +9,11 @@ import com.aurora.core.models.settingspecific.RaceTemplates;
 import com.aurora.core.models.settingspecific.Races;
 import com.aurora.core.models.settingspecific.Skills;
 import com.aurora.core.models.usables.Armour;
+import com.aurora.core.models.userdata.HeroArmour;
+import com.aurora.core.models.userdata.HeroEquipment;
 import com.aurora.core.models.userdata.HeroPlayer;
+import com.aurora.core.models.userdata.HeroWeapons;
+import com.aurora.player.playercharacterutils.PlayerCharacterWornEquipmentPlacesEnum;
 
 public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, Item> {
 
@@ -260,6 +264,43 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
     @Override
     public void setParameter(Item item, String data) {
       ((HeroPlayer) item).getHeroSkills().setHeroSkills(data);
+    }
+  },
+
+  /////////////////////////////////////////////////////////////////////
+  //////////////////////  HERO_PLAYER WEAPONS  ///////////////////////
+
+  COL_HERO_WEAPONS_PARENT_WEAPON_ID(DbColumnNames.HERO_PARENT_WEAPON_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((HeroWeapons) item).setHeroParentItemID(Integer.valueOf(data));
+    }
+  },
+
+  /////////////////////////////////////////////////////////////////////
+  //////////////////////  HERO_PLAYER ARMOUR  ///////////////////////
+
+  COL_HERO_WEAPONS_PARENT_ARMOUR_ID(DbColumnNames.HERO_PARENT_ARMOUR_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((HeroArmour) item).setHeroParentItemID(Integer.valueOf(data));
+    }
+  },
+
+  /////////////////////////////////////////////////////////////////////
+  //////////////////////  HERO_PLAYER ARMOUR  ///////////////////////
+
+  COL_HERO_EQUIPMENT_PARENT_ARMOUR_ID(DbColumnNames.HERO_PARENT_EQUIPMENT_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((HeroEquipment) item).setHeroParentItemID(Integer.valueOf(data));
+    }
+  },
+
+  COL_HERO_EQUIPMENT_WORN_PLACE(DbColumnNames.HERO_EQUIPMENT_WORN_PLACE_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((HeroEquipment) item).setWornPlace((PlayerCharacterWornEquipmentPlacesEnum.valueOf(data)));
     }
   },
 

@@ -3,37 +3,59 @@ package com.aurora.player.adapters;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.ExpandableListView;
+import android.widget.ExpandableListView.OnChildClickListener;
+import android.widget.ExpandableListView.OnGroupClickListener;
 
-public class PlayerCharacterEquipmentContainersContainerAdapter extends BaseExpandableListAdapter {
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+
+import com.aurora.core.models.userdata.HeroEquipment;
+import com.aurora.core.models.userdata.HeroPlayer;
+
+public class PlayerCharacterEquipmentContainersContainerAdapter extends BaseExpandableListAdapter implements OnChildClickListener,
+    OnGroupClickListener {
+
+  private HeroPlayer playerHero;
+  private LinkedHashMap<HeroEquipment, List<HeroEquipment>> itemCollections;
+  ArrayList<HeroEquipment> containerList;
+
+  public PlayerCharacterEquipmentContainersContainerAdapter(HeroPlayer playerHero) {
+    this.playerHero = playerHero;
+    itemCollections = playerHero.getHeroContainerEquipmentMap();
+    containerList = new ArrayList<>(new LinkedHashSet<>(itemCollections.keySet()));
+  }
 
   @Override
   public int getGroupCount() {
-    return 0;
+    return containerList.size();
   }
 
   @Override
-  public int getChildrenCount(int i) {
-    return 0;
+  public int getChildrenCount(int containerPosition) {
+    return itemCollections.get(containerList.get(containerPosition)).size();
   }
 
   @Override
-  public Object getGroup(int i) {
-    return null;
+  public HeroEquipment getGroup(int containerPosition) {
+    return containerList.get(containerPosition);
   }
 
   @Override
-  public Object getChild(int i, int i1) {
-    return null;
+  public HeroEquipment getChild(int containerPosition, int equipmentItemPosition) {
+    return itemCollections.get(containerPosition).get(equipmentItemPosition);
   }
 
   @Override
-  public long getGroupId(int i) {
-    return 0;
+  public long getGroupId(int containerPosition) {
+    return containerPosition;
   }
 
   @Override
-  public long getChildId(int i, int i1) {
-    return 0;
+  public long getChildId(int containerPosition, int equipmentItemPosition) {
+    return equipmentItemPosition;
   }
 
   @Override
@@ -42,17 +64,27 @@ public class PlayerCharacterEquipmentContainersContainerAdapter extends BaseExpa
   }
 
   @Override
-  public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
+  public View getGroupView(int containerPosition, boolean b, View view, ViewGroup viewGroup) {
     return null;
   }
 
   @Override
-  public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
+  public View getChildView(int containerPosition, int equipmentItemPosition, boolean b, View view, ViewGroup viewGroup) {
     return null;
   }
 
   @Override
-  public boolean isChildSelectable(int i, int i1) {
+  public boolean isChildSelectable(int containerPosition, int equipmentItemPosition) {
+    return false;
+  }
+
+  @Override
+  public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+    return false;
+  }
+
+  @Override
+  public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
     return false;
   }
 }

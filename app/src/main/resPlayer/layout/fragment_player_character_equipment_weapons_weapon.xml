@@ -1,69 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment_player_character_equipment_weapons_weapon"
-    android:layout_width="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/fragment_player_character_equipment_weapons_weapon"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:orientation="horizontal">
+
+  <ImageButton
+    android:id="@+id/fragment_player_character_equipment_weapons_weapon_equipped"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_gravity="center_vertical"
+    android:contentDescription="TODO"
+    app:srcCompat="@android:drawable/checkbox_off_background"/>
 
-    <ImageButton
-        android:id="@+id/fragment_player_character_equipment_weapons_weapon_equipped"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:contentDescription="TODO"
-        app:srcCompat="@android:drawable/checkbox_off_background" />
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/fragment_player_character_equipment_weapons_weapon_texts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/fragment_player_character_equipment_weapons_weapon_texts_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin" />
-
-        <TextView
-            android:id="@+id/fragment_player_character_equipment_weapons_weapon_texts_properties"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
-            android:textSize="@dimen/text_small" />
-    </LinearLayout>
-
-    <include
-        android:id="@+id/fragment_player_character_equipment_weapons_weapon_attack"
-        layout="@layout/fragment_number_value_with_description_rollable_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical" />
-
-    <include
-        android:id="@+id/fragment_player_character_equipment_weapons_weapon_damage"
-        layout="@layout/fragment_number_value_with_description_rollable_box"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical" />
+  <LinearLayout
+    android:id="@+id/fragment_player_character_equipment_weapons_weapon_texts"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:orientation="vertical">
 
     <TextView
-        android:id="@+id/fragment_player_character_equipment_weapons_weapon_texts_quantity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin" />
+      android:id="@+id/fragment_player_character_equipment_weapons_weapon_texts_name"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_horizontal_margin"
+      android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
 
-    <ImageButton
-        android:id="@+id/fragment_player_character_equipment_weapons_weapon_ranged_show"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:contentDescription="TODO add indicator on right by code and use PlayerCharacterEquipmentWeaponsWeaponAdapter expand with layout=fragment_player_character_equipment_weapons_weapon_ranged"
-        app:srcCompat="@android:drawable/arrow_down_float" />
+    <TextView
+      android:id="@+id/fragment_player_character_equipment_weapons_weapon_texts_properties"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/activity_horizontal_margin"
+      android:layout_marginEnd="@dimen/activity_horizontal_margin"
+      android:textSize="@dimen/text_small"/>
+  </LinearLayout>
+
+  <include
+    android:id="@+id/fragment_player_character_equipment_weapons_weapon_attack"
+    layout="@layout/fragment_number_value_with_description_rollable_box"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"/>
+
+  <include
+    android:id="@+id/fragment_player_character_equipment_weapons_weapon_damage"
+    layout="@layout/fragment_number_value_with_description_rollable_box"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"/>
+
+  <TextView
+    android:id="@+id/fragment_player_character_equipment_weapons_weapon_texts_quantity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+
+  <ImageButton
+    android:id="@+id/fragment_player_character_equipment_weapons_weapon_ranged_show"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:contentDescription="TODO add indicator on right by code and use PlayerCharacterEquipmentWeaponsWeaponAdapter expand with layout=fragment_player_character_equipment_weapons_weapon_ranged"
+    app:srcCompat="@android:drawable/arrow_down_float"/>
 
 </LinearLayout>

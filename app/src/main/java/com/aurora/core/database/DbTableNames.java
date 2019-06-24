@@ -8,6 +8,9 @@ public class DbTableNames {
   public static final String HERO_PLAYER = "HeroPlayer";
   public static final String HERO_STATISTICS = "HeroValues";
   public static final String HERO_SKILLS = "HeroSkills";
+  public static final String HERO_WEAPONS = "HeroWeapons";
+  public static final String HERO_ARMOUR = "HeroArmour";
+  public static final String HERO_EQUIPMENT = "HeroEquipment";
   public static final String HERO_DESCRIPTION = "HeroDescription";
   public static final String HERO_NPC = "HeroNpc";
   public static final String SKILLS = "Skills";

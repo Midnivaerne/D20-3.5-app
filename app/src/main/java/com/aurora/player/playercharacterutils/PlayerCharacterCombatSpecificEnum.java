@@ -4,7 +4,7 @@ import static com.aurora.core.database.TranslationsHolder.translate;
 
 import com.aurora.core.models.userdata.HeroValues;
 
-public enum PlayerCharacterCombatSpecificEnum implements PlayerCharacterSpecificEnumBase<PlayerCharacterCombatEnum> {
+public enum PlayerCharacterCombatSpecificEnum implements PlayerCharacterSpecificEnumBase<PlayerCharacterCombatEnum, HeroValues> {
   NAME {
     @Override
     public int getSpecificFieldId(PlayerCharacterCombatEnum combatField) {
@@ -12,8 +12,7 @@ public enum PlayerCharacterCombatSpecificEnum implements PlayerCharacterSpecific
     }
 
     @Override
-    public String getSpecificValue(PlayerCharacterCombatEnum combatField,
-        HeroValues heroValues) {
+    public String getSpecificValue(PlayerCharacterCombatEnum combatField, HeroValues heroValues) {
       return translate(combatField.toString());
     }
   },
@@ -24,8 +23,7 @@ public enum PlayerCharacterCombatSpecificEnum implements PlayerCharacterSpecific
     }
 
     @Override
-    public String getSpecificValue(PlayerCharacterCombatEnum combatField,
-        HeroValues heroValues) {
+    public String getSpecificValue(PlayerCharacterCombatEnum combatField, HeroValues heroValues) {
       return String.valueOf(heroValues.getCombatTextValues().get(combatField));
     }
   }

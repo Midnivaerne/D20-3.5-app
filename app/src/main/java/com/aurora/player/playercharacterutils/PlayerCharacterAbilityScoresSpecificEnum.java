@@ -5,7 +5,8 @@ import static com.aurora.core.database.TranslationsHolder.translate;
 import com.aurora.core.R;
 import com.aurora.core.models.userdata.HeroValues;
 
-public enum PlayerCharacterAbilityScoresSpecificEnum implements PlayerCharacterSpecificEnumBase<PlayerCharacterAbilityScoresEnum> {
+public enum PlayerCharacterAbilityScoresSpecificEnum implements
+    PlayerCharacterSpecificEnumBase<PlayerCharacterAbilityScoresEnum, HeroValues> {
   NAME {
     @Override
     public int getSpecificFieldId(PlayerCharacterAbilityScoresEnum abilityScore) {
@@ -13,8 +14,7 @@ public enum PlayerCharacterAbilityScoresSpecificEnum implements PlayerCharacterS
     }
 
     @Override
-    public String getSpecificValue(PlayerCharacterAbilityScoresEnum abilityScore,
-        HeroValues heroValues) {
+    public String getSpecificValue(PlayerCharacterAbilityScoresEnum abilityScore, HeroValues heroValues) {
       return translate(abilityScore.toString());
     }
   },
@@ -25,8 +25,7 @@ public enum PlayerCharacterAbilityScoresSpecificEnum implements PlayerCharacterS
     }
 
     @Override
-    public String getSpecificValue(PlayerCharacterAbilityScoresEnum abilityScore,
-        HeroValues heroValues) {
+    public String getSpecificValue(PlayerCharacterAbilityScoresEnum abilityScore, HeroValues heroValues) {
       return String.valueOf(heroValues.getAbilityScoreValues().get(abilityScore));
     }
   },
@@ -37,8 +36,7 @@ public enum PlayerCharacterAbilityScoresSpecificEnum implements PlayerCharacterS
     }
 
     @Override
-    public String getSpecificValue(PlayerCharacterAbilityScoresEnum abilityScore,
-        HeroValues heroValues) {
+    public String getSpecificValue(PlayerCharacterAbilityScoresEnum abilityScore, HeroValues heroValues) {
       return String
           .valueOf(HeroValues.getStatisticModifier(Integer.parseInt(String.valueOf(heroValues.getAbilityScoreValues().get(abilityScore)))));
     }
@@ -63,8 +61,7 @@ public enum PlayerCharacterAbilityScoresSpecificEnum implements PlayerCharacterS
     }
 
     @Override
-    public String getSpecificValue(PlayerCharacterAbilityScoresEnum abilityScore,
-        HeroValues heroValues) {
+    public String getSpecificValue(PlayerCharacterAbilityScoresEnum abilityScore, HeroValues heroValues) {
       return String
           .valueOf(HeroValues.getStatisticModifier(Integer.parseInt(String.valueOf(heroValues.getAbilityScoreValues().get(abilityScore)))));
       //todo add modifiers, don't show if the same as base values

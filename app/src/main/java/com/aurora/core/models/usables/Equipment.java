@@ -1,15 +1,16 @@
 package com.aurora.core.models.usables;
 
+import static com.aurora.core.database.DbColumnNames.EQUIPMENT_IS_CONTAINER_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.SOURCE_COLUMN_NAME;
 import static com.aurora.core.database.DbTableNames.EQUIPMENT;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 import androidx.room.Index;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 
 import com.aurora.core.models.Databases;
@@ -24,15 +25,27 @@ import com.aurora.core.models.helpers.Item;
         parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
 public class Equipment extends Item {
 
+  @ColumnInfo(name = EQUIPMENT_IS_CONTAINER_COLUMN_NAME)
+  private String isContainer;
+
   @Ignore
   public Equipment() {
     super();
   }
 
+  @Ignore
   public Equipment(String name,
       String source,
       String idAsNameBackup) {
+    new Equipment(name, source, idAsNameBackup, null);
+  }
+
+  public Equipment(String name,
+      String source,
+      String idAsNameBackup,
+      String isContainer) {
     super(name, source, idAsNameBackup);
+    this.setIsContainer(isContainer);
   }
 
   @Ignore
@@ -40,6 +53,7 @@ public class Equipment extends Item {
     new Equipment(
         source.getName(),
         source.getSource(),
-        source.getIdAsNameBackup());
+        source.getIdAsNameBackup(),
+        source.getIsContainer());
   }
 }

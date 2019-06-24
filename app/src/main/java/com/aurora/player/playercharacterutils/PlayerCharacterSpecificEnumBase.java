@@ -1,10 +1,10 @@
 package com.aurora.player.playercharacterutils;
 
-import com.aurora.core.models.userdata.HeroValues;
+import com.aurora.core.models.helpers.Item;
 
-public interface PlayerCharacterSpecificEnumBase<T extends PlayerCharacterEnumBase> extends PlayerCharacterSuperBase {
+public interface PlayerCharacterSpecificEnumBase<T extends PlayerCharacterEnumBase, V extends Item> extends PlayerCharacterSuperBase {
 
   int getSpecificFieldId(T enumBase);
 
-  String getSpecificValue(T abilityScore, HeroValues heroValues);
+  String getSpecificValue(T enumBase, V heroValues);
 }

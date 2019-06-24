@@ -28,10 +28,13 @@ import com.aurora.core.models.settingspecific.Spells;
 import com.aurora.core.models.usables.Armour;
 import com.aurora.core.models.usables.Equipment;
 import com.aurora.core.models.usables.Weapons;
+import com.aurora.core.models.userdata.HeroArmour;
 import com.aurora.core.models.userdata.HeroDescription;
+import com.aurora.core.models.userdata.HeroEquipment;
 import com.aurora.core.models.userdata.HeroPlayer;
 import com.aurora.core.models.userdata.HeroSkills;
 import com.aurora.core.models.userdata.HeroValues;
+import com.aurora.core.models.userdata.HeroWeapons;
 
 public enum ItemType implements CoreTypeHelper<ItemType, Item> {
   /**
@@ -741,6 +744,117 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
         databaseHolder.heroesPlayerMap.put(heroPlayer.getItemID(), heroPlayer);
       }
       databaseHolder.heroesPlayerList.addAll(heroes);
+    }
+  },
+  /**
+   * HeroWeapons.
+   */
+  HERO_PLAYER_WEAPONS(DbTableNames.HERO_WEAPONS) {
+    @Override
+    public BaseDaO getDaO(DatabaseHolder databaseHolder) {
+      return databaseHolder.heroWeaponsDaO();
+    }
+
+    @Override
+    public List<HeroWeapons> getDatabaseList(DatabaseHolder databaseHolder) {
+      return databaseHolder.heroesWeaponsList;
+    }
+
+    @Override
+    public Map<Integer, HeroWeapons> getDatabaseMap(DatabaseHolder databaseHolder) {
+      return databaseHolder.heroesWeaponsMap;
+    }
+
+    @Override
+    public Item getNewObject() {
+      return new HeroWeapons();
+    }
+
+    @Override
+    public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+      databaseHolder.heroWeaponsDaO().insertAll(databaseHolder.heroesWeaponsList);
+    }
+
+    @Override
+    public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+      databaseHolder.heroesWeaponsList.addAll(databaseHolder.heroWeaponsDaO().getAllObjectsAsObject());
+      for (HeroWeapons heroWeapons : databaseHolder.heroesWeaponsList) {
+        databaseHolder.heroesWeaponsMap.put(heroWeapons.getItemID(), heroWeapons);
+      }
+    }
+  },
+  /**
+   * HeroArmour.
+   */
+  HERO_PLAYER_ARMOUR(DbTableNames.HERO_ARMOUR) {
+    @Override
+    public BaseDaO getDaO(DatabaseHolder databaseHolder) {
+      return databaseHolder.heroArmourDaO();
+    }
+
+    @Override
+    public List<HeroArmour> getDatabaseList(DatabaseHolder databaseHolder) {
+      return databaseHolder.heroesArmourList;
+    }
+
+    @Override
+    public Map<Integer, HeroArmour> getDatabaseMap(DatabaseHolder databaseHolder) {
+      return databaseHolder.heroesArmourMap;
+    }
+
+    @Override
+    public Item getNewObject() {
+      return new HeroArmour();
+    }
+
+    @Override
+    public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+      databaseHolder.heroArmourDaO().insertAll(databaseHolder.heroesArmourList);
+    }
+
+    @Override
+    public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+      databaseHolder.heroesArmourList.addAll(databaseHolder.heroArmourDaO().getAllObjectsAsObject());
+      for (HeroArmour heroArmour : databaseHolder.heroesArmourList) {
+        databaseHolder.heroesArmourMap.put(heroArmour.getItemID(), heroArmour);
+      }
+    }
+  },
+  /**
+   * HeroEquipment.
+   */
+  HERO_PLAYER_EQUIPMENT(DbTableNames.HERO_EQUIPMENT) {
+    @Override
+    public BaseDaO getDaO(DatabaseHolder databaseHolder) {
+      return databaseHolder.heroEquipmentDaO();
+    }
+
+    @Override
+    public List<HeroEquipment> getDatabaseList(DatabaseHolder databaseHolder) {
+      return databaseHolder.heroesEquipmentList;
+    }
+
+    @Override
+    public Map<Integer, HeroEquipment> getDatabaseMap(DatabaseHolder databaseHolder) {
+      return databaseHolder.heroesEquipmentMap;
+    }
+
+    @Override
+    public Item getNewObject() {
+      return new HeroEquipment();
+    }
+
+    @Override
+    public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+      databaseHolder.heroEquipmentDaO().insertAll(databaseHolder.heroesEquipmentList);
+    }
+
+    @Override
+    public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+      databaseHolder.heroesEquipmentList.addAll(databaseHolder.heroEquipmentDaO().getAllObjectsAsObject());
+      for (HeroEquipment heroEquipment : databaseHolder.heroesEquipmentList) {
+        databaseHolder.heroesEquipmentMap.put(heroEquipment.getItemID(), heroEquipment);
+      }
     }
   },
   /**
