@@ -66,28 +66,43 @@ public class PlayerCharacterEquipmentPlaceholderFragment extends Fragment {
   }
 
   private void loadArmour(@NonNull View armoursRecyclerView) {
-    for (PlayerCharacterArmourEnum armourEnum : PlayerCharacterArmourEnum.values()) {
-      for (PlayerCharacterArmourSpecificEnum armourSpecific : PlayerCharacterArmourSpecificEnum.values()) {
-        ((TextView) armoursRecyclerView.findViewById(armourEnum.getFieldId()).findViewById(armourSpecific.getSpecificFieldId(armourEnum)))
-            .setText(armourSpecific.getSpecificValue(armourEnum, playerCharacterVM.getHero().getHeroArmourMap().get(armourEnum)));
+    if (!playerCharacterVM.getHero().getHeroArmourMap().isEmpty()) {
+      for (PlayerCharacterArmourEnum armourEnum : PlayerCharacterArmourEnum.values()) {
+        if (playerCharacterVM.getHero().getHeroArmourMap().get(armourEnum) != null) {
+          for (PlayerCharacterArmourSpecificEnum armourSpecific : PlayerCharacterArmourSpecificEnum.values()) {
+            ((TextView) armoursRecyclerView.findViewById(armourEnum.getFieldId())
+                .findViewById(armourSpecific.getSpecificFieldId(armourEnum)))
+                .setText(armourSpecific.getSpecificValue(armourEnum, playerCharacterVM.getHero().getHeroArmourMap().get(armourEnum)));
+          }
+        }
       }
     }
   }
 
   private void loadShield(@NonNull View shieldsRecyclerView) {
-    for (PlayerCharacterArmourEnum armourEnum : PlayerCharacterArmourEnum.values()) {
-      for (PlayerCharacterArmourSpecificEnum armourSpecific : PlayerCharacterArmourSpecificEnum.values()) {
-        ((TextView) shieldsRecyclerView.findViewById(armourEnum.getFieldId()).findViewById(armourSpecific.getSpecificFieldId(armourEnum)))
-            .setText(armourSpecific.getSpecificValue(armourEnum, playerCharacterVM.getHero().getHeroArmourMap().get(armourEnum)));
+    if (!playerCharacterVM.getHero().getHeroArmourMap().isEmpty()) {
+      for (PlayerCharacterArmourEnum armourEnum : PlayerCharacterArmourEnum.values()) {
+        if (playerCharacterVM.getHero().getHeroArmourMap().get(armourEnum) != null) {
+          for (PlayerCharacterArmourSpecificEnum armourSpecific : PlayerCharacterArmourSpecificEnum.values()) {
+            ((TextView) shieldsRecyclerView.findViewById(armourEnum.getFieldId())
+                .findViewById(armourSpecific.getSpecificFieldId(armourEnum)))
+                .setText(armourSpecific.getSpecificValue(armourEnum, playerCharacterVM.getHero().getHeroArmourMap().get(armourEnum)));
+          }
+        }
       }
     }
   }
 
   private void loadWorn(@NonNull View wornRecyclerView) {
-    for (PlayerCharacterWornEquipmentPlacesEnum wornWhere : PlayerCharacterWornEquipmentPlacesEnum.values()) {
-      for (PlayerCharacterWornEquipmentPlacesSpecificEnum wornWhereSpecific : PlayerCharacterWornEquipmentPlacesSpecificEnum.values()) {
-        ((TextView) wornRecyclerView.findViewById(wornWhere.getFieldId()).findViewById(wornWhereSpecific.getSpecificFieldId(wornWhere)))
-            .setText(wornWhereSpecific.getSpecificValue(wornWhere, playerCharacterVM.getHero().getHeroPlaceEquipmentMap().get(wornWhere)));
+    if (!playerCharacterVM.getHero().getHeroPlaceEquipmentMap().isEmpty()) {
+      for (PlayerCharacterWornEquipmentPlacesEnum wornWhere : PlayerCharacterWornEquipmentPlacesEnum.values()) {
+        if (playerCharacterVM.getHero().getHeroPlaceEquipmentMap().get(wornWhere) != null) {
+          for (PlayerCharacterWornEquipmentPlacesSpecificEnum wornWhereSpecific : PlayerCharacterWornEquipmentPlacesSpecificEnum.values()) {
+            ((TextView) wornRecyclerView.findViewById(wornWhere.getFieldId()).findViewById(wornWhereSpecific.getSpecificFieldId(wornWhere)))
+                .setText(
+                    wornWhereSpecific.getSpecificValue(wornWhere, playerCharacterVM.getHero().getHeroPlaceEquipmentMap().get(wornWhere)));
+          }
+        }
       }
     }
   }
