@@ -25,7 +25,7 @@ import java.util.Map;
 import com.aurora.core.R;
 import com.aurora.core.models.settingspecific.Skills;
 import com.aurora.core.models.userdata.HeroPlayer;
-import com.aurora.player.playercharacterutils.PlayerCharacterSkillsValues;
+import com.aurora.player.playercharacterutils.PlayerCharacterSkillsValuesEnum;
 
 public class SkillsRecyclerViewAdapter extends RecyclerView.Adapter<SkillsRecyclerViewAdapter.ViewHolder> {
 
@@ -57,15 +57,15 @@ public class SkillsRecyclerViewAdapter extends RecyclerView.Adapter<SkillsRecycl
     Skills skill = (Skills) view.getTag();
     ((TextView) popupView.findViewById(R.id.skill_detail_name)).setText(translate(skill.getName()));
     ((TextView) popupView.findViewById(R.id.skill_detail_value)).setText(String.valueOf(
-        playerHero.getHeroSkills().getValuesHolder().get(skill).get(PlayerCharacterSkillsValues.RANK) + playerHero.getHeroSkills()
-            .getValuesHolder().get(skill).get(PlayerCharacterSkillsValues.ATTRIBUTE_MODIFIER) + playerHero.getHeroSkills()
-            .getValuesHolder().get(skill).get(PlayerCharacterSkillsValues.OTHER)));
+        playerHero.getHeroSkills().getValuesHolder().get(skill).get(PlayerCharacterSkillsValuesEnum.RANK) + playerHero.getHeroSkills()
+            .getValuesHolder().get(skill).get(PlayerCharacterSkillsValuesEnum.ATTRIBUTE_MODIFIER) + playerHero.getHeroSkills()
+            .getValuesHolder().get(skill).get(PlayerCharacterSkillsValuesEnum.OTHER)));
     ((TextView) popupView.findViewById(R.id.skill_detail_rank))
-        .setText(String.valueOf(playerHero.getHeroSkills().getValuesHolder().get(skill).get(PlayerCharacterSkillsValues.RANK)));
+        .setText(String.valueOf(playerHero.getHeroSkills().getValuesHolder().get(skill).get(PlayerCharacterSkillsValuesEnum.RANK)));
     ((TextView) popupView.findViewById(R.id.skill_detail_attribute_modifier)).setText(
-        String.valueOf(playerHero.getHeroSkills().getValuesHolder().get(skill).get(PlayerCharacterSkillsValues.ATTRIBUTE_MODIFIER)));
+        String.valueOf(playerHero.getHeroSkills().getValuesHolder().get(skill).get(PlayerCharacterSkillsValuesEnum.ATTRIBUTE_MODIFIER)));
     ((TextView) popupView.findViewById(R.id.skill_detail_other_modifier))
-        .setText(String.valueOf(playerHero.getHeroSkills().getValuesHolder().get(skill).get(PlayerCharacterSkillsValues.OTHER)));
+        .setText(String.valueOf(playerHero.getHeroSkills().getValuesHolder().get(skill).get(PlayerCharacterSkillsValuesEnum.OTHER)));
     int width = LinearLayout.LayoutParams.WRAP_CONTENT;
     int height = LinearLayout.LayoutParams.WRAP_CONTENT;
     boolean focusable = true;
@@ -124,10 +124,10 @@ public class SkillsRecyclerViewAdapter extends RecyclerView.Adapter<SkillsRecycl
     holder.skillArmourPenalty.setOnClickListener(onClickListener);
 
     holder.skillValue.setText(String.valueOf(
-        playerHero.getHeroSkills().getValuesHolder().get(skill).get(PlayerCharacterSkillsValues.RANK) + playerHero.getHeroSkills()
+        playerHero.getHeroSkills().getValuesHolder().get(skill).get(PlayerCharacterSkillsValuesEnum.RANK) + playerHero.getHeroSkills()
             .getValuesHolder().get(skill)
-            .get(PlayerCharacterSkillsValues.ATTRIBUTE_MODIFIER) + playerHero.getHeroSkills().getValuesHolder().get(skill)
-            .get(PlayerCharacterSkillsValues.OTHER)));
+            .get(PlayerCharacterSkillsValuesEnum.ATTRIBUTE_MODIFIER) + playerHero.getHeroSkills().getValuesHolder().get(skill)
+            .get(PlayerCharacterSkillsValuesEnum.OTHER)));
     holder.skillValue.setTag(skill);
     holder.skillValue.setOnClickListener(onClickListener);
 

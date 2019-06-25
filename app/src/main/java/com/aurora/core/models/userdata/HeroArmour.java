@@ -15,6 +15,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.aurora.core.database.DatabaseHolder;
@@ -22,6 +23,7 @@ import com.aurora.core.models.Databases;
 import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.typehelpers.ItemType;
 import com.aurora.core.models.usables.Armour;
+import com.aurora.player.playercharacterutils.PlayerCharacterArmourEnum;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -46,6 +48,9 @@ public class HeroArmour extends Item {
 
   @Ignore
   private Armour armour;
+
+  @Ignore
+  private Map<PlayerCharacterArmourEnum, String> armourValues = new HashMap<>();
 
   public HeroArmour() {
     super();
@@ -86,7 +91,11 @@ public class HeroArmour extends Item {
   }
 
   HeroArmour generateAll(DatabaseHolder databaseHolder) {
-    setArmour(databaseHolder.armourDaO().getObjectWithId(getArmourId()));
+    setArmour(databaseHolder.armourMap.get(getArmourId()));
+    this.armourValues.put(PlayerCharacterArmourEnum.ARMOUR_NAME, getName());
+    this.armourValues.put(PlayerCharacterArmourEnum.ARMOUR_AC, getArmour().getArmourDeflection());
+    this.armourValues.put(PlayerCharacterArmourEnum.ARMOUR_DEX, getArmour().getArmourMaxDexterityBonus());
+    this.armourValues.put(PlayerCharacterArmourEnum.ARMOUR_PROPERTIES, getArmour().getArmourSpecialProperties());
     return this;
   }
 }

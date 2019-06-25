@@ -16,6 +16,7 @@ import java.util.Map;
 import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.models.helpers.Item;
 import com.aurora.player.playercharacterutils.PlayerCharacterAbilityScoresEnum;
+import com.aurora.player.playercharacterutils.PlayerCharacterArmourEnum;
 import com.aurora.player.playercharacterutils.PlayerCharacterWornEquipmentPlacesEnum;
 
 @EqualsAndHashCode(callSuper = true)
@@ -30,13 +31,19 @@ public class Hero extends Item {
   private HeroSkills heroSkills;
 
   @Ignore
-  private List<HeroWeapons> heroWeapons;
+  private ArrayList<HeroWeapons> heroWeapons;
 
   @Ignore
-  private List<HeroArmour> heroArmour;
+  private LinkedHashMap<HeroWeapons, List<HeroWeapons>> heroWeaponsMap;
 
   @Ignore
-  private List<HeroEquipment> heroEquipment;
+  private ArrayList<HeroArmour> heroArmour;
+
+  @Ignore
+  private Map<PlayerCharacterArmourEnum, HeroArmour> heroArmourMap = new HashMap<>();
+
+  @Ignore
+  private ArrayList<HeroEquipment> heroEquipment;
 
   @Ignore
   private Map<PlayerCharacterWornEquipmentPlacesEnum, HeroEquipment> heroPlaceEquipmentMap = new HashMap<>();
@@ -81,29 +88,48 @@ public class Hero extends Item {
 
   public void generateAll(DatabaseHolder databaseHolder) {
     getHeroValues().generateAll(databaseHolder);
+
     getHeroSkills().generateSkillListAsSkillAndRank(databaseHolder);
     for (PlayerCharacterAbilityScoresEnum attr : getHeroValues().getAbilityScoreValues().keySet()) {
       getHeroSkills().getAttributeModifiers().put(attr, getStatisticModifier(getHeroValues().getAbilityScoreValues().get(attr)));
     }
     getHeroSkills().loadAllSettingSkills(databaseHolder, getHeroValues().getRace().getRaceSkills(),
         getHeroValues().getRaceTemplate() != null ? getHeroValues().getRaceTemplate().getRaceTemplateSkills() : null);
-    setHeroWeapons(databaseHolder.heroWeaponsDaO().getWeaponsWithParentHero(getItemID()));
-    getHeroWeapons().forEach(heroWeapons -> heroWeapons.generateAll(databaseHolder));
-    setHeroArmour(databaseHolder.heroArmourDaO().getArmourWithParentHero(getItemID()));
-    getHeroArmour().forEach(heroArmour -> heroArmour.generateAll(databaseHolder));
-    setHeroEquipment(databaseHolder.heroEquipmentDaO().getEuipmentWithParentHero(getItemID()));
-    getHeroEquipment().forEach(heroEquipment -> heroEquipment.generateAll(databaseHolder));
-    for (HeroEquipment heroEquipment : getHeroEquipment()) {
-      if (heroEquipment.getWornPlace() != null) {
-        heroPlaceEquipmentMap.put(heroEquipment.getWornPlace(), heroEquipment);
-      } else {
-        HeroEquipment parentContainer = databaseHolder.heroEquipmentDaO().getObjectWithId(heroEquipment.getParentContainer());
-        if (!heroContainerEquipmentMap.containsKey(parentContainer)) {
-          heroContainerEquipmentMap
-              .put(databaseHolder.heroEquipmentDaO().getObjectWithId(heroEquipment.getParentContainer()), new ArrayList<HeroEquipment>());
-        }
-        heroContainerEquipmentMap.get(parentContainer).add(heroEquipment);
+
+    for (HeroWeapons heroWeapon : databaseHolder.heroesWeaponsList) {
+      if (heroWeapon.getHeroParentItemID().equals(this.getItemID())) {
+        heroWeapon.generateAll(databaseHolder);
+        getHeroWeapons().add(heroWeapon);
       }
     }
+
+    for (HeroArmour heroArmour : databaseHolder.heroesArmourList) {
+      if (heroArmour.getHeroParentItemID().equals(this.getItemID())) {
+        heroArmour.generateAll(databaseHolder);
+        getHeroArmour().add(heroArmour);
+      }
+    }
+
+    for (HeroEquipment heroEquipment : databaseHolder.heroesEquipmentList) {
+      if (heroEquipment.getHeroParentItemID().equals(this.getItemID())) {
+        heroEquipment.generateAll(databaseHolder);
+        getHeroEquipment().add(heroEquipment);
+      }
+    }
+    if (getHeroEquipment() != null) {
+      for (HeroEquipment heroEquipment : getHeroEquipment()) {
+        if (heroEquipment.getWornPlace() != null) {
+          getHeroPlaceEquipmentMap().put(heroEquipment.getWornPlace(), heroEquipment);
+        } else {
+          HeroEquipment parentContainer = databaseHolder.heroesEquipmentMap.get(heroEquipment.getParentContainer());
+          if (!getHeroContainerEquipmentMap().containsKey(parentContainer)) {
+            getHeroContainerEquipmentMap()
+                .put(databaseHolder.heroesEquipmentMap.get(heroEquipment.getParentContainer()), new ArrayList<HeroEquipment>());
+          }
+          getHeroContainerEquipmentMap().get(parentContainer).add(heroEquipment);
+        }
+      }
+    }
+
   }
 }

@@ -7,13 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
 
 import com.aurora.core.R;
-import com.aurora.player.adapters.EquipmentArmoursRecyclerViewAdapter;
 import com.aurora.player.adapters.EquipmentWeaponsRecyclerViewAdapter;
 import com.aurora.player.adapters.PlayerCharacterEquipmentContainersContainerAdapter;
+import com.aurora.player.playercharacterutils.PlayerCharacterArmourEnum;
+import com.aurora.player.playercharacterutils.PlayerCharacterArmourSpecificEnum;
 import com.aurora.player.playercharacterutils.PlayerCharacterWornEquipmentPlacesEnum;
 import com.aurora.player.playercharacterutils.PlayerCharacterWornEquipmentPlacesSpecificEnum;
 import com.aurora.player.viewmodels.PlayerCharacterVM;
@@ -61,15 +61,26 @@ public class PlayerCharacterEquipmentPlaceholderFragment extends Fragment {
   }
 
   private void loadWeapons(@NonNull View weaponsRecyclerView) {
-    ((RecyclerView) weaponsRecyclerView).setAdapter(new EquipmentWeaponsRecyclerViewAdapter(playerCharacterVM.getHero()));
+    ((ExpandableListView) weaponsRecyclerView)
+        .setAdapter(new EquipmentWeaponsRecyclerViewAdapter(this.getContext(), playerCharacterVM.getHero()));
   }
 
   private void loadArmour(@NonNull View armoursRecyclerView) {
-    ((RecyclerView) armoursRecyclerView).setAdapter(new EquipmentArmoursRecyclerViewAdapter(playerCharacterVM.getHero()));
+    for (PlayerCharacterArmourEnum armourEnum : PlayerCharacterArmourEnum.values()) {
+      for (PlayerCharacterArmourSpecificEnum armourSpecific : PlayerCharacterArmourSpecificEnum.values()) {
+        ((TextView) armoursRecyclerView.findViewById(armourEnum.getFieldId()).findViewById(armourSpecific.getSpecificFieldId(armourEnum)))
+            .setText(armourSpecific.getSpecificValue(armourEnum, playerCharacterVM.getHero().getHeroArmourMap().get(armourEnum)));
+      }
+    }
   }
 
   private void loadShield(@NonNull View shieldsRecyclerView) {
-    ((RecyclerView) shieldsRecyclerView).setAdapter(new EquipmentArmoursRecyclerViewAdapter(playerCharacterVM.getHero()));
+    for (PlayerCharacterArmourEnum armourEnum : PlayerCharacterArmourEnum.values()) {
+      for (PlayerCharacterArmourSpecificEnum armourSpecific : PlayerCharacterArmourSpecificEnum.values()) {
+        ((TextView) shieldsRecyclerView.findViewById(armourEnum.getFieldId()).findViewById(armourSpecific.getSpecificFieldId(armourEnum)))
+            .setText(armourSpecific.getSpecificValue(armourEnum, playerCharacterVM.getHero().getHeroArmourMap().get(armourEnum)));
+      }
+    }
   }
 
   private void loadWorn(@NonNull View wornRecyclerView) {
@@ -82,7 +93,7 @@ public class PlayerCharacterEquipmentPlaceholderFragment extends Fragment {
   }
 
   private void loadContainers(@NonNull View containersRecyclerView) {
-    ((ExpandableListView) (containersRecyclerView))
-        .setAdapter(new PlayerCharacterEquipmentContainersContainerAdapter(playerCharacterVM.getHero()));
+    ((ExpandableListView) containersRecyclerView)
+        .setAdapter(new PlayerCharacterEquipmentContainersContainerAdapter(this.getContext(), playerCharacterVM.getHero()));
   }
 }

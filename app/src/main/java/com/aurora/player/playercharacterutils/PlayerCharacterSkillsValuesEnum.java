@@ -2,7 +2,7 @@ package com.aurora.player.playercharacterutils;
 
 import com.aurora.core.R;
 
-public enum PlayerCharacterSkillsValues {
+public enum PlayerCharacterSkillsValuesEnum {
   PROFICIENCY {
     @Override
     public int getFieldId() {

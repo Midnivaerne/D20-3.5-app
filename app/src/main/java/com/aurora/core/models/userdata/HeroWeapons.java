@@ -86,7 +86,7 @@ public class HeroWeapons extends Item {
   }
 
   HeroWeapons generateAll(DatabaseHolder databaseHolder) {
-    setWeapon(databaseHolder.weaponsDaO().getObjectWithId(getWeaponId()));
+    setWeapon(databaseHolder.weaponsMap.get(getWeaponId()));
     return this;
   }
 }

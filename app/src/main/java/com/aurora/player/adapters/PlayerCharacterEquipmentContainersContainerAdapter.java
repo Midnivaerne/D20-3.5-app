@@ -1,5 +1,6 @@
 package com.aurora.player.adapters;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
@@ -18,11 +19,13 @@ import com.aurora.core.models.userdata.HeroPlayer;
 public class PlayerCharacterEquipmentContainersContainerAdapter extends BaseExpandableListAdapter implements OnChildClickListener,
     OnGroupClickListener {
 
-  private HeroPlayer playerHero;
-  private LinkedHashMap<HeroEquipment, List<HeroEquipment>> itemCollections;
-  ArrayList<HeroEquipment> containerList;
+  private final Context context;
+  private final HeroPlayer playerHero;
+  private final LinkedHashMap<HeroEquipment, List<HeroEquipment>> itemCollections;
+  private final ArrayList<HeroEquipment> containerList;
 
-  public PlayerCharacterEquipmentContainersContainerAdapter(HeroPlayer playerHero) {
+  public PlayerCharacterEquipmentContainersContainerAdapter(Context context, HeroPlayer playerHero) {
+    this.context = context;
     this.playerHero = playerHero;
     itemCollections = playerHero.getHeroContainerEquipmentMap();
     containerList = new ArrayList<>(new LinkedHashSet<>(itemCollections.keySet()));

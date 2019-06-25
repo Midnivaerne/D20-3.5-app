@@ -28,7 +28,7 @@ import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.settingspecific.Skills;
 import com.aurora.core.models.typehelpers.ItemType;
 import com.aurora.player.playercharacterutils.PlayerCharacterAbilityScoresEnum;
-import com.aurora.player.playercharacterutils.PlayerCharacterSkillsValues;
+import com.aurora.player.playercharacterutils.PlayerCharacterSkillsValuesEnum;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -56,7 +56,7 @@ public class HeroSkills extends Item {
   private Map<Skills, Integer> allSettingSkillsWithOtherModifiers = new HashMap<>();
 
   @Ignore
-  private Map<Skills, Map<PlayerCharacterSkillsValues, Integer>> valuesHolder = new HashMap<>();
+  private Map<Skills, Map<PlayerCharacterSkillsValuesEnum, Integer>> valuesHolder = new HashMap<>();
 
   @Ignore
   private Map<PlayerCharacterAbilityScoresEnum, Integer> attributeModifiers = new HashMap<>();
@@ -153,11 +153,11 @@ public class HeroSkills extends Item {
       }
     }
     for (Skills skill : allSettingSkillsWithOtherModifiers.keySet()) {
-      HashMap<PlayerCharacterSkillsValues, Integer> values = new HashMap<>();
-      values.put(PlayerCharacterSkillsValues.RANK, skillListAsSkillAndRank.containsKey(skill) ? skillListAsSkillAndRank.get(skill) : 0);
-      values.put(PlayerCharacterSkillsValues.ATTRIBUTE_MODIFIER,
+      HashMap<PlayerCharacterSkillsValuesEnum, Integer> values = new HashMap<>();
+      values.put(PlayerCharacterSkillsValuesEnum.RANK, skillListAsSkillAndRank.containsKey(skill) ? skillListAsSkillAndRank.get(skill) : 0);
+      values.put(PlayerCharacterSkillsValuesEnum.ATTRIBUTE_MODIFIER,
           (attributeModifiers.get(PlayerCharacterAbilityScoresEnum.getEnumFromShortDescription(skill.getSkillAttribute()))));
-      values.put(PlayerCharacterSkillsValues.OTHER, (allSettingSkillsWithOtherModifiers.get(skill)));
+      values.put(PlayerCharacterSkillsValuesEnum.OTHER, (allSettingSkillsWithOtherModifiers.get(skill)));
       valuesHolder.put(skill, values);
     }
     return this;
