@@ -21,6 +21,44 @@
       <Source>Test_classes_Source</Source>
     </Databases_Item>
   </Databases>
+  <Weapons>
+    <Weapons_Item>
+      <Name>weapon_mele1</Name>
+      <Source>Test_bigger_source</Source>
+    </Weapons_Item>
+    <Weapons_Item>
+      <Name>weapon_ranged1</Name>
+      <Source>Test_bigger_source</Source>
+    </Weapons_Item>
+    <Weapons_Item>
+      <Name>weapon_ranged1_ammo1</Name>
+      <Source>Test_bigger_source</Source>
+    </Weapons_Item>
+    <Weapons_Item>
+      <Name>weapon_ranged1_ammo2</Name>
+      <Source>Test_bigger_source</Source>
+    </Weapons_Item>
+    <Weapons_Item>
+      <Name>weapon_ranged2_ammo</Name>
+      <Source>Test_bigger_source</Source>
+    </Weapons_Item>
+  </Weapons>
+  <Armour>
+    <Armour_Item>
+      <Name>armour1</Name>
+      <Source>Test_bigger_source</Source>
+    </Armour_Item>
+    <Armour_Item>
+      <Name>shield1</Name>
+      <Source>Test_bigger_source</Source>
+    </Armour_Item>
+  </Armour>
+  <Equipment>
+    <Equipment_Item>
+      <Name>boots1</Name>
+      <Source>Test_bigger_source</Source>
+    </Equipment_Item>
+  </Equipment>
   <Races>
     <Races_Item>
       <Name>Test_race_name1</Name>
@@ -123,6 +161,68 @@
       <Hero_Skill_List>1=5,2=5,3=5</Hero_Skill_List>
     </HeroPlayer_Item>
   </HeroPlayer>
+  <HeroWeapons>
+    <HeroWeapons_Item>
+      <Name>hero_weapon_mele</Name>
+      <Source>Player_Hero_Source</Source>
+      <Hero_Parent_Weapon_Id>1</Hero_Parent_Weapon_Id>
+      <Parent_Item_ID>1</Parent_Item_ID>
+      <Id_As_Name_Backup>Weapons{1=weapon_mele1}</Id_As_Name_Backup>
+    </HeroWeapons_Item>
+    <HeroWeapons_Item>
+      <Name>hero_weapon_ranged</Name>
+      <Source>Player_Hero_Source</Source>
+      <Hero_Parent_Weapon_Id>2</Hero_Parent_Weapon_Id>
+      <Parent_Item_ID>1</Parent_Item_ID>
+      <Id_As_Name_Backup>Weapons{2=weapon_ranged1}</Id_As_Name_Backup>
+    </HeroWeapons_Item>
+    <HeroWeapons_Item>
+      <Name>hero_weapon_good_ammo1</Name>
+      <Source>Player_Hero_Source</Source>
+      <Hero_Parent_Weapon_Id>3</Hero_Parent_Weapon_Id>
+      <Parent_Item_ID>1</Parent_Item_ID>
+      <Id_As_Name_Backup>Weapons{3=weapon_ranged1_ammo1}</Id_As_Name_Backup>
+    </HeroWeapons_Item>
+    <HeroWeapons_Item>
+      <Name>hero_weapon_good_ammo2</Name>
+      <Source>Player_Hero_Source</Source>
+      <Hero_Parent_Weapon_Id>4</Hero_Parent_Weapon_Id>
+      <Parent_Item_ID>1</Parent_Item_ID>
+      <Id_As_Name_Backup>Weapons{4=weapon_ranged1_ammo2}</Id_As_Name_Backup>
+    </HeroWeapons_Item>
+    <HeroWeapons_Item>
+      <Name>hero_weapon_bad_ammo</Name>
+      <Source>Player_Hero_Source</Source>
+      <Hero_Parent_Weapon_Id>5</Hero_Parent_Weapon_Id>
+      <Parent_Item_ID>1</Parent_Item_ID>
+      <Id_As_Name_Backup>Weapons{5=weapon_ranged2_ammo}</Id_As_Name_Backup>
+    </HeroWeapons_Item>
+  </HeroWeapons>
+  <HeroArmour>
+    <HeroArmour_Item>
+      <Name>hero_armour</Name>
+      <Source>Player_Hero_Source</Source>
+      <Hero_Parent_Armour_Id>1</Hero_Parent_Armour_Id>
+      <Parent_Item_ID>1</Parent_Item_ID>
+      <Id_As_Name_Backup>Armour{1=armour1}</Id_As_Name_Backup>
+    </HeroArmour_Item>
+    <HeroArmour_Item>
+      <Name>hero_shield</Name>
+      <Source>Player_Hero_Source</Source>
+      <Hero_Parent_Armour_Id>2</Hero_Parent_Armour_Id>
+      <Parent_Item_ID>1</Parent_Item_ID>
+      <Id_As_Name_Backup>Armour{2=shield1}</Id_As_Name_Backup>
+    </HeroArmour_Item>
+  </HeroArmour>
+  <HeroEquipment>
+    <HeroEquipment_Item>
+      <Name>hero_boots</Name>
+      <Source>Player_Hero_Source</Source>
+      <Hero_Parent_Equipment_Id>1</Hero_Parent_Equipment_Id>
+      <Parent_Item_ID>1</Parent_Item_ID>
+      <Id_As_Name_Backup>Equipment{1=boots1}</Id_As_Name_Backup>
+    </HeroEquipment_Item>
+  </HeroEquipment>
   <Translations>
     <Translations_Item>
       <Name>Test_race_source_name</Name>
