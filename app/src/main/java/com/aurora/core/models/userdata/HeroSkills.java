@@ -1,6 +1,6 @@
 package com.aurora.core.models.userdata;
 
-import static com.aurora.core.database.DbColumnNames.HERO_PARENT_ITEM_ID_COLUMN_NAME;
+import static com.aurora.core.database.DbColumnNames.HERO_PARENT_HERO_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.HERO_SKILLS_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.ITEM_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.SOURCE_COLUMN_NAME;
@@ -24,6 +24,7 @@ import java.util.Map;
 
 import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.models.Databases;
+import com.aurora.core.models.helpers.HeroChild;
 import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.settingspecific.Skills;
 import com.aurora.core.models.typehelpers.ItemType;
@@ -34,17 +35,17 @@ import com.aurora.player.playercharacterutils.PlayerCharacterSkillsValuesEnum;
 @Data
 @SuperBuilder
 @Entity(tableName = HERO_SKILLS, inheritSuperIndices = true,
-    indices = {@Index(SOURCE_COLUMN_NAME), @Index(HERO_PARENT_ITEM_ID_COLUMN_NAME)},
+    indices = {@Index(SOURCE_COLUMN_NAME), @Index(HERO_PARENT_HERO_ID_COLUMN_NAME)},
     foreignKeys = {
         @ForeignKey(entity = Databases.class,
             parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
         @ForeignKey(entity = HeroPlayer.class,
-            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_ITEM_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE)}
+            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_HERO_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE)}
 )
-public class HeroSkills extends Item {
+public class HeroSkills extends Item implements HeroChild {
 
-  @ColumnInfo(name = HERO_PARENT_ITEM_ID_COLUMN_NAME)
-  private Integer heroParentItemID;
+  @ColumnInfo(name = HERO_PARENT_HERO_ID_COLUMN_NAME)
+  private Integer heroParentHeroId;
 
   @ColumnInfo(name = HERO_SKILLS_COLUMN_NAME)
   private String heroSkills;
@@ -83,10 +84,10 @@ public class HeroSkills extends Item {
   public HeroSkills(String name,
       String source,
       String idAsNameBackup,
-      Integer heroParentItemID,
+      Integer heroParentHeroId,
       String heroSkills) {
     super(name, source, idAsNameBackup);
-    this.setHeroParentItemID(heroParentItemID);
+    this.setHeroParentHeroId(heroParentHeroId);
     this.setHeroSkills(heroSkills);
   }
 
@@ -96,7 +97,7 @@ public class HeroSkills extends Item {
         source.getName(),
         source.getSource(),
         source.getIdAsNameBackup(),
-        source.getHeroParentItemID(),
+        source.getHeroParentHeroId(),
         source.getHeroSkills());
   }
 

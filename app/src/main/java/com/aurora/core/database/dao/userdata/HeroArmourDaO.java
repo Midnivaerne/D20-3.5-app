@@ -48,7 +48,7 @@ public abstract class HeroArmourDaO extends BaseDaO<HeroArmour> {
   @Query("SELECT * FROM HeroArmour WHERE Name == :name")
   public abstract HeroArmour getObjectWithName(String name);
 
-  @Query("SELECT * FROM HeroArmour WHERE Parent_Item_ID == :parentHeroId")
+  @Query("SELECT * FROM HeroArmour WHERE Parent_Hero_Id == :parentHeroId")
   public abstract List<HeroArmour> getArmourWithParentHero(Integer parentHeroId);
 
   @Query("DELETE FROM HeroArmour")

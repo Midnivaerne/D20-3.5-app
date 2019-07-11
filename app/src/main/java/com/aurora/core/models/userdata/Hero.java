@@ -97,21 +97,21 @@ public class Hero extends Item {
         getHeroValues().getRaceTemplate() != null ? getHeroValues().getRaceTemplate().getRaceTemplateSkills() : null);
 
     for (HeroWeapons heroWeapon : databaseHolder.heroesWeaponsList) {
-      if (heroWeapon.getHeroParentItemID().equals(this.getItemID())) {
+      if (heroWeapon.getHeroParentHeroId().equals(this.getItemID())) {
         heroWeapon.generateAll(databaseHolder);
         getHeroWeapons().add(heroWeapon);
       }
     }
 
     for (HeroArmour heroArmour : databaseHolder.heroesArmourList) {
-      if (heroArmour.getHeroParentItemID().equals(this.getItemID())) {
+      if (heroArmour.getHeroParentHeroId().equals(this.getItemID())) {
         heroArmour.generateAll(databaseHolder);
         getHeroArmour().add(heroArmour);
       }
     }
 
     for (HeroEquipment heroEquipment : databaseHolder.heroesEquipmentList) {
-      if (heroEquipment.getHeroParentItemID().equals(this.getItemID())) {
+      if (heroEquipment.getHeroParentHeroId().equals(this.getItemID())) {
         heroEquipment.generateAll(databaseHolder);
         getHeroEquipment().add(heroEquipment);
       }

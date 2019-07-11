@@ -1,7 +1,7 @@
 package com.aurora.core.models.userdata;
 
-import static com.aurora.core.database.DbColumnNames.HERO_PARENT_ARMOUR_ID_COLUMN_NAME;
-import static com.aurora.core.database.DbColumnNames.HERO_PARENT_ITEM_ID_COLUMN_NAME;
+import static com.aurora.core.database.DbColumnNames.HERO_ARMOUR_PARENT_ARMOUR_ID_COLUMN_NAME;
+import static com.aurora.core.database.DbColumnNames.HERO_PARENT_HERO_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.ITEM_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.SOURCE_COLUMN_NAME;
 import static com.aurora.core.database.DbTableNames.HERO_ARMOUR;
@@ -20,6 +20,7 @@ import java.util.Map;
 
 import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.models.Databases;
+import com.aurora.core.models.helpers.HeroChild;
 import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.typehelpers.ItemType;
 import com.aurora.core.models.usables.Armour;
@@ -29,21 +30,21 @@ import com.aurora.player.playercharacterutils.PlayerCharacterArmourEnum;
 @Data
 @SuperBuilder
 @Entity(tableName = HERO_ARMOUR, inheritSuperIndices = true,
-    indices = {@Index(SOURCE_COLUMN_NAME), @Index(HERO_PARENT_ITEM_ID_COLUMN_NAME), @Index(HERO_PARENT_ARMOUR_ID_COLUMN_NAME)},
+    indices = {@Index(SOURCE_COLUMN_NAME), @Index(HERO_PARENT_HERO_ID_COLUMN_NAME), @Index(HERO_ARMOUR_PARENT_ARMOUR_ID_COLUMN_NAME)},
     foreignKeys = {
         @ForeignKey(entity = Databases.class,
             parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
         @ForeignKey(entity = HeroPlayer.class,
-            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_ITEM_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
+            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_HERO_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
         @ForeignKey(entity = Armour.class,
-            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_ARMOUR_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE)}
+            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_ARMOUR_PARENT_ARMOUR_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE)}
 )
-public class HeroArmour extends Item {
+public class HeroArmour extends Item implements HeroChild {
 
-  @ColumnInfo(name = HERO_PARENT_ITEM_ID_COLUMN_NAME)
-  private Integer heroParentItemID;
+  @ColumnInfo(name = HERO_PARENT_HERO_ID_COLUMN_NAME)
+  private Integer heroParentHeroId;
 
-  @ColumnInfo(name = HERO_PARENT_ARMOUR_ID_COLUMN_NAME)
+  @ColumnInfo(name = HERO_ARMOUR_PARENT_ARMOUR_ID_COLUMN_NAME)
   private Integer armourId;
 
   @Ignore
@@ -52,6 +53,7 @@ public class HeroArmour extends Item {
   @Ignore
   private Map<PlayerCharacterArmourEnum, String> armourValues = new HashMap<>();
 
+  @Ignore
   public HeroArmour() {
     super();
   }
@@ -72,10 +74,10 @@ public class HeroArmour extends Item {
   public HeroArmour(String name,
       String source,
       String idAsNameBackup,
-      Integer heroParentItemID,
+      Integer heroParentHeroId,
       Integer armourId) {
     super(name, source, idAsNameBackup);
-    this.setHeroParentItemID(heroParentItemID);
+    this.setHeroParentHeroId(heroParentHeroId);
     this.setArmourId(armourId);
   }
 
@@ -85,7 +87,7 @@ public class HeroArmour extends Item {
         source.getName(),
         source.getSource(),
         source.getIdAsNameBackup(),
-        source.getHeroParentItemID(),
+        source.getHeroParentHeroId(),
         source.getArmourId()
     );
   }

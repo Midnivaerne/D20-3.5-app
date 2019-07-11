@@ -11,7 +11,7 @@ import static com.aurora.core.database.DbColumnNames.HERO_CLASS_ID_LIST_COLUMN_N
 import static com.aurora.core.database.DbColumnNames.HERO_DEITY_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.HERO_GENDER_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.HERO_HIT_POINTS_COLUMN_NAME;
-import static com.aurora.core.database.DbColumnNames.HERO_PARENT_ITEM_ID_COLUMN_NAME;
+import static com.aurora.core.database.DbColumnNames.HERO_PARENT_HERO_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.HERO_RACE_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.HERO_SIZE_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.ITEM_ID_COLUMN_NAME;
@@ -38,6 +38,7 @@ import com.aurora.core.database.DatabaseManager;
 import com.aurora.core.models.Databases;
 import com.aurora.core.models.constants.Alignments;
 import com.aurora.core.models.constants.Sizes;
+import com.aurora.core.models.helpers.HeroChild;
 import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.helpers.ValuesConverter;
 import com.aurora.core.models.settingspecific.Classes;
@@ -54,13 +55,13 @@ import com.aurora.player.playercharacterutils.PlayerCharacterSavingThrowsEnum;
 @Data
 @SuperBuilder
 @Entity(tableName = HERO_STATISTICS, inheritSuperIndices = true,
-    indices = {@Index(SOURCE_COLUMN_NAME), @Index(HERO_PARENT_ITEM_ID_COLUMN_NAME), @Index(HERO_ALIGNMENT_ID_COLUMN_NAME),
+    indices = {@Index(SOURCE_COLUMN_NAME), @Index(HERO_PARENT_HERO_ID_COLUMN_NAME), @Index(HERO_ALIGNMENT_ID_COLUMN_NAME),
         @Index(HERO_DEITY_ID_COLUMN_NAME), @Index(HERO_SIZE_COLUMN_NAME)},
     foreignKeys = {
         @ForeignKey(entity = Databases.class,
             parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
         @ForeignKey(entity = HeroPlayer.class,
-            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_ITEM_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
+            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_HERO_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
         @ForeignKey(entity = Alignments.class,
             parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_ALIGNMENT_ID_COLUMN_NAME),
         @ForeignKey(entity = Sizes.class,
@@ -68,10 +69,10 @@ import com.aurora.player.playercharacterutils.PlayerCharacterSavingThrowsEnum;
         @ForeignKey(entity = Deities.class,
             parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_DEITY_ID_COLUMN_NAME)}
 )
-public class HeroValues extends Item implements ValuesConverter {
+public class HeroValues extends Item implements ValuesConverter, HeroChild {
 
-  @ColumnInfo(name = HERO_PARENT_ITEM_ID_COLUMN_NAME)
-  private Integer heroParentItemID;
+  @ColumnInfo(name = HERO_PARENT_HERO_ID_COLUMN_NAME)
+  private Integer heroParentHeroId;
 
   @ColumnInfo(name = HERO_HIT_POINTS_COLUMN_NAME)
   private String heroHitPoints;
@@ -153,7 +154,7 @@ public class HeroValues extends Item implements ValuesConverter {
   public HeroValues(String name,
       String source,
       String idAsNameBackup,
-      Integer heroParentItemID,
+      Integer heroParentHeroId,
       String heroHitPoints,
       Integer heroAbilityScoreStr,
       Integer heroAbilityScoreDex,
@@ -168,7 +169,7 @@ public class HeroValues extends Item implements ValuesConverter {
       Integer heroSizeId,
       String heroGender) {
     super(name, source, idAsNameBackup);
-    this.heroParentItemID = heroParentItemID;
+    this.heroParentHeroId = heroParentHeroId;
     this.heroHitPoints = heroHitPoints;
     this.heroAbilityScoreStr = heroAbilityScoreStr;
     this.heroAbilityScoreDex = heroAbilityScoreDex;
@@ -318,7 +319,7 @@ public class HeroValues extends Item implements ValuesConverter {
         source.getName(),
         source.getSource(),
         source.getIdAsNameBackup(),
-        source.getHeroParentItemID(),
+        source.getHeroParentHeroId(),
         source.getHeroHitPoints(),
         source.getHeroAbilityScoreStr(),
         source.getHeroAbilityScoreDex(),

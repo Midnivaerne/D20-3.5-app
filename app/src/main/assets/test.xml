@@ -165,36 +165,36 @@
     <HeroWeapons_Item>
       <Name>hero_weapon_mele</Name>
       <Source>Player_Hero_Source</Source>
-      <Hero_Parent_Weapon_Id>1</Hero_Parent_Weapon_Id>
-      <Parent_Item_ID>1</Parent_Item_ID>
+      <Hero_Weapon_Parent_Weapon_Id>1</Hero_Weapon_Parent_Weapon_Id>
+      <Parent_Hero_Id>1</Parent_Hero_Id>
       <Id_As_Name_Backup>Weapons{1=weapon_mele1}</Id_As_Name_Backup>
     </HeroWeapons_Item>
     <HeroWeapons_Item>
       <Name>hero_weapon_ranged</Name>
       <Source>Player_Hero_Source</Source>
-      <Hero_Parent_Weapon_Id>2</Hero_Parent_Weapon_Id>
-      <Parent_Item_ID>1</Parent_Item_ID>
+      <Hero_Weapon_Parent_Weapon_Id>2</Hero_Weapon_Parent_Weapon_Id>
+      <Parent_Hero_Id>1</Parent_Hero_Id>
       <Id_As_Name_Backup>Weapons{2=weapon_ranged1}</Id_As_Name_Backup>
     </HeroWeapons_Item>
     <HeroWeapons_Item>
       <Name>hero_weapon_good_ammo1</Name>
       <Source>Player_Hero_Source</Source>
-      <Hero_Parent_Weapon_Id>3</Hero_Parent_Weapon_Id>
-      <Parent_Item_ID>1</Parent_Item_ID>
+      <Hero_Weapon_Parent_Weapon_Id>3</Hero_Weapon_Parent_Weapon_Id>
+      <Parent_Hero_Id>1</Parent_Hero_Id>
       <Id_As_Name_Backup>Weapons{3=weapon_ranged1_ammo1}</Id_As_Name_Backup>
     </HeroWeapons_Item>
     <HeroWeapons_Item>
       <Name>hero_weapon_good_ammo2</Name>
       <Source>Player_Hero_Source</Source>
-      <Hero_Parent_Weapon_Id>4</Hero_Parent_Weapon_Id>
-      <Parent_Item_ID>1</Parent_Item_ID>
+      <Hero_Weapon_Parent_Weapon_Id>4</Hero_Weapon_Parent_Weapon_Id>
+      <Parent_Hero_Id>1</Parent_Hero_Id>
       <Id_As_Name_Backup>Weapons{4=weapon_ranged1_ammo2}</Id_As_Name_Backup>
     </HeroWeapons_Item>
     <HeroWeapons_Item>
       <Name>hero_weapon_bad_ammo</Name>
       <Source>Player_Hero_Source</Source>
-      <Hero_Parent_Weapon_Id>5</Hero_Parent_Weapon_Id>
-      <Parent_Item_ID>1</Parent_Item_ID>
+      <Hero_Weapon_Parent_Weapon_Id>5</Hero_Weapon_Parent_Weapon_Id>
+      <Parent_Hero_Id>1</Parent_Hero_Id>
       <Id_As_Name_Backup>Weapons{5=weapon_ranged2_ammo}</Id_As_Name_Backup>
     </HeroWeapons_Item>
   </HeroWeapons>
@@ -203,14 +203,14 @@
       <Name>hero_armour</Name>
       <Source>Player_Hero_Source</Source>
       <Hero_Parent_Armour_Id>1</Hero_Parent_Armour_Id>
-      <Parent_Item_ID>1</Parent_Item_ID>
+      <Parent_Hero_Id>1</Parent_Hero_Id>
       <Id_As_Name_Backup>Armour{1=armour1}</Id_As_Name_Backup>
     </HeroArmour_Item>
     <HeroArmour_Item>
       <Name>hero_shield</Name>
       <Source>Player_Hero_Source</Source>
       <Hero_Parent_Armour_Id>2</Hero_Parent_Armour_Id>
-      <Parent_Item_ID>1</Parent_Item_ID>
+      <Parent_Hero_Id>1</Parent_Hero_Id>
       <Id_As_Name_Backup>Armour{2=shield1}</Id_As_Name_Backup>
     </HeroArmour_Item>
   </HeroArmour>
@@ -219,7 +219,7 @@
       <Name>hero_boots</Name>
       <Source>Player_Hero_Source</Source>
       <Hero_Parent_Equipment_Id>1</Hero_Parent_Equipment_Id>
-      <Parent_Item_ID>1</Parent_Item_ID>
+      <Parent_Hero_Id>1</Parent_Hero_Id>
       <Id_As_Name_Backup>Equipment{1=boots1}</Id_As_Name_Backup>
     </HeroEquipment_Item>
   </HeroEquipment>

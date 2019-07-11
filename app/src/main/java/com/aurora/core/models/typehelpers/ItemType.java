@@ -690,15 +690,15 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
         databaseHolder.heroesPlayerList.get(i).setItemID(heroId);
 
         HeroDescription description = databaseHolder.heroesPlayerList.get(i).getHeroDescription();
-        description.setHeroParentItemID(heroId);
+        description.setHeroParentHeroId(heroId);
         descriptionsSet.add(description);
 
         HeroValues statistic = databaseHolder.heroesPlayerList.get(i).getHeroValues();
-        statistic.setHeroParentItemID(heroId);
+        statistic.setHeroParentHeroId(heroId);
         statisticsSet.add(statistic);
 
         HeroSkills skills = databaseHolder.heroesPlayerList.get(i).getHeroSkills();
-        skills.setHeroParentItemID(heroId);
+        skills.setHeroParentHeroId(heroId);
         skillsSet.add(skills);
       }
       databaseHolder.heroDescriptionDaO().insertAll(descriptionsSet);
@@ -712,20 +712,20 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
           .getAllObjectsAsMergedObjectItem();
       Map<Integer, Integer> parentToDescriptionId = new HashMap<>();
       for (Integer descrId : descriptions.keySet()) {
-        parentToDescriptionId.put(descriptions.get(descrId) != null ? descrId : descriptions.get(descrId).getHeroParentItemID(), descrId);
+        parentToDescriptionId.put(descriptions.get(descrId) != null ? descrId : descriptions.get(descrId).getHeroParentHeroId(), descrId);
       }
 
       Map<Integer, HeroValues> statistics = (Map<Integer, HeroValues>) databaseHolder.heroStatisticsAbilityScoresDaO()
           .getAllObjectsAsMergedObjectItem();
       Map<Integer, Integer> parentToStatisticsId = new HashMap<>();
       for (Integer statsId : statistics.keySet()) {
-        parentToStatisticsId.put(statistics.get(statsId) != null ? statsId : statistics.get(statsId).getHeroParentItemID(), statsId);
+        parentToStatisticsId.put(statistics.get(statsId) != null ? statsId : statistics.get(statsId).getHeroParentHeroId(), statsId);
       }
 
       Map<Integer, HeroSkills> skills = (Map<Integer, HeroSkills>) databaseHolder.heroSkillsDaO().getAllObjectsAsMergedObjectItem();
       Map<Integer, Integer> parentToSkillsId = new HashMap<>();
       for (Integer skillsId : skills.keySet()) {
-        parentToSkillsId.put(skills.get(skillsId) != null ? skillsId : skills.get(skillsId).getHeroParentItemID(), skillsId);
+        parentToSkillsId.put(skills.get(skillsId) != null ? skillsId : skills.get(skillsId).getHeroParentHeroId(), skillsId);
       }
       List<HeroPlayer> heroes = new ArrayList<>(
           (Collection<? extends HeroPlayer>) databaseHolder.heroPlayerDaO().getAllObjectsAsMergedObjectItem().values());
@@ -772,11 +772,6 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
 
     @Override
     public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
-      System.out.println("_____________" + databaseHolder.heroesWeaponsList);//todo delete
-      System.out.println("_____________" + databaseHolder.heroesWeaponsList.get(0));//todo delete
-      System.out.println("_____________" + databaseHolder.heroesWeaponsList.get(0).getName());//todo delete
-      System.out.println("_____________" + databaseHolder.heroesWeaponsList.get(0).getHeroParentItemID());//todo delete
-      System.out.println("_____________" + databaseHolder.heroesWeaponsList.get(0).getWeaponId());//todo delete
       databaseHolder.heroWeaponsDaO().insertAll(databaseHolder.heroesWeaponsList);
     }
 

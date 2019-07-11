@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import com.aurora.core.models.Translations;
+import com.aurora.core.models.helpers.HeroChild;
 import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.settingspecific.RaceTemplates;
 import com.aurora.core.models.settingspecific.Races;
@@ -135,6 +136,15 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
 
   ///////////////////////////////////////////////////////////////
   ////////////////////////  HERO_PLAYER PLAYER /////////////////////////
+
+  ///////////////////////////////////////////////////////////////
+  ////////////////////////  HERO_PLAYER HERO /////////////////////////
+  COL_HERO_PARENT_HERO_ID(DbColumnNames.HERO_PARENT_HERO_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((HeroChild) item).setHeroParentHeroId(Integer.valueOf(data));
+    }
+  },
 
   //////////////////////////////////////////////////////////////////
   //////////////////////  HERO_PLAYER DESCRIPTION  ///////////////////////
@@ -270,30 +280,30 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
   /////////////////////////////////////////////////////////////////////
   //////////////////////  HERO_PLAYER WEAPONS  ///////////////////////
 
-  COL_HERO_WEAPONS_PARENT_WEAPON_ID(DbColumnNames.HERO_PARENT_WEAPON_ID_COLUMN_NAME, false) {
+  COL_HERO_WEAPONS_PARENT_WEAPON_ID(DbColumnNames.HERO_WEAPON_PARENT_WEAPON_ID_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroWeapons) item).setHeroParentItemID(Integer.valueOf(data));
+      ((HeroWeapons) item).setWeaponId(Integer.valueOf(data));
     }
   },
 
   /////////////////////////////////////////////////////////////////////
   //////////////////////  HERO_PLAYER ARMOUR  ///////////////////////
 
-  COL_HERO_WEAPONS_PARENT_ARMOUR_ID(DbColumnNames.HERO_PARENT_ARMOUR_ID_COLUMN_NAME, false) {
+  COL_HERO_WEAPONS_PARENT_ARMOUR_ID(DbColumnNames.HERO_ARMOUR_PARENT_ARMOUR_ID_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroArmour) item).setHeroParentItemID(Integer.valueOf(data));
+      ((HeroArmour) item).setHeroParentHeroId(Integer.valueOf(data));
     }
   },
 
   /////////////////////////////////////////////////////////////////////
   //////////////////////  HERO_PLAYER ARMOUR  ///////////////////////
 
-  COL_HERO_EQUIPMENT_PARENT_ARMOUR_ID(DbColumnNames.HERO_PARENT_EQUIPMENT_ID_COLUMN_NAME, false) {
+  COL_HERO_EQUIPMENT_PARENT_ARMOUR_ID(DbColumnNames.HERO_EQUIPMENT_PARENT_EQUIPMENT_ID_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroEquipment) item).setHeroParentItemID(Integer.valueOf(data));
+      ((HeroEquipment) item).setHeroParentHeroId(Integer.valueOf(data));
     }
   },
 

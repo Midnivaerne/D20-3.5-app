@@ -1,9 +1,9 @@
 package com.aurora.core.models.userdata;
 
 import static com.aurora.core.database.DbColumnNames.HERO_EQUIPMENT_CONTAINER_COLUMN_NAME;
+import static com.aurora.core.database.DbColumnNames.HERO_EQUIPMENT_PARENT_EQUIPMENT_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.HERO_EQUIPMENT_WORN_PLACE_COLUMN_NAME;
-import static com.aurora.core.database.DbColumnNames.HERO_PARENT_EQUIPMENT_ID_COLUMN_NAME;
-import static com.aurora.core.database.DbColumnNames.HERO_PARENT_ITEM_ID_COLUMN_NAME;
+import static com.aurora.core.database.DbColumnNames.HERO_PARENT_HERO_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.ITEM_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.SOURCE_COLUMN_NAME;
 import static com.aurora.core.database.DbTableNames.HERO_EQUIPMENT;
@@ -21,6 +21,7 @@ import java.util.Map;
 
 import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.models.Databases;
+import com.aurora.core.models.helpers.HeroChild;
 import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.typehelpers.ItemType;
 import com.aurora.core.models.usables.Equipment;
@@ -31,21 +32,21 @@ import com.aurora.player.playercharacterutils.PlayerCharacterWornEquipmentPlaces
 @Data
 @SuperBuilder
 @Entity(tableName = HERO_EQUIPMENT, inheritSuperIndices = true,
-    indices = {@Index(SOURCE_COLUMN_NAME), @Index(HERO_PARENT_ITEM_ID_COLUMN_NAME), @Index(HERO_PARENT_EQUIPMENT_ID_COLUMN_NAME)},
+    indices = {@Index(SOURCE_COLUMN_NAME), @Index(HERO_PARENT_HERO_ID_COLUMN_NAME), @Index(HERO_EQUIPMENT_PARENT_EQUIPMENT_ID_COLUMN_NAME)},
     foreignKeys = {
         @ForeignKey(entity = Databases.class,
             parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
         @ForeignKey(entity = HeroPlayer.class,
-            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_ITEM_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
+            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_HERO_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
         @ForeignKey(entity = Weapons.class,
-            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_EQUIPMENT_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE)}
+            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_EQUIPMENT_PARENT_EQUIPMENT_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE)}
 )
-public class HeroEquipment extends Item {
+public class HeroEquipment extends Item implements HeroChild {
 
-  @ColumnInfo(name = HERO_PARENT_ITEM_ID_COLUMN_NAME)
-  private Integer heroParentItemID;
+  @ColumnInfo(name = HERO_PARENT_HERO_ID_COLUMN_NAME)
+  private Integer heroParentHeroId;
 
-  @ColumnInfo(name = HERO_PARENT_EQUIPMENT_ID_COLUMN_NAME)
+  @ColumnInfo(name = HERO_EQUIPMENT_PARENT_EQUIPMENT_ID_COLUMN_NAME)
   private Integer equipmentId;
 
   @Ignore
@@ -77,10 +78,10 @@ public class HeroEquipment extends Item {
   public HeroEquipment(String name,
       String source,
       String idAsNameBackup,
-      Integer heroParentItemID,
+      Integer heroParentHeroId,
       Integer weaponId) {
     super(name, source, idAsNameBackup);
-    this.setHeroParentItemID(heroParentItemID);
+    this.setHeroParentHeroId(heroParentHeroId);
     this.setEquipmentId(weaponId);
   }
 
@@ -90,7 +91,7 @@ public class HeroEquipment extends Item {
         source.getName(),
         source.getSource(),
         source.getIdAsNameBackup(),
-        source.getHeroParentItemID(),
+        source.getHeroParentHeroId(),
         source.getEquipmentId()
     );
   }

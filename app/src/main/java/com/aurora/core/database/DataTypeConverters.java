@@ -22,12 +22,18 @@ public class DataTypeConverters {
 
   @TypeConverter
   public PlayerCharacterWornEquipmentPlacesEnum StringToWornPlace(String wornPlace) {
-    return PlayerCharacterWornEquipmentPlacesEnum.valueOf(wornPlace);
+    if (wornPlace != null) {
+      return PlayerCharacterWornEquipmentPlacesEnum.valueOf(wornPlace);
+    }
+    return null;
   }
 
   @TypeConverter
   public String StringToWornPlace(PlayerCharacterWornEquipmentPlacesEnum wornPlace) {
-    return wornPlace.toString();
+    if (wornPlace != null) {
+      return wornPlace.toString();
+    }
+    return null;
   }
 
 }

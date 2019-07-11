@@ -4,7 +4,7 @@ import static com.aurora.core.database.DbColumnNames.HERO_AGE_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.HERO_EYES_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.HERO_HAIR_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.HERO_HEIGHT_COLUMN_NAME;
-import static com.aurora.core.database.DbColumnNames.HERO_PARENT_ITEM_ID_COLUMN_NAME;
+import static com.aurora.core.database.DbColumnNames.HERO_PARENT_HERO_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.HERO_PLAYER_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.HERO_SKIN_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.HERO_WEIGHT_COLUMN_NAME;
@@ -24,6 +24,7 @@ import lombok.experimental.SuperBuilder;
 import java.util.Map;
 
 import com.aurora.core.models.Databases;
+import com.aurora.core.models.helpers.HeroChild;
 import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.typehelpers.ItemType;
 
@@ -31,17 +32,17 @@ import com.aurora.core.models.typehelpers.ItemType;
 @Data
 @SuperBuilder
 @Entity(tableName = HERO_DESCRIPTION, inheritSuperIndices = true,
-    indices = {@Index(SOURCE_COLUMN_NAME), @Index(HERO_PARENT_ITEM_ID_COLUMN_NAME)},
+    indices = {@Index(SOURCE_COLUMN_NAME), @Index(HERO_PARENT_HERO_ID_COLUMN_NAME)},
     foreignKeys = {
         @ForeignKey(entity = Databases.class,
             parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
         @ForeignKey(entity = HeroPlayer.class,
-            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_ITEM_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE)}
+            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_HERO_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE)}
 )
-public class HeroDescription extends Item {
+public class HeroDescription extends Item implements HeroChild {
 
-  @ColumnInfo(name = HERO_PARENT_ITEM_ID_COLUMN_NAME)
-  private Integer heroParentItemID;
+  @ColumnInfo(name = HERO_PARENT_HERO_ID_COLUMN_NAME)
+  private Integer heroParentHeroId;
 
   @ColumnInfo(name = HERO_PLAYER_COLUMN_NAME)
   private String heroPlayer;
@@ -78,7 +79,7 @@ public class HeroDescription extends Item {
   public HeroDescription(String name,
       String source,
       String idAsNameBackup,
-      Integer heroParentItemID,
+      Integer heroParentHeroId,
       String heroPlayer,
       Integer heroAge,
       String heroHeight,
@@ -87,7 +88,7 @@ public class HeroDescription extends Item {
       String heroHair,
       String heroSkin) {
     super(name, source, idAsNameBackup);
-    this.heroParentItemID = heroParentItemID;
+    this.heroParentHeroId = heroParentHeroId;
     this.heroPlayer = heroPlayer;
     this.heroAge = heroAge;
     this.heroHeight = heroHeight;
@@ -103,7 +104,7 @@ public class HeroDescription extends Item {
         source.getName(),
         source.getSource(),
         source.getIdAsNameBackup(),
-        source.getHeroParentItemID(),
+        source.getHeroParentHeroId(),
         source.getHeroPlayer(),
         source.getHeroAge(),
         source.getHeroHeight(),
