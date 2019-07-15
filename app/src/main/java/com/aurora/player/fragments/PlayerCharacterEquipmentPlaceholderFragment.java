@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import lombok.NonNull;
 
 import com.aurora.core.R;
-import com.aurora.player.adapters.EquipmentWeaponsRecyclerViewAdapter;
+import com.aurora.player.adapters.PlayerCharacterEquipmentWeaponsWeaponAdapter;
 import com.aurora.player.adapters.PlayerCharacterEquipmentContainersContainerAdapter;
 import com.aurora.player.playercharacterutils.PlayerCharacterArmourEnum;
 import com.aurora.player.playercharacterutils.PlayerCharacterArmourSpecificEnum;
@@ -62,7 +62,8 @@ public class PlayerCharacterEquipmentPlaceholderFragment extends Fragment {
 
   private void loadWeapons(@NonNull View weaponsRecyclerView) {
     ((ExpandableListView) weaponsRecyclerView)
-        .setAdapter(new EquipmentWeaponsRecyclerViewAdapter(this.getContext(), playerCharacterVM.getHero()));
+        .setAdapter(new PlayerCharacterEquipmentWeaponsWeaponAdapter(this.getContext(), playerCharacterVM.getHero()));
+    //todo list height?
   }
 
   private void loadArmour(@NonNull View armoursRecyclerView) {
@@ -108,7 +109,9 @@ public class PlayerCharacterEquipmentPlaceholderFragment extends Fragment {
   }
 
   private void loadContainers(@NonNull View containersRecyclerView) {
-    ((ExpandableListView) containersRecyclerView)
-        .setAdapter(new PlayerCharacterEquipmentContainersContainerAdapter(this.getContext(), playerCharacterVM.getHero()));
+    if (!playerCharacterVM.getHero().getHeroContainerEquipmentMap().isEmpty()) {
+      ((ExpandableListView) containersRecyclerView)
+          .setAdapter(new PlayerCharacterEquipmentContainersContainerAdapter(this.getContext(), playerCharacterVM.getHero()));
+    }
   }
 }

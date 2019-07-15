@@ -202,14 +202,14 @@
     <HeroArmour_Item>
       <Name>hero_armour</Name>
       <Source>Player_Hero_Source</Source>
-      <Hero_Parent_Armour_Id>1</Hero_Parent_Armour_Id>
+      <Hero_Armour_Parent_Armour_Id>1</Hero_Armour_Parent_Armour_Id>
       <Parent_Hero_Id>1</Parent_Hero_Id>
       <Id_As_Name_Backup>Armour{1=armour1}</Id_As_Name_Backup>
     </HeroArmour_Item>
     <HeroArmour_Item>
       <Name>hero_shield</Name>
       <Source>Player_Hero_Source</Source>
-      <Hero_Parent_Armour_Id>2</Hero_Parent_Armour_Id>
+      <Hero_Armour_Parent_Armour_Id>2</Hero_Armour_Parent_Armour_Id>
       <Parent_Hero_Id>1</Parent_Hero_Id>
       <Id_As_Name_Backup>Armour{2=shield1}</Id_As_Name_Backup>
     </HeroArmour_Item>

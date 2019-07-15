@@ -96,6 +96,7 @@ public class Hero extends Item {
     getHeroSkills().loadAllSettingSkills(databaseHolder, getHeroValues().getRace().getRaceSkills(),
         getHeroValues().getRaceTemplate() != null ? getHeroValues().getRaceTemplate().getRaceTemplateSkills() : null);
 
+    setHeroWeapons(new ArrayList<HeroWeapons>());
     for (HeroWeapons heroWeapon : databaseHolder.heroesWeaponsList) {
       if (heroWeapon.getHeroParentHeroId().equals(this.getItemID())) {
         heroWeapon.generateAll(databaseHolder);
@@ -103,6 +104,7 @@ public class Hero extends Item {
       }
     }
 
+    setHeroArmour(new ArrayList<HeroArmour>());
     for (HeroArmour heroArmour : databaseHolder.heroesArmourList) {
       if (heroArmour.getHeroParentHeroId().equals(this.getItemID())) {
         heroArmour.generateAll(databaseHolder);
@@ -110,6 +112,7 @@ public class Hero extends Item {
       }
     }
 
+    setHeroEquipment(new ArrayList<HeroEquipment>());
     for (HeroEquipment heroEquipment : databaseHolder.heroesEquipmentList) {
       if (heroEquipment.getHeroParentHeroId().equals(this.getItemID())) {
         heroEquipment.generateAll(databaseHolder);
@@ -122,11 +125,15 @@ public class Hero extends Item {
           getHeroPlaceEquipmentMap().put(heroEquipment.getWornPlace(), heroEquipment);
         } else {
           HeroEquipment parentContainer = databaseHolder.heroesEquipmentMap.get(heroEquipment.getParentContainer());
-          if (!getHeroContainerEquipmentMap().containsKey(parentContainer)) {
-            getHeroContainerEquipmentMap()
-                .put(databaseHolder.heroesEquipmentMap.get(heroEquipment.getParentContainer()), new ArrayList<HeroEquipment>());
+          if (parentContainer != null) {
+            if (!getHeroContainerEquipmentMap().containsKey(parentContainer)) {
+              getHeroContainerEquipmentMap()
+                  .put(databaseHolder.heroesEquipmentMap.get(heroEquipment.getParentContainer()), new ArrayList<HeroEquipment>());
+            }
+            getHeroContainerEquipmentMap().get(parentContainer).add(heroEquipment);
+          } else {
+            //todo manage "lost" items
           }
-          getHeroContainerEquipmentMap().get(parentContainer).add(heroEquipment);
         }
       }
     }

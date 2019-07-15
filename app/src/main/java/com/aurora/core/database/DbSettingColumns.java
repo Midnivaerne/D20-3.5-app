@@ -293,7 +293,7 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
   COL_HERO_WEAPONS_PARENT_ARMOUR_ID(DbColumnNames.HERO_ARMOUR_PARENT_ARMOUR_ID_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroArmour) item).setHeroParentHeroId(Integer.valueOf(data));
+      ((HeroArmour) item).setArmourId(Integer.valueOf(data));
     }
   },
 
@@ -303,7 +303,7 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
   COL_HERO_EQUIPMENT_PARENT_ARMOUR_ID(DbColumnNames.HERO_EQUIPMENT_PARENT_EQUIPMENT_ID_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((HeroEquipment) item).setHeroParentHeroId(Integer.valueOf(data));
+      ((HeroEquipment) item).setEquipmentId(Integer.valueOf(data));
     }
   },
 
