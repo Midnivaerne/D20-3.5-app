@@ -2,6 +2,7 @@ package com.aurora.core.models.userdata;
 
 import static com.aurora.core.database.DbColumnNames.HERO_PARENT_HERO_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.HERO_WEAPON_PARENT_WEAPON_ID_COLUMN_NAME;
+import static com.aurora.core.database.DbColumnNames.HERO_WEAPON_WEAPON_SPECIFICS_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.ITEM_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.SOURCE_COLUMN_NAME;
 import static com.aurora.core.database.DbTableNames.HERO_WEAPONS;
@@ -15,6 +16,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
 import java.util.Map;
 
 import com.aurora.core.database.DatabaseHolder;
@@ -22,6 +24,7 @@ import com.aurora.core.models.Databases;
 import com.aurora.core.models.helpers.HeroChild;
 import com.aurora.core.models.helpers.Item;
 import com.aurora.core.models.typehelpers.ItemType;
+import com.aurora.core.models.usables.WeaponSpecifics;
 import com.aurora.core.models.usables.Weapons;
 
 @EqualsAndHashCode(callSuper = true)
@@ -47,6 +50,12 @@ public class HeroWeapons extends Item implements HeroChild {
 
   @Ignore
   private Weapons weapon;
+
+  @ColumnInfo(name = HERO_WEAPON_WEAPON_SPECIFICS_COLUMN_NAME)
+  private String weaponSpecificIds;
+
+  @Ignore
+  private List<WeaponSpecifics> weaponSpecificsList;
 
   @Ignore
   public HeroWeapons() {
@@ -89,6 +98,12 @@ public class HeroWeapons extends Item implements HeroChild {
 
   HeroWeapons generateAll(DatabaseHolder databaseHolder) {
     setWeapon(databaseHolder.weaponsMap.get(getWeaponId()));
+    getWeapon().generateAll(databaseHolder);
+    if (getWeaponSpecificIds() != null && getWeaponSpecificIds() != "") {
+      for (String weaponSpecificId : weaponSpecificIds.split(",")) {
+        weaponSpecificsList.add(databaseHolder.weaponSpecificsMap.get(Integer.valueOf(weaponSpecificId)));
+      }
+    }
     return this;
   }
 }

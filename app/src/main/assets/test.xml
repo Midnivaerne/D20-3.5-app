@@ -21,26 +21,84 @@
       <Source>Test_classes_Source</Source>
     </Databases_Item>
   </Databases>
+  <WeaponType>
+    <WeaponType_Item>
+      <Name>melee_name</Name>
+      <Source>Test_bigger_source</Source>
+      <Weapon_Type_Can_Have_Ammo>false</Weapon_Type_Can_Have_Ammo>
+      <Weapon_Type_Is_Ammo>false</Weapon_Type_Is_Ammo>
+    </WeaponType_Item>
+    <WeaponType_Item>
+      <Name>thrown_name</Name>
+      <Source>Test_bigger_source</Source>
+      <Weapon_Type_Can_Have_Ammo>true</Weapon_Type_Can_Have_Ammo>
+      <Weapon_Type_Is_Ammo>true</Weapon_Type_Is_Ammo>
+    </WeaponType_Item>
+    <WeaponType_Item>
+      <Name>ranged_name</Name>
+      <Source>Test_bigger_source</Source>
+      <Weapon_Type_Can_Have_Ammo>true</Weapon_Type_Can_Have_Ammo>
+      <Weapon_Type_Is_Ammo>false</Weapon_Type_Is_Ammo>
+    </WeaponType_Item>
+    <WeaponType_Item>
+      <Name>ammo_name</Name>
+      <Source>Test_bigger_source</Source>
+      <Weapon_Type_Can_Have_Ammo>false</Weapon_Type_Can_Have_Ammo>
+      <Weapon_Type_Is_Ammo>true</Weapon_Type_Is_Ammo>
+    </WeaponType_Item>
+  </WeaponType>
+  <WeaponSubtype>
+    <WeaponSubtype_Item>
+      <Name>melee_example_swords_name</Name>
+      <Source>Test_bigger_source</Source>
+    </WeaponSubtype_Item>
+    <WeaponSubtype_Item>
+      <Name>ammo_example_arrows_name</Name>
+      <Source>Test_bigger_source</Source>
+    </WeaponSubtype_Item>
+    <WeaponSubtype_Item>
+      <Name>ammo_example_bolts_name</Name>
+      <Source>Test_bigger_source</Source>
+    </WeaponSubtype_Item>
+    <WeaponSubtype_Item>
+      <Name>ranged_example_bows_name</Name>
+      <Source>Test_bigger_source</Source>
+      <Weapon_Subtype_Used_Ammo_Type_Id>2</Weapon_Subtype_Used_Ammo_Type_Id>
+    </WeaponSubtype_Item>
+  </WeaponSubtype>
+  <WeaponSpecifics>
+    <WeaponSpecifics_Item></WeaponSpecifics_Item>
+  </WeaponSpecifics>
   <Weapons>
     <Weapons_Item>
       <Name>weapon_mele1</Name>
       <Source>Test_bigger_source</Source>
+      <Weapon_Type_Parent_Id>1</Weapon_Type_Parent_Id>
+      <Weapon_Subtype_Parent_Id>1</Weapon_Subtype_Parent_Id>
     </Weapons_Item>
     <Weapons_Item>
       <Name>weapon_ranged1</Name>
       <Source>Test_bigger_source</Source>
+      <Weapon_Type_Parent_Id>3</Weapon_Type_Parent_Id>
+      <Weapon_Subtype_Parent_Id>4</Weapon_Subtype_Parent_Id>
     </Weapons_Item>
     <Weapons_Item>
       <Name>weapon_ranged1_ammo1</Name>
       <Source>Test_bigger_source</Source>
+      <Weapon_Type_Parent_Id>4</Weapon_Type_Parent_Id>
+      <Weapon_Subtype_Parent_Id>2</Weapon_Subtype_Parent_Id>
     </Weapons_Item>
     <Weapons_Item>
       <Name>weapon_ranged1_ammo2</Name>
       <Source>Test_bigger_source</Source>
+      <Weapon_Type_Parent_Id>4</Weapon_Type_Parent_Id>
+      <Weapon_Subtype_Parent_Id>2</Weapon_Subtype_Parent_Id>
     </Weapons_Item>
     <Weapons_Item>
       <Name>weapon_ranged2_ammo</Name>
       <Source>Test_bigger_source</Source>
+      <Weapon_Type_Parent_Id>4</Weapon_Type_Parent_Id>
+      <Weapon_Subtype_Parent_Id>3</Weapon_Subtype_Parent_Id>
     </Weapons_Item>
   </Weapons>
   <Armour>

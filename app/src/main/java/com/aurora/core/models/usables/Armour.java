@@ -22,11 +22,7 @@ import com.aurora.core.models.helpers.Item;
 @SuperBuilder
 @Entity(tableName = ARMOUR, inheritSuperIndices = true,
     indices = {@Index(value = {SOURCE_COLUMN_NAME})},
-    foreignKeys = @ForeignKey(
-        entity = Databases.class,
-        parentColumns = SOURCE_COLUMN_NAME,
-        childColumns = SOURCE_COLUMN_NAME,
-        onDelete = ForeignKey.CASCADE))
+    foreignKeys = @ForeignKey(entity = Databases.class, parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
 public class Armour extends Item {
 
   @ColumnInfo(name = DbColumnNames.ARMOUR_PRICE_COLUMN_NAME)

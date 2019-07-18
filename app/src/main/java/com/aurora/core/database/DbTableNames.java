@@ -17,6 +17,9 @@ public class DbTableNames {
   public static final String FEATS = "Feats";
   public static final String RACES = "Races";
   public static final String CLASSES = "Classes";
+  public static final String WEAPON_TYPE = "WeaponType";
+  public static final String WEAPON_SUBTYPE = "WeaponSubtype";
+  public static final String WEAPON_SPECIFICS = "WeaponSpecifics";
   public static final String WEAPONS = "Weapons";
   public static final String ARMOUR = "Armour";
   public static final String EQUIPMENT = "Equipment";

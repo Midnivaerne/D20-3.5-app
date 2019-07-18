@@ -27,6 +27,9 @@ import com.aurora.core.models.settingspecific.SpecialQualities;
 import com.aurora.core.models.settingspecific.Spells;
 import com.aurora.core.models.usables.Armour;
 import com.aurora.core.models.usables.Equipment;
+import com.aurora.core.models.usables.WeaponSpecifics;
+import com.aurora.core.models.usables.WeaponSubtype;
+import com.aurora.core.models.usables.WeaponType;
 import com.aurora.core.models.usables.Weapons;
 import com.aurora.core.models.userdata.HeroArmour;
 import com.aurora.core.models.userdata.HeroDescription;
@@ -359,6 +362,117 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     }
   },
   /**
+   * Weapon types.
+   */
+  WEAPON_TYPE(DbTableNames.WEAPON_TYPE) {
+    @Override
+    public BaseDaO getDaO(DatabaseHolder databaseHolder) {
+      return databaseHolder.weaponTypeDaO();
+    }
+
+    @Override
+    public List<WeaponType> getDatabaseList(DatabaseHolder databaseHolder) {
+      return databaseHolder.weaponTypeList;
+    }
+
+    @Override
+    public Map<Integer, WeaponType> getDatabaseMap(DatabaseHolder databaseHolder) {
+      return databaseHolder.weaponTypeMap;
+    }
+
+    @Override
+    public Item getNewObject() {
+      return new WeaponType();
+    }
+
+    @Override
+    public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+      databaseHolder.weaponTypeDaO().insertAll(databaseHolder.weaponTypeList);
+    }
+
+    @Override
+    public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+      databaseHolder.weaponTypeList.addAll(databaseHolder.weaponTypeDaO().getAllObjectsAsObject());
+      for (WeaponType weaponType : databaseHolder.weaponTypeList) {
+        databaseHolder.weaponTypeMap.put(weaponType.getItemID(), weaponType);
+      }
+    }
+  },
+  /**
+   * Weapons sub-types.
+   */
+  WEAPON_SUBTYPE(DbTableNames.WEAPON_SUBTYPE) {
+    @Override
+    public BaseDaO getDaO(DatabaseHolder databaseHolder) {
+      return databaseHolder.weaponSubtypeDaO();
+    }
+
+    @Override
+    public List<WeaponSubtype> getDatabaseList(DatabaseHolder databaseHolder) {
+      return databaseHolder.weaponSubtypeList;
+    }
+
+    @Override
+    public Map<Integer, WeaponSubtype> getDatabaseMap(DatabaseHolder databaseHolder) {
+      return databaseHolder.weaponSubtypeMap;
+    }
+
+    @Override
+    public Item getNewObject() {
+      return new WeaponSubtype();
+    }
+
+    @Override
+    public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+      databaseHolder.weaponSubtypeDaO().insertAll(databaseHolder.weaponSubtypeList);
+    }
+
+    @Override
+    public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+      databaseHolder.weaponSubtypeList.addAll(databaseHolder.weaponSubtypeDaO().getAllObjectsAsObject());
+      for (WeaponSubtype weaponSubtype : databaseHolder.weaponSubtypeList) {
+        databaseHolder.weaponSubtypeMap.put(weaponSubtype.getItemID(), weaponSubtype);
+      }
+    }
+  },
+  /**
+   * Weapons specific construction.
+   */
+  WEAPON_SPECIFICS(DbTableNames.WEAPON_SPECIFICS) {
+    @Override
+    public BaseDaO getDaO(DatabaseHolder databaseHolder) {
+      return databaseHolder.weaponSpecificsDaO();
+    }
+
+    @Override
+    public List<WeaponSpecifics> getDatabaseList(DatabaseHolder databaseHolder) {
+      return databaseHolder.weaponSpecificsList;
+    }
+
+    @Override
+    public Map<Integer, WeaponSpecifics> getDatabaseMap(DatabaseHolder databaseHolder) {
+      return databaseHolder.weaponSpecificsMap;
+    }
+
+    @Override
+    public Item getNewObject() {
+      return new WeaponSpecifics();
+    }
+
+    @Override
+    public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+      databaseHolder.weaponSpecificsDaO().insertAll(databaseHolder.weaponSpecificsList);
+    }
+
+    @Override
+    public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+      databaseHolder.weaponSpecificsList.addAll(databaseHolder.weaponSpecificsDaO().getAllObjectsAsObject());
+      for (WeaponSpecifics weaponSpecifics : databaseHolder.weaponSpecificsList) {
+        databaseHolder.weaponSpecificsMap.put(weaponSpecifics.getItemID(), weaponSpecifics);
+      }
+    }
+  },
+  /**
    * Weapons.
    */
   WEAPONS(DbTableNames.WEAPONS) {
@@ -394,7 +508,6 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
         databaseHolder.weaponsMap.put(weapons.getItemID(), weapons);
       }
     }
-
   },
   /**
    * Armour.

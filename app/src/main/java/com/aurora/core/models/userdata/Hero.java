@@ -88,22 +88,47 @@ public class Hero extends Item {
 
   public void generateAll(DatabaseHolder databaseHolder) {
     getHeroValues().generateAll(databaseHolder);
+    generateSkills(databaseHolder);
+    generateWeapons(databaseHolder);
+    generateArmour(databaseHolder);
+    generateEquipment(databaseHolder);
+  }
 
+  private void generateSkills(DatabaseHolder databaseHolder) {
     getHeroSkills().generateSkillListAsSkillAndRank(databaseHolder);
     for (PlayerCharacterAbilityScoresEnum attr : getHeroValues().getAbilityScoreValues().keySet()) {
       getHeroSkills().getAttributeModifiers().put(attr, getStatisticModifier(getHeroValues().getAbilityScoreValues().get(attr)));
     }
     getHeroSkills().loadAllSettingSkills(databaseHolder, getHeroValues().getRace().getRaceSkills(),
         getHeroValues().getRaceTemplate() != null ? getHeroValues().getRaceTemplate().getRaceTemplateSkills() : null);
+  }
 
+  private void generateWeapons(DatabaseHolder databaseHolder) {
     setHeroWeapons(new ArrayList<HeroWeapons>());
+    Map<Integer, List<HeroWeapons>> ammoTypeMap = new LinkedHashMap<Integer, List<HeroWeapons>>();
     for (HeroWeapons heroWeapon : databaseHolder.heroesWeaponsList) {
       if (heroWeapon.getHeroParentHeroId().equals(this.getItemID())) {
         heroWeapon.generateAll(databaseHolder);
         getHeroWeapons().add(heroWeapon);
+        if (heroWeapon.getWeapon().getWeaponType().getIsAmmo()) {
+          if (!ammoTypeMap.containsKey(heroWeapon.getWeapon().getWeaponSubtype())) {
+            ammoTypeMap.put(heroWeapon.getWeapon().getWeaponSubtype().getItemID(), new ArrayList<HeroWeapons>());
+          }
+          ammoTypeMap.get(heroWeapon.getWeapon().getWeaponSubtype().getItemID()).add(heroWeapon);
+        }
       }
     }
+    setHeroWeaponsMap(new LinkedHashMap<HeroWeapons, List<HeroWeapons>>());
+    for (HeroWeapons heroWeapon : getHeroWeapons()) {
+      if (heroWeapon.getWeapon().getWeaponType().getCanHaveAmmo() && heroWeapon.getWeapon().getWeaponSubtype().getUsedAmmoType() != null) {
+        getHeroWeaponsMap().put(heroWeapon, ammoTypeMap.get(heroWeapon.getWeapon().getWeaponSubtype().getUsedAmmoType().getItemID()));
+      } else if (!heroWeapon.getWeapon().getWeaponType().getIsAmmo()) {
+        getHeroWeaponsMap().put(heroWeapon, null);
+      }
+    }
+  }
 
+  private void generateArmour(DatabaseHolder databaseHolder) {
     setHeroArmour(new ArrayList<HeroArmour>());
     for (HeroArmour heroArmour : databaseHolder.heroesArmourList) {
       if (heroArmour.getHeroParentHeroId().equals(this.getItemID())) {
@@ -111,7 +136,9 @@ public class Hero extends Item {
         getHeroArmour().add(heroArmour);
       }
     }
+  }
 
+  private void generateEquipment(DatabaseHolder databaseHolder) {
     setHeroEquipment(new ArrayList<HeroEquipment>());
     for (HeroEquipment heroEquipment : databaseHolder.heroesEquipmentList) {
       if (heroEquipment.getHeroParentHeroId().equals(this.getItemID())) {
@@ -137,6 +164,5 @@ public class Hero extends Item {
         }
       }
     }
-
   }
 }

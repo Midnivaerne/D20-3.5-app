@@ -42,6 +42,9 @@ import com.aurora.core.database.dao.settingspecific.SpecialQualitiesDaO;
 import com.aurora.core.database.dao.settingspecific.SpellsDaO;
 import com.aurora.core.database.dao.usables.ArmourDaO;
 import com.aurora.core.database.dao.usables.EquipmentDaO;
+import com.aurora.core.database.dao.usables.WeaponSpecificsDaO;
+import com.aurora.core.database.dao.usables.WeaponSubtypeDaO;
+import com.aurora.core.database.dao.usables.WeaponTypeDaO;
 import com.aurora.core.database.dao.usables.WeaponsDaO;
 import com.aurora.core.database.dao.userdata.HeroArmourDaO;
 import com.aurora.core.database.dao.userdata.HeroDescriptionDaO;
@@ -75,6 +78,9 @@ import com.aurora.core.models.settingspecific.Spells;
 import com.aurora.core.models.typehelpers.RulesType;
 import com.aurora.core.models.usables.Armour;
 import com.aurora.core.models.usables.Equipment;
+import com.aurora.core.models.usables.WeaponSpecifics;
+import com.aurora.core.models.usables.WeaponSubtype;
+import com.aurora.core.models.usables.WeaponType;
 import com.aurora.core.models.usables.Weapons;
 import com.aurora.core.models.userdata.HeroArmour;
 import com.aurora.core.models.userdata.HeroDescription;
@@ -91,7 +97,8 @@ import com.aurora.core.models.userdata.HeroWeapons;
     RulesCombat.class, RulesSkills.class, Alignments.class, Sizes.class,
     EnergyTypes.class, MaterialTypes.class,
     SpecialAttacks.class, SpecialQualities.class,
-    Armour.class, Equipment.class, Feats.class, Skills.class, Spells.class, Weapons.class,
+    Armour.class, Equipment.class, Feats.class, Skills.class, Spells.class,
+    WeaponType.class, WeaponSubtype.class, WeaponSpecifics.class, Weapons.class,
     Classes.class, Monsters.class, Races.class, RaceTemplates.class, Deities.class,
     HeroNpc.class, HeroPlayer.class,
     HeroDescription.class, HeroValues.class, HeroSkills.class, HeroWeapons.class, HeroArmour.class, HeroEquipment.class,
@@ -129,6 +136,9 @@ public abstract class DatabaseHolder extends RoomDatabase {
   public final List<Classes> classesList = new ArrayList<>();
   public final List<Skills> skillsList = new ArrayList<>();
   public final List<Feats> featsList = new ArrayList<>();
+  public final List<WeaponType> weaponTypeList = new ArrayList<>();
+  public final List<WeaponSubtype> weaponSubtypeList = new ArrayList<>();
+  public final List<WeaponSpecifics> weaponSpecificsList = new ArrayList<>();
   public final List<Weapons> weaponsList = new ArrayList<>();
   public final List<Armour> armourList = new ArrayList<>();
   public final List<Equipment> equipmentList = new ArrayList<>();
@@ -164,6 +174,9 @@ public abstract class DatabaseHolder extends RoomDatabase {
   public final Map<Integer, Classes> classesMap = new HashMap<>();
   public final Map<Integer, Skills> skillsMap = new HashMap<>();
   public final Map<Integer, Feats> featsMap = new HashMap<>();
+  public final Map<Integer, WeaponType> weaponTypeMap = new HashMap<>();
+  public final Map<Integer, WeaponSubtype> weaponSubtypeMap = new HashMap<>();
+  public final Map<Integer, WeaponSpecifics> weaponSpecificsMap = new HashMap<>();
   public final Map<Integer, Weapons> weaponsMap = new HashMap<>();
   public final Map<Integer, Armour> armourMap = new HashMap<>();
 
@@ -261,6 +274,12 @@ public abstract class DatabaseHolder extends RoomDatabase {
 
   ///////////////////////MAPS FOR USABLES///////////////////////////
   public abstract EquipmentDaO equipmentDaO();
+
+  public abstract WeaponTypeDaO weaponTypeDaO();
+
+  public abstract WeaponSubtypeDaO weaponSubtypeDaO();
+
+  public abstract WeaponSpecificsDaO weaponSpecificsDaO();
 
   public abstract WeaponsDaO weaponsDaO();
 

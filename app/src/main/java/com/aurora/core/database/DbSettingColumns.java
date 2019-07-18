@@ -10,6 +10,9 @@ import com.aurora.core.models.settingspecific.RaceTemplates;
 import com.aurora.core.models.settingspecific.Races;
 import com.aurora.core.models.settingspecific.Skills;
 import com.aurora.core.models.usables.Armour;
+import com.aurora.core.models.usables.WeaponSubtype;
+import com.aurora.core.models.usables.WeaponType;
+import com.aurora.core.models.usables.Weapons;
 import com.aurora.core.models.userdata.HeroArmour;
 import com.aurora.core.models.userdata.HeroEquipment;
 import com.aurora.core.models.userdata.HeroPlayer;
@@ -62,6 +65,47 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
 
   //////////////////////////////////////////////////////////////////
   //////////////////////  SPECIAL_QUALITIES  //////////////////////
+
+  ////////////////////////////////////////////////////////////////
+  ////////////////////////  WEAPON_TYPE  //////////////////////////
+  COL_WEAPON_TYPE_CAN_HAVE_AMMO(DbColumnNames.WEAPON_TYPE_CAN_HAVE_AMMO_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((WeaponType) item).setCanHaveAmmo(Boolean.valueOf(data));
+    }
+  },
+  COL_WEAPON_TYPE_IS_AMMO(DbColumnNames.WEAPON_TYPE_IS_AMMO_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((WeaponType) item).setIsAmmo(Boolean.valueOf(data));
+    }
+  },
+  ////////////////////////////////////////////////////////////////
+  //////////////////////  WEAPON_SUBTYPE  ////////////////////////
+  COL_WEAPON_SUBTYPE_USED_AMMO_TYPE_ID(DbColumnNames.WEAPON_SUBTYPE_USED_AMMO_TYPE_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((WeaponSubtype) item).setUsedAmmoTypeId(Integer.valueOf(data));
+    }
+  },
+
+  ////////////////////////////////////////////////////////////////
+  ///////////////////////  WEAPON_SPECIALS  ///////////////////////
+
+  ////////////////////////////////////////////////////////////////
+  //////////////////////////  WEAPONS  //////////////////////////
+  COL_WEAPON_TYPE_PARENT_ID(DbColumnNames.WEAPON_TYPE_PARENT_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Weapons) item).setWeaponTypeId(Integer.valueOf(data));
+    }
+  },
+  COL_WEAPON_SUBTYPE_PARENT_ID(DbColumnNames.WEAPON_SUBTYPE_PARENT_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Weapons) item).setWeaponSubtypeId(Integer.valueOf(data));
+    }
+  },
 
   //////////////////////////////////////////////////////////////
   //////////////////////////  ARMOUR  //////////////////////////
@@ -125,14 +169,15 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
       ((Armour) item).setArmourMagicImprovements(data);
     }
   },
-  ////////////////////////////////////////////////////////////////
-  //////////////////////////  CLASSES  //////////////////////////
 
   //////////////////////////////////////////////////////////////////
   //////////////////////////  EQUIPMENT  //////////////////////////
 
   //////////////////////////////////////////////////////////////
   //////////////////////////  FEATS  //////////////////////////
+
+  ////////////////////////////////////////////////////////////////
+  //////////////////////////  CLASSES  //////////////////////////
 
   ///////////////////////////////////////////////////////////////
   ////////////////////////  HERO_PLAYER PLAYER /////////////////////////
@@ -459,9 +504,6 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
 
   ///////////////////////////////////////////////////////////////
   //////////////////////////  SPELLS  //////////////////////////
-
-  ////////////////////////////////////////////////////////////////
-  //////////////////////////  WEAPONS  //////////////////////////
 
   //////////////////////////////////////////////////////////////
   //////////////////////////  DEITIES  //////////////////////////

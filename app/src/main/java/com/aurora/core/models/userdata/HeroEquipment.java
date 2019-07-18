@@ -34,12 +34,9 @@ import com.aurora.player.playercharacterutils.PlayerCharacterWornEquipmentPlaces
 @Entity(tableName = HERO_EQUIPMENT, inheritSuperIndices = true,
     indices = {@Index(SOURCE_COLUMN_NAME), @Index(HERO_PARENT_HERO_ID_COLUMN_NAME), @Index(HERO_EQUIPMENT_PARENT_EQUIPMENT_ID_COLUMN_NAME)},
     foreignKeys = {
-        @ForeignKey(entity = Databases.class,
-            parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
-        @ForeignKey(entity = HeroPlayer.class,
-            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_HERO_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
-        @ForeignKey(entity = Weapons.class,
-            parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_EQUIPMENT_PARENT_EQUIPMENT_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE)}
+        @ForeignKey(entity = Databases.class, parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
+        @ForeignKey(entity = HeroPlayer.class, parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_PARENT_HERO_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
+        @ForeignKey(entity = Weapons.class, parentColumns = ITEM_ID_COLUMN_NAME, childColumns = HERO_EQUIPMENT_PARENT_EQUIPMENT_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE)}
 )
 public class HeroEquipment extends Item implements HeroChild {
 

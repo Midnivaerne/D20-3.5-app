@@ -7,36 +7,40 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.aurora.core.R;
 import com.aurora.core.models.userdata.HeroPlayer;
 import com.aurora.core.models.userdata.HeroWeapons;
 
-public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandableListAdapter implements OnChildClickListener,
-    OnGroupClickListener {
+public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandableListAdapter {
 
   private final Context context;
   private final HeroPlayer playerHero;
   private final LinkedHashMap<HeroWeapons, List<HeroWeapons>> heroWeaponsAmmoMap;
   private final ArrayList<HeroWeapons> weaponsList;
 
-  public PlayerCharacterEquipmentWeaponsWeaponAdapter(Context context, HeroPlayer playerHero) {
+  private ExpandableListView weaponsRecyclerView;
+  private Map<HeroWeapons, Integer> weaponPositions = new HashMap<HeroWeapons, Integer>();
+  private int lastExpandedGroupPosition = -1;
+
+  public PlayerCharacterEquipmentWeaponsWeaponAdapter(Context context, ExpandableListView weaponsRecyclerView,
+      HeroPlayer playerHero) {
     this.context = context;
+    this.weaponsRecyclerView = weaponsRecyclerView;
     this.playerHero = playerHero;
     heroWeaponsAmmoMap = playerHero.getHeroWeaponsMap();
-    weaponsList = playerHero.getHeroWeapons();
+    weaponsList = new ArrayList<>(playerHero.getHeroWeaponsMap().keySet());
   }
 
   @Override
@@ -46,7 +50,8 @@ public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandable
 
   @Override
   public int getChildrenCount(int weaponPosition) {
-    return heroWeaponsAmmoMap != null ? heroWeaponsAmmoMap.get(weaponsList.get(weaponPosition)).size() : 0;
+    return heroWeaponsAmmoMap != null ? (heroWeaponsAmmoMap.get(weaponsList.get(weaponPosition)) != null ? heroWeaponsAmmoMap
+        .get(weaponsList.get(weaponPosition)).size() : 0) : 0;
   }
 
   @Override
@@ -56,7 +61,7 @@ public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandable
 
   @Override
   public Object getChild(int weaponPosition, int ammoPosition) {
-    return heroWeaponsAmmoMap.get(weaponPosition).get(ammoPosition);
+    return heroWeaponsAmmoMap.get(getGroup(weaponPosition)).get(ammoPosition);
   }
 
   @Override
@@ -77,6 +82,7 @@ public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandable
   @Override
   public View getGroupView(int weaponPosition, boolean isExpanded, View view, ViewGroup parent) {
     HeroWeapons heroWeapon = (HeroWeapons) getGroup(weaponPosition);
+    weaponPositions.put(heroWeapon, weaponPosition);
     WeaponViewHolder weaponViewHolder;
     if (view == null) {
       //LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -87,6 +93,11 @@ public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandable
       view.setTag(weaponViewHolder);
     }
     weaponViewHolder = (WeaponViewHolder) view.getTag();
+    if (getChildrenCount(weaponPosition) < 1) {
+      weaponViewHolder.weaponRangedExpander.setClickable(false);
+      weaponViewHolder.weaponRangedExpander.setEnabled(false);
+      weaponViewHolder.weaponRangedExpander.setVisibility(View.INVISIBLE);
+    }
     return view;
   }
 
@@ -103,6 +114,9 @@ public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandable
       view.setTag(ammoViewHolder);
     }
     ammoViewHolder = (WeaponViewHolder) view.getTag();
+    ammoViewHolder.weaponRangedExpander.setClickable(false);
+    ammoViewHolder.weaponRangedExpander.setEnabled(false);
+    ammoViewHolder.weaponRangedExpander.setVisibility(View.INVISIBLE);
     return view;
   }
 
@@ -112,48 +126,37 @@ public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandable
   }
 
   @Override
-  public boolean onChildClick(ExpandableListView parent, View v, int weaponPosition, int ammoPosition, long id) {
-    return false;
+  public void onGroupExpanded(int groupPosition) {
+    if (groupPosition != lastExpandedGroupPosition) {
+      weaponsRecyclerView.collapseGroup(lastExpandedGroupPosition);
+    }
+    super.onGroupExpanded(groupPosition);
+    lastExpandedGroupPosition = groupPosition;
   }
 
-  @Override
-  public boolean onGroupClick(ExpandableListView parent, View v, int weaponPosition, long id) {
-    if (getChildrenCount(weaponPosition) > 0) {
-      ExpandableListAdapter listAdapter = (ExpandableListAdapter) parent.getExpandableListAdapter();
-      int totalHeight = 0;
-      int desiredWidth = View.MeasureSpec.makeMeasureSpec(parent.getWidth(),
-          View.MeasureSpec.EXACTLY);
-      for (int i = 0; i < listAdapter.getGroupCount(); i++) {
-        View groupItem = listAdapter.getGroupView(i, false, null, parent);
-        groupItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-
-        totalHeight += groupItem.getMeasuredHeight();
-
-        if (((parent.isGroupExpanded(i)) && (i != weaponPosition))
-            || ((!parent.isGroupExpanded(i)) && (i == weaponPosition))) {
-          for (int j = 0; j < listAdapter.getChildrenCount(i); j++) {
-            View listItem = listAdapter.getChildView(i, j, false, null,
-                parent);
-            listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-
-            totalHeight += listItem.getMeasuredHeight();
-
-          }
+  public void setListHeight() {
+    int totalHeight = 0;
+    int desiredWidth = View.MeasureSpec.makeMeasureSpec(weaponsRecyclerView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+    for (int i = 0; i < this.getGroupCount(); i++) {
+      View groupItem = this.getGroupView(i, false, null, weaponsRecyclerView);
+      groupItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+      totalHeight += groupItem.getMeasuredHeight();
+      if (weaponsRecyclerView.isGroupExpanded(i)) {
+        for (int j = 0; j < this.getChildrenCount(i); j++) {
+          View listItem = this.getChildView(i, j, false, null, weaponsRecyclerView);
+          listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+          totalHeight += listItem.getMeasuredHeight();
         }
       }
-
-      ViewGroup.LayoutParams params = parent.getLayoutParams();
-      int height = totalHeight
-          + (parent.getDividerHeight() * (listAdapter.getGroupCount() - 1));
-      if (height < 10) {
-        height = 200;
-      }
-      params.height = height;
-      parent.setLayoutParams(params);
-      parent.requestLayout();
-      return true;
     }
-    return false;
+    ViewGroup.LayoutParams params = weaponsRecyclerView.getLayoutParams();
+    int height = totalHeight + (weaponsRecyclerView.getDividerHeight() * (this.getGroupCount() - 1));
+    if (height < 10) {
+      height = 200;
+    }
+    params.height = height;
+    weaponsRecyclerView.setLayoutParams(params);
+    weaponsRecyclerView.requestLayout();
   }
 
   class WeaponViewHolder extends RecyclerView.ViewHolder {
@@ -183,10 +186,10 @@ public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandable
           .findViewById(R.id.fragment_number_value_with_description_rollable_box_value));
       weaponQuantity = (TextView) view.findViewById(R.id.fragment_player_character_equipment_weapons_weapon_texts_quantity);
       weaponRangedExpander = (ImageButton) view.findViewById(R.id.fragment_player_character_equipment_weapons_weapon_ranged_show);
-      bind(heroWeapon);
+      bind(view, heroWeapon);
     }
 
-    public void bind(HeroWeapons heroWeapon) {
+    public void bind(View view, HeroWeapons heroWeapon) {
       weaponEquippedIndicator.setTag(heroWeapon);
       //weaponEquippedIndicator.setOnClickListener(onClickListener);
 
@@ -213,9 +216,22 @@ public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandable
       //weaponQuantity.setOnClickListener(onClickListener);
 
       weaponRangedExpander.setTag(heroWeapon);
-      //weaponRangedExpander.setOnClickListener(onClickExpanderListener);
+      weaponRangedExpander.setOnClickListener(onExpandClickListener);
     }
   }
+
+  private View.OnClickListener onExpandClickListener = view -> {
+    int thisWeaponPosition = weaponPositions.get(view.getTag());
+    if (getChildrenCount(thisWeaponPosition) > 0) {
+      weaponsRecyclerView.smoothScrollToPosition(thisWeaponPosition);
+      if (weaponsRecyclerView.isGroupExpanded(thisWeaponPosition)) {
+        weaponsRecyclerView.collapseGroup(thisWeaponPosition);
+      } else {
+        weaponsRecyclerView.expandGroup(thisWeaponPosition, true);
+      }
+      setListHeight();
+    }
+  };
 
   private class HeroWeaponsComparator implements Comparator {
 

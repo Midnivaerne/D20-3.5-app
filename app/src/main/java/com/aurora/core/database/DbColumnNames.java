@@ -33,6 +33,11 @@ public class DbColumnNames {
   public static final String ARMOUR_SPECIAL_PROPERTIES_COLUMN_NAME = "Armour_Special_Properties";
   public static final String ARMOUR_MATERIAL_COLUMN_NAME = "Armour_Material";
   public static final String ARMOUR_MAGIC_IMPROVEMENTS_COLUMN_NAME = "Armour_Magic_Improvements";
+  public static final String WEAPON_TYPE_CAN_HAVE_AMMO_COLUMN_NAME = "Weapon_Type_Can_Have_Ammo";
+  public static final String WEAPON_TYPE_IS_AMMO_COLUMN_NAME = "Weapon_Type_Is_Ammo";
+  public static final String WEAPON_TYPE_PARENT_ID_COLUMN_NAME = "Weapon_Type_Parent_Id";
+  public static final String WEAPON_SUBTYPE_PARENT_ID_COLUMN_NAME = "Weapon_Subtype_Parent_Id";
+  public static final String WEAPON_SUBTYPE_USED_AMMO_TYPE_ID_COLUMN_NAME = "Weapon_Subtype_Used_Ammo_Type_Id";
   public static final String EQUIPMENT_IS_CONTAINER_COLUMN_NAME = "Equipment_Is_Container";
   public static final String RACE_DESCRIPTION_COLUMN_NAME = "Race_Description";
   public static final String RACE_ATTRIBUTE_MODIFIERS_COLUMN_NAME = "Race_Attribute_Modifiers";
@@ -63,8 +68,9 @@ public class DbColumnNames {
   public static final String HERO_ABILITY_SCORE_WIS_COLUMN_NAME = "Hero_Wis";
   public static final String HERO_ABILITY_SCORE_CHA_COLUMN_NAME = "Hero_Cha";
   public static final String HERO_SKILLS_COLUMN_NAME = "Hero_Skill_List";
-  public static final String HERO_WEAPON_PARENT_WEAPON_ID_COLUMN_NAME = "Hero_Weapon_Parent_Weapon_Id";
   public static final String HERO_ARMOUR_PARENT_ARMOUR_ID_COLUMN_NAME = "Hero_Armour_Parent_Armour_Id";
+  public static final String HERO_WEAPON_PARENT_WEAPON_ID_COLUMN_NAME = "Hero_Weapon_Parent_Weapon_Id";
+  public static final String HERO_WEAPON_WEAPON_SPECIFICS_COLUMN_NAME="Hero_Weapon_Weapon_Specifics";
   public static final String HERO_EQUIPMENT_PARENT_EQUIPMENT_ID_COLUMN_NAME = "Hero_Parent_Equipment_Id";
   public static final String HERO_EQUIPMENT_WORN_PLACE_COLUMN_NAME = "Hero_Equipment_Worn_Place";
   public static final String HERO_EQUIPMENT_CONTAINER_COLUMN_NAME = "Hero_Equipment_Container";
