@@ -111,7 +111,7 @@ public class Hero extends Item {
         heroWeapon.generateAll(databaseHolder);
         getHeroWeapons().add(heroWeapon);
         if (heroWeapon.getWeapon().getWeaponType().getIsAmmo()) {
-          if (!ammoTypeMap.containsKey(heroWeapon.getWeapon().getWeaponSubtype())) {
+          if (!ammoTypeMap.containsKey(heroWeapon.getWeapon().getWeaponSubtype().getItemID())) {
             ammoTypeMap.put(heroWeapon.getWeapon().getWeaponSubtype().getItemID(), new ArrayList<HeroWeapons>());
           }
           ammoTypeMap.get(heroWeapon.getWeapon().getWeaponSubtype().getItemID()).add(heroWeapon);
