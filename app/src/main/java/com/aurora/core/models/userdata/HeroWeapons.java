@@ -2,6 +2,7 @@ package com.aurora.core.models.userdata;
 
 import static com.aurora.core.database.DbColumnNames.HERO_PARENT_HERO_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.HERO_WEAPON_PARENT_WEAPON_ID_COLUMN_NAME;
+import static com.aurora.core.database.DbColumnNames.HERO_WEAPON_SELECTED_AMMO_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.HERO_WEAPON_WEAPON_SPECIFICS_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.ITEM_ID_COLUMN_NAME;
 import static com.aurora.core.database.DbColumnNames.SOURCE_COLUMN_NAME;
@@ -53,6 +54,12 @@ public class HeroWeapons extends Item implements HeroChild {
 
   @ColumnInfo(name = HERO_WEAPON_WEAPON_SPECIFICS_COLUMN_NAME)
   private String weaponSpecificIds;
+
+  @ColumnInfo(name = HERO_WEAPON_SELECTED_AMMO_ID_COLUMN_NAME)
+  private Integer selectedAmmoId;
+
+  @Ignore
+  private HeroWeapons selectedAmmo;
 
   @Ignore
   private List<WeaponSpecifics> weaponSpecificsList;

@@ -63,7 +63,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_vertical"
-    android:contentDescription="TODO add indicator on right by code and use PlayerCharacterEquipmentWeaponsWeaponAdapter expand with layout=fragment_player_character_equipment_weapons_weapon_ranged"
+    android:contentDescription="TODO"
     app:srcCompat="@android:drawable/arrow_down_float"/>
 
 </LinearLayout>

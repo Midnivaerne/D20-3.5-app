@@ -31,10 +31,10 @@ public class Hero extends Item {
   private HeroSkills heroSkills;
 
   @Ignore
-  private ArrayList<HeroWeapons> heroWeapons;
+  private Map<Integer, HeroWeapons> heroWeaponsFromIdMap;
 
   @Ignore
-  private LinkedHashMap<HeroWeapons, List<HeroWeapons>> heroWeaponsMap;
+  private LinkedHashMap<Integer, List<Integer>> heroWeaponsWithAmmoMap;
 
   @Ignore
   private ArrayList<HeroArmour> heroArmour;
@@ -104,26 +104,30 @@ public class Hero extends Item {
   }
 
   private void generateWeapons(DatabaseHolder databaseHolder) {
-    setHeroWeapons(new ArrayList<HeroWeapons>());
-    Map<Integer, List<HeroWeapons>> ammoTypeMap = new LinkedHashMap<Integer, List<HeroWeapons>>();
+    setHeroWeaponsFromIdMap(new HashMap<Integer, HeroWeapons>());
+    Map<Integer, List<Integer>> ammoTypeIdMap = new LinkedHashMap<Integer, List<Integer>>();
     for (HeroWeapons heroWeapon : databaseHolder.heroesWeaponsList) {
       if (heroWeapon.getHeroParentHeroId().equals(this.getItemID())) {
         heroWeapon.generateAll(databaseHolder);
-        getHeroWeapons().add(heroWeapon);
+        getHeroWeaponsFromIdMap().put(heroWeapon.getItemID(), heroWeapon);
         if (heroWeapon.getWeapon().getWeaponType().getIsAmmo()) {
-          if (!ammoTypeMap.containsKey(heroWeapon.getWeapon().getWeaponSubtype().getItemID())) {
-            ammoTypeMap.put(heroWeapon.getWeapon().getWeaponSubtype().getItemID(), new ArrayList<HeroWeapons>());
+          if (!ammoTypeIdMap.containsKey(heroWeapon.getWeapon().getWeaponSubtype().getItemID())) {
+            ammoTypeIdMap.put(heroWeapon.getWeapon().getWeaponSubtypeId(), new ArrayList<Integer>());
           }
-          ammoTypeMap.get(heroWeapon.getWeapon().getWeaponSubtype().getItemID()).add(heroWeapon);
+          ammoTypeIdMap.get(heroWeapon.getWeapon().getWeaponSubtypeId()).add(heroWeapon.getItemID());
         }
       }
     }
-    setHeroWeaponsMap(new LinkedHashMap<HeroWeapons, List<HeroWeapons>>());
-    for (HeroWeapons heroWeapon : getHeroWeapons()) {
-      if (heroWeapon.getWeapon().getWeaponType().getCanHaveAmmo() && heroWeapon.getWeapon().getWeaponSubtype().getUsedAmmoType() != null) {
-        getHeroWeaponsMap().put(heroWeapon, ammoTypeMap.get(heroWeapon.getWeapon().getWeaponSubtype().getUsedAmmoType().getItemID()));
+    setHeroWeaponsWithAmmoMap(new LinkedHashMap<Integer, List<Integer>>());
+    for (HeroWeapons heroWeapon : getHeroWeaponsFromIdMap().values()) {
+      if (heroWeapon.getWeapon().getWeaponType().getCanHaveAmmo()
+          && heroWeapon.getWeapon().getWeaponSubtype().getUsedAmmoTypeId() != null) {
+        heroWeapon.setSelectedAmmoId(ammoTypeIdMap.get(heroWeapon.getWeapon().getWeaponSubtype().getUsedAmmoTypeId()).stream()
+            .filter(hwid -> hwid.equals(heroWeapon.getSelectedAmmoId())).findAny().orElse(null));
+        getHeroWeaponsWithAmmoMap()
+            .put(heroWeapon.getItemID(), ammoTypeIdMap.get(heroWeapon.getWeapon().getWeaponSubtype().getUsedAmmoTypeId()));
       } else if (!heroWeapon.getWeapon().getWeaponType().getIsAmmo()) {
-        getHeroWeaponsMap().put(heroWeapon, null);
+        getHeroWeaponsWithAmmoMap().put(heroWeapon.getItemID(), null);
       }
     }
   }

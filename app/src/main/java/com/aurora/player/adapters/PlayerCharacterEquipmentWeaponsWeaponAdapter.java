@@ -9,10 +9,10 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -27,11 +27,14 @@ public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandable
 
   private final Context context;
   private final HeroPlayer playerHero;
-  private final LinkedHashMap<HeroWeapons, List<HeroWeapons>> heroWeaponsAmmoMap;
-  private final ArrayList<HeroWeapons> weaponsList;
+  private final LinkedHashMap<Integer, List<Integer>> heroWeaponsAmmoIdMap;
+  private Map<Integer, HeroWeapons> weaponsList;
 
   private ExpandableListView weaponsRecyclerView;
-  private Map<HeroWeapons, Integer> weaponPositions = new HashMap<HeroWeapons, Integer>();
+  private Map<Integer, Integer> weaponIdsToPositions = new HashMap<Integer, Integer>();
+  private Map<Integer, Integer> weaponPositionsToIds = new HashMap<Integer, Integer>();
+  private Map<Integer, Integer> ammoIdsToPositions = new HashMap<Integer, Integer>();
+  private Map<Integer, Integer> ammoPositionsToIds = new HashMap<Integer, Integer>();
   private int lastExpandedGroupPosition = -1;
 
   public PlayerCharacterEquipmentWeaponsWeaponAdapter(Context context, ExpandableListView weaponsRecyclerView,
@@ -39,29 +42,41 @@ public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandable
     this.context = context;
     this.weaponsRecyclerView = weaponsRecyclerView;
     this.playerHero = playerHero;
-    heroWeaponsAmmoMap = playerHero.getHeroWeaponsMap();
-    weaponsList = new ArrayList<>(playerHero.getHeroWeaponsMap().keySet());
+    heroWeaponsAmmoIdMap = playerHero.getHeroWeaponsWithAmmoMap();
+    weaponsList = playerHero.getHeroWeaponsFromIdMap();
+    populateGroupListIds();
+  }
+
+  private void populateGroupListIds() {
+    int i = 0;
+    for (HeroWeapons hw : weaponsList.values()) {
+      if (heroWeaponsAmmoIdMap.keySet().contains(hw.getItemID())) {
+        weaponIdsToPositions.put(hw.getItemID(), i);
+        weaponPositionsToIds.put(i, hw.getItemID());
+        i++;
+      }
+    }
   }
 
   @Override
   public int getGroupCount() {
-    return weaponsList != null ? weaponsList.size() : 0;
+    return heroWeaponsAmmoIdMap != null ? heroWeaponsAmmoIdMap.size() : 0;
   }
 
   @Override
   public int getChildrenCount(int weaponPosition) {
-    return heroWeaponsAmmoMap != null ? (heroWeaponsAmmoMap.get(weaponsList.get(weaponPosition)) != null ? heroWeaponsAmmoMap
-        .get(weaponsList.get(weaponPosition)).size() : 0) : 0;
+    return heroWeaponsAmmoIdMap != null ? (heroWeaponsAmmoIdMap.get(weaponPositionsToIds.get(weaponPosition)) != null ? heroWeaponsAmmoIdMap
+        .get(weaponPositionsToIds.get(weaponPosition)).size() : 0) : 0;
   }
 
   @Override
   public Object getGroup(int weaponPosition) {
-    return weaponsList.get(weaponPosition);
+    return weaponsList.get(weaponPositionsToIds.get(weaponPosition));
   }
 
   @Override
   public Object getChild(int weaponPosition, int ammoPosition) {
-    return heroWeaponsAmmoMap.get(getGroup(weaponPosition)).get(ammoPosition);
+    return weaponsList.get(ammoPositionsToIds.get(ammoPosition));
   }
 
   @Override
@@ -82,7 +97,6 @@ public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandable
   @Override
   public View getGroupView(int weaponPosition, boolean isExpanded, View view, ViewGroup parent) {
     HeroWeapons heroWeapon = (HeroWeapons) getGroup(weaponPosition);
-    weaponPositions.put(heroWeapon, weaponPosition);
     WeaponViewHolder weaponViewHolder;
     if (view == null) {
       //LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -104,19 +118,23 @@ public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandable
   @Override
   public View getChildView(int weaponPosition, int ammoPosition, boolean isLastChild, View view, ViewGroup parent) {
     HeroWeapons weaponAmmo = (HeroWeapons) getChild(weaponPosition, ammoPosition);
-    WeaponViewHolder ammoViewHolder;//todo change to ammo?
+    AmmoViewHolder ammoViewHolder;
     if (view == null) {
       //LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
       //view = layoutInflater.inflate(R.layout.fragment_player_character_equipment_weapons_weapon, null);
       view = LayoutInflater.from(parent.getContext())
-          .inflate(R.layout.fragment_player_character_equipment_weapons_weapon, parent, false); //todo change to ammo?
-      ammoViewHolder = new WeaponViewHolder(view, weaponAmmo);
+          .inflate(R.layout.fragment_player_character_equipment_weapons_weapon_ranged, parent, false);
+      ammoViewHolder = new AmmoViewHolder(view, weaponAmmo);
       view.setTag(ammoViewHolder);
     }
-    ammoViewHolder = (WeaponViewHolder) view.getTag();
-    ammoViewHolder.weaponRangedExpander.setClickable(false);
-    ammoViewHolder.weaponRangedExpander.setEnabled(false);
-    ammoViewHolder.weaponRangedExpander.setVisibility(View.INVISIBLE);
+    ammoViewHolder = (AmmoViewHolder) view.getTag();
+    HeroWeapons expandedHeroWeapon = weaponsList.get(weaponPositionsToIds.get(weaponPosition));
+    if (expandedHeroWeapon != null && expandedHeroWeapon.getSelectedAmmoId() != null) {
+      int selectedAmmoId = expandedHeroWeapon.getSelectedAmmoId();
+      if (selectedAmmoId > -1 && selectedAmmoId == weaponAmmo.getItemID()) {
+        ammoViewHolder.ammoEquippedIndicator.setChecked(true);
+      }
+    }
     return view;
   }
 
@@ -126,12 +144,12 @@ public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandable
   }
 
   @Override
-  public void onGroupExpanded(int groupPosition) {
-    if (groupPosition != lastExpandedGroupPosition) {
+  public void onGroupExpanded(int weaponPosition) {
+    if (weaponPosition != lastExpandedGroupPosition) {
       weaponsRecyclerView.collapseGroup(lastExpandedGroupPosition);
     }
-    super.onGroupExpanded(groupPosition);
-    lastExpandedGroupPosition = groupPosition;
+    super.onGroupExpanded(weaponPosition);
+    lastExpandedGroupPosition = weaponPosition;
   }
 
   public void setListHeight() {
@@ -220,17 +238,85 @@ public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandable
     }
   }
 
+  class AmmoViewHolder extends RecyclerView.ViewHolder {
+
+    final RadioButton ammoEquippedIndicator;
+    final TextView ammoName;
+    final TextView ammoProperties;
+    final TextView ammoQuantity;
+    final ImageButton ammoDetails;
+
+    AmmoViewHolder(View view, HeroWeapons heroWeapon) {
+      super(view);
+      ammoEquippedIndicator = (RadioButton) view
+          .findViewById(R.id.fragment_player_character_equipment_weapons_weapon_ranged_name_equipped_button);
+      ammoName = (TextView) view.findViewById(R.id.fragment_player_character_equipment_weapons_weapon_ranged_text_name);
+      ammoProperties = (TextView) view.findViewById(R.id.fragment_player_character_equipment_weapons_weapon_ranged_text_properties);
+      ammoQuantity = (TextView) view.findViewById(R.id.fragment_player_character_equipment_weapons_weapon_texts_quantity);
+      ammoDetails = (ImageButton) view.findViewById(R.id.fragment_player_character_equipment_weapons_weapon_equipped_details);
+      bind(view, heroWeapon);
+    }
+
+    public void bind(View view, HeroWeapons heroWeapon) {
+      ammoEquippedIndicator.setTag(heroWeapon);
+      ammoEquippedIndicator.setOnClickListener(onAmmoToggleClickListener);
+
+      ammoName.setText(translate(heroWeapon.getName()));
+      ammoName.setTag(heroWeapon);
+      //ammoName.setOnClickListener(onClickListener);
+
+      ammoProperties.setText(translate("TODO"));//todo ammoProperties
+      ammoProperties.setTag(heroWeapon);
+      //ammoProperties.setOnClickListener(onClickListener);
+
+      ammoQuantity.setTag(heroWeapon);
+      //weaponQuantity.setOnClickListener(onClickListener);
+
+      ammoDetails.setTag(heroWeapon);
+      //ammoDetails.setOnClickListener(onClickListener);
+    }
+  }
+
   private View.OnClickListener onExpandClickListener = view -> {
-    int thisWeaponPosition = weaponPositions.get(view.getTag());
+    int thisWeaponPosition = weaponIdsToPositions.get(((HeroWeapons) view.getTag()).getItemID());
     if (getChildrenCount(thisWeaponPosition) > 0) {
       weaponsRecyclerView.smoothScrollToPosition(thisWeaponPosition);
-      if (weaponsRecyclerView.isGroupExpanded(thisWeaponPosition)) {
-        weaponsRecyclerView.collapseGroup(thisWeaponPosition);
-      } else {
-        weaponsRecyclerView.expandGroup(thisWeaponPosition, true);
-      }
+      expandAndPopulateChildListIds(thisWeaponPosition, weaponsRecyclerView.isGroupExpanded(thisWeaponPosition));
       setListHeight();
     }
+  };
+
+  private void expandAndPopulateChildListIds(int thisWeaponPosition, Boolean expanded) {
+    if (!expanded) {
+      int i = 0;
+      for (HeroWeapons ha : weaponsList.values()) {
+        if (heroWeaponsAmmoIdMap.get(weaponPositionsToIds.get(thisWeaponPosition)).contains(ha.getItemID())) {
+          ammoIdsToPositions.put(ha.getItemID(), i);
+          ammoPositionsToIds.put(i, ha.getItemID());
+          i++;
+        }
+      }
+      weaponsRecyclerView.expandGroup(thisWeaponPosition, true);
+    } else {
+      weaponsRecyclerView.collapseGroup(thisWeaponPosition);
+      ammoIdsToPositions.clear();
+      ammoPositionsToIds.clear();
+    }
+  }
+
+  private View.OnClickListener onAmmoToggleClickListener = view -> {
+    int thisAmmoPosition = ammoIdsToPositions.get(((HeroWeapons) view.getTag()).getItemID());
+    for (int i = 0; i < getChildrenCount(lastExpandedGroupPosition); i++) {
+      if (thisAmmoPosition != i) {
+        ((AmmoViewHolder) weaponsRecyclerView.getChildAt(lastExpandedGroupPosition + 1 + i).getTag()).ammoEquippedIndicator
+            .setChecked(false);
+      }
+    }
+    HeroWeapons heroWeapon = (HeroWeapons) getGroup(lastExpandedGroupPosition);
+    HeroWeapons selectedAmmo = (HeroWeapons) ((AmmoViewHolder) weaponsRecyclerView
+        .getChildAt(lastExpandedGroupPosition + 1 + thisAmmoPosition).getTag()).ammoEquippedIndicator.getTag();
+    heroWeapon.setSelectedAmmo(selectedAmmo);
+    heroWeapon.setSelectedAmmoId(selectedAmmo.getItemID());
   };
 
   private class HeroWeaponsComparator implements Comparator {

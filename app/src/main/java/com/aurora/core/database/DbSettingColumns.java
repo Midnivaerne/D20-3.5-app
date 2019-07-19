@@ -331,6 +331,18 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
       ((HeroWeapons) item).setWeaponId(Integer.valueOf(data));
     }
   },
+  COL_HERO_WEAPON_WEAPON_SPECIFICS(DbColumnNames.HERO_WEAPON_WEAPON_SPECIFICS_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((HeroWeapons) item).setWeaponSpecificIds(data);
+    }
+  },
+  COL_HERO_WEAPON_SELECTED_AMMO_ID(DbColumnNames.HERO_WEAPON_SELECTED_AMMO_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((HeroWeapons) item).setSelectedAmmoId(Integer.valueOf(data));
+    }
+  },
 
   /////////////////////////////////////////////////////////////////////
   //////////////////////  HERO_PLAYER ARMOUR  ///////////////////////
