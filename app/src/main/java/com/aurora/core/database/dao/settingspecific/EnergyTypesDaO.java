@@ -7,8 +7,8 @@ import androidx.room.RoomWarnings;
 import java.util.List;
 
 import com.aurora.core.helper.BaseDaO;
-import com.aurora.core.models.helpers.Item;
-import com.aurora.core.models.settingspecific.EnergyTypes;
+import com.aurora.core.database.models.helpers.Item;
+import com.aurora.core.database.models.settingspecific.EnergyTypes;
 
 @Dao
 public abstract class EnergyTypesDaO extends BaseDaO<EnergyTypes> {

@@ -41,7 +41,11 @@ import com.aurora.core.database.dao.settingspecific.SpecialAttacksDaO;
 import com.aurora.core.database.dao.settingspecific.SpecialQualitiesDaO;
 import com.aurora.core.database.dao.settingspecific.SpellsDaO;
 import com.aurora.core.database.dao.usables.ArmourDaO;
+import com.aurora.core.database.dao.usables.ArmourSpecificsDaO;
+import com.aurora.core.database.dao.usables.ArmourSubtypeDaO;
+import com.aurora.core.database.dao.usables.ArmourTypeDaO;
 import com.aurora.core.database.dao.usables.EquipmentDaO;
+import com.aurora.core.database.dao.usables.PriceDaO;
 import com.aurora.core.database.dao.usables.WeaponSpecificsDaO;
 import com.aurora.core.database.dao.usables.WeaponSubtypeDaO;
 import com.aurora.core.database.dao.usables.WeaponTypeDaO;
@@ -53,42 +57,46 @@ import com.aurora.core.database.dao.userdata.HeroPlayerDaO;
 import com.aurora.core.database.dao.userdata.HeroSkillsDaO;
 import com.aurora.core.database.dao.userdata.HeroValuesDaO;
 import com.aurora.core.database.dao.userdata.HeroWeaponsDaO;
-import com.aurora.core.models.Databases;
-import com.aurora.core.models.Translations;
-import com.aurora.core.models.constants.Alignments;
-import com.aurora.core.models.constants.BaseQualities;
-import com.aurora.core.models.constants.CoreStates;
-import com.aurora.core.models.constants.RulesCombat;
-import com.aurora.core.models.constants.RulesSkills;
-import com.aurora.core.models.constants.Sizes;
-import com.aurora.core.models.helpers.Rules;
-import com.aurora.core.models.settingspecific.Classes;
-import com.aurora.core.models.settingspecific.Deities;
-import com.aurora.core.models.settingspecific.EnergyTypes;
-import com.aurora.core.models.settingspecific.Feats;
-import com.aurora.core.models.settingspecific.HeroNpc;
-import com.aurora.core.models.settingspecific.MaterialTypes;
-import com.aurora.core.models.settingspecific.Monsters;
-import com.aurora.core.models.settingspecific.RaceTemplates;
-import com.aurora.core.models.settingspecific.Races;
-import com.aurora.core.models.settingspecific.Skills;
-import com.aurora.core.models.settingspecific.SpecialAttacks;
-import com.aurora.core.models.settingspecific.SpecialQualities;
-import com.aurora.core.models.settingspecific.Spells;
-import com.aurora.core.models.typehelpers.RulesType;
-import com.aurora.core.models.usables.Armour;
-import com.aurora.core.models.usables.Equipment;
-import com.aurora.core.models.usables.WeaponSpecifics;
-import com.aurora.core.models.usables.WeaponSubtype;
-import com.aurora.core.models.usables.WeaponType;
-import com.aurora.core.models.usables.Weapons;
-import com.aurora.core.models.userdata.HeroArmour;
-import com.aurora.core.models.userdata.HeroDescription;
-import com.aurora.core.models.userdata.HeroEquipment;
-import com.aurora.core.models.userdata.HeroPlayer;
-import com.aurora.core.models.userdata.HeroSkills;
-import com.aurora.core.models.userdata.HeroValues;
-import com.aurora.core.models.userdata.HeroWeapons;
+import com.aurora.core.database.models.Databases;
+import com.aurora.core.database.models.Translations;
+import com.aurora.core.database.models.constants.Alignments;
+import com.aurora.core.database.models.constants.BaseQualities;
+import com.aurora.core.database.models.constants.CoreStates;
+import com.aurora.core.database.models.constants.RulesCombat;
+import com.aurora.core.database.models.constants.RulesSkills;
+import com.aurora.core.database.models.constants.Sizes;
+import com.aurora.core.database.models.helpers.Rules;
+import com.aurora.core.database.models.settingspecific.Classes;
+import com.aurora.core.database.models.settingspecific.Deities;
+import com.aurora.core.database.models.settingspecific.EnergyTypes;
+import com.aurora.core.database.models.settingspecific.Feats;
+import com.aurora.core.database.models.settingspecific.HeroNpc;
+import com.aurora.core.database.models.settingspecific.MaterialTypes;
+import com.aurora.core.database.models.settingspecific.Monsters;
+import com.aurora.core.database.models.settingspecific.RaceTemplates;
+import com.aurora.core.database.models.settingspecific.Races;
+import com.aurora.core.database.models.settingspecific.Skills;
+import com.aurora.core.database.models.settingspecific.SpecialAttacks;
+import com.aurora.core.database.models.settingspecific.SpecialQualities;
+import com.aurora.core.database.models.settingspecific.Spells;
+import com.aurora.core.database.models.typehelpers.RulesType;
+import com.aurora.core.database.models.usables.Armour;
+import com.aurora.core.database.models.usables.ArmourSpecifics;
+import com.aurora.core.database.models.usables.ArmourSubtype;
+import com.aurora.core.database.models.usables.ArmourType;
+import com.aurora.core.database.models.usables.Equipment;
+import com.aurora.core.database.models.usables.Price;
+import com.aurora.core.database.models.usables.WeaponSpecifics;
+import com.aurora.core.database.models.usables.WeaponSubtype;
+import com.aurora.core.database.models.usables.WeaponType;
+import com.aurora.core.database.models.usables.Weapons;
+import com.aurora.core.database.models.userdata.HeroArmour;
+import com.aurora.core.database.models.userdata.HeroDescription;
+import com.aurora.core.database.models.userdata.HeroEquipment;
+import com.aurora.core.database.models.userdata.HeroPlayer;
+import com.aurora.core.database.models.userdata.HeroSkills;
+import com.aurora.core.database.models.userdata.HeroValues;
+import com.aurora.core.database.models.userdata.HeroWeapons;
 
 @Singleton
 @Database(entities = {
@@ -97,8 +105,11 @@ import com.aurora.core.models.userdata.HeroWeapons;
     RulesCombat.class, RulesSkills.class, Alignments.class, Sizes.class,
     EnergyTypes.class, MaterialTypes.class,
     SpecialAttacks.class, SpecialQualities.class,
-    Armour.class, Equipment.class, Feats.class, Skills.class, Spells.class,
+    Feats.class, Skills.class, Spells.class,
+    Price.class,
     WeaponType.class, WeaponSubtype.class, WeaponSpecifics.class, Weapons.class,
+    ArmourType.class, ArmourSubtype.class, ArmourSpecifics.class, Armour.class,
+    Equipment.class,
     Classes.class, Monsters.class, Races.class, RaceTemplates.class, Deities.class,
     HeroNpc.class, HeroPlayer.class,
     HeroDescription.class, HeroValues.class, HeroSkills.class, HeroWeapons.class, HeroArmour.class, HeroEquipment.class,
@@ -136,10 +147,14 @@ public abstract class DatabaseHolder extends RoomDatabase {
   public final List<Classes> classesList = new ArrayList<>();
   public final List<Skills> skillsList = new ArrayList<>();
   public final List<Feats> featsList = new ArrayList<>();
+  public final List<Price> priceList = new ArrayList<>();
   public final List<WeaponType> weaponTypeList = new ArrayList<>();
   public final List<WeaponSubtype> weaponSubtypeList = new ArrayList<>();
   public final List<WeaponSpecifics> weaponSpecificsList = new ArrayList<>();
   public final List<Weapons> weaponsList = new ArrayList<>();
+  public final List<ArmourType> armourTypeList = new ArrayList<>();
+  public final List<ArmourSubtype> armourSubtypeList = new ArrayList<>();
+  public final List<ArmourSpecifics> armourSpecificsList = new ArrayList<>();
   public final List<Armour> armourList = new ArrayList<>();
   public final List<Equipment> equipmentList = new ArrayList<>();
   public final List<Spells> spellsList = new ArrayList<>();
@@ -174,10 +189,14 @@ public abstract class DatabaseHolder extends RoomDatabase {
   public final Map<Integer, Classes> classesMap = new HashMap<>();
   public final Map<Integer, Skills> skillsMap = new HashMap<>();
   public final Map<Integer, Feats> featsMap = new HashMap<>();
+  public final Map<Integer, Price> priceMap = new HashMap<>();
   public final Map<Integer, WeaponType> weaponTypeMap = new HashMap<>();
   public final Map<Integer, WeaponSubtype> weaponSubtypeMap = new HashMap<>();
   public final Map<Integer, WeaponSpecifics> weaponSpecificsMap = new HashMap<>();
   public final Map<Integer, Weapons> weaponsMap = new HashMap<>();
+  public final Map<Integer, ArmourType> armourTypeMap = new HashMap<>();
+  public final Map<Integer, ArmourSubtype> armourSubtypeMap = new HashMap<>();
+  public final Map<Integer, ArmourSpecifics> armourSpecificsMap = new HashMap<>();
   public final Map<Integer, Armour> armourMap = new HashMap<>();
 
   ///////////////////////LISTS FOR SETTING///////////////////////////
@@ -273,7 +292,7 @@ public abstract class DatabaseHolder extends RoomDatabase {
   public abstract DeitiesDaO deitiesDaO();
 
   ///////////////////////MAPS FOR USABLES///////////////////////////
-  public abstract EquipmentDaO equipmentDaO();
+  public abstract PriceDaO priceDaO();
 
   public abstract WeaponTypeDaO weaponTypeDaO();
 
@@ -283,7 +302,15 @@ public abstract class DatabaseHolder extends RoomDatabase {
 
   public abstract WeaponsDaO weaponsDaO();
 
+  public abstract ArmourTypeDaO armourTypeDaO();
+
+  public abstract ArmourSubtypeDaO armourSubtypeDaO();
+
+  public abstract ArmourSpecificsDaO armourSpecificsDaO();
+
   public abstract ArmourDaO armourDaO();
+
+  public abstract EquipmentDaO equipmentDaO();
 
   ////////////////////////////////////////////////////////////////////////////
   public abstract TranslationsDaO translationsDaO();

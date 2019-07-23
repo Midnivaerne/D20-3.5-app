@@ -2,7 +2,7 @@ package com.aurora.player.playercharacterutils;
 
 import static com.aurora.core.database.TranslationsHolder.translate;
 
-import com.aurora.core.models.userdata.HeroArmour;
+import com.aurora.core.database.models.userdata.HeroArmour;
 
 public enum PlayerCharacterArmourSpecificEnum implements PlayerCharacterSpecificEnumBase<PlayerCharacterArmourEnum, HeroArmour> {
 

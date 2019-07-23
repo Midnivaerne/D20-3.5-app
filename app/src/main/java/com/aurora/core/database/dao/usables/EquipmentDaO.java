@@ -7,8 +7,8 @@ import androidx.room.RoomWarnings;
 import java.util.List;
 
 import com.aurora.core.helper.BaseDaO;
-import com.aurora.core.models.helpers.Item;
-import com.aurora.core.models.usables.Equipment;
+import com.aurora.core.database.models.helpers.Item;
+import com.aurora.core.database.models.usables.Equipment;
 
 @Dao
 public abstract class EquipmentDaO extends BaseDaO<Equipment> {

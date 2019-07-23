@@ -3,20 +3,23 @@ package com.aurora.core.database;
 import lombok.Getter;
 import lombok.Setter;
 
-import com.aurora.core.models.Translations;
-import com.aurora.core.models.helpers.HeroChild;
-import com.aurora.core.models.helpers.Item;
-import com.aurora.core.models.settingspecific.RaceTemplates;
-import com.aurora.core.models.settingspecific.Races;
-import com.aurora.core.models.settingspecific.Skills;
-import com.aurora.core.models.usables.Armour;
-import com.aurora.core.models.usables.WeaponSubtype;
-import com.aurora.core.models.usables.WeaponType;
-import com.aurora.core.models.usables.Weapons;
-import com.aurora.core.models.userdata.HeroArmour;
-import com.aurora.core.models.userdata.HeroEquipment;
-import com.aurora.core.models.userdata.HeroPlayer;
-import com.aurora.core.models.userdata.HeroWeapons;
+import com.aurora.core.database.models.Translations;
+import com.aurora.core.database.models.helpers.HeroChild;
+import com.aurora.core.database.models.helpers.Item;
+import com.aurora.core.database.models.settingspecific.RaceTemplates;
+import com.aurora.core.database.models.settingspecific.Races;
+import com.aurora.core.database.models.settingspecific.Skills;
+import com.aurora.core.database.models.usables.Armour;
+import com.aurora.core.database.models.usables.ArmourSubtype;
+import com.aurora.core.database.models.usables.ArmourType;
+import com.aurora.core.database.models.usables.Price;
+import com.aurora.core.database.models.usables.WeaponSubtype;
+import com.aurora.core.database.models.usables.WeaponType;
+import com.aurora.core.database.models.usables.Weapons;
+import com.aurora.core.database.models.userdata.HeroArmour;
+import com.aurora.core.database.models.userdata.HeroEquipment;
+import com.aurora.core.database.models.userdata.HeroPlayer;
+import com.aurora.core.database.models.userdata.HeroWeapons;
 import com.aurora.player.playercharacterutils.PlayerCharacterWornEquipmentPlacesEnum;
 
 public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, Item> {
@@ -67,6 +70,21 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
   //////////////////////  SPECIAL_QUALITIES  //////////////////////
 
   ////////////////////////////////////////////////////////////////
+  ////////////////////////  PRICE  ///////////////////////////////
+  COL_PRICE_VALUE(DbColumnNames.PRICE_VALUE_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Price) item).setPriceValue(Integer.valueOf(data));
+    }
+  },
+  COL_PRICE_CURRENCY(DbColumnNames.PRICE_CURRENCY_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Price) item).setPriceCurrency(data);
+    }
+  },
+
+  ////////////////////////////////////////////////////////////////
   ////////////////////////  WEAPON_TYPE  //////////////////////////
   COL_WEAPON_TYPE_CAN_HAVE_AMMO(DbColumnNames.WEAPON_TYPE_CAN_HAVE_AMMO_COLUMN_NAME, false) {
     @Override
@@ -106,67 +124,76 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
       ((Weapons) item).setWeaponSubtypeId(Integer.valueOf(data));
     }
   },
+  COL_WEAPON_PRICE_ID(DbColumnNames.WEAPON_PRICE_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Weapons) item).setPriceId(Integer.valueOf(data));
+    }
+  },
+
+  ////////////////////////////////////////////////////////////////
+  ////////////////////////  ARMOUR_TYPE  //////////////////////////
+  COL_ARMOUR_TYPE_IS_SHIELD(DbColumnNames.ARMOUR_TYPE_IS_SHIELD_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((ArmourType) item).setIsShield(Boolean.valueOf(data));
+    }
+  },
+
+  ////////////////////////////////////////////////////////////////
+  //////////////////////  ARMOUR_SUBTYPE  ////////////////////////
+  COL_ARMOUR_SUBTYPE_VALUE(DbColumnNames.ARMOUR_SUBTYPE_VALUE_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((ArmourSubtype) item).setArmourValue(Integer.valueOf(data));
+    }
+  },
+  COL_ARMOUR_SUBTYPE_MAX_DEXTERITY_BONUS(DbColumnNames.ARMOUR_SUBTYPE_MAX_DEXTERITY_BONUS_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((ArmourSubtype) item).setArmourMaxDexterityBonus(Integer.valueOf(data));
+    }
+  },
+  COL_ARMOUR_SUBTYPE_PENALTY(DbColumnNames.ARMOUR_PENALTY_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((ArmourSubtype) item).setArmourPenalty(Integer.valueOf(data));
+    }
+  },
+  COL_ARMOUR_SUBTYPE_ARCANE_FAILURE(DbColumnNames.ARMOUR_ARCANE_FAILURE_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((ArmourSubtype) item).setArmourArcaneFailure(Integer.valueOf(data));
+    }
+  },
+  COL_ARMOUR_SUBTYPE_MAX_SPEED(DbColumnNames.ARMOUR_MAX_SPEED_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((ArmourSubtype) item).setArmourMaxSpeed(Integer.valueOf(data));
+    }
+  },
+  COL_ARMOUR_SUBTYPE_WEIGHT(DbColumnNames.ARMOUR_WEIGHT_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((ArmourSubtype) item).setArmourWeight(Integer.valueOf(data));
+    }
+  },
+  COL_ARMOUR_SUBTYPE_SPECIAL_PROPERTIES(DbColumnNames.ARMOUR_SPECIAL_PROPERTIES_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((ArmourSubtype) item).setArmourSpecialProperties(data);
+    }
+  },
+
+  ////////////////////////////////////////////////////////////////
+  ///////////////////////  ARMOUR_SPECIALS  ///////////////////////
 
   //////////////////////////////////////////////////////////////
   //////////////////////////  ARMOUR  //////////////////////////
-  COL_ARMOUR_PRICE(DbColumnNames.ARMOUR_PRICE_COLUMN_NAME, false) {
+  COL_ARMOUR_PRICE_ID(DbColumnNames.ARMOUR_PRICE_ID_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
-      ((Armour) item).setArmourPrice(data);
-    }
-  },
-  COL_ARMOUR_DEFLECTION(DbColumnNames.ARMOUR_DEFLECTION_COLUMN_NAME, false) {
-    @Override
-    public void setParameter(Item item, String data) {
-      ((Armour) item).setArmourDeflection(data);
-    }
-  },
-  ColArmourMaxDexterityBonus(DbColumnNames.ARMOUR_MAX_DEXTERITY_BONUS_COLUMN_NAME, false) {
-    @Override
-    public void setParameter(Item item, String data) {
-      ((Armour) item).setArmourMaxDexterityBonus(data);
-    }
-  },
-  COL_ARMOUR_PENALTY(DbColumnNames.ARMOUR_PENALTY_COLUMN_NAME, false) {
-    @Override
-    public void setParameter(Item item, String data) {
-      ((Armour) item).setArmourPenalty(data);
-    }
-  },
-  COL_ARMOUR_ARCANE_FAILURE(DbColumnNames.ARMOUR_ARCANE_FAILURE_COLUMN_NAME, false) {
-    @Override
-    public void setParameter(Item item, String data) {
-      ((Armour) item).setArmourArcaneFailure(data);
-    }
-  },
-  COL_ARMOUR_MAX_SPEED(DbColumnNames.ARMOUR_MAX_SPEED_COLUMN_NAME, false) {
-    @Override
-    public void setParameter(Item item, String data) {
-      ((Armour) item).setArmourMaxSpeed(data);
-    }
-  },
-  COL_ARMOUR_WEIGHT(DbColumnNames.ARMOUR_WEIGHT_COLUMN_NAME, false) {
-    @Override
-    public void setParameter(Item item, String data) {
-      ((Armour) item).setArmourWeight(data);
-    }
-  },
-  COL_ARMOUR_SPECIAL_PROPERTIES(DbColumnNames.ARMOUR_SPECIAL_PROPERTIES_COLUMN_NAME, false) {
-    @Override
-    public void setParameter(Item item, String data) {
-      ((Armour) item).setArmourSpecialProperties(data);
-    }
-  },
-  COL_ARMOUR_MATERIAL(DbColumnNames.ARMOUR_MATERIAL_COLUMN_NAME, false) {
-    @Override
-    public void setParameter(Item item, String data) {
-      ((Armour) item).setArmourMaterial(data);
-    }
-  },
-  COL_ARMOUR_MAGIC_IMPROVEMENTS(DbColumnNames.ARMOUR_MAGIC_IMPROVEMENTS_COLUMN_NAME, false) {
-    @Override
-    public void setParameter(Item item, String data) {
-      ((Armour) item).setArmourMagicImprovements(data);
+      ((Armour) item).setPriceId(Integer.valueOf(data));
     }
   },
 
@@ -343,14 +370,26 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
       ((HeroWeapons) item).setSelectedAmmoId(Integer.valueOf(data));
     }
   },
+  COL_HERO_WEAPONS_MATERIAL_ID(DbColumnNames.HERO_WEAPON_MATERIAL_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((HeroWeapons) item).setWeaponMaterialId(Integer.valueOf(data));
+    }
+  },
 
   /////////////////////////////////////////////////////////////////////
   //////////////////////  HERO_PLAYER ARMOUR  ///////////////////////
 
-  COL_HERO_WEAPONS_PARENT_ARMOUR_ID(DbColumnNames.HERO_ARMOUR_PARENT_ARMOUR_ID_COLUMN_NAME, false) {
+  COL_HERO_ARMOUR_PARENT_ARMOUR_ID(DbColumnNames.HERO_ARMOUR_PARENT_ARMOUR_ID_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
       ((HeroArmour) item).setArmourId(Integer.valueOf(data));
+    }
+  },
+  COL_HERO_ARMOUR_MATERIAL_ID(DbColumnNames.HERO_ARMOUR_MATERIAL_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((HeroArmour) item).setArmourMaterialId(Integer.valueOf(data));
     }
   },
 

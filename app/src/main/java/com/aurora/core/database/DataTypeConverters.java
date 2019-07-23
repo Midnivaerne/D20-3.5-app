@@ -5,8 +5,8 @@ import androidx.room.TypeConverter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.aurora.core.models.helpers.Item;
-import com.aurora.core.models.settingspecific.Races;
+import com.aurora.core.database.models.helpers.Item;
+import com.aurora.core.database.models.settingspecific.Races;
 import com.aurora.player.playercharacterutils.PlayerCharacterWornEquipmentPlacesEnum;
 
 public class DataTypeConverters {

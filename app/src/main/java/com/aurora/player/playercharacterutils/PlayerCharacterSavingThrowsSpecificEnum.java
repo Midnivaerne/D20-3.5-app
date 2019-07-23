@@ -3,7 +3,7 @@ package com.aurora.player.playercharacterutils;
 import static com.aurora.core.database.TranslationsHolder.translate;
 
 import com.aurora.core.R;
-import com.aurora.core.models.userdata.HeroValues;
+import com.aurora.core.database.models.userdata.HeroValues;
 
 public enum PlayerCharacterSavingThrowsSpecificEnum implements
     PlayerCharacterSpecificEnumBase<PlayerCharacterSavingThrowsEnum, HeroValues> {

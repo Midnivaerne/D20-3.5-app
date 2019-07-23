@@ -1,6 +1,6 @@
 package com.aurora.player.playercharacterutils;
 
-import com.aurora.core.models.helpers.Item;
+import com.aurora.core.database.models.helpers.Item;
 
 public interface PlayerCharacterSpecificEnumBase<T extends PlayerCharacterEnumBase, V extends Item> extends PlayerCharacterSuperBase {
 

@@ -15,9 +15,9 @@ import lombok.NonNull;
 import java.util.Map;
 
 import com.aurora.core.R;
-import com.aurora.core.models.helpers.Item;
-import com.aurora.core.models.userdata.Hero;
-import com.aurora.core.models.userdata.HeroPlayer;
+import com.aurora.core.database.models.helpers.Item;
+import com.aurora.core.database.models.userdata.Hero;
+import com.aurora.core.database.models.userdata.HeroPlayer;
 import com.aurora.player.fragments.PlayerCharactersListDetailFragment;
 import com.aurora.player.views.PlayerCharacterActivity;
 import com.aurora.player.views.PlayerCharactersListActivity;

@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.aurora.core.R;
-import com.aurora.core.models.settingspecific.Skills;
-import com.aurora.core.models.userdata.HeroPlayer;
+import com.aurora.core.database.models.settingspecific.Skills;
+import com.aurora.core.database.models.userdata.HeroPlayer;
 import com.aurora.player.playercharacterutils.PlayerCharacterSkillsValuesEnum;
 
 public class SkillsRecyclerViewAdapter extends RecyclerView.Adapter<SkillsRecyclerViewAdapter.ViewHolder> {

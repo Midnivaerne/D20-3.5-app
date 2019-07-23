@@ -11,8 +11,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.aurora.core.models.helpers.CoreHelper;
-import com.aurora.core.models.helpers.Item;
+import com.aurora.core.database.models.helpers.CoreHelper;
+import com.aurora.core.database.models.helpers.Item;
 
 public abstract class BaseDaO<T extends CoreHelper> {
 

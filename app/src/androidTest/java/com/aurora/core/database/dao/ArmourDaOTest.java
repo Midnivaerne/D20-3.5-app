@@ -12,7 +12,7 @@ import java.util.List;
 
 import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.database.DatabaseManager;
-import com.aurora.core.models.usables.Armour;
+import com.aurora.core.database.models.usables.Armour;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

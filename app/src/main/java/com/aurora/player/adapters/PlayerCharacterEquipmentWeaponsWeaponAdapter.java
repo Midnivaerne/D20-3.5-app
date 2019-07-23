@@ -20,8 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.aurora.core.R;
-import com.aurora.core.models.userdata.HeroPlayer;
-import com.aurora.core.models.userdata.HeroWeapons;
+import com.aurora.core.database.models.userdata.HeroPlayer;
+import com.aurora.core.database.models.userdata.HeroWeapons;
 
 public class PlayerCharacterEquipmentWeaponsWeaponAdapter extends BaseExpandableListAdapter {
 

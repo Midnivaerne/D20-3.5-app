@@ -7,10 +7,10 @@ import java.util.Objects;
 import org.xml.sax.Attributes;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.aurora.core.models.helpers.CoreHelper;
-import com.aurora.core.models.typehelpers.CoreTypeHelper;
-import com.aurora.core.models.typehelpers.ItemType;
-import com.aurora.core.models.typehelpers.RulesType;
+import com.aurora.core.database.models.helpers.CoreHelper;
+import com.aurora.core.database.models.typehelpers.CoreTypeHelper;
+import com.aurora.core.database.models.typehelpers.ItemType;
+import com.aurora.core.database.models.typehelpers.RulesType;
 
 public class XmlHandler extends DefaultHandler {
 

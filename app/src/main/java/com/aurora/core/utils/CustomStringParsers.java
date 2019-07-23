@@ -7,8 +7,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.aurora.core.models.typehelpers.CoreTypeHelper;
-import com.aurora.core.models.typehelpers.ItemType;
+import com.aurora.core.database.models.typehelpers.CoreTypeHelper;
+import com.aurora.core.database.models.typehelpers.ItemType;
 
 public class CustomStringParsers {
 

@@ -20,9 +20,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 import com.aurora.core.R;
-import com.aurora.core.models.userdata.HeroEquipment;
-import com.aurora.core.models.userdata.HeroPlayer;
-import com.aurora.core.models.userdata.HeroWeapons;
+import com.aurora.core.database.models.userdata.HeroEquipment;
+import com.aurora.core.database.models.userdata.HeroPlayer;
+import com.aurora.core.database.models.userdata.HeroWeapons;
 
 public class PlayerCharacterEquipmentContainersContainerAdapter extends BaseExpandableListAdapter implements OnChildClickListener,
     OnGroupClickListener {

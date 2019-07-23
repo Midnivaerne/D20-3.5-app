@@ -11,7 +11,7 @@ import java.util.List;
 
 import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.database.DatabaseManager;
-import com.aurora.core.models.settingspecific.Classes;
+import com.aurora.core.database.models.settingspecific.Classes;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

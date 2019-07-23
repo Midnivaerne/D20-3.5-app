@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.aurora.core.BR;
 import com.aurora.core.R;
 import com.aurora.core.helper.BindingFragment;
-import com.aurora.core.models.userdata.Hero;
+import com.aurora.core.database.models.userdata.Hero;
 import com.aurora.player.views.PlayerCharactersListActivity;
 import com.aurora.player.views.PlayerCharactersListFrameItemDetailActivity;
 import com.google.android.material.appbar.CollapsingToolbarLayout;

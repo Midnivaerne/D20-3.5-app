@@ -10,7 +10,7 @@ import lombok.Setter;
 import com.aurora.core.R;
 import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.helper.ActivityViewModel;
-import com.aurora.core.models.userdata.HeroPlayer;
+import com.aurora.core.database.models.userdata.HeroPlayer;
 import com.aurora.player.adapters.CustomTabChangeListener;
 import com.aurora.player.adapters.CustomTabSelectionListener;
 import com.aurora.player.adapters.PlayerCharacterAllSectionsPagerAdapter;

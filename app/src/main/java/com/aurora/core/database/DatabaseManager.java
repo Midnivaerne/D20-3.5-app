@@ -25,9 +25,9 @@ import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlSerializer;
 
 import com.aurora.core.helper.BindingActivity;
-import com.aurora.core.models.typehelpers.CoreTypeHelper;
-import com.aurora.core.models.typehelpers.ItemType;
-import com.aurora.core.models.userdata.HeroPlayer;
+import com.aurora.core.database.models.typehelpers.CoreTypeHelper;
+import com.aurora.core.database.models.typehelpers.ItemType;
+import com.aurora.core.database.models.userdata.HeroPlayer;
 import com.aurora.core.utils.CommonUtils;
 
 public class DatabaseManager {
