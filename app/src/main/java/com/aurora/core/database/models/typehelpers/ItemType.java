@@ -1,14 +1,12 @@
 package com.aurora.core.database.models.typehelpers;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.database.DbTableNames;
-import com.aurora.core.helper.BaseDaO;
 import com.aurora.core.database.models.Databases;
 import com.aurora.core.database.models.Translations;
 import com.aurora.core.database.models.helpers.Item;
@@ -26,7 +24,11 @@ import com.aurora.core.database.models.settingspecific.SpecialAttacks;
 import com.aurora.core.database.models.settingspecific.SpecialQualities;
 import com.aurora.core.database.models.settingspecific.Spells;
 import com.aurora.core.database.models.usables.Armour;
+import com.aurora.core.database.models.usables.ArmourSpecifics;
+import com.aurora.core.database.models.usables.ArmourSubtype;
+import com.aurora.core.database.models.usables.ArmourType;
 import com.aurora.core.database.models.usables.Equipment;
+import com.aurora.core.database.models.usables.Price;
 import com.aurora.core.database.models.usables.WeaponSpecifics;
 import com.aurora.core.database.models.usables.WeaponSubtype;
 import com.aurora.core.database.models.usables.WeaponType;
@@ -38,6 +40,7 @@ import com.aurora.core.database.models.userdata.HeroPlayer;
 import com.aurora.core.database.models.userdata.HeroSkills;
 import com.aurora.core.database.models.userdata.HeroValues;
 import com.aurora.core.database.models.userdata.HeroWeapons;
+import com.aurora.core.helper.BaseDaO;
 
 public enum ItemType implements CoreTypeHelper<ItemType, Item> {
   /**
@@ -362,6 +365,43 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
     }
   },
   /**
+   * Price.
+   */
+  PRICE(DbTableNames.PRICE) {
+    @Override
+    public BaseDaO getDaO(DatabaseHolder databaseHolder) {
+      return databaseHolder.priceDaO();
+    }
+
+    @Override
+    public List<Price> getDatabaseList(DatabaseHolder databaseHolder) {
+      return databaseHolder.priceList;
+    }
+
+    @Override
+    public Map<Integer, Price> getDatabaseMap(DatabaseHolder databaseHolder) {
+      return databaseHolder.priceMap;
+    }
+
+    @Override
+    public Item getNewObject() {
+      return new Price();
+    }
+
+    @Override
+    public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+      databaseHolder.priceDaO().insertAll(databaseHolder.priceList);
+    }
+
+    @Override
+    public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+      databaseHolder.priceList.addAll(databaseHolder.priceDaO().getAllObjectsAsObject());
+      for (Price price : databaseHolder.priceList) {
+        databaseHolder.priceMap.put(price.getItemID(), price);
+      }
+    }
+  },
+  /**
    * Weapon types.
    */
   WEAPON_TYPE(DbTableNames.WEAPON_TYPE) {
@@ -506,6 +546,117 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
       databaseHolder.weaponsList.addAll(databaseHolder.weaponsDaO().getAllObjectsAsObject());
       for (Weapons weapons : databaseHolder.weaponsList) {
         databaseHolder.weaponsMap.put(weapons.getItemID(), weapons);
+      }
+    }
+  },
+  /**
+   * Weapon types.
+   */
+  ARMOUR_TYPE(DbTableNames.ARMOUR_TYPE) {
+    @Override
+    public BaseDaO getDaO(DatabaseHolder databaseHolder) {
+      return databaseHolder.armourTypeDaO();
+    }
+
+    @Override
+    public List<ArmourType> getDatabaseList(DatabaseHolder databaseHolder) {
+      return databaseHolder.armourTypeList;
+    }
+
+    @Override
+    public Map<Integer, ArmourType> getDatabaseMap(DatabaseHolder databaseHolder) {
+      return databaseHolder.armourTypeMap;
+    }
+
+    @Override
+    public Item getNewObject() {
+      return new ArmourType();
+    }
+
+    @Override
+    public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+      databaseHolder.armourTypeDaO().insertAll(databaseHolder.armourTypeList);
+    }
+
+    @Override
+    public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+      databaseHolder.armourTypeList.addAll(databaseHolder.armourTypeDaO().getAllObjectsAsObject());
+      for (ArmourType armourType : databaseHolder.armourTypeList) {
+        databaseHolder.armourTypeMap.put(armourType.getItemID(), armourType);
+      }
+    }
+  },
+  /**
+   * Weapons sub-types.
+   */
+  ARMOUR_SUBTYPE(DbTableNames.ARMOUR_SUBTYPE) {
+    @Override
+    public BaseDaO getDaO(DatabaseHolder databaseHolder) {
+      return databaseHolder.armourSubtypeDaO();
+    }
+
+    @Override
+    public List<ArmourSubtype> getDatabaseList(DatabaseHolder databaseHolder) {
+      return databaseHolder.armourSubtypeList;
+    }
+
+    @Override
+    public Map<Integer, ArmourSubtype> getDatabaseMap(DatabaseHolder databaseHolder) {
+      return databaseHolder.armourSubtypeMap;
+    }
+
+    @Override
+    public Item getNewObject() {
+      return new ArmourSubtype();
+    }
+
+    @Override
+    public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+      databaseHolder.armourSubtypeDaO().insertAll(databaseHolder.armourSubtypeList);
+    }
+
+    @Override
+    public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+      databaseHolder.armourSubtypeList.addAll(databaseHolder.armourSubtypeDaO().getAllObjectsAsObject());
+      for (ArmourSubtype armourSubtype : databaseHolder.armourSubtypeList) {
+        databaseHolder.armourSubtypeMap.put(armourSubtype.getItemID(), armourSubtype);
+      }
+    }
+  },
+  /**
+   * Weapons specific construction.
+   */
+  ARMOUR_SPECIFICS(DbTableNames.ARMOUR_SPECIFICS) {
+    @Override
+    public BaseDaO getDaO(DatabaseHolder databaseHolder) {
+      return databaseHolder.armourSpecificsDaO();
+    }
+
+    @Override
+    public List<ArmourSpecifics> getDatabaseList(DatabaseHolder databaseHolder) {
+      return databaseHolder.armourSpecificsList;
+    }
+
+    @Override
+    public Map<Integer, ArmourSpecifics> getDatabaseMap(DatabaseHolder databaseHolder) {
+      return databaseHolder.armourSpecificsMap;
+    }
+
+    @Override
+    public Item getNewObject() {
+      return new ArmourSpecifics();
+    }
+
+    @Override
+    public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
+      databaseHolder.armourSpecificsDaO().insertAll(databaseHolder.armourSpecificsList);
+    }
+
+    @Override
+    public void fromDatabaseToHolder(DatabaseHolder databaseHolder) {
+      databaseHolder.armourSpecificsList.addAll(databaseHolder.armourSpecificsDaO().getAllObjectsAsObject());
+      for (ArmourSpecifics armourSpecifics : databaseHolder.armourSpecificsList) {
+        databaseHolder.armourSpecificsMap.put(armourSpecifics.getItemID(), armourSpecifics);
       }
     }
   },
@@ -794,7 +945,11 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
 
     @Override
     public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
-      List<Long> baseHeroIds = databaseHolder.heroPlayerDaO().insertAll(databaseHolder.heroesPlayerList);
+      //System.out.println("H>D____________" + databaseHolder.heroesPlayerList);//todo delete
+      //System.out.println("H>D   wornid____________" + databaseHolder.heroesPlayerList.get(0).getWornItemId());//todo delete
+
+      List<Long> baseHeroIds = databaseHolder.heroPlayerDaO().insertAllWithHeroUpdate(databaseHolder.heroesPlayerList);
+      //System.out.println("H>D____________fDB>>" + databaseHolder.heroPlayerDaO().getHeroPlayerObjectsWithHeroAndItemFields().get(1).getWornItemId());//todo delete
       List<HeroDescription> descriptionsSet = new ArrayList<>();
       List<HeroValues> statisticsSet = new ArrayList<>();
       List<HeroSkills> skillsSet = new ArrayList<>();
@@ -840,8 +995,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
       for (Integer skillsId : skills.keySet()) {
         parentToSkillsId.put(skills.get(skillsId) != null ? skillsId : skills.get(skillsId).getHeroParentHeroId(), skillsId);
       }
-      List<HeroPlayer> heroes = new ArrayList<>(
-          (Collection<? extends HeroPlayer>) databaseHolder.heroPlayerDaO().getAllObjectsAsMergedObjectItem().values());
+      List<HeroPlayer> heroes = new ArrayList<>(databaseHolder.heroPlayerDaO().getHeroPlayerObjectsWithHeroAndItemFields().values());
       heroes.forEach((h) -> h.setHeroDescription(descriptions.get(parentToDescriptionId.get(h.getItemID()))));
       heroes.forEach((h) -> h.setHeroValues(statistics.get(parentToStatisticsId.get(h.getItemID()))));
       heroes.forEach((h) -> h.setHeroSkills(skills.get(parentToSkillsId.get(h.getItemID()))));

@@ -140,12 +140,10 @@ public class HeroValues extends Item implements ValuesConverter, HeroChild {
   @Ignore
   private Map<PlayerCharacterSavingThrowsEnum, Integer> savingThrowsValues = new HashMap<>();
 
-  @Ignore
   public HeroValues() {
     super();
   }
 
-  @Ignore
   public HeroValues(Map<ItemType, Map<Integer, String>> backupNames) {
     super();
     this.setBackupNames(backupNames);
@@ -185,6 +183,7 @@ public class HeroValues extends Item implements ValuesConverter, HeroChild {
     this.heroGender = heroGender;
   }
 
+  @Ignore
   public void generateAll(DatabaseHolder databaseHolder) {
     this.generateRaceFromId(databaseHolder)
         .generateClassListFromId(databaseHolder)
@@ -196,6 +195,7 @@ public class HeroValues extends Item implements ValuesConverter, HeroChild {
     populateSavingThrowsValues();
   }
 
+  @Ignore
   private void populateCombatTextValues() {
     combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_HIT_POINTS, getHeroHitPointsStringFromList());
     combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_DAMAGE_REDUCTION, getDamageReduction());
@@ -211,6 +211,7 @@ public class HeroValues extends Item implements ValuesConverter, HeroChild {
     combatTextValues.put(PlayerCharacterCombatEnum.HERO_COMBAT_SPELL_RESISTANCE, getSpellResistance());
   }
 
+  @Ignore
   private void populateAbilityScoreValues() {
     abilityScoreValues.put(PlayerCharacterAbilityScoresEnum.HERO_ABILITY_SCORES_STR, getHeroAbilityScoreStr());
     abilityScoreValues.put(PlayerCharacterAbilityScoresEnum.HERO_ABILITY_SCORES_DEX, getHeroAbilityScoreDex());
@@ -220,6 +221,7 @@ public class HeroValues extends Item implements ValuesConverter, HeroChild {
     abilityScoreValues.put(PlayerCharacterAbilityScoresEnum.HERO_ABILITY_SCORES_CHA, getHeroAbilityScoreCha());
   }
 
+  @Ignore
   private void populateSavingThrowsValues() {
     savingThrowsValues.put(PlayerCharacterSavingThrowsEnum.HERO_SAVING_THROWS_FORTITUDE, getFortitude());
     savingThrowsValues.put(PlayerCharacterSavingThrowsEnum.HERO_SAVING_THROWS_REFLEX, getReflex());
@@ -335,6 +337,7 @@ public class HeroValues extends Item implements ValuesConverter, HeroChild {
         source.getHeroGender());
   }
 
+  @Ignore
   public String getDamageReduction() {
     StringBuilder out = new StringBuilder();
     //getHeroValues().getRace().getSpecialQualities().iterator()
@@ -345,66 +348,79 @@ public class HeroValues extends Item implements ValuesConverter, HeroChild {
     return String.valueOf(out);
   }
 
+  @Ignore
   public String getArmourClass() {
     int out = 10; //todo proper value
     return String.valueOf(out);
   }
 
+  @Ignore
   public String getArmourClassTouch() {
     int out = 10;//todo proper value
     return String.valueOf(out);
   }
 
+  @Ignore
   public String getArmourClassFlatfooted() {
     int out = 10;//todo proper value
     return String.valueOf(out);
   }
 
+  @Ignore
   public String getSpeed() {
     int out = 0;//todo proper value
     return String.valueOf(out);
   }
 
+  @Ignore
   public String getInitiative() {
     int out = 0;//todo proper value
     return String.valueOf(out);
   }
 
+  @Ignore
   public String getAttack() {
     int out = 0;//todo proper value
     return String.valueOf(out);
   }
 
+  @Ignore
   public String getAttackMelee() {
     int out = 0;//todo proper value
     return String.valueOf(out);
   }
 
+  @Ignore
   public String getAttackRanged() {
     int out = 0;//todo proper value
     return String.valueOf(out);
   }
 
+  @Ignore
   public String getGrapple() {
     int out = 0;//todo proper value
     return String.valueOf(out);
   }
 
+  @Ignore
   public String getSpellResistance() {
     int out = 0;//todo proper value
     return String.valueOf(out);
   }
 
+  @Ignore
   public Integer getFortitude() {
     int out = 0;//todo proper value
     return out;
   }
 
+  @Ignore
   public Integer getReflex() {
     int out = 0;//todo proper value
     return out;
   }
 
+  @Ignore
   public Integer getWill() {
     int out = 0;//todo proper value
     return out;

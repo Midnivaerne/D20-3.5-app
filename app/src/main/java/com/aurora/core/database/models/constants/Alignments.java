@@ -17,7 +17,6 @@ import com.aurora.core.database.models.helpers.Rules;
 @Entity(tableName = ALIGNMENTS, inheritSuperIndices = true)
 public class Alignments extends Rules {
 
-  @Ignore
   public Alignments() {
     super();
   }
@@ -26,7 +25,6 @@ public class Alignments extends Rules {
     super(name);
   }
 
-  @Ignore
   public Alignments(Alignments source) {
     new Alignments(
         source.getName());

@@ -1,7 +1,11 @@
 package com.aurora.core.database.models.userdata;
 
+import static com.aurora.core.database.DbColumnNames.HERO_LEFT_HAND_HELD_ITEM_ID_COLUMN_NAME;
+import static com.aurora.core.database.DbColumnNames.HERO_RIGHT_HAND_HELD_ITEM_ID_COLUMN_NAME;
+import static com.aurora.core.database.DbColumnNames.HERO_WORN_ITEM_ID_COLUMN_NAME;
 import static com.aurora.core.database.models.userdata.HeroValues.getStatisticModifier;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Ignore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,7 +20,6 @@ import java.util.Map;
 import com.aurora.core.database.DatabaseHolder;
 import com.aurora.core.database.models.helpers.Item;
 import com.aurora.player.playercharacterutils.PlayerCharacterAbilityScoresEnum;
-import com.aurora.player.playercharacterutils.PlayerCharacterArmourEnum;
 import com.aurora.player.playercharacterutils.PlayerCharacterWornEquipmentPlacesEnum;
 
 @EqualsAndHashCode(callSuper = true)
@@ -37,10 +40,16 @@ public class Hero extends Item {
   private LinkedHashMap<Integer, List<Integer>> heroWeaponsWithAmmoMap;
 
   @Ignore
-  private ArrayList<HeroArmour> heroArmour;
+  private Map<Integer, HeroArmour> heroArmourFromIdMap;
 
-  @Ignore
-  private Map<PlayerCharacterArmourEnum, HeroArmour> heroArmourMap = new HashMap<>();
+  @ColumnInfo(name = HERO_RIGHT_HAND_HELD_ITEM_ID_COLUMN_NAME)
+  private Integer rightHandHeldItemId;
+
+  @ColumnInfo(name = HERO_LEFT_HAND_HELD_ITEM_ID_COLUMN_NAME)
+  private Integer leftHandHeldItemId;
+
+  @ColumnInfo(name = HERO_WORN_ITEM_ID_COLUMN_NAME)
+  private Integer wornItemId;
 
   @Ignore
   private ArrayList<HeroEquipment> heroEquipment;
@@ -51,18 +60,25 @@ public class Hero extends Item {
   @Ignore
   private LinkedHashMap<HeroEquipment, List<HeroEquipment>> heroContainerEquipmentMap = new LinkedHashMap<>();
 
-  @Ignore
   public Hero() {
     super();
     this.setHeroValues(new HeroValues(this.getBackupNames()));
     this.setHeroSkills(new HeroSkills(this.getBackupNames()));
   }
 
-  @Ignore
   public Hero(String name,
       String source,
       String idAsNameBackup) {
-    new Hero(name, source, idAsNameBackup, null, null);
+    new Hero(name, source, idAsNameBackup, null, null, null, null, null);
+  }
+
+  public Hero(String name,
+      String source,
+      String idAsNameBackup,
+      Integer rightHandHeldItemId,
+      Integer leftHandHeldItemId,
+      Integer wornItemId) {
+    new Hero(name, source, idAsNameBackup, null, null, rightHandHeldItemId, leftHandHeldItemId, wornItemId);
   }
 
 
@@ -70,22 +86,31 @@ public class Hero extends Item {
       String source,
       String idAsNameBackup,
       HeroValues heroValues,
-      HeroSkills heroSkills) {
+      HeroSkills heroSkills,
+      Integer rightHandHeldItemId,
+      Integer leftHandHeldItemId,
+      Integer wornItemId) {
     super(name, source, idAsNameBackup);
     this.setHeroValues(heroValues == null ? new HeroValues(this.getBackupNames()) : new HeroValues(heroValues));
     this.setHeroSkills(heroSkills == null ? new HeroSkills(this.getBackupNames()) : new HeroSkills(heroSkills));
+    this.setRightHandHeldItemId(rightHandHeldItemId);
+    this.setLeftHandHeldItemId(leftHandHeldItemId);
+    this.setWornItemId(wornItemId);
   }
 
-  @Ignore
   public Hero(Hero source) {
     new Hero(
         source.getName(),
         source.getSource(),
         source.getIdAsNameBackup(),
         source.getHeroValues(),
-        source.getHeroSkills());
+        source.getHeroSkills(),
+        source.getRightHandHeldItemId(),
+        source.getLeftHandHeldItemId(),
+        source.getWornItemId());
   }
 
+  @Ignore
   public void generateAll(DatabaseHolder databaseHolder) {
     getHeroValues().generateAll(databaseHolder);
     generateSkills(databaseHolder);
@@ -94,6 +119,7 @@ public class Hero extends Item {
     generateEquipment(databaseHolder);
   }
 
+  @Ignore
   private void generateSkills(DatabaseHolder databaseHolder) {
     getHeroSkills().generateSkillListAsSkillAndRank(databaseHolder);
     for (PlayerCharacterAbilityScoresEnum attr : getHeroValues().getAbilityScoreValues().keySet()) {
@@ -103,6 +129,7 @@ public class Hero extends Item {
         getHeroValues().getRaceTemplate() != null ? getHeroValues().getRaceTemplate().getRaceTemplateSkills() : null);
   }
 
+  @Ignore
   private void generateWeapons(DatabaseHolder databaseHolder) {
     setHeroWeaponsFromIdMap(new HashMap<Integer, HeroWeapons>());
     Map<Integer, List<Integer>> ammoTypeIdMap = new LinkedHashMap<Integer, List<Integer>>();
@@ -132,16 +159,18 @@ public class Hero extends Item {
     }
   }
 
+  @Ignore
   private void generateArmour(DatabaseHolder databaseHolder) {
-    setHeroArmour(new ArrayList<HeroArmour>());
+    setHeroArmourFromIdMap(new HashMap<Integer, HeroArmour>());
     for (HeroArmour heroArmour : databaseHolder.heroesArmourList) {
       if (heroArmour.getHeroParentHeroId().equals(this.getItemID())) {
         heroArmour.generateAll(databaseHolder);
-        getHeroArmour().add(heroArmour);
+        getHeroArmourFromIdMap().put(heroArmour.getItemID(), heroArmour);
       }
     }
   }
 
+  @Ignore
   private void generateEquipment(DatabaseHolder databaseHolder) {
     setHeroEquipment(new ArrayList<HeroEquipment>());
     for (HeroEquipment heroEquipment : databaseHolder.heroesEquipmentList) {

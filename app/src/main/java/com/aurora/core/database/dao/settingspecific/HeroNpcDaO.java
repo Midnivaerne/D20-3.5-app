@@ -35,6 +35,7 @@ public abstract class HeroNpcDaO extends BaseDaO<HeroNpc> {
   @Query("SELECT * FROM HeroNpc WHERE Item_ID IN (:ids)")
   public abstract List<HeroNpc> getObjectsWithIdsAsObject(List<Integer> ids);
 
+  @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
   @Query("SELECT * FROM HeroNpc WHERE Item_ID IN (:ids)")
   public abstract List<Item> getObjectsWithIdsAsItem(List<Integer> ids);
 

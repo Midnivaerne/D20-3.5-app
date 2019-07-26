@@ -33,7 +33,6 @@ public class HeroPlayer extends Hero {
   @Ignore
   private Map<PlayerCharacterDescriptionsEnum, String> textDescriptions = new HashMap<>();
 
-  @Ignore
   public HeroPlayer() {
     super();
     this.heroDescription = new HeroDescription(this.getBackupNames());
@@ -42,7 +41,16 @@ public class HeroPlayer extends Hero {
   public HeroPlayer(String name,
       String source,
       String idAsNameBackup) {
-    new HeroPlayer(name, source, idAsNameBackup, null, null, null);
+    new HeroPlayer(name, source, idAsNameBackup, null, null, null, null, null, null);
+  }
+
+  public HeroPlayer(String name,
+      String source,
+      String idAsNameBackup,
+      Integer rightHandHeldItemId,
+      Integer leftHandHeldItemId,
+      Integer wornItemId) {
+    new HeroPlayer(name, source, idAsNameBackup, null, null, null, rightHandHeldItemId, leftHandHeldItemId, wornItemId);
   }
 
   public HeroPlayer(String name,
@@ -50,17 +58,22 @@ public class HeroPlayer extends Hero {
       String idAsNameBackup,
       HeroValues heroValues,
       HeroSkills heroSkills,
-      HeroDescription heroDescription) {
-    super(name, source, idAsNameBackup, heroValues, heroSkills);
+      HeroDescription heroDescription,
+      Integer rightHandHeldItemId,
+      Integer leftHandHeldItemId,
+      Integer wornItemId) {
+    super(name, source, idAsNameBackup, heroValues, heroSkills, rightHandHeldItemId, leftHandHeldItemId, wornItemId);
     this.heroDescription = heroDescription == null ? new HeroDescription(this.getBackupNames()) : new HeroDescription(heroDescription);
   }
 
+  @Ignore
   @Override
   public void generateAll(DatabaseHolder databaseHolder) {
     super.generateAll(databaseHolder);
     populateTextDescriptions();
   }
 
+  @Ignore
   private void populateTextDescriptions() {
     textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_NAME, getName());
     textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_PLAYER, getHeroDescription().getHeroPlayer());
@@ -78,7 +91,6 @@ public class HeroPlayer extends Hero {
     textDescriptions.put(PlayerCharacterDescriptionsEnum.HERO_SKIN, getHeroDescription().getHeroSkin());
   }
 
-  @Ignore
   public HeroPlayer(HeroPlayer source) {
     new HeroPlayer(
         source.getName(),
@@ -86,6 +98,9 @@ public class HeroPlayer extends Hero {
         source.getIdAsNameBackup(),
         source.getHeroValues(),
         source.getHeroSkills(),
-        source.getHeroDescription());
+        source.getHeroDescription(),
+        source.getRightHandHeldItemId(),
+        source.getLeftHandHeldItemId(),
+        source.getWornItemId());
   }
 }

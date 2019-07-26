@@ -67,7 +67,6 @@ public class Races extends Item {
   @ColumnInfo(name = DbColumnNames.RACE_FAVOURITE_CLASS_COLUMN_NAME)
   private String favouriteClass;
 
-  @Ignore
   public Races() {
     super();
   }
@@ -129,7 +128,6 @@ public class Races extends Item {
     return this;
   }
 
-  @Ignore
   public Races(Races source) {
     new Races(
         source.getName(),

@@ -1,11 +1,10 @@
 package com.aurora.core.database.models.helpers;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import androidx.room.ColumnInfo;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.SuperBuilder;
 
 import com.aurora.core.database.DbColumnNames;
@@ -29,7 +28,6 @@ public class Rules implements CoreHelper {
 
   private String content;
 
-  @Ignore
   public Rules() {
   }
 
@@ -37,12 +35,12 @@ public class Rules implements CoreHelper {
     this.name = name;
   }
 
-  @Ignore
   public Rules(Rules source) {
     new Rules(
         source.getName());
   }
 
+  @Ignore
   public Rules createRulesGroup(RulesType rulesType) {
     switch (rulesType) {
       case ALIGNMENTS:

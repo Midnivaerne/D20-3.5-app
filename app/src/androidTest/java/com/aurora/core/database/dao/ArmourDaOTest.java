@@ -10,22 +10,23 @@ import androidx.test.platform.app.InstrumentationRegistry;
 import java.util.Arrays;
 import java.util.List;
 
-import com.aurora.core.database.DatabaseHolder;
-import com.aurora.core.database.DatabaseManager;
-import com.aurora.core.database.models.usables.Armour;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.aurora.core.database.DatabaseHolder;
+import com.aurora.core.database.DatabaseManager;
+import com.aurora.core.database.models.usables.Armour;
+
 
 @RunWith(AndroidJUnit4.class)
 public class ArmourDaOTest {
 
-  private static final Armour ARMOUR1 = new Armour("name1", "source1", "1=idBqp1", "price1", "1", "1", "1", "1", "1", "1", "1", "1", "1");
-  private static final Armour ARMOUR2 = new Armour("name2", "source2", "2=idBqp2", "price2", "2", "2", "2", "2", "2", "2", "2", "2", "2");
-  private static final Armour ARMOUR3 = new Armour("name3", "source3", "3=idBqp3", "price3", "3", "3", "3", "3", "3", "3", "3", "3", "3");
+  private static final Armour ARMOUR1 = new Armour("name1", "source1", "1=idBqp1", 1, 1, 1);
+  private static final Armour ARMOUR2 = new Armour("name1", "source1", "1=idBqp1", 2, 2, 2);
+  private static final Armour ARMOUR3 = new Armour("name1", "source1", "1=idBqp1", 3, 3, 3);
   private DatabaseHolder mDatabaseHolder;
 
   @Before
@@ -76,7 +77,7 @@ public class ArmourDaOTest {
   @Test
   public void updateAndGetItem() {
     long id1 = mDatabaseHolder.armourDaO().insert(ARMOUR1);
-    Armour updatedArmour = ARMOUR1.clone();
+    Armour updatedArmour = new Armour(ARMOUR1);
     updatedArmour.setName("updatedName");
     updatedArmour.setItemID(toIntExact(id1));
     mDatabaseHolder.armourDaO().update(updatedArmour);

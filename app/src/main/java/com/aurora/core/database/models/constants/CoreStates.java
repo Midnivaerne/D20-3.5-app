@@ -17,7 +17,6 @@ import com.aurora.core.database.models.helpers.Rules;
 @Entity(tableName = CORE_STATES, inheritSuperIndices = true)
 public class CoreStates extends Rules {
 
-  @Ignore
   public CoreStates() {
     super();
   }
@@ -26,7 +25,6 @@ public class CoreStates extends Rules {
     super(name);
   }
 
-  @Ignore
   public CoreStates(CoreStates source) {
     new CoreStates(source.getName());
   }

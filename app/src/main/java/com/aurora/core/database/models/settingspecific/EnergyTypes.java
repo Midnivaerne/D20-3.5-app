@@ -24,7 +24,6 @@ import com.aurora.core.database.models.helpers.Item;
         parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
 public class EnergyTypes extends Item {
 
-  @Ignore
   public EnergyTypes() {
     super();
   }
@@ -35,7 +34,6 @@ public class EnergyTypes extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  @Ignore
   public EnergyTypes(EnergyTypes source) {
     new EnergyTypes(
         source.getName(),

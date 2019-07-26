@@ -28,12 +28,10 @@ public class ArmourType extends Item {
   @ColumnInfo(name = ARMOUR_TYPE_IS_SHIELD_COLUMN_NAME)
   private Boolean isShield;
 
-  @Ignore
   public ArmourType() {
     super();
   }
 
-  @Ignore
   public ArmourType(String name,
       String source,
       String idAsNameBackup) {
@@ -48,7 +46,6 @@ public class ArmourType extends Item {
     this.isShield = isShield;
   }
 
-  @Ignore
   public ArmourType(ArmourType source) {
     new ArmourType(
         source.getName(),

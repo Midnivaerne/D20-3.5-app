@@ -63,7 +63,6 @@ public class RaceTemplates extends Item {
   @ColumnInfo(name = DbColumnNames.RACE_TEMPLATE_LANGUAGES_COLUMN_NAME)
   private String raceTemplateLanguages;
 
-  @Ignore
   public RaceTemplates() {
     super();
   }
@@ -92,12 +91,10 @@ public class RaceTemplates extends Item {
     this.raceTemplateLanguages = raceTemplateLanguages;
   }
 
-  @Ignore
   public RaceTemplates generateSpecials(DatabaseHolder databaseHolder) {
     return this.generateSpecialAttacksFromIds(databaseHolder).generateSpecialQualitiesFromIds(databaseHolder);
   }
 
-  @Ignore
   private RaceTemplates generateSpecialAttacksFromIds(DatabaseHolder databaseHolder) {
     List<Integer> lst = new ArrayList<>();
     if (raceTemplateSpecialAttacksIds != null) {
@@ -110,7 +107,6 @@ public class RaceTemplates extends Item {
     return this;
   }
 
-  @Ignore
   private RaceTemplates generateSpecialQualitiesFromIds(DatabaseHolder databaseHolder) {
     List<Integer> lst = new ArrayList<>();
     if (raceTemplateSpecialQualitiesIds != null) {
@@ -123,7 +119,6 @@ public class RaceTemplates extends Item {
     return this;
   }
 
-  @Ignore
   public RaceTemplates(RaceTemplates source) {
     new RaceTemplates(
         source.getName(),

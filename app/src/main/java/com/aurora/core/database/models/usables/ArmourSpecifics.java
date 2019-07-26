@@ -22,7 +22,6 @@ import com.aurora.core.database.models.helpers.Item;
     foreignKeys = @ForeignKey(entity = Databases.class, parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
 public class ArmourSpecifics extends Item {
 
-  @Ignore
   public ArmourSpecifics() {
     super();
   }
@@ -33,7 +32,6 @@ public class ArmourSpecifics extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  @Ignore
   public ArmourSpecifics(ArmourSpecifics source) {
     new ArmourSpecifics(
         source.getName(),

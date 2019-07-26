@@ -17,7 +17,6 @@ import com.aurora.core.database.models.helpers.Rules;
 @Entity(tableName = RULES_SKILLS, inheritSuperIndices = true)
 public class RulesSkills extends Rules {
 
-  @Ignore
   public RulesSkills() {
     super();
   }
@@ -26,7 +25,6 @@ public class RulesSkills extends Rules {
     super(name);
   }
 
-  @Ignore
   public RulesSkills(RulesSkills source) {
     new RulesSkills(
         source.getName());

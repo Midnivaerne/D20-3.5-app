@@ -24,7 +24,6 @@ import com.aurora.core.database.models.helpers.Item;
         parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
 public class Feats extends Item {
 
-  @Ignore
   public Feats() {
     super();
   }
@@ -35,7 +34,6 @@ public class Feats extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  @Ignore
   public Feats(Feats source) {
     new Feats(
         source.getName(),

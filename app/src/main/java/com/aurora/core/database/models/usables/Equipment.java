@@ -28,12 +28,10 @@ public class Equipment extends Item {
   @ColumnInfo(name = EQUIPMENT_IS_CONTAINER_COLUMN_NAME)
   private String isContainer;
 
-  @Ignore
   public Equipment() {
     super();
   }
 
-  @Ignore
   public Equipment(String name,
       String source,
       String idAsNameBackup) {
@@ -48,7 +46,6 @@ public class Equipment extends Item {
     this.setIsContainer(isContainer);
   }
 
-  @Ignore
   public Equipment(Equipment source) {
     new Equipment(
         source.getName(),

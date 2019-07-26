@@ -33,8 +33,8 @@
         layout="@layout/fragment_player_character_equipment_armour"/>
 
       <include
-        android:id="@+id/fragment_player_character_equipment_shield"
-        layout="@layout/fragment_player_character_equipment_armour"/>
+        android:id="@+id/fragment_player_character_equipment_shields"
+        layout="@layout/fragment_player_character_equipment_shields"/>
 
       <include
         android:id="@+id/fragment_player_character_equipment_worn"

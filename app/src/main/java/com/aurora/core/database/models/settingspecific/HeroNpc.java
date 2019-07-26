@@ -26,7 +26,6 @@ import com.aurora.core.database.models.userdata.HeroValues;
         parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
 public class HeroNpc extends Hero {
 
-  @Ignore
   public HeroNpc() {
     super();
   }
@@ -34,15 +33,27 @@ public class HeroNpc extends Hero {
   public HeroNpc(String name,
       String source,
       String idAsNameBackup) {
-    new HeroNpc(name, source, idAsNameBackup, null, null);
+    new HeroNpc(name, source, idAsNameBackup, null, null, null, null, null);
+  }
+
+  public HeroNpc(String name,
+      String source,
+      String idAsNameBackup,
+      Integer rightHandHeldItemId,
+      Integer leftHandHeldItemId,
+      Integer wornItemId) {
+    new HeroNpc(name, source, idAsNameBackup, null, null, rightHandHeldItemId, leftHandHeldItemId, wornItemId);
   }
 
   public HeroNpc(String name,
       String source,
       String idAsNameBackup,
       HeroValues heroValues,
-      HeroSkills heroSkills) {
-    super(name, source, idAsNameBackup, heroValues, heroSkills);
+      HeroSkills heroSkills,
+      Integer rightHandHeldItemId,
+      Integer leftHandHeldItemId,
+      Integer wornItemId) {
+    super(name, source, idAsNameBackup, heroValues, heroSkills, rightHandHeldItemId, leftHandHeldItemId, wornItemId);
   }
 
   @Ignore
@@ -52,6 +63,9 @@ public class HeroNpc extends Hero {
         source.getSource(),
         source.getIdAsNameBackup(),
         source.getHeroValues(),
-        source.getHeroSkills());
+        source.getHeroSkills(),
+        source.getRightHandHeldItemId(),
+        source.getLeftHandHeldItemId(),
+        source.getWornItemId());
   }
 }

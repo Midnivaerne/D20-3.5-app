@@ -33,12 +33,10 @@ public class Price extends Item {
   @ColumnInfo(name = PRICE_CURRENCY_COLUMN_NAME)
   private String priceCurrency;
 
-  @Ignore
   public Price() {
     super();
   }
 
-  @Ignore
   public Price(String name,
       String source,
       String idAsNameBackup) {
@@ -55,7 +53,6 @@ public class Price extends Item {
     this.setPriceCurrency(priceCurrency);
   }
 
-  @Ignore
   public Price(Price source) {
     new Price(
         source.getName(),

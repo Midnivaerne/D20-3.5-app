@@ -65,12 +65,10 @@ public class HeroDescription extends Item implements HeroChild {
   @ColumnInfo(name = HERO_SKIN_COLUMN_NAME)
   private String heroSkin;
 
-  @Ignore
   public HeroDescription() {
     super();
   }
 
-  @Ignore
   public HeroDescription(Map<ItemType, Map<Integer, String>> backupNames) {
     super();
     this.setBackupNames(backupNames);
@@ -98,7 +96,6 @@ public class HeroDescription extends Item implements HeroChild {
     this.heroSkin = heroSkin;
   }
 
-  @Ignore
   public HeroDescription(HeroDescription source) {
     new HeroDescription(
         source.getName(),

@@ -16,6 +16,7 @@ import com.aurora.core.database.models.usables.Price;
 import com.aurora.core.database.models.usables.WeaponSubtype;
 import com.aurora.core.database.models.usables.WeaponType;
 import com.aurora.core.database.models.usables.Weapons;
+import com.aurora.core.database.models.userdata.Hero;
 import com.aurora.core.database.models.userdata.HeroArmour;
 import com.aurora.core.database.models.userdata.HeroEquipment;
 import com.aurora.core.database.models.userdata.HeroPlayer;
@@ -190,6 +191,18 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
 
   //////////////////////////////////////////////////////////////
   //////////////////////////  ARMOUR  //////////////////////////
+  COL_ARMOUR_TYPE_PARENT_ID(DbColumnNames.ARMOUR_TYPE_PARENT_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Armour) item).setArmourTypeId(Integer.valueOf(data));
+    }
+  },
+  COL_ARMOUR_SUBTYPE_PARENT_ID(DbColumnNames.ARMOUR_SUBTYPE_PARENT_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Armour) item).setArmourSubtypeId(Integer.valueOf(data));
+    }
+  },
   COL_ARMOUR_PRICE_ID(DbColumnNames.ARMOUR_PRICE_ID_COLUMN_NAME, false) {
     @Override
     public void setParameter(Item item, String data) {
@@ -207,7 +220,7 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
   //////////////////////////  CLASSES  //////////////////////////
 
   ///////////////////////////////////////////////////////////////
-  ////////////////////////  HERO_PLAYER PLAYER /////////////////////////
+  ////////////////////////  HERO_PLAYER PLAYER ///////////////////
 
   ///////////////////////////////////////////////////////////////
   ////////////////////////  HERO_PLAYER HERO /////////////////////////
@@ -217,6 +230,25 @@ public enum DbSettingColumns implements DbColumnNamesMethods<DbSettingColumns, I
       ((HeroChild) item).setHeroParentHeroId(Integer.valueOf(data));
     }
   },
+  COL_HERO_RIGHT_HAND_HELD_ITEM_ID(DbColumnNames.HERO_RIGHT_HAND_HELD_ITEM_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Hero) item).setRightHandHeldItemId(Integer.valueOf(data));
+    }
+  },
+  COL_HERO_LEFT_HAND_HELD_ITEM_ID(DbColumnNames.HERO_LEFT_HAND_HELD_ITEM_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Hero) item).setLeftHandHeldItemId(Integer.valueOf(data));
+    }
+  },
+  COL_HERO_WORN_ITEM_ID(DbColumnNames.HERO_WORN_ITEM_ID_COLUMN_NAME, false) {
+    @Override
+    public void setParameter(Item item, String data) {
+      ((Hero) item).setWornItemId(Integer.valueOf(data));
+    }
+  },
+
 
   //////////////////////////////////////////////////////////////////
   //////////////////////  HERO_PLAYER DESCRIPTION  ///////////////////////

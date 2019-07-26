@@ -26,7 +26,6 @@ import com.aurora.core.database.models.helpers.Item;
         onDelete = ForeignKey.CASCADE))
 public class Classes extends Item {
 
-  @Ignore
   public Classes() {
     super();
   }
@@ -37,7 +36,6 @@ public class Classes extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  @Ignore
   public Classes(Classes source) {
     new Classes(
         source.getName(),

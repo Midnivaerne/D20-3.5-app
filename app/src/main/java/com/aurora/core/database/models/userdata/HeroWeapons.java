@@ -72,18 +72,15 @@ public class HeroWeapons extends Item implements HeroChild {
   @Ignore
   private List<WeaponSpecifics> weaponSpecificsList;
 
-  @Ignore
   public HeroWeapons() {
     super();
   }
 
-  @Ignore
   public HeroWeapons(Map<ItemType, Map<Integer, String>> backupNames) {
     super();
     this.setBackupNames(backupNames);
   }
 
-  @Ignore
   public HeroWeapons(String name,
       String source,
       String idAsNameBackup) {
@@ -117,12 +114,13 @@ public class HeroWeapons extends Item implements HeroChild {
     );
   }
 
+  @Ignore
   HeroWeapons generateAll(DatabaseHolder databaseHolder) {
     setWeapon(databaseHolder.weaponsMap.get(getWeaponId()));
+    getWeapon().generateAll(databaseHolder);
     if (getWeaponMaterialId() != null) {
       setWeaponMaterial(databaseHolder.materialTypesMap.get(getWeaponMaterialId()));
     }
-    getWeapon().generateAll(databaseHolder);
     if (getWeaponSpecificIds() != null && getWeaponSpecificIds() != "") {
       for (String weaponSpecificId : weaponSpecificIds.split(",")) {
         weaponSpecificsList.add(databaseHolder.weaponSpecificsMap.get(Integer.valueOf(weaponSpecificId)));

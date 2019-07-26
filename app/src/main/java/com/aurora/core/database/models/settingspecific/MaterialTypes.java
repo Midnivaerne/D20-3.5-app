@@ -24,7 +24,6 @@ import com.aurora.core.database.models.helpers.Item;
         parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
 public class MaterialTypes extends Item {
 
-  @Ignore
   public MaterialTypes() {
     super();
   }
@@ -35,7 +34,6 @@ public class MaterialTypes extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  @Ignore
   public MaterialTypes(MaterialTypes source) {
     new MaterialTypes(
         source.getName(),

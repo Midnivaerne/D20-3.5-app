@@ -21,6 +21,14 @@
       <Source>Test_classes_Source</Source>
     </Databases_Item>
   </Databases>
+  <Price>
+    <Price_Item>
+      <Name>sample_price</Name>
+      <Source>Test_bigger_source</Source>
+      <Price_Value>1</Price_Value>
+      <Price_Currency>GOLD</Price_Currency>
+    </Price_Item>
+  </Price>
   <WeaponType>
     <WeaponType_Item>
       <Name>melee_name</Name>
@@ -101,14 +109,52 @@
       <Weapon_Subtype_Parent_Id>3</Weapon_Subtype_Parent_Id>
     </Weapons_Item>
   </Weapons>
+  <ArmourType>
+    <ArmourType_Item>
+      <Name>worn_armour_name</Name>
+      <Source>Test_bigger_source</Source>
+      <Armour_Type_Is_Shield>false</Armour_Type_Is_Shield>
+    </ArmourType_Item>
+    <ArmourType_Item>
+      <Name>shield_name</Name>
+      <Source>Test_bigger_source</Source>
+      <Armour_Type_Is_Shield>true</Armour_Type_Is_Shield>
+    </ArmourType_Item>
+  </ArmourType>
+  <ArmourSubtype>
+    <ArmourSubtype_Item>
+      <Name>armour_example_armour_name</Name>
+      <Source>Test_bigger_source</Source>
+      <Armour_Value>4</Armour_Value>
+      <Armour_Max_Dexterity_Bonus>6</Armour_Max_Dexterity_Bonus>
+      <Armour_Penalty>2</Armour_Penalty>
+      <Armour_Arcane_Failure>10</Armour_Arcane_Failure>
+      <Armour_Weight>30</Armour_Weight>
+    </ArmourSubtype_Item>
+    <ArmourSubtype_Item>
+      <Name>armour_example_shield_name</Name>
+      <Source>Test_bigger_source</Source>
+      <Armour_Value>2</Armour_Value>
+      <Armour_Weight>7</Armour_Weight>
+    </ArmourSubtype_Item>
+  </ArmourSubtype>
+  <ArmourSpecifics>
+    <ArmourSpecifics_Item></ArmourSpecifics_Item>
+  </ArmourSpecifics>
   <Armour>
     <Armour_Item>
       <Name>armour1</Name>
       <Source>Test_bigger_source</Source>
+      <Armour_Type_Parent_Id>1</Armour_Type_Parent_Id>
+      <Armour_Subtype_Parent_Id>1</Armour_Subtype_Parent_Id>
+      <Armour_Price_Id>1</Armour_Price_Id>
     </Armour_Item>
     <Armour_Item>
       <Name>shield1</Name>
       <Source>Test_bigger_source</Source>
+      <Armour_Type_Parent_Id>2</Armour_Type_Parent_Id>
+      <Armour_Subtype_Parent_Id>2</Armour_Subtype_Parent_Id>
+      <Armour_Price_Id>1</Armour_Price_Id>
     </Armour_Item>
   </Armour>
   <Equipment>
@@ -189,6 +235,7 @@
       <Hero_Wis>10</Hero_Wis>
       <Hero_Cha>8</Hero_Cha>
       <Hero_Skill_List>1=1,2=1</Hero_Skill_List>
+      <Worn_Item_Id>1</Worn_Item_Id>
     </HeroPlayer_Item>
     <HeroPlayer_Item>
       <Name>Another_Hero_Name</Name>

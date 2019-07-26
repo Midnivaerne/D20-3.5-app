@@ -35,6 +35,7 @@ public abstract class EquipmentDaO extends BaseDaO<Equipment> {
   @Query("SELECT * FROM Equipment WHERE Item_ID IN (:ids)")
   public abstract List<Equipment> getObjectsWithIdsAsObject(List<Integer> ids);
 
+  @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
   @Query("SELECT * FROM Equipment WHERE Item_ID IN (:ids)")
   public abstract List<Item> getObjectsWithIdsAsItem(List<Integer> ids);
 

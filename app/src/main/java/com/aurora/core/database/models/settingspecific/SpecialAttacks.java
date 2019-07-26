@@ -25,7 +25,6 @@ import com.aurora.core.database.models.helpers.Item;
 public class SpecialAttacks extends Item {
 
 
-  @Ignore
   public SpecialAttacks() {
     super();
   }
@@ -36,7 +35,6 @@ public class SpecialAttacks extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  @Ignore
   public SpecialAttacks(SpecialAttacks source) {
     new SpecialAttacks(
         source.getName(),

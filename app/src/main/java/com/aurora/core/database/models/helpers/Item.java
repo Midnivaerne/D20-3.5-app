@@ -41,7 +41,6 @@ public class Item implements CoreHelper {
   @Ignore
   private Map<ItemType, Map<Integer, String>> backupNames;
 
-  @Ignore
   public Item() {
   }
 
@@ -59,7 +58,6 @@ public class Item implements CoreHelper {
     }
   }
 
-  @Ignore
   public Item(Item sourceItem) {
     new Item(
         sourceItem.getName(),

@@ -27,7 +27,6 @@ public class SpecialQualities extends Item {
 
   public static final String DamageReduction = "Damage_Reduction"; //todo find a better solution
 
-  @Ignore
   public SpecialQualities() {
     super();
   }
@@ -38,7 +37,6 @@ public class SpecialQualities extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  @Ignore
   public SpecialQualities(SpecialQualities source) {
     new SpecialQualities(
         source.getName(),

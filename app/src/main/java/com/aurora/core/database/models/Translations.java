@@ -34,7 +34,6 @@ public class Translations extends Item {
   @ColumnInfo(name = DbColumnNames.TRANS_COLUMN_NAME)
   private String trans;
 
-  @Ignore
   public Translations() {
     super();
   }
@@ -51,7 +50,6 @@ public class Translations extends Item {
     this.trans = trans;
   }
 
-  @Ignore
   public Translations(Translations source) {
     new Translations(
         source.getName(),

@@ -59,13 +59,11 @@ public class HeroEquipment extends Item implements HeroChild {
     super();
   }
 
-  @Ignore
   public HeroEquipment(Map<ItemType, Map<Integer, String>> backupNames) {
     super();
     this.setBackupNames(backupNames);
   }
 
-  @Ignore
   public HeroEquipment(String name,
       String source,
       String idAsNameBackup) {
@@ -82,7 +80,6 @@ public class HeroEquipment extends Item implements HeroChild {
     this.setEquipmentId(weaponId);
   }
 
-  @Ignore
   public HeroEquipment(HeroEquipment source) {
     new HeroEquipment(
         source.getName(),
@@ -93,6 +90,7 @@ public class HeroEquipment extends Item implements HeroChild {
     );
   }
 
+  @Ignore
   HeroEquipment generateAll(DatabaseHolder databaseHolder) {
     setEquipment(databaseHolder.equipmentMap.get(getEquipmentId()));
     return this;

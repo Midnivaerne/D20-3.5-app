@@ -62,18 +62,15 @@ public class HeroSkills extends Item implements HeroChild {
   @Ignore
   private Map<PlayerCharacterAbilityScoresEnum, Integer> attributeModifiers = new HashMap<>();
 
-  @Ignore
   public HeroSkills() {
     super();
   }
 
-  @Ignore
   public HeroSkills(Map<ItemType, Map<Integer, String>> backupNames) {
     super();
     this.setBackupNames(backupNames);
   }
 
-  @Ignore
   public HeroSkills(
       String name,
       String source,
@@ -91,7 +88,6 @@ public class HeroSkills extends Item implements HeroChild {
     this.setHeroSkills(heroSkills);
   }
 
-  @Ignore
   public HeroSkills(HeroSkills source) {
     new HeroSkills(
         source.getName(),
@@ -101,6 +97,7 @@ public class HeroSkills extends Item implements HeroChild {
         source.getHeroSkills());
   }
 
+  @Ignore
   HeroSkills generateSkillListAsSkillAndRank(DatabaseHolder databaseHolder) {
     for (String skillRankPair : heroSkills.split(SPLITTER_COMA)) {
       skillListAsSkillAndRank
@@ -110,6 +107,7 @@ public class HeroSkills extends Item implements HeroChild {
     return this;
   }
 
+  @Ignore
   HeroSkills loadAllSettingSkills(DatabaseHolder databaseHolder, String raceSkills, String raceTemplateSkills) {
     Map<Skills, Integer> raceSkillsMap = new HashMap<>();
     if (raceSkills != null && !raceSkills.equals("")) {

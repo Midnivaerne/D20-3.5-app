@@ -24,9 +24,12 @@ import com.aurora.core.database.models.helpers.Item;
 @Data
 @SuperBuilder
 @Entity(tableName = ARMOUR, inheritSuperIndices = true,
-    indices = {@Index(value = {SOURCE_COLUMN_NAME}), @Index(value = {ARMOUR_PRICE_ID_COLUMN_NAME})},
+    indices = {@Index(value = {SOURCE_COLUMN_NAME}), @Index(value = {ARMOUR_TYPE_PARENT_ID_COLUMN_NAME}),
+        @Index(value = {ARMOUR_SUBTYPE_PARENT_ID_COLUMN_NAME}), @Index(value = {ARMOUR_PRICE_ID_COLUMN_NAME})},
     foreignKeys = {
         @ForeignKey(entity = Databases.class, parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
+        @ForeignKey(entity = ArmourType.class, parentColumns = ITEM_ID_COLUMN_NAME, childColumns = ARMOUR_TYPE_PARENT_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
+        @ForeignKey(entity = ArmourSubtype.class, parentColumns = ITEM_ID_COLUMN_NAME, childColumns = ARMOUR_SUBTYPE_PARENT_ID_COLUMN_NAME, onDelete = ForeignKey.CASCADE),
         @ForeignKey(entity = Price.class, parentColumns = ITEM_ID_COLUMN_NAME, childColumns = ARMOUR_PRICE_ID_COLUMN_NAME, onDelete = ForeignKey.SET_NULL)})
 public class Armour extends Item {
 
@@ -49,17 +52,14 @@ public class Armour extends Item {
   private Price price;
 
 
-  @Ignore
   public Armour() {
     super();
   }
 
-  @Ignore
   public Armour(String name,
       String source,
-      String idAsNameBackup,
-      Integer armourTypeId) {
-    new Armour(name, source, idAsNameBackup, armourTypeId, null, null);
+      String idAsNameBackup) {
+    new Armour(name, source, idAsNameBackup, null, null, null);
   }
 
   public Armour(String name,
@@ -74,7 +74,6 @@ public class Armour extends Item {
     this.priceId = priceId;
   }
 
-  @Ignore
   public Armour(Armour source) {
     new Armour(
         source.getName(),
@@ -85,6 +84,7 @@ public class Armour extends Item {
         source.getPriceId());
   }
 
+  @Ignore
   public Armour generateAll(DatabaseHolder databaseHolder) {
     setArmourType(databaseHolder.armourTypeMap.get(getArmourTypeId()));
     setArmourSubtype(databaseHolder.armourSubtypeMap.get(getArmourSubtypeId()));

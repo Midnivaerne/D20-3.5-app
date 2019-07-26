@@ -6,6 +6,9 @@ public class DbColumnNames {
   public static final String ITEM_NAME_COLUMN_NAME = "Name";
   public static final String SOURCE_COLUMN_NAME = "Source";
   public static final String ID_AS_NAME_BACKUP_COLUMN_NAME = "Id_As_Name_Backup";
+  public static final String HERO_RIGHT_HAND_HELD_ITEM_ID_COLUMN_NAME = "Right_Hand_Held_Item_Id";
+  public static final String HERO_LEFT_HAND_HELD_ITEM_ID_COLUMN_NAME = "Left_Hand_Held_Item_Id";
+  public static final String HERO_WORN_ITEM_ID_COLUMN_NAME = "Worn_Item_Id";
   public static final String HERO_PARENT_HERO_ID_COLUMN_NAME = "Parent_Hero_Id";
   public static final String HERO_PLAYER_COLUMN_NAME = "Player";
   public static final String HERO_CLASS_ID_LIST_COLUMN_NAME = "Class_And_Level";
@@ -25,9 +28,9 @@ public class DbColumnNames {
   public static final String TRANS_COLUMN_NAME = "Translation";
   public static final String PRICE_VALUE_COLUMN_NAME = "Price_Value";
   public static final String PRICE_CURRENCY_COLUMN_NAME = "Price_Currency";
-  public static final String WEAPON_PRICE_ID_COLUMN_NAME = "Weapon_Price";
-  public static final String ARMOUR_PRICE_ID_COLUMN_NAME = "Armour_Price";
-  public static final String EQUIPMENT_PRICE_ID_COLUMN_NAME = "Equipment_Price";
+  public static final String WEAPON_PRICE_ID_COLUMN_NAME = "Weapon_Price_Id";
+  public static final String ARMOUR_PRICE_ID_COLUMN_NAME = "Armour_Price_Id";
+  public static final String EQUIPMENT_PRICE_ID_COLUMN_NAME = "Equipment_Price_Id";
   public static final String ARMOUR_TYPE_PARENT_ID_COLUMN_NAME = "Armour_Type_Parent_Id";
   public static final String ARMOUR_SUBTYPE_PARENT_ID_COLUMN_NAME = "Armour_Subtype_Parent_Id";
   public static final String ARMOUR_TYPE_IS_SHIELD_COLUMN_NAME = "Armour_Type_Is_Shield";

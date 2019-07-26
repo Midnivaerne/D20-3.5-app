@@ -17,7 +17,6 @@ import com.aurora.core.database.models.helpers.Rules;
 @Entity(tableName = BASE_QUALITIES, inheritSuperIndices = true)
 public class BaseQualities extends Rules {
 
-  @Ignore
   public BaseQualities() {
     super();
   }
@@ -26,7 +25,6 @@ public class BaseQualities extends Rules {
     super(name);
   }
 
-  @Ignore
   public BaseQualities(BaseQualities source) {
     new BaseQualities(
         source.getName());

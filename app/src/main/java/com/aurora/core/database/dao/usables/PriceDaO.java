@@ -35,6 +35,7 @@ public abstract class PriceDaO extends BaseDaO<Price> {
   @Query("SELECT * FROM Price WHERE Item_ID IN (:ids)")
   public abstract List<Price> getObjectsWithIdsAsObject(List<Integer> ids);
 
+  @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
   @Query("SELECT * FROM Price WHERE Item_ID IN (:ids)")
   public abstract List<Item> getObjectsWithIdsAsItem(List<Integer> ids);
 

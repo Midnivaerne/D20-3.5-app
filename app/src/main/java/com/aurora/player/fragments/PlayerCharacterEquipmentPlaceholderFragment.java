@@ -7,10 +7,13 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 import lombok.NonNull;
 
 import com.aurora.core.R;
+import com.aurora.core.database.models.userdata.HeroArmour;
 import com.aurora.player.adapters.PlayerCharacterEquipmentContainersContainerAdapter;
+import com.aurora.player.adapters.PlayerCharacterEquipmentShieldsShieldAdapter;
 import com.aurora.player.adapters.PlayerCharacterEquipmentWeaponsWeaponAdapter;
 import com.aurora.player.playercharacterutils.PlayerCharacterArmourEnum;
 import com.aurora.player.playercharacterutils.PlayerCharacterArmourSpecificEnum;
@@ -55,7 +58,7 @@ public class PlayerCharacterEquipmentPlaceholderFragment extends Fragment {
   private void loadHeroDataFromVMtoView(View rootView) {
     loadWeapons(rootView.findViewById(R.id.fragment_player_character_equipment_weapons));
     loadArmour(rootView.findViewById(R.id.fragment_player_character_equipment_armour));
-    loadShield(rootView.findViewById(R.id.fragment_player_character_equipment_shield));
+    loadShield(rootView.findViewById(R.id.fragment_player_character_equipment_shields));
     loadWorn(rootView.findViewById(R.id.fragment_player_character_equipment_worn));
     loadContainers(rootView.findViewById(R.id.fragment_player_character_equipment_containers));
   }
@@ -69,31 +72,29 @@ public class PlayerCharacterEquipmentPlaceholderFragment extends Fragment {
   }
 
   private void loadArmour(@NonNull View armoursRecyclerView) {
-    if (!playerCharacterVM.getHero().getHeroArmourMap().isEmpty()) {
+    if (playerCharacterVM.getHero().getWornItemId() != null) {
+      armoursRecyclerView.setVisibility(View.VISIBLE);
+      Integer wornArmourId = playerCharacterVM.getHero().getWornItemId();
+      HeroArmour wornArmour = playerCharacterVM.getHero().getHeroArmourFromIdMap().get(wornArmourId);
       for (PlayerCharacterArmourEnum armourEnum : PlayerCharacterArmourEnum.values()) {
-        if (playerCharacterVM.getHero().getHeroArmourMap().get(armourEnum) != null) {
+        if (wornArmour.getArmourValues().get(armourEnum) != null) {
           for (PlayerCharacterArmourSpecificEnum armourSpecific : PlayerCharacterArmourSpecificEnum.values()) {
             ((TextView) armoursRecyclerView.findViewById(armourEnum.getFieldId())
                 .findViewById(armourSpecific.getSpecificFieldId(armourEnum)))
-                .setText(armourSpecific.getSpecificValue(armourEnum, playerCharacterVM.getHero().getHeroArmourMap().get(armourEnum)));
+                .setText(armourSpecific.getSpecificValue(armourEnum, wornArmour));
           }
         }
       }
+    } else {
+      armoursRecyclerView.setVisibility(View.GONE);
     }
   }
 
-  private void loadShield(@NonNull View shieldsRecyclerView) {
-    if (!playerCharacterVM.getHero().getHeroArmourMap().isEmpty()) {
-      for (PlayerCharacterArmourEnum armourEnum : PlayerCharacterArmourEnum.values()) {
-        if (playerCharacterVM.getHero().getHeroArmourMap().get(armourEnum) != null) {
-          for (PlayerCharacterArmourSpecificEnum armourSpecific : PlayerCharacterArmourSpecificEnum.values()) {
-            ((TextView) shieldsRecyclerView.findViewById(armourEnum.getFieldId())
-                .findViewById(armourSpecific.getSpecificFieldId(armourEnum)))
-                .setText(armourSpecific.getSpecificValue(armourEnum, playerCharacterVM.getHero().getHeroArmourMap().get(armourEnum)));
-          }
-        }
-      }
-    }
+  private void loadShield(@NonNull View view) {
+    RecyclerView shieldsListView = (RecyclerView) view.findViewById(R.id.fragment_player_character_equipment_shields_list);
+    PlayerCharacterEquipmentShieldsShieldAdapter playerCharacterEquipmentShieldsShieldAdapter = new PlayerCharacterEquipmentShieldsShieldAdapter(
+        this.getContext(), shieldsListView, playerCharacterVM.getHero());
+    shieldsListView.setAdapter(playerCharacterEquipmentShieldsShieldAdapter);
   }
 
   private void loadWorn(@NonNull View wornRecyclerView) {

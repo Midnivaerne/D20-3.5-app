@@ -31,12 +31,10 @@ public class WeaponSubtype extends Item {
   @Ignore
   private WeaponSubtype usedAmmoType;
 
-  @Ignore
   public WeaponSubtype() {
     super();
   }
 
-  @Ignore
   public WeaponSubtype(String name,
       String source,
       String idAsNameBackup) {
@@ -51,7 +49,6 @@ public class WeaponSubtype extends Item {
     this.setUsedAmmoTypeId(usedAmmoTypeId);
   }
 
-  @Ignore
   public WeaponSubtype(WeaponSubtype source) {
     new WeaponSubtype(
         source.getName(),

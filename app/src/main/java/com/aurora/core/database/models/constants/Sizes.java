@@ -17,7 +17,6 @@ import com.aurora.core.database.models.helpers.Rules;
 @Entity(tableName = SIZES, inheritSuperIndices = true)
 public class Sizes extends Rules {
 
-  @Ignore
   public Sizes() {
     super();
   }
@@ -26,7 +25,6 @@ public class Sizes extends Rules {
     super(name);
   }
 
-  @Ignore
   public Sizes(Sizes source) {
     new Sizes(
         source.getName());

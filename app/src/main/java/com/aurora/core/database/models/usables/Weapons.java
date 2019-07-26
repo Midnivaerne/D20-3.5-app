@@ -52,12 +52,10 @@ public class Weapons extends Item {
   @Ignore
   private Price price;
 
-  @Ignore
   public Weapons() {
     super();
   }
 
-  @Ignore
   public Weapons(String name,
       String source,
       String idAsNameBackup) {
@@ -76,7 +74,6 @@ public class Weapons extends Item {
     this.setPriceId(priceId);
   }
 
-  @Ignore
   public Weapons(Weapons source) {
     new Weapons(
         source.getName(),

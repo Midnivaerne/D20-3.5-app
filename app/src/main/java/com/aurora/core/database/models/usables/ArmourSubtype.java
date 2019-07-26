@@ -52,12 +52,10 @@ public class ArmourSubtype extends Item {
   @ColumnInfo(name = ARMOUR_SPECIAL_PROPERTIES_COLUMN_NAME)
   private String armourSpecialProperties;
 
-  @Ignore
   public ArmourSubtype() {
     super();
   }
 
-  @Ignore
   public ArmourSubtype(String name,
       String source,
       String idAsNameBackup) {
@@ -84,7 +82,6 @@ public class ArmourSubtype extends Item {
     this.setArmourSpecialProperties(armourSpecialProperties);
   }
 
-  @Ignore
   public ArmourSubtype(ArmourSubtype source) {
     new ArmourSubtype(
         source.getName(),

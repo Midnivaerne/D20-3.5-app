@@ -24,7 +24,6 @@ import com.aurora.core.database.models.helpers.Item;
         parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
 public class Spells extends Item {
 
-  @Ignore
   public Spells() {
     super();
   }
@@ -35,7 +34,6 @@ public class Spells extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  @Ignore
   public Spells(Spells source) {
     new Spells(
         source.getName(),

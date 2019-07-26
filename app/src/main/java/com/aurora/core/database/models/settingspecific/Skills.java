@@ -55,18 +55,15 @@ public class Skills extends Item {
   @ColumnInfo(name = SKILL_OTHER_TO_IMPROVE_COLUMN_NAME)
   private String skillOtherToImprove;
 
-  @Ignore
   public Skills() {
     super();
   }
 
-  @Ignore
   public Skills(Map<ItemType, Map<Integer, String>> backupNames) {
     super();
     this.setBackupNames(backupNames);
   }
 
-  @Ignore
   public Skills(String name,
       String source,
       String idAsNameBackup) {
@@ -93,7 +90,6 @@ public class Skills extends Item {
     this.skillOtherToImprove = skillOtherToImprove;
   }
 
-  @Ignore
   public Skills(Skills source) {
     new Skills(
         source.getName(),

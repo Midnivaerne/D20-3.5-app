@@ -35,6 +35,7 @@ public abstract class WeaponTypeDaO extends BaseDaO<WeaponType> {
   @Query("SELECT * FROM WeaponType WHERE Item_ID IN (:ids)")
   public abstract List<WeaponType> getObjectsWithIdsAsObject(List<Integer> ids);
 
+  @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
   @Query("SELECT * FROM WeaponType WHERE Item_ID IN (:ids)")
   public abstract List<Item> getObjectsWithIdsAsItem(List<Integer> ids);
 

@@ -20,7 +20,6 @@ import com.aurora.core.database.models.helpers.Item;
     indices = {@Index(value = {SOURCE_COLUMN_NAME}, unique = true)})
 public class Databases extends Item {
 
-  @Ignore
   public Databases() {
     super();
   }
@@ -31,7 +30,6 @@ public class Databases extends Item {
     super(name, source, idAsNameBackup);
   }
 
-  @Ignore
   public Databases(Databases source) {
     //return Databases.builder().name(getName()).source(getSource()).idAsNameBackup(getIdAsNameBackup()).build();
     // todo wait for lombok plugin update that will support @SuperBuilder

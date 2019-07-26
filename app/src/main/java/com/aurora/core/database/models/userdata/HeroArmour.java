@@ -65,18 +65,15 @@ public class HeroArmour extends Item implements HeroChild {
   @Ignore
   private Map<PlayerCharacterArmourEnum, String> armourValues = new HashMap<>();
 
-  @Ignore
   public HeroArmour() {
     super();
   }
 
-  @Ignore
   public HeroArmour(Map<ItemType, Map<Integer, String>> backupNames) {
     super();
     this.setBackupNames(backupNames);
   }
 
-  @Ignore
   public HeroArmour(String name,
       String source,
       String idAsNameBackup) {
@@ -97,7 +94,6 @@ public class HeroArmour extends Item implements HeroChild {
     this.setArmourMaterialId(armourMaterialId);
   }
 
-  @Ignore
   public HeroArmour(HeroArmour source) {
     new HeroArmour(
         source.getName(),
@@ -110,8 +106,10 @@ public class HeroArmour extends Item implements HeroChild {
     );
   }
 
+  @Ignore
   HeroArmour generateAll(DatabaseHolder databaseHolder) {
     setArmour(databaseHolder.armourMap.get(getArmourId()));
+    getArmour().generateAll(databaseHolder);
     if (getArmourMaterialId() != null) {
       setArmourMaterial(databaseHolder.materialTypesMap.get(getArmourMaterialId()));
     }

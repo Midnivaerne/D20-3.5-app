@@ -32,12 +32,10 @@ public class WeaponType extends Item {
   @ColumnInfo(name = WEAPON_TYPE_IS_AMMO_COLUMN_NAME)
   private Boolean isAmmo;
 
-  @Ignore
   public WeaponType() {
     super();
   }
 
-  @Ignore
   public WeaponType(String name,
       String source,
       String idAsNameBackup) {
@@ -54,7 +52,6 @@ public class WeaponType extends Item {
     this.setIsAmmo(isAmmo);
   }
 
-  @Ignore
   public WeaponType(WeaponType source) {
     new WeaponType(
         source.getName(),

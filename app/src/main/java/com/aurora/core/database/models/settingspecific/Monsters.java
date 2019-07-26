@@ -25,7 +25,6 @@ import com.aurora.core.database.models.helpers.ValuesConverter;
         parentColumns = SOURCE_COLUMN_NAME, childColumns = SOURCE_COLUMN_NAME, onDelete = ForeignKey.CASCADE))
 public class Monsters extends Item implements ValuesConverter {
 
-  @Ignore
   public Monsters() {
     super();
   }
@@ -36,7 +35,6 @@ public class Monsters extends Item implements ValuesConverter {
     super(name, source, idAsNameBackup);
   }
 
-  @Ignore
   public Monsters(Monsters source) {
     new Monsters(
         source.getName(),
