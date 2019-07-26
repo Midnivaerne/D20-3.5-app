@@ -60,9 +60,7 @@ public abstract class HeroPlayerDaO extends BaseDaO<HeroPlayer> {
   public Map<Integer, HeroPlayer> getHeroPlayerObjectsWithHeroAndItemFields() {
     Map<Integer, HeroPlayer> result = new HashMap<>();
     ArrayList<HeroPlayer> resultHP = new ArrayList<>(getAllObjectsAsObject());
-    System.out.println("1>>" + resultHP);//todo delete
     ArrayList<Hero> resultH = new ArrayList<>(getAllObjectsAsHero());
-    System.out.println("2>>" + resultH);//todo delete
     ArrayList<Item> resultItem = new ArrayList<>(getAllObjectsAsItem());
     for (int i = 0; i < resultHP.size(); i++) {
       ((Item) resultHP.get(i)).setItemID(resultItem.get(i).getItemID());
@@ -73,7 +71,6 @@ public abstract class HeroPlayerDaO extends BaseDaO<HeroPlayer> {
       ((Hero) resultHP.get(i)).setLeftHandHeldItemId(resultH.get(i).getLeftHandHeldItemId());
       ((Hero) resultHP.get(i)).setWornItemId(resultH.get(i).getWornItemId());
       result.put(resultItem.get(i).getItemID(), resultHP.get(i));
-      System.out.println("3>>" + resultHP.get(i));//todo delete
     }
     return result;
   }

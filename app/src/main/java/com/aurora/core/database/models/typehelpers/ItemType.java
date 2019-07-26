@@ -945,11 +945,7 @@ public enum ItemType implements CoreTypeHelper<ItemType, Item> {
 
     @Override
     public void fromHolderToDatabase(DatabaseHolder databaseHolder) {
-      //System.out.println("H>D____________" + databaseHolder.heroesPlayerList);//todo delete
-      //System.out.println("H>D   wornid____________" + databaseHolder.heroesPlayerList.get(0).getWornItemId());//todo delete
-
       List<Long> baseHeroIds = databaseHolder.heroPlayerDaO().insertAllWithHeroUpdate(databaseHolder.heroesPlayerList);
-      //System.out.println("H>D____________fDB>>" + databaseHolder.heroPlayerDaO().getHeroPlayerObjectsWithHeroAndItemFields().get(1).getWornItemId());//todo delete
       List<HeroDescription> descriptionsSet = new ArrayList<>();
       List<HeroValues> statisticsSet = new ArrayList<>();
       List<HeroSkills> skillsSet = new ArrayList<>();
