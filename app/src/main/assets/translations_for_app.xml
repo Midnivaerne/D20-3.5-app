@@ -80,6 +80,14 @@
         </Translations_Item>
 
         <Translations_Item>
+            <Name>WB_button</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>World Building Tools</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
             <Name>DM_button</Name>
             <Source>translations_for_app_source</Source>
             <Category>translations_for_app</Category>
@@ -93,6 +101,14 @@
             <Category>translations_for_app</Category>
             <Language>en</Language>
             <Translation>Player Tools</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_wb_</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>World Building Tools</Translation>
         </Translations_Item>
 
         <Translations_Item>

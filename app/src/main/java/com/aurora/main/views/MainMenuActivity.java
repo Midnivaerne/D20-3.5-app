@@ -12,6 +12,7 @@ import com.aurora.core.helper.BindingActivity;
 import com.aurora.main.viewmodels.MainMenuVM;
 import com.aurora.master.views.DmActivity;
 import com.aurora.player.views.PlayerCharactersListActivity;
+import com.aurora.worldbuilder.views.WbActivity;
 
 public class MainMenuActivity extends BindingActivity<ActivityMainMenuBinding, MainMenuVM> {
 
@@ -26,6 +27,7 @@ public class MainMenuActivity extends BindingActivity<ActivityMainMenuBinding, M
   @Override
   protected void setTranslatedTexts() {
     getSupportActionBar().setTitle(translate("app_name"));
+    ((Button) findViewById(R.id.WB_button)).setText(translate("WB_button"));
     ((Button) findViewById(R.id.DM_button)).setText(translate("DM_button"));
     ((Button) findViewById(R.id.PC_button)).setText(translate("PC_button"));
   }
@@ -60,6 +62,8 @@ public class MainMenuActivity extends BindingActivity<ActivityMainMenuBinding, M
         return PlayerCharactersListActivity.class;
       case R.id.DM_button:
         return DmActivity.class;
+      case R.id.WB_button:
+        return WbActivity.class;
       case R.id.action_rules:
         return RulesActivity.class;
       case R.id.action_content:

@@ -5,11 +5,11 @@
 
   <data>
 
-    <import type="android.view.View"/>
+    <import type="android.view.View" />
 
     <variable
       name="viewModel"
-      type="com.aurora.main.viewmodels.MainMenuVM"/>
+      type="com.aurora.main.viewmodels.MainMenuVM" />
   </data>
 
   <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
-        app:popupTheme="@style/AppTheme.PopupOverlay"/>
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -40,30 +40,40 @@
       tools:showIn="@layout/activity_main_menu">
 
       <Button
-        android:id="@+id/DM_button"
+        android:id="@+id/WB_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
         android:layout_marginStart="60dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="60dp"
         android:onClick="@{(v) -> viewModel.buttonOnClick(v)}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
+      <Button
+        android:id="@+id/DM_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:onClick="@{(v) -> viewModel.buttonOnClick(v)}"
+        app:layout_constraintBottom_toTopOf="@+id/PC_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/WB_button" />
       <Button
         android:id="@+id/PC_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="120dp"
         android:layout_marginStart="60dp"
         android:layout_marginEnd="60dp"
+        android:layout_marginBottom="120dp"
         android:onClick="@{(v) -> viewModel.buttonOnClick(v)}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DM_button"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
