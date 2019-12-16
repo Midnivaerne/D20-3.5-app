@@ -2,7 +2,7 @@ package com.aurora.core.activitiesTests;
 
 import org.junit.Test;
 
-public class d2035AppViewTest {
+public class OverworldAppViewTest {
 
     //@Rule
     //@Before    public void setUp() throws Exception {    }

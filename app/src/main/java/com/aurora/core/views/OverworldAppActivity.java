@@ -1,16 +1,14 @@
 package com.aurora.core.views;
 
-import lombok.Getter;
-
-import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,13 +17,13 @@ import java.util.List;
 import com.aurora.core.BR;
 import com.aurora.core.R;
 import com.aurora.core.database.CustomCallback;
-import com.aurora.core.databinding.ActivityD2035appBinding;
+import com.aurora.core.databinding.ActivityOverworldappBinding;
 import com.aurora.core.helper.BindingActivity;
-import com.aurora.core.viewmodels.D2035appVM;
+import com.aurora.core.viewmodels.OverworldAppVM;
 import com.aurora.main.views.MainMenuActivity;
 
 
-public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D2035appVM> implements CustomCallback {
+public class OverworldAppActivity extends BindingActivity<ActivityOverworldappBinding, OverworldAppVM> implements CustomCallback {
 
   private static final int REQUEST_CODE_PERMISSION_ALL = 1;
   @Getter
@@ -33,8 +31,8 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
 
   @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
   @Override
-  public D2035appVM onCreate() {
-    return new D2035appVM(this);
+  public OverworldAppVM onCreate() {
+    return new OverworldAppVM(this);
   }
 
   @Override
@@ -59,7 +57,7 @@ public class D2035appActivity extends BindingActivity<ActivityD2035appBinding, D
 
   @Override
   public int getLayoutId() {
-    return R.layout.activity_d2035app;
+    return R.layout.activity_overworldapp;
   }
 
   @Override

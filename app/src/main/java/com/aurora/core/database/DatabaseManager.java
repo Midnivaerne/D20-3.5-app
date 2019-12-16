@@ -35,7 +35,7 @@ public class DatabaseManager {
   private static final String[] FILENAMES = {"translations_for_app.xml", "baseRules.xml", "test.xml"}; //todo refactor
   private static final int MAX_PROGRESS = 100;
   private static final int NUMBER_OF_PROGRESS_INCREASES = 10;
-  private static String externalPathSeparator = "/Android/data/com.aurora.d20_3.5_app/";
+  private static String externalPathSeparator = "/Android/data/com.aurora.overworld_app/";
   public static final String path = getPublicExternalStorageBaseDir() + externalPathSeparator + "Data/";
   private static ProgressBar progressBar;
 

@@ -20,15 +20,15 @@
             <Source>translations_for_app_source</Source>
             <Category>translations_for_app</Category>
             <Language>en</Language>
-            <Translation>D20 3.5 app</Translation>
+            <Translation>Overworld app</Translation>
         </Translations_Item>
 
         <Translations_Item>
-            <Name>title_activity_d2035app</Name>
+            <Name>title_activity_overworldapp</Name>
             <Source>translations_for_app_source</Source>
             <Category>translations_for_app</Category>
             <Language>en</Language>
-            <Translation>D2035appActivity</Translation>
+            <Translation>OverworldappActivity</Translation>
         </Translations_Item>
 
         <Translations_Item>

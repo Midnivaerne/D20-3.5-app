@@ -18,9 +18,9 @@ import java.util.concurrent.ExecutionException;
 import com.aurora.core.database.CustomCallback;
 import com.aurora.core.database.DatabaseManager;
 import com.aurora.core.helper.ActivityViewModel;
-import com.aurora.core.views.D2035appActivity;
+import com.aurora.core.views.OverworldAppActivity;
 
-public class D2035appVM extends ActivityViewModel<D2035appActivity> {
+public class OverworldAppVM extends ActivityViewModel<OverworldAppActivity> {
 
   private static final int MIN_LEVEL_DRAWABLE = 1;
   private static final int MAX_LEVEL_DRAWABLE = 6;
@@ -30,7 +30,7 @@ public class D2035appVM extends ActivityViewModel<D2035appActivity> {
   private int appDimensionWidth;
   private int appDimensionHeight;
 
-  public D2035appVM(D2035appActivity activity) {
+  public OverworldAppVM(OverworldAppActivity activity) {
     super(activity);
     setDimensions();
   }
@@ -72,28 +72,28 @@ public class D2035appVM extends ActivityViewModel<D2035appActivity> {
 
   private static class InitializeDbAsync extends AsyncTask<Void, Void, Void> {
 
-    private final D2035appVM d2035appVM;
+    private final OverworldAppVM overworldAppVM;
     private CustomCallback customCallback;
 
-    private InitializeDbAsync(D2035appVM d2035appVM, CustomCallback customCallback) {
-      this.d2035appVM = d2035appVM;
+    private InitializeDbAsync(OverworldAppVM overworldAppVM, CustomCallback customCallback) {
+      this.overworldAppVM = overworldAppVM;
       this.customCallback = customCallback;
     }
 
     @Override
     protected void onPreExecute() {
-      DatabaseManager.startProgressBar(d2035appVM.getActivity());
+      DatabaseManager.startProgressBar(overworldAppVM.getActivity());
     }
 
     @Override
     protected Void doInBackground(final Void... params) {
-      DatabaseManager.initialDatabasesResolver(d2035appVM.getActivity());
+      DatabaseManager.initialDatabasesResolver(overworldAppVM.getActivity());
       return null;
     }
 
     @Override
     protected void onPostExecute(Void par) {
-      DatabaseManager.closeProgressBar(d2035appVM.getActivity());
+      DatabaseManager.closeProgressBar(overworldAppVM.getActivity());
       try {
         Thread.sleep(1);
       } catch (InterruptedException e) {

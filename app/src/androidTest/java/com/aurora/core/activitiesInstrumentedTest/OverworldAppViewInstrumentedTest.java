@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import com.aurora.main.views.MainMenuActivity;
 
-public class d2035AppViewInstrumentedTest {
+public class OverworldAppViewInstrumentedTest {
 
     @Rule
     public ActivityTestRule<MainMenuActivity> mainActivityActivityTestRule = new ActivityTestRule<>(MainMenuActivity.class);
@@ -33,7 +33,7 @@ public class d2035AppViewInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.aurora.d20_35_app", appContext.getPackageName());
+        assertEquals("com.aurora.overworld_app", appContext.getPackageName());
     }
 
     @Test
