@@ -3,12 +3,17 @@ package com.aurora.core.database.dao.userdata;
 import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.RoomWarnings;
+import androidx.room.Transaction;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.aurora.core.database.models.helpers.Item;
+import com.aurora.core.database.models.userdata.Hero;
+import com.aurora.core.database.models.userdata.HeroPlayer;
 import com.aurora.core.helper.BaseDaO;
-import com.aurora.core.models.helpers.Item;
-import com.aurora.core.models.userdata.HeroPlayer;
 
 @Dao
 public abstract class HeroPlayerDaO extends BaseDaO<HeroPlayer> {
@@ -50,4 +55,40 @@ public abstract class HeroPlayerDaO extends BaseDaO<HeroPlayer> {
 
   @Query("DELETE FROM HeroPlayer")
   public abstract void deleteAll();
+
+  @Transaction
+  public Map<Integer, HeroPlayer> getHeroPlayerObjectsWithHeroAndItemFields() {
+    Map<Integer, HeroPlayer> result = new HashMap<>();
+    ArrayList<HeroPlayer> resultHP = new ArrayList<>(getAllObjectsAsObject());
+    ArrayList<Hero> resultH = new ArrayList<>(getAllObjectsAsHero());
+    ArrayList<Item> resultItem = new ArrayList<>(getAllObjectsAsItem());
+    for (int i = 0; i < resultHP.size(); i++) {
+      ((Item) resultHP.get(i)).setItemID(resultItem.get(i).getItemID());
+      ((Item) resultHP.get(i)).setName(resultItem.get(i).getName());
+      ((Item) resultHP.get(i)).setSource(resultItem.get(i).getSource());
+      ((Item) resultHP.get(i)).setIdAsNameBackup(resultItem.get(i).getIdAsNameBackup());
+      ((Hero) resultHP.get(i)).setRightHandHeldItemId(resultH.get(i).getRightHandHeldItemId());
+      ((Hero) resultHP.get(i)).setLeftHandHeldItemId(resultH.get(i).getLeftHandHeldItemId());
+      ((Hero) resultHP.get(i)).setWornItemId(resultH.get(i).getWornItemId());
+      result.put(resultItem.get(i).getItemID(), resultHP.get(i));
+    }
+    return result;
+  }
+
+  @Query("SELECT Item_ID,Name,Source,Id_As_Name_Backup,Right_Hand_Held_Item_Id,Left_Hand_Held_Item_Id,Worn_Item_Id FROM HeroPlayer")
+  abstract List<Hero> getAllObjectsAsHero();
+
+  @Transaction
+  public List<Long> insertAllWithHeroUpdate(List<HeroPlayer> heroesPlayerList) {
+    List<Long> insertIds = insertAll(heroesPlayerList);
+    for (int i = 0; i < insertIds.size(); i++) {
+      HeroPlayer heroPlayer = heroesPlayerList.get(i);
+      updateHeroFields(Math.toIntExact(insertIds.get(i)), heroPlayer.getRightHandHeldItemId(), heroPlayer.getLeftHandHeldItemId(),
+          heroPlayer.getWornItemId());
+    }
+    return insertIds;
+  }
+
+  @Query("UPDATE HeroPlayer SET Right_Hand_Held_Item_Id=:rightHandHeldItemId,Left_Hand_Held_Item_Id=:leftHandHeldItemId,Worn_Item_Id=:wornItemId WHERE Item_ID=:HeroId")
+  abstract void updateHeroFields(Integer HeroId, Integer rightHandHeldItemId, Integer leftHandHeldItemId, Integer wornItemId);
 }

@@ -7,9 +7,9 @@ import androidx.room.RoomWarnings;
 import java.util.List;
 
 import com.aurora.core.helper.BaseDaO;
-import com.aurora.core.models.constants.Sizes;
-import com.aurora.core.models.helpers.Item;
-import com.aurora.core.models.helpers.Rules;
+import com.aurora.core.database.models.constants.Sizes;
+import com.aurora.core.database.models.helpers.Item;
+import com.aurora.core.database.models.helpers.Rules;
 
 @Dao
 public abstract class SizesDaO extends BaseDaO<Sizes> {

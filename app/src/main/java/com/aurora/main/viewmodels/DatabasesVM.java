@@ -20,7 +20,7 @@ import java.util.List;
 
 import com.aurora.core.R;
 import com.aurora.core.helper.ActivityViewModel;
-import com.aurora.core.models.Databases;
+import com.aurora.core.database.models.Databases;
 import com.aurora.main.fragments.DatabasesListDetailFragment;
 import com.aurora.main.views.DatabasesActivity;
 import com.aurora.main.views.DatabasesListItemDetailActivity;
@@ -86,8 +86,7 @@ public class DatabasesVM extends ActivityViewModel<DatabasesActivity> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-      View view = LayoutInflater.from(parent.getContext())
-          .inflate(R.layout.activity_databases_list_item, parent, false);
+      View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_databases_list_item, parent, false);
       return new ViewHolder(view);
     }
 

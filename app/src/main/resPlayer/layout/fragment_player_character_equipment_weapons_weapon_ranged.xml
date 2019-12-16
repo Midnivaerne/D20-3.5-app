@@ -1,33 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment_player_character_equipment_weapons_weapon_ranged"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/fragment_player_character_equipment_weapons_weapon_ranged"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:orientation="horizontal">
+
+  <RadioButton
+    android:id="@+id/fragment_player_character_equipment_weapons_weapon_ranged_name_equipped_button"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:layout_marginEnd="@dimen/activity_horizontal_margin"/>
+
+  <TextView
+    android:id="@+id/fragment_player_character_equipment_weapons_weapon_ranged_text_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+    android:textSize="@dimen/text_small"/>
 
-    <RadioButton
-        android:id="@+id/fragment_player_character_equipment_weapons_weapon_ranged_name_equipped_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_weight="1" />
+  <TextView
+    android:id="@+id/fragment_player_character_equipment_weapons_weapon_ranged_text_properties"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+    android:textSize="@dimen/text_small"/>
 
-    <TextView
-        android:id="@+id/fragment_player_character_equipment_weapons_weapon_ranged_properties"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:textSize="@dimen/text_small" />
+  <TextView
+    android:id="@+id/fragment_player_character_equipment_weapons_weapon_texts_quantity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/activity_horizontal_margin"
+    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+    android:textSize="@dimen/text_small"/>
 
-    <ImageButton
-        android:id="@+id/fragment_player_character_equipment_weapons_weapon_equipped_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:contentDescription="TODO"
-        app:srcCompat="@android:drawable/ic_menu_help" />
+  <ImageButton
+    android:id="@+id/fragment_player_character_equipment_weapons_weapon_equipped_details"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:contentDescription="TODO"
+    app:srcCompat="@android:drawable/ic_menu_help"/>
 
 </LinearLayout>

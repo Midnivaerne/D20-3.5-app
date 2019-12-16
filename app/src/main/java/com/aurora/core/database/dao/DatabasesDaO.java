@@ -7,8 +7,8 @@ import androidx.room.RoomWarnings;
 import java.util.List;
 
 import com.aurora.core.helper.BaseDaO;
-import com.aurora.core.models.Databases;
-import com.aurora.core.models.helpers.Item;
+import com.aurora.core.database.models.Databases;
+import com.aurora.core.database.models.helpers.Item;
 
 @Dao
 public abstract class DatabasesDaO extends BaseDaO<Databases> {

@@ -3,7 +3,7 @@ package com.aurora.core.database;
 import lombok.Getter;
 import lombok.Setter;
 
-import com.aurora.core.models.helpers.Rules;
+import com.aurora.core.database.models.helpers.Rules;
 
 public enum DbRulesColumns implements DbColumnNamesMethods<DbRulesColumns, Rules> {
 

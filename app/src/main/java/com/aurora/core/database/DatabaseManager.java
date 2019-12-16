@@ -2,8 +2,6 @@ package com.aurora.core.database;
 
 import static com.aurora.core.utils.ExternalStorageHandler.getPublicExternalStorageBaseDir;
 
-import lombok.NonNull;
-
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -11,10 +9,7 @@ import android.util.Log;
 import android.util.Xml;
 import android.view.View;
 import android.widget.ProgressBar;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
+import lombok.NonNull;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,20 +17,25 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import com.aurora.core.helper.BindingActivity;
-import com.aurora.core.models.typehelpers.CoreTypeHelper;
-import com.aurora.core.models.typehelpers.ItemType;
-import com.aurora.core.models.userdata.HeroPlayer;
-import com.aurora.core.utils.CommonUtils;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlSerializer;
+
+import com.aurora.core.helper.BindingActivity;
+import com.aurora.core.database.models.typehelpers.CoreTypeHelper;
+import com.aurora.core.database.models.typehelpers.ItemType;
+import com.aurora.core.database.models.userdata.HeroPlayer;
+import com.aurora.core.utils.CommonUtils;
 
 public class DatabaseManager {
 
   private static final String[] FILENAMES = {"translations_for_app.xml", "baseRules.xml", "test.xml"}; //todo refactor
   private static final int MAX_PROGRESS = 100;
   private static final int NUMBER_OF_PROGRESS_INCREASES = 10;
-  private static String externalPathSeparator = "/Android/data/com.aurora.d20_3.5_app/";
+  private static String externalPathSeparator = "/Android/data/com.aurora.overworld_app/";
   public static final String path = getPublicExternalStorageBaseDir() + externalPathSeparator + "Data/";
   private static ProgressBar progressBar;
 

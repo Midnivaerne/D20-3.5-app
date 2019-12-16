@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.aurora.core.models.Translations;
+import com.aurora.core.database.models.Translations;
 
 public class TranslationsHolder {
 

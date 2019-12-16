@@ -1,6 +1,6 @@
 package com.aurora.core.database;
 
-import com.aurora.core.models.helpers.CoreHelper;
+import com.aurora.core.database.models.helpers.CoreHelper;
 
 public interface DbColumnNamesMethods<E extends Enum<E>, C extends CoreHelper> {
 

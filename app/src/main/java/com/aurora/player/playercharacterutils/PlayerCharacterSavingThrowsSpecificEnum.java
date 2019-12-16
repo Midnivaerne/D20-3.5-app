@@ -3,9 +3,10 @@ package com.aurora.player.playercharacterutils;
 import static com.aurora.core.database.TranslationsHolder.translate;
 
 import com.aurora.core.R;
-import com.aurora.core.models.userdata.HeroValues;
+import com.aurora.core.database.models.userdata.HeroValues;
 
-public enum PlayerCharacterSavingThrowsSpecificEnum implements PlayerCharacterSpecificEnumBase<PlayerCharacterSavingThrowsEnum> {
+public enum PlayerCharacterSavingThrowsSpecificEnum implements
+    PlayerCharacterSpecificEnumBase<PlayerCharacterSavingThrowsEnum, HeroValues> {
   NAME {
     @Override
     public int getSpecificFieldId(PlayerCharacterSavingThrowsEnum savingThrow) {
@@ -13,8 +14,7 @@ public enum PlayerCharacterSavingThrowsSpecificEnum implements PlayerCharacterSp
     }
 
     @Override
-    public String getSpecificValue(PlayerCharacterSavingThrowsEnum savingThrow,
-        HeroValues heroValues) {
+    public String getSpecificValue(PlayerCharacterSavingThrowsEnum savingThrow, HeroValues heroValues) {
       return translate(savingThrow.toString());
     }
   },
@@ -25,8 +25,7 @@ public enum PlayerCharacterSavingThrowsSpecificEnum implements PlayerCharacterSp
     }
 
     @Override
-    public String getSpecificValue(PlayerCharacterSavingThrowsEnum savingThrow,
-        HeroValues heroValues) {
+    public String getSpecificValue(PlayerCharacterSavingThrowsEnum savingThrow, HeroValues heroValues) {
       return String.valueOf(heroValues.getSavingThrowsValues().get(savingThrow));
     }
   }

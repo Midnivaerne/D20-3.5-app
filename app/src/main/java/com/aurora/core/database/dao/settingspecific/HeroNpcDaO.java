@@ -7,8 +7,8 @@ import androidx.room.RoomWarnings;
 import java.util.List;
 
 import com.aurora.core.helper.BaseDaO;
-import com.aurora.core.models.helpers.Item;
-import com.aurora.core.models.settingspecific.HeroNpc;
+import com.aurora.core.database.models.helpers.Item;
+import com.aurora.core.database.models.settingspecific.HeroNpc;
 
 @Dao
 public abstract class HeroNpcDaO extends BaseDaO<HeroNpc> {
@@ -35,6 +35,7 @@ public abstract class HeroNpcDaO extends BaseDaO<HeroNpc> {
   @Query("SELECT * FROM HeroNpc WHERE Item_ID IN (:ids)")
   public abstract List<HeroNpc> getObjectsWithIdsAsObject(List<Integer> ids);
 
+  @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
   @Query("SELECT * FROM HeroNpc WHERE Item_ID IN (:ids)")
   public abstract List<Item> getObjectsWithIdsAsItem(List<Integer> ids);
 

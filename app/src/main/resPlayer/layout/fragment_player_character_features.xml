@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
+  <data>
 
-        <import type="android.view.View" />
+    <import type="android.view.View"/>
 
-        <variable
-            name="viewModel"
-          type="com.aurora.player.viewmodels.PlayerCharacterVM"/>
-    </data>
+    <variable
+      name="viewModel"
+      type="com.aurora.player.viewmodels.PlayerCharacterVM"/>
+  </data>
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+  <ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/fragment_player_character_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context="com.aurora.player.fragments.PlayerCharacterFeaturesPlaceholderFragment">
+    <androidx.appcompat.widget.LinearLayoutCompat
+      android:id="@+id/fragment_player_character_equipment_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      tools:context="com.aurora.player.fragments.PlayerCharacterFeaturesPlaceholderFragment">
 
-            <include
-                android:id="@+id/fragment_player_character_features_racial"
-                layout="@layout/fragment_player_character_features_racial" />
+      <include
+        android:id="@+id/fragment_player_character_features_racial"
+        layout="@layout/fragment_player_character_features_racial"/>
 
-            <include
-                android:id="@+id/fragment_player_character_features_class"
-                layout="@layout/fragment_player_character_features_class" />
+      <include
+        android:id="@+id/fragment_player_character_features_class"
+        layout="@layout/fragment_player_character_features_class"/>
 
-            <include
-                android:id="@+id/fragment_player_character_features_spells"
-                layout="@layout/fragment_player_character_features_spells" />
+      <include
+        android:id="@+id/fragment_player_character_features_spells"
+        layout="@layout/fragment_player_character_features_spells"/>
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </ScrollView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+  </ScrollView>
 </layout>

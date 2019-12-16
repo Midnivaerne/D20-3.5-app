@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
+  <data>
 
-        <import type="android.view.View" />
+    <import type="android.view.View"/>
 
-        <variable
-            name="viewModel"
-          type="com.aurora.player.viewmodels.PlayerCharacterVM"/>
-    </data>
+    <variable
+      name="viewModel"
+      type="com.aurora.player.viewmodels.PlayerCharacterVM"/>
+  </data>
 
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+  <ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/fragment_player_character_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            tools:context="com.aurora.player.fragments.PlayerCharacterStatisticsPlaceholderFragment">
+    <androidx.appcompat.widget.LinearLayoutCompat
+      android:id="@+id/fragment_player_character_equipment_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      tools:context="com.aurora.player.fragments.PlayerCharacterStatisticsPlaceholderFragment">
 
-            <include
-                android:id="@+id/fragment_player_character_statistics_combat"
-                layout="@layout/fragment_player_character_statistics_combat" />
+      <include
+        android:id="@+id/fragment_player_character_statistics_combat"
+        layout="@layout/fragment_player_character_statistics_combat"/>
 
-            <include
-                android:id="@+id/fragment_player_character_statistics_ability_scores"
-                layout="@layout/fragment_player_character_statistics_ability_scores" />
+      <include
+        android:id="@+id/fragment_player_character_statistics_ability_scores"
+        layout="@layout/fragment_player_character_statistics_ability_scores"/>
 
-            <include
-                android:id="@+id/fragment_player_character_statistics_saving_throws"
-                layout="@layout/fragment_player_character_statistics_saving_throws" />
+      <include
+        android:id="@+id/fragment_player_character_statistics_saving_throws"
+        layout="@layout/fragment_player_character_statistics_saving_throws"/>
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </ScrollView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+  </ScrollView>
 </layout>

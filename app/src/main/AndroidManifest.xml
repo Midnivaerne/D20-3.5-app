@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-          android:name="com.aurora.core.views.D2035appActivity"
+          android:name="com.aurora.core.views.OverworldAppActivity"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +29,14 @@
         <activity android:name="com.aurora.main.views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-              android:value="com.aurora.core.views.D2035appActivity"/>
+              android:value="com.aurora.core.views.OverworldAppActivity"/>
+        </activity>
+        <activity
+          android:name="com.aurora.worldbuilder.views.WbActivity"
+          android:parentActivityName="com.aurora.main.views.MainMenuActivity">
+            <meta-data
+              android:name="android.support.PARENT_ACTIVITY"
+              android:value="com.aurora.main.views.MainMenuActivity" />
         </activity>
         <activity
           android:name="com.aurora.master.views.DmActivity"
@@ -53,7 +60,7 @@
                 android:value="com.aurora.main.views.MainMenuActivity" />
         </activity>
         <activity
-            android:name=".fragments.D2035appContentFragment"
+            android:name=".fragments.OverworldAppContentFragment"
             android:parentActivityName="com.aurora.main.views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

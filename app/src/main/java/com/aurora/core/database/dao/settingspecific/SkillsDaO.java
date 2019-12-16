@@ -7,8 +7,8 @@ import androidx.room.RoomWarnings;
 import java.util.List;
 
 import com.aurora.core.helper.BaseDaO;
-import com.aurora.core.models.helpers.Item;
-import com.aurora.core.models.settingspecific.Skills;
+import com.aurora.core.database.models.helpers.Item;
+import com.aurora.core.database.models.settingspecific.Skills;
 
 @Dao
 public abstract class SkillsDaO extends BaseDaO<Skills> {

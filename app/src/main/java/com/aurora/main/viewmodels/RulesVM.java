@@ -18,7 +18,7 @@ import java.util.List;
 
 import com.aurora.core.R;
 import com.aurora.core.helper.ActivityViewModel;
-import com.aurora.core.models.helpers.Rules;
+import com.aurora.core.database.models.helpers.Rules;
 import com.aurora.main.fragments.RulesDetailFragment;
 import com.aurora.main.views.RulesActivity;
 import com.aurora.main.views.RulesDetailActivity;

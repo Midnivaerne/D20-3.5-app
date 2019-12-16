@@ -7,8 +7,8 @@ import androidx.room.RoomWarnings;
 import java.util.List;
 
 import com.aurora.core.helper.BaseDaO;
-import com.aurora.core.models.helpers.Item;
-import com.aurora.core.models.usables.Equipment;
+import com.aurora.core.database.models.helpers.Item;
+import com.aurora.core.database.models.usables.Equipment;
 
 @Dao
 public abstract class EquipmentDaO extends BaseDaO<Equipment> {
@@ -35,6 +35,7 @@ public abstract class EquipmentDaO extends BaseDaO<Equipment> {
   @Query("SELECT * FROM Equipment WHERE Item_ID IN (:ids)")
   public abstract List<Equipment> getObjectsWithIdsAsObject(List<Integer> ids);
 
+  @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
   @Query("SELECT * FROM Equipment WHERE Item_ID IN (:ids)")
   public abstract List<Item> getObjectsWithIdsAsItem(List<Integer> ids);
 
