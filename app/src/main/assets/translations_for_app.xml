@@ -1,0 +1,277 @@
+<Database>
+    <Databases>
+        <Databases_Item>
+            <Name>translations_for_app_source_name</Name>
+            <Source>translations_for_app_source</Source>
+        </Databases_Item>
+    </Databases>
+    <Translations>
+        <!-- English -->
+        <Translations_Item>
+            <Name>translations_for_app_source_name</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Translations for application</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>app_name</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Overworld app</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_overworldapp</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>OverworldappActivity</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>action_rules</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Rules</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>action_content</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Content</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>action_database</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Database</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>action_settings</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Settings</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>action_help</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Help</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>action_exit</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Exit</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>WB_button</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>World Building Tools</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>DM_button</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Dungeon Master Tools</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>PC_button</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Player Tools</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_wb_</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>World Building Tools</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_dm_</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Dungeon Master Tools</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_pc_</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Player Characters</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_settings_</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Settings</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_help_</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Help</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_rulesset_list</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Rules Sets</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_rulesset_detail</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Rules set Detail</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_player_character_</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>PlayerCharacter_Activity</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>section_format</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Hello World from section: %1$d</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_player_character_actions_</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>PlayerCharacterActions_Activity</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>navigation_drawer_open</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Open navigation drawer</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>navigation_drawer_close</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Close navigation drawer</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_rulesexplanation_</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Rules explanation</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_content_</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>en</Language>
+            <Translation>Content</Translation>
+        </Translations_Item>
+
+        <!-- Polish -->
+
+        <Translations_Item>
+            <Name>translations_for_app_source_name</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>pl</Language>
+            <Translation>Tłumaczenia applikacji</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>action_settings</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>pl</Language>
+            <Translation>Ustawienia</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>DM_button</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>pl</Language>
+            <Translation>Narzędzia mistrza Gry</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>PC_button</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>pl</Language>
+            <Translation>Narzędzia Gracza</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_dm_</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>pl</Language>
+            <Translation>Narzędzia mistrza Gry</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>title_activity_pc_</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>pl</Language>
+            <Translation>Bohaterowie Gracza</Translation>
+        </Translations_Item>
+
+        <Translations_Item>
+            <Name>action_help</Name>
+            <Source>translations_for_app_source</Source>
+            <Category>translations_for_app</Category>
+            <Language>pl</Language>
+            <Translation>Pomoc</Translation>
+        </Translations_Item>
+
+    </Translations>
+</Database>

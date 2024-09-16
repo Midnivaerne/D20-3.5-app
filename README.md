@@ -1,3 +1,3 @@
-# D20-3.5-app
+# Overworld-app
 
-This will be a android mobile app to manage d20 v3.5 based character
+This will be a android mobile app to manage rpg characters, adventures and worlds
