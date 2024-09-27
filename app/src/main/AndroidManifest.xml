@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.aurora.d20_35_app">
+    package="com.aurora.core">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
@@ -17,8 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".views.D2035appActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize">
+            android:name="com.aurora.core.views.OverworldAppActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -26,76 +27,83 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.MainMenuActivity">
+        <activity android:name="com.aurora.main.views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.views.D2035appActivity" />
+                android:value="com.aurora.core.views.OverworldAppActivity" />
         </activity>
         <activity
-            android:name=".views.DMActivity"
-            android:parentActivityName=".views.MainMenuActivity">
+            android:name="com.aurora.worldbuilder.views.WbActivity"
+            android:parentActivityName="com.aurora.main.views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.views.MainMenuActivity" />
+                android:value="com.aurora.main.views.MainMenuActivity" />
         </activity>
         <activity
-            android:name=".views.PlayerCharactersListActivity"
-            android:parentActivityName=".views.MainMenuActivity">
+            android:name="com.aurora.master.views.DmActivity"
+            android:parentActivityName="com.aurora.main.views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.views.MainMenuActivity" />
+                android:value="com.aurora.main.views.MainMenuActivity" />
         </activity>
         <activity
-            android:name=".views.RulesActivity"
-            android:parentActivityName=".views.MainMenuActivity">
+            android:name="com.aurora.player.views.PlayerCharactersListActivity"
+            android:parentActivityName="com.aurora.main.views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.views.MainMenuActivity" />
+                android:value="com.aurora.main.views.MainMenuActivity" />
         </activity>
         <activity
-            android:name=".fragments.D2035appContentFragment"
-            android:parentActivityName=".views.MainMenuActivity">
+            android:name="com.aurora.main.views.RulesActivity"
+            android:parentActivityName="com.aurora.main.views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.views.MainMenuActivity" />
+                android:value="com.aurora.main.views.MainMenuActivity" />
         </activity>
         <activity
-            android:name=".views.SettingsActivity"
-            android:parentActivityName=".views.MainMenuActivity">
+            android:name=".fragments.OverworldAppContentFragment"
+            android:parentActivityName="com.aurora.main.views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.views.MainMenuActivity" />
+                android:value="com.aurora.main.views.MainMenuActivity" />
         </activity>
         <activity
-            android:name=".views.HelpActivity"
-            android:parentActivityName=".views.MainMenuActivity">
+            android:name="com.aurora.main.views.SettingsActivity"
+            android:parentActivityName="com.aurora.main.views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.views.MainMenuActivity" />
+                android:value="com.aurora.main.views.MainMenuActivity" />
         </activity>
         <activity
-            android:name=".views.DatabasesActivity"
-            android:parentActivityName=".views.MainMenuActivity">
+            android:name="com.aurora.main.views.HelpActivity"
+            android:parentActivityName="com.aurora.main.views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.views.MainMenuActivity" />
+                android:value="com.aurora.main.views.MainMenuActivity" />
         </activity>
         <activity
-            android:name=".views.DatabasesListItemDetailActivity"
-            android:parentActivityName=".views.DatabasesActivity">
+            android:name="com.aurora.main.views.DatabasesActivity"
+            android:parentActivityName="com.aurora.main.views.MainMenuActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.views.DatabasesActivity" />
+                android:value="com.aurora.main.views.MainMenuActivity" />
         </activity>
         <activity
-            android:name=".views.PlayerCharacterActivity"
-            android:parentActivityName=".views.PlayerCharactersListActivity">
+            android:name="com.aurora.main.views.DatabasesListItemDetailActivity"
+            android:parentActivityName="com.aurora.main.views.DatabasesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.aurora.d20_35_app.views.PlayerCharactersListActivity" />
+                android:value="com.aurora.main.views.DatabasesActivity" />
         </activity>
-        <activity android:name=".views.RulesDetailActivity" />
-        <activity android:name=".views.PlayerCharactersListFrameItemDetailActivity" />
+        <activity
+            android:name="com.aurora.player.views.PlayerCharacterActivity"
+            android:parentActivityName="com.aurora.player.views.PlayerCharactersListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aurora.player.views.PlayerCharactersListActivity" />
+        </activity>
+        <activity android:name="com.aurora.main.views.RulesDetailActivity" />
+        <activity android:name="com.aurora.player.views.PlayerCharactersListFrameItemDetailActivity" />
     </application>
 
 </manifest>

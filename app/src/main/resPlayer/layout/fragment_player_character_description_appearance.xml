@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <data>
+
+    <import type="android.view.View"/>
+
+    <variable
+      name="viewModel"
+      type="com.aurora.player.viewmodels.PlayerCharacterVM"/>
+  </data>
+
+  <ScrollView
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+      android:id="@+id/fragment_player_character_description_layout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingBottom="?attr/actionBarSize"
+      android:orientation="vertical"
+      app:layout_behavior="@string/appbar_scrolling_view_behavior"
+      tools:context="com.aurora.player.fragments.PlayerCharacterDescriptionAppearancePlaceholderFragment">
+
+      <include
+        android:id="@+id/fragment_player_character_description_appearance_entry_name"
+        layout="@layout/fragment_text_value_with_description_box"/>
+
+      <include
+        android:id="@+id/fragment_player_character_description_appearance_entry_player"
+        layout="@layout/fragment_text_value_with_description_box"/>
+
+      <include
+        android:id="@+id/fragment_player_character_description_appearance_entry_class_and_level"
+        layout="@layout/fragment_text_value_with_description_box"/>
+
+      <include
+        android:id="@+id/fragment_player_character_description_appearance_entry_race"
+        layout="@layout/fragment_text_value_with_description_box"/>
+
+      <include
+        android:id="@+id/fragment_player_character_description_appearance_entry_alignment"
+        layout="@layout/fragment_text_value_with_description_box"/>
+
+      <include
+        android:id="@+id/fragment_player_character_description_appearance_entry_deity"
+        layout="@layout/fragment_text_value_with_description_box"/>
+
+      <include
+        android:id="@+id/fragment_player_character_description_appearance_entry_size"
+        layout="@layout/fragment_text_value_with_description_box"/>
+
+      <include
+        android:id="@+id/fragment_player_character_description_appearance_entry_age"
+        layout="@layout/fragment_text_value_with_description_box"/>
+
+      <include
+        android:id="@+id/fragment_player_character_description_appearance_entry_gender"
+        layout="@layout/fragment_text_value_with_description_box"/>
+
+      <include
+        android:id="@+id/fragment_player_character_description_appearance_entry_height"
+        layout="@layout/fragment_text_value_with_description_box"/>
+
+      <include
+        android:id="@+id/fragment_player_character_description_appearance_entry_weight"
+        layout="@layout/fragment_text_value_with_description_box"/>
+
+      <include
+        android:id="@+id/fragment_player_character_description_appearance_entry_eyes"
+        layout="@layout/fragment_text_value_with_description_box"/>
+
+      <include
+        android:id="@+id/fragment_player_character_description_appearance_entry_hair"
+        layout="@layout/fragment_text_value_with_description_box"/>
+
+      <include
+        android:id="@+id/fragment_player_character_description_appearance_entry_skin"
+        layout="@layout/fragment_text_value_with_description_box"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+  </ScrollView>
+</layout>

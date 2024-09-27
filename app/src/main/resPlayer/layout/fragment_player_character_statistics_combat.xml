@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@+id/fragment_player_character_statistics_combat"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <include
+    android:id="@+id/fragment_player_character_statistics_combat_hit_points"
+    layout="@layout/fragment_usables_statistics_combat_hit_points"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    />
+
+  <include
+    android:id="@+id/fragment_player_character_statistics_combat_damage_reduction"
+    layout="@layout/fragment_number_value_with_description_box"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/fragment_player_character_statistics_combat_hit_points"/>
+
+  <include
+    android:id="@+id/fragment_player_character_statistics_combat_armour_class"
+    layout="@layout/fragment_number_value_with_description_box"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/fragment_player_character_statistics_combat_damage_reduction"/>
+
+  <include
+    android:id="@+id/fragment_player_character_statistics_combat_armour_class_touch"
+    layout="@layout/fragment_number_value_with_description_box"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/fragment_player_character_statistics_combat_armour_class"/>
+
+  <include
+    android:id="@+id/fragment_player_character_statistics_combat_armour_class_flatfooted"
+    layout="@layout/fragment_number_value_with_description_box"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/fragment_player_character_statistics_combat_armour_class_touch"/>
+
+  <include
+    android:id="@+id/fragment_player_character_statistics_combat_speed"
+    layout="@layout/fragment_number_value_with_description_box"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/fragment_player_character_statistics_combat_armour_class_flatfooted"/>
+
+  <include
+    android:id="@+id/fragment_player_character_statistics_combat_initiative"
+    layout="@layout/fragment_number_value_with_description_rollable_box"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/fragment_player_character_statistics_combat_speed"/>
+
+  <include
+    android:id="@+id/fragment_player_character_statistics_combat_attack"
+    layout="@layout/fragment_number_value_with_description_rollable_box"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/fragment_player_character_statistics_combat_initiative"/>
+
+  <include
+    android:id="@+id/fragment_player_character_statistics_combat_attack_melee"
+    layout="@layout/fragment_number_value_with_description_rollable_box"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/fragment_player_character_statistics_combat_attack"/>
+
+  <include
+    android:id="@+id/fragment_player_character_statistics_combat_attack_ranged"
+    layout="@layout/fragment_number_value_with_description_rollable_box"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/fragment_player_character_statistics_combat_attack_melee"/>
+
+  <include
+    android:id="@+id/fragment_player_character_statistics_combat_grapple"
+    layout="@layout/fragment_number_value_with_description_rollable_box"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/fragment_player_character_statistics_combat_attack_ranged"/>
+
+  <include
+    android:id="@+id/fragment_player_character_statistics_combat_spell_resistance"
+    layout="@layout/fragment_number_value_with_description_box"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/fragment_player_character_statistics_combat_grapple"/>
+
+</RelativeLayout>
